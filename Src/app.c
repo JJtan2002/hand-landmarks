@@ -162,7 +162,7 @@ typedef struct {
   float *boxes_out;
   uint32_t boxes_out_len;
   pd_model_pp_static_param_t static_param;
-  pd_postprocess_out_t pd_out;
+  pd_pp_out_t pd_out;
 } pd_model_info_t;
 
 typedef struct {
@@ -805,7 +805,7 @@ static void palm_detector_init(pd_model_info_t *info)
   assert(info->boxes_out_len == AI_PD_MODEL_PP_TOTAL_DETECTIONS * sizeof(float) * 18);
 
   /* post processor info */
-  ret = app_postprocess_init(&info->static_param);
+  ret = app_postprocess_init(&info->static_param, &NN_Instance_palm_detector);
   assert(ret == AI_PD_POSTPROCESS_ERROR_NO);
 }
 
