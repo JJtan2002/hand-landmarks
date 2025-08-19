@@ -1111,8 +1111,88 @@ static void compute_next_roi(roi_t *src, ld_point_t lm_in[LD_LANDMARK_NB], roi_t
 
   *next = roi;
 }
-
 static void nn_thread_fct(void *arg)
+{
+  float nn_period_filtered_ms = 0;
+  // Filtered inference times, will be updated with 0
+  float pd_filtered_ms = 0;
+  float ld_filtered_ms = 0;
+
+  uint32_t nn_period_ms;
+  uint32_t nn_period[2];
+  uint8_t *nn_pipe_dst;
+  int is_tracking;
+  uint32_t pd_ms;
+  uint32_t hl_ms;
+  int ret;
+
+  /*
+   * MODEL INITIALIZATION REMOVED
+   * All model init functions have been removed.
+   */
+
+  /*** App Loop ***************************************************************/
+  nn_period[1] = HAL_GetTick();
+  nn_pipe_dst = bqueue_get_free(&nn_input_queue, 0);
+  assert(nn_pipe_dst);
+  CAM_NNPipe_Start(nn_pipe_dst, CMW_MODE_CONTINUOUS);
+  while (1)
+  {
+    uint8_t *capture_buffer;
+
+    // Standard frame timing
+    nn_period[0] = nn_period[1];
+    nn_period[1] = HAL_GetTick();
+    nn_period_ms = nn_period[1] - nn_period[0];
+    nn_period_filtered_ms = USE_FILTERED_TS ? (15 * nn_period_filtered_ms + nn_period_ms) / 16 : nn_period_ms;
+
+    // Get camera buffer to keep the pipeline moving
+    capture_buffer = bqueue_get_ready(&nn_input_queue);
+    assert(capture_buffer);
+
+
+    /**************************************************************************
+     * MODEL EXECUTION DISABLED
+     * All model run calls are removed. We now force a "no detection" state.
+     **************************************************************************/
+    is_tracking = 0; // Force state to "not tracking"
+    pd_ms = 0;       // Set inference time to 0
+    hl_ms = 0;       // Set inference time to 0
+
+    // Update filtered times with our zero values
+    pd_filtered_ms = USE_FILTERED_TS ? (7 * pd_filtered_ms + pd_ms) / 8 : pd_ms;
+    ld_filtered_ms = USE_FILTERED_TS ? (7 * ld_filtered_ms + hl_ms) / 8 : hl_ms;
+
+    // We are done with the buffer, release it
+    bqueue_put_free(&nn_input_queue);
+
+
+    /*
+     * Update display stats with the "no detection" info
+     */
+    ret = xSemaphoreTake(disp.lock, portMAX_DELAY);
+    assert(ret == pdTRUE);
+
+    // Populate display structure with valid, non-model data
+    disp.info.pd_ms = (int)pd_filtered_ms;
+    disp.info.hl_ms = (int)ld_filtered_ms;
+    disp.info.nn_period_ms = nn_period_filtered_ms;
+    disp.info.pd_hand_nb = 0;
+    disp.info.pd_max_prob = 0.0f;
+    disp.info.hands[0].is_valid = 0; // Set hand as invalid
+
+    // NOTE: We no longer copy box or landmark data, as none exists.
+    // The display thread should check the 'is_valid' flag before drawing.
+
+    ret = xSemaphoreGive(disp.lock);
+    assert(ret == pdTRUE);
+
+    // Signal the display thread to update
+    xSemaphoreGive(disp.update);
+  }
+}
+
+static void backup(void *arg)
 {
   float nn_period_filtered_ms = 0;
   float pd_filtered_ms = 0;
