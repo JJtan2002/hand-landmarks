@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccE5GjSm.s 			page 1
+ARM GAS  /tmp/ccdlWCT9.s 			page 1
 
 
    1              		.arch armv8.1-m.main
@@ -25,12 +25,701 @@ ARM GAS  /tmp/ccE5GjSm.s 			page 1
   22              	.Ltext0:
   23              		.cfi_sections	.debug_frame
   24              		.file 1 "Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c"
-  25              	.Letext0:
-ARM GAS  /tmp/ccE5GjSm.s 			page 2
+  25              		.section	.rodata.app_postprocess_init.str1.1,"aMS",%progbits,1
+  26              	.LC0:
+  27 0000 286E6E5F 		.ascii	"(nn_instance != NULL) && (nn_instance->network != N"
+  27      696E7374 
+  27      616E6365 
+  27      20213D20 
+  27      4E554C4C 
+  28 0033 554C4C29 		.ascii	"ULL) && (nn_instance->network->output_buffers_info "
+  28      20262620 
+  28      286E6E5F 
+  28      696E7374 
+  28      616E6365 
+  29 0066 213D204E 		.ascii	"!= NULL)\000"
+  29      554C4C29 
+  29      00
+  30              	.LC1:
+  31 006f 4C69622F 		.ascii	"Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h\000"
+  31      41495F52 
+  31      756E7469 
+  31      6D652F4E 
+  31      70752F6C 
+  32              		.section	.text.app_postprocess_init,"ax",%progbits
+  33              		.align	1
+  34              		.global	app_postprocess_init
+  35              		.syntax unified
+  36              		.thumb
+  37              		.thumb_func
+  39              	app_postprocess_init:
+  40              	.LVL0:
+  41              	.LFB7343:
+   1:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  /**
+   2:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  ******************************************************************************
+   3:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  * @file    app_postprocess_od_yolov8_ui.c
+ARM GAS  /tmp/ccdlWCT9.s 			page 2
+
+
+   4:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  * @author  GPM Application Team
+   5:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  *
+   6:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  ******************************************************************************
+   7:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  * @attention
+   8:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  *
+   9:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  * Copyright (c) 2023 STMicroelectronics.
+  10:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  * All rights reserved.
+  11:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  *
+  12:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  * This software is licensed under terms that can be found in the LICENSE file
+  13:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  * in the root directory of this software component.
+  14:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  * If no LICENSE file comes with this software, it is provided AS-IS.
+  15:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  *
+  16:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  ******************************************************************************
+  17:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  */
+  18:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** 
+  19:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** 
+  20:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** #include "app_postprocess.h"
+  21:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** #include "app_config.h"
+  22:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** #include <assert.h>
+  23:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** 
+  24:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** #if POSTPROCESS_TYPE == POSTPROCESS_OD_YOLO_V8_UI
+  25:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** static int8_t scratch_buffer[AI_OD_YOLOV8_PP_TOTAL_BOXES * 6];
+  26:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** static od_pp_outBuffer_t out_detections[AI_OD_YOLOV8_PP_TOTAL_BOXES];
+  27:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** 
+  28:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** int32_t app_postprocess_init(void *params_postprocess, NN_Instance_TypeDef *NN_Instance)
+  29:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** {
+  42              		.loc 1 29 1 view -0
+  43              		.cfi_startproc
+  44              		@ args = 0, pretend = 0, frame = 0
+  45              		@ frame_needed = 0, uses_anonymous_args = 0
+  30:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   int32_t error = AI_OD_POSTPROCESS_ERROR_NO;
+  46              		.loc 1 30 3 view .LVU1
+  31:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   od_yolov8_pp_static_param_t *params = (od_yolov8_pp_static_param_t *) params_postprocess;
+  47              		.loc 1 31 3 view .LVU2
+  29:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   int32_t error = AI_OD_POSTPROCESS_ERROR_NO;
+  48              		.loc 1 29 1 is_stmt 0 view .LVU3
+  49 0000 10B5     		push	{r4, lr}
+  50              		.cfi_def_cfa_offset 8
+  51              		.cfi_offset 4, -8
+  52              		.cfi_offset 14, -4
+  29:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   int32_t error = AI_OD_POSTPROCESS_ERROR_NO;
+  53              		.loc 1 29 1 view .LVU4
+  54 0002 0446     		mov	r4, r0
+  55              	.LVL1:
+  32:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   const LL_Buffer_InfoTypeDef *buffers_info = LL_ATON_Output_Buffers_Info(NN_Instance);
+  56              		.loc 1 32 3 is_stmt 1 view .LVU5
+  57              	.LBB4:
+  58              	.LBI4:
+  59              		.file 2 "Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h"
+   1:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** /**
+   2:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  ******************************************************************************
+   3:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  * @file    ll_aton_rt_user_api.h
+   4:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  * @author  SRA Artificial Intelligence & Embedded Architectures
+   5:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  * @brief   Header file of ATON LL runtime.
+   6:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  * @note    User API to Aton Runtime.
+   7:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  ******************************************************************************
+   8:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  * @attention
+ARM GAS  /tmp/ccdlWCT9.s 			page 3
+
+
+   9:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  *
+  10:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  * Copyright (c) 2025 STMicroelectronics.
+  11:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  * All rights reserved.
+  12:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  *
+  13:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  * This software is licensed under terms that can be found in the LICENSE file
+  14:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  * in the root directory of this software component.
+  15:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  * If no LICENSE file comes with this software, it is provided AS-IS.
+  16:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  *
+  17:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  ******************************************************************************
+  18:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  */
+  19:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+  20:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** #ifndef __LL_ATON_RT_USER_API
+  21:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** #define __LL_ATON_RT_USER_API
+  22:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+  23:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** #ifdef __cplusplus
+  24:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** extern "C"
+  25:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** {
+  26:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** #endif
+  27:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+  28:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** #include "ll_aton_NN_interface.h"
+  29:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** #include "ll_aton_caches_interface.h"
+  30:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** #include "ll_aton_osal.h"
+  31:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** #include "ll_aton_platform.h"
+  32:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** #include "ll_aton_util.h"
+  33:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+  34:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /** @defgroup User API Types, Events & Return Values
+  35:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @{
+  36:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
+  37:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+  38:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /**
+  39:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @brief  Return vales of the central inference run function `LL_ATON_RT_RunEpochBlock()`
+  40:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @note   See explanations for the different values in the function description
+  41:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
+  42:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   typedef enum LL_ATON_RT_RetValues
+  43:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   {
+  44:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****     LL_ATON_RT_NO_WFE = 0,
+  45:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****     LL_ATON_RT_WFE,
+  46:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****     LL_ATON_RT_DONE,
+  47:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   } LL_ATON_RT_RetValues_t;
+  48:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+  49:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /*
+  50:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * NOTE:
+  51:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * =====
+  52:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * regarding the type definitions of `LL_ATON_User_IO_Result_t` (i.e. User I/O Return Values),
+  53:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * `LL_ATON_RT_Callbacktype_t` (i.e. Callback Events), `TraceRuntime_FuncPtr_t` (i.e. Runtime Cal
+  54:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * `TraceEpochBlock_FuncPtr_t` (i.e. Epoch Callback Functions), `NN_Interface_TypeDef` (i.e. Netw
+  55:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * and `NN_Instance_TypeDef` (i.e. Network Instance),
+  56:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * please refer to include file `ll_aton_NN_interface.h`
+  57:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
+  58:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+  59:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /**
+  60:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @}
+  61:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
+  62:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+  63:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /** @defgroup User API Macros for NN Interface & Instance definition
+  64:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @{
+  65:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
+ARM GAS  /tmp/ccdlWCT9.s 			page 4
+
+
+  66:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+  67:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** /**
+  68:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  * @brief Declare and fill a constant named NN interface object
+  69:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  * @param nn_if_name name of the network as provided by option `--network-name`
+  70:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  */
+  71:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** #define LL_ATON_DECLARE_NAMED_NN_INTERFACE(nn_if_name)                                             
+  72:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   LL_ATON_DECLARE_NAMED_NN_PROTOS(nn_if_name);                                                     
+  73:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****                                                                                                    
+  74:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   static const NN_Interface_TypeDef NN_Interface_##nn_if_name = {                                  
+  75:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****       .network_name = #nn_if_name,                                                                 
+  76:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****       .ec_network_init = &LL_ATON_EC_Network_Init_##nn_if_name,                                    
+  77:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****       .ec_inference_init = &LL_ATON_EC_Inference_Init_##nn_if_name,                                
+  78:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****       .input_setter = &LL_ATON_Set_User_Input_Buffer_##nn_if_name,                                 
+  79:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****       .input_getter = &LL_ATON_Get_User_Input_Buffer_##nn_if_name,                                 
+  80:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****       .output_setter = &LL_ATON_Set_User_Output_Buffer_##nn_if_name,                               
+  81:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****       .output_getter = &LL_ATON_Get_User_Output_Buffer_##nn_if_name,                               
+  82:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****       .epoch_block_items = &LL_ATON_EpochBlockItems_##nn_if_name,                                  
+  83:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****       .output_buffers_info = &LL_ATON_Output_Buffers_Info_##nn_if_name,                            
+  84:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****       .input_buffers_info = &LL_ATON_Input_Buffers_Info_##nn_if_name,                              
+  85:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****       .internal_buffers_info = &LL_ATON_Internal_Buffers_Info_##nn_if_name}
+  86:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+  87:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** /**
+  88:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  * @brief Declare and fill a non-constant named NN execution instance
+  89:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  * @param nn_exec_name typically name of the network as provided by option `--network-name`
+  90:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  * @param nn_if_ptr pointer to network interface
+  91:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  */
+  92:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** #define LL_ATON_DECLARE_NAMED_NN_INSTANCE(nn_exec_name, nn_if_ptr)                                 
+  93:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   static NN_Instance_TypeDef NN_Instance_##nn_exec_name = {.network = nn_if_ptr, .exec_state = {0}}
+  94:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+  95:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** /**
+  96:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  * @brief Declare and fill a non-constant named NN execution instance and constant network interfac
+  97:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  *        which get linked together (by this macro).
+  98:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  * @param nn_name name of the network as provided by option `--network-name`
+  99:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  */
+ 100:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** #define LL_ATON_DECLARE_NAMED_NN_INSTANCE_AND_INTERFACE(nn_name)                                   
+ 101:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   LL_ATON_DECLARE_NAMED_NN_INTERFACE(nn_name);                                                     
+ 102:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   LL_ATON_DECLARE_NAMED_NN_INSTANCE(nn_name, &NN_Interface_##nn_name);
+ 103:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+ 104:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /**
+ 105:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @}
+ 106:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
+ 107:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+ 108:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /** @defgroup User API Function Declarations
+ 109:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * (apart from cache maintenance functions, which can be found in file `ll_aton_caches_interface.
+ 110:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @{
+ 111:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
+ 112:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+ 113:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /**
+ 114:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @brief Initialize the ATON runtime
+ 115:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @note  If not explicitly stated otherwise, this function must be called before any other `LL_*
+ 116:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *        library function
+ 117:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
+ 118:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   void LL_ATON_RT_RuntimeInit(void);
+ 119:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+ 120:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /**
+ 121:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @brief Register callback for ATON runtime related events (e.g. initialization/deinitialization
+ 122:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * `LL_ATON_RT_Callbacktype_t`)
+ARM GAS  /tmp/ccdlWCT9.s 			page 5
+
+
+ 123:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @param rt_callback Function pointer to callback function (set to `NULL` to disable epoch traci
+ 124:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *
+ 125:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @note  This function must only be called when no network is currently executing
+ 126:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *        and should be called BEFORE `LL_ATON_RT_Init_Network()` otherwise runtime init events w
+ 127:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
+ 128:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   void LL_ATON_RT_SetRuntimeCallback(TraceRuntime_FuncPtr_t rt_callback);
+ 129:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+ 130:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /**
+ 131:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @brief Register callback for tracing epoch/network related events (see `LL_ATON_RT_Callbacktyp
+ 132:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @param epoch_block_callback Function pointer to callback function (set to `NULL` to disable ep
+ 133:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @param nn_instance          Pointer to network instance for which to set the callback (may not
+ 134:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *
+ 135:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @deprecated This function is deprecated and will be removed in a future release.
+ 136:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *             Use `LL_ATON_RT_SetNetworkCallback()` instead!
+ 137:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
+ 138:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   void LL_ATON_RT_SetEpochCallback(TraceEpochBlock_FuncPtr_t epoch_block_callback, NN_Instance_Type
+ 139:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+ 140:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /**
+ 141:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @brief Register callback for tracing epoch/network related events (see `LL_ATON_RT_Callbacktyp
+ 142:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @param nn_instance          Pointer to network instance for which to set the callback (may not
+ 143:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @param epoch_block_callback Function pointer to callback function (set to `NULL` to disable ep
+ 144:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *
+ 145:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @note  This function must only be called while the passed network instance is not executing
+ 146:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *        and should be called before `LL_ATON_RT_Init_Network()`!
+ 147:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
+ 148:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   void LL_ATON_RT_SetNetworkCallback(NN_Instance_TypeDef *nn_instance, TraceEpochBlock_FuncPtr_t ep
+ 149:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+ 150:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /**
+ 151:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @brief Initialise a network instance
+ 152:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @param nn_instance Pointer to network instance to initialize
+ 153:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
+ 154:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   void LL_ATON_RT_Init_Network(NN_Instance_TypeDef *nn_instance);
+ 155:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+ 156:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /**
+ 157:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @brief Reset network instance for getting ready for a new inference
+ 158:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @param nn_instance Pointer to network instance to initialize
+ 159:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *
+ 160:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @note May only be called in case `LL_ATON_RT_RunEpochBlock()` returned either `LL_ATON_RT_DONE
+ 161:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *       `LL_ATON_RT_NO_WFE`
+ 162:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
+ 163:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   void LL_ATON_RT_Reset_Network(NN_Instance_TypeDef *nn_instance);
+ 164:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+ 165:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /**
+ 166:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @brief  Checks status of previously started epoch block and
+ 167:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *         starts execution of next epoch block of the NN provided the previous epoch block has t
+ 168:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @param nn_instance Pointer to network instance to run/continue (may not be `NULL`)
+ 169:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @retval LL_ATON_RT_NO_WFE  Next epoch block may be started, NN execution not finished, do not 
+ 170:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *                            `LL_ATON_OSAL_WFE()`
+ 171:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @retval LL_ATON_RT_WFE     Epoch block is still running, NN execution not finished, you may ca
+ 172:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *                            `LL_ATON_OSAL_WFE()`.
+ 173:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *                            NOTE, that in this case no other network instance may be run/contin
+ 174:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *                            same thread!
+ 175:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *                            It is entirely the user's responsibility to comply with this restri
+ 176:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @retval LL_ATON_RT_DONE    NN execution finished
+ 177:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
+ 178:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   LL_ATON_RT_RetValues_t LL_ATON_RT_RunEpochBlock(NN_Instance_TypeDef *nn_instance);
+ 179:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+ARM GAS  /tmp/ccdlWCT9.s 			page 6
+
+
+ 180:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /**
+ 181:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @brief  Sets user allocated inputs (one at a time)
+ 182:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @param  nn_instance pointer to the network instance
+ 183:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *         (MUST be an already initialized instance)
+ 184:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @param  num zero base index of the input buffer to set
+ 185:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @param  buffer pointer to the area used to store this input
+ 186:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @param  size size of the memory reserved for this input
+ 187:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
+ 188:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   static inline LL_ATON_User_IO_Result_t LL_ATON_Set_User_Input_Buffer(const NN_Instance_TypeDef *n
+ 189:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****                                                                        uint32_t num, void *buffer, 
+ 190:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+ 191:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /**
+ 192:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @brief  Gets user allocated inputs (one at a time)
+ 193:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @param  nn_instance pointer to the network instance
+ 194:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *         (MUST be an already initialized instance)
+ 195:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @param  num zero base index of the input buffer to get
+ 196:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @retval returns a pointer to the specified user allocated input
+ 197:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
+ 198:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   static inline void *LL_ATON_Get_User_Input_Buffer(const NN_Instance_TypeDef *nn_instance, uint32_
+ 199:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+ 200:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /**
+ 201:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @brief  Sets user allocated outputs (one at a time)
+ 202:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @param  nn_instance pointer to the network instance
+ 203:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *         (MUST be an already initialized instance)
+ 204:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @param  num zero base index of the output buffer to set
+ 205:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @param  buffer pointer to the area used to store this output
+ 206:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @param  size size of the memory reserved for this output
+ 207:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
+ 208:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   static inline LL_ATON_User_IO_Result_t LL_ATON_Set_User_Output_Buffer(const NN_Instance_TypeDef *
+ 209:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****                                                                         uint32_t num, void *buffer,
+ 210:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+ 211:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /**
+ 212:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @brief  Gets user allocated inputs (one at a time)
+ 213:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @param  nn_instance pointer to the network instance
+ 214:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *         (MUST be an already initialized instance)
+ 215:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @param  num zero base index of the output buffer to get
+ 216:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @retval returns a pointer to the specified user allocated output
+ 217:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
+ 218:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   static inline void *LL_ATON_Get_User_Output_Buffer(const NN_Instance_TypeDef *nn_instance, uint32
+ 219:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+ 220:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /**
+ 221:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @brief  Returns an array of structures describing input buffers
+ 222:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @param  nn_instance pointer to the network instance
+ 223:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *         (MUST be an already initialized instance)
+ 224:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @retval returns a pointer to the array of LL_Buffer_InfoTypeDef, name is NULL for the last one
+ 225:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
+ 226:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   static inline const LL_Buffer_InfoTypeDef *LL_ATON_Output_Buffers_Info(const NN_Instance_TypeDef 
+ 227:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+ 228:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /**
+ 229:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @brief  Returns an array of structures describing output buffers
+ 230:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @param  nn_instance pointer to the network instance
+ 231:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *         (MUST be an already initialized instance)
+ 232:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @retval Returns a pointer to the array of LL_Buffer_InfoTypeDef, name is NULL for the last one
+ 233:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
+ 234:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   static inline const LL_Buffer_InfoTypeDef *LL_ATON_Input_Buffers_Info(const NN_Instance_TypeDef *
+ 235:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+ 236:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /**
+ARM GAS  /tmp/ccdlWCT9.s 			page 7
+
+
+ 237:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @brief  Returns an array of structures describing epoch output transient buffers
+ 238:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @param  nn_instance pointer to the network instance
+ 239:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *         (MUST be an already initialized instance)
+ 240:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @retval Returns a pointer to the array of LL_Buffer_InfoTypeDef, name is NULL for the last one
+ 241:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
+ 242:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   static inline const LL_Buffer_InfoTypeDef *LL_ATON_Internal_Buffers_Info(const NN_Instance_TypeDe
+ 243:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+ 244:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /**
+ 245:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @brief De-initialise a network instance
+ 246:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @param nn_instance Pointer to network instance to de-initialize
+ 247:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
+ 248:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   void LL_ATON_RT_DeInit_Network(NN_Instance_TypeDef *nn_instance);
+ 249:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+ 250:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /**
+ 251:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @brief De-initialize the ATON runtime
+ 252:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
+ 253:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   void LL_ATON_RT_RuntimeDeInit(void);
+ 254:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+ 255:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /**
+ 256:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @}
+ 257:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
+ 258:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+ 259:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /** @defgroup User API Function Inline Implementations (of some User API functions)
+ 260:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @{
+ 261:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
+ 262:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+ 263:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   static inline LL_ATON_User_IO_Result_t LL_ATON_Set_User_Input_Buffer(const NN_Instance_TypeDef *n
+ 264:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****                                                                        uint32_t num, void *buffer, 
+ 265:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   {
+ 266:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****     assert((nn_instance != NULL) && (nn_instance->network != NULL) && (nn_instance->network->input_
+ 267:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****     return nn_instance->network->input_setter(num, buffer, size);
+ 268:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   }
+ 269:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+ 270:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   static inline void *LL_ATON_Get_User_Input_Buffer(const NN_Instance_TypeDef *nn_instance, uint32_
+ 271:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   {
+ 272:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****     assert((nn_instance != NULL) && (nn_instance->network != NULL) && (nn_instance->network->input_
+ 273:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****     return nn_instance->network->input_getter(num);
+ 274:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   }
+ 275:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+ 276:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   static inline LL_ATON_User_IO_Result_t LL_ATON_Set_User_Output_Buffer(const NN_Instance_TypeDef *
+ 277:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****                                                                         uint32_t num, void *buffer,
+ 278:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   {
+ 279:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****     assert((nn_instance != NULL) && (nn_instance->network != NULL) && (nn_instance->network->output
+ 280:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****     return nn_instance->network->output_setter(num, buffer, size);
+ 281:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   }
+ 282:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+ 283:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   static inline void *LL_ATON_Get_User_Output_Buffer(const NN_Instance_TypeDef *nn_instance, uint32
+ 284:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   {
+ 285:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****     assert((nn_instance != NULL) && (nn_instance->network != NULL) && (nn_instance->network->output
+ 286:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****     return nn_instance->network->output_getter(num);
+ 287:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   }
+ 288:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
+ 289:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   static inline const LL_Buffer_InfoTypeDef *LL_ATON_Output_Buffers_Info(const NN_Instance_TypeDef 
+  60              		.loc 2 289 46 view .LVU6
+  61              	.LBB5:
+ 290:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   {
+ 291:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****     assert((nn_instance != NULL) && (nn_instance->network != NULL) &&
+ARM GAS  /tmp/ccdlWCT9.s 			page 8
+
+
+  62              		.loc 2 291 5 view .LVU7
+  63 0004 19B1     		cbz	r1, .L2
+  64              		.loc 2 291 5 is_stmt 0 discriminator 2 view .LVU8
+  65 0006 0B68     		ldr	r3, [r1]
+  66 0008 0BB1     		cbz	r3, .L2
+  67              		.loc 2 291 5 discriminator 4 view .LVU9
+  68 000a 1B6A     		ldr	r3, [r3, #32]
+  69 000c 33B9     		cbnz	r3, .L3
+  70              	.L2:
+  71              		.loc 2 291 5 discriminator 5 view .LVU10
+  72 000e 40F22311 		movw	r1, #291
+  73              	.LVL2:
+  74              		.loc 2 291 5 discriminator 5 view .LVU11
+  75 0012 0F4B     		ldr	r3, .L10
+  76 0014 0F4A     		ldr	r2, .L10+4
+  77 0016 1048     		ldr	r0, .L10+8
+  78              	.LVL3:
+  79              		.loc 2 291 5 discriminator 5 view .LVU12
+  80 0018 FFF7FEFF 		bl	__assert_func
+  81              	.LVL4:
+  82              	.L3:
+ 292:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****            (nn_instance->network->output_buffers_info != NULL));
+ 293:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****     return nn_instance->network->output_buffers_info();
+  83              		.loc 2 293 5 is_stmt 1 view .LVU13
+  84              		.loc 2 293 12 is_stmt 0 view .LVU14
+  85 001c 9847     		blx	r3
+  86              	.LVL5:
+  87              		.loc 2 293 12 view .LVU15
+  88              	.LBE5:
+  89              	.LBE4:
+  33:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->raw_output_scale = *(buffers_info[0].scale);
+  90              		.loc 1 33 3 is_stmt 1 view .LVU16
+  91              		.loc 1 33 30 is_stmt 0 view .LVU17
+  92 001e 036B     		ldr	r3, [r0, #48]
+  34:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->raw_output_zero_point = *(buffers_info[0].offset);
+  35:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->nb_classes = AI_OD_YOLOV8_PP_NB_CLASSES;
+  36:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->nb_total_boxes = AI_OD_YOLOV8_PP_TOTAL_BOXES;
+  93              		.loc 1 36 26 view .LVU18
+  94 0020 0322     		movs	r2, #3
+  33:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->raw_output_scale = *(buffers_info[0].scale);
+  95              		.loc 1 33 30 view .LVU19
+  96 0022 1B68     		ldr	r3, [r3]	@ float
+  33:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->raw_output_scale = *(buffers_info[0].scale);
+  97              		.loc 1 33 28 view .LVU20
+  98 0024 6361     		str	r3, [r4, #20]	@ float
+  34:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->raw_output_zero_point = *(buffers_info[0].offset);
+  99              		.loc 1 34 3 is_stmt 1 view .LVU21
+  34:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->raw_output_zero_point = *(buffers_info[0].offset);
+ 100              		.loc 1 34 35 is_stmt 0 view .LVU22
+ 101 0026 436B     		ldr	r3, [r0, #52]
+  37:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->max_boxes_limit = AI_OD_YOLOV8_PP_MAX_BOXES_LIMIT;
+  38:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->conf_threshold = AI_OD_YOLOV8_PP_CONF_THRESHOLD;
+  39:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->iou_threshold = AI_OD_YOLOV8_PP_IOU_THRESHOLD;
+  40:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->pScratchBuff = scratch_buffer;
+  41:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   error = od_yolov8_pp_reset(params);
+ 102              		.loc 1 41 11 view .LVU23
+ 103 0028 2046     		mov	r0, r4
+ARM GAS  /tmp/ccdlWCT9.s 			page 9
+
+
+ 104              	.LVL6:
+  34:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->raw_output_zero_point = *(buffers_info[0].offset);
+ 105              		.loc 1 34 33 view .LVU24
+ 106 002a 1B88     		ldrh	r3, [r3]
+ 107 002c 2376     		strb	r3, [r4, #24]
+  35:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->nb_total_boxes = AI_OD_YOLOV8_PP_TOTAL_BOXES;
+ 108              		.loc 1 35 3 is_stmt 1 view .LVU25
+  36:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->max_boxes_limit = AI_OD_YOLOV8_PP_MAX_BOXES_LIMIT;
+ 109              		.loc 1 36 26 is_stmt 0 view .LVU26
+ 110 002e 40F63403 		movw	r3, #2100
+ 111 0032 C4E90023 		strd	r2, r3, [r4]
+  37:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->max_boxes_limit = AI_OD_YOLOV8_PP_MAX_BOXES_LIMIT;
+ 112              		.loc 1 37 3 is_stmt 1 view .LVU27
+  37:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->max_boxes_limit = AI_OD_YOLOV8_PP_MAX_BOXES_LIMIT;
+ 113              		.loc 1 37 27 is_stmt 0 view .LVU28
+ 114 0036 0A23     		movs	r3, #10
+ 115 0038 A360     		str	r3, [r4, #8]
+  38:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->iou_threshold = AI_OD_YOLOV8_PP_IOU_THRESHOLD;
+ 116              		.loc 1 38 3 is_stmt 1 view .LVU29
+  38:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->iou_threshold = AI_OD_YOLOV8_PP_IOU_THRESHOLD;
+ 117              		.loc 1 38 26 is_stmt 0 view .LVU30
+ 118 003a 4FF07C53 		mov	r3, #1056964608
+ 119 003e E360     		str	r3, [r4, #12]	@ float
+  39:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->pScratchBuff = scratch_buffer;
+ 120              		.loc 1 39 3 is_stmt 1 view .LVU31
+  39:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->pScratchBuff = scratch_buffer;
+ 121              		.loc 1 39 25 is_stmt 0 view .LVU32
+ 122 0040 2361     		str	r3, [r4, #16]	@ float
+  40:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   error = od_yolov8_pp_reset(params);
+ 123              		.loc 1 40 3 is_stmt 1 view .LVU33
+  40:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   error = od_yolov8_pp_reset(params);
+ 124              		.loc 1 40 24 is_stmt 0 view .LVU34
+ 125 0042 064B     		ldr	r3, .L10+12
+ 126 0044 2362     		str	r3, [r4, #32]
+ 127              		.loc 1 41 3 is_stmt 1 view .LVU35
+  42:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** 
+  43:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   return error;
+  44:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** }
+ 128              		.loc 1 44 1 is_stmt 0 view .LVU36
+ 129 0046 BDE81040 		pop	{r4, lr}
+ 130              		.cfi_restore 14
+ 131              		.cfi_restore 4
+ 132              		.cfi_def_cfa_offset 0
+ 133              	.LVL7:
+  41:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** 
+ 134              		.loc 1 41 11 view .LVU37
+ 135 004a FFF7FEBF 		b	od_yolov8_pp_reset
+ 136              	.LVL8:
+ 137              	.L11:
+  41:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** 
+ 138              		.loc 1 41 11 view .LVU38
+ 139 004e 00BF     		.align	2
+ 140              	.L10:
+ 141 0050 00000000 		.word	.LC0
+ 142 0054 00000000 		.word	__func__.1
+ 143 0058 6F000000 		.word	.LC1
+ 144 005c 00000000 		.word	scratch_buffer
+ARM GAS  /tmp/ccdlWCT9.s 			page 10
+
+
+ 145              		.cfi_endproc
+ 146              	.LFE7343:
+ 148              		.section	.rodata.app_postprocess_run.str1.1,"aMS",%progbits,1
+ 149              	.LC2:
+ 150 0000 6E625F69 		.ascii	"nb_input == 1\000"
+ 150      6E707574 
+ 150      203D3D20 
+ 150      3100
+ 151              	.LC3:
+ 152 000e 4C69622F 		.ascii	"Lib/ai-postprocessing-wrapper/app_postprocess_od_yo"
+ 152      61692D70 
+ 152      6F737470 
+ 152      726F6365 
+ 152      7373696E 
+ 153 0041 6C6F7638 		.ascii	"lov8_ui.c\000"
+ 153      5F75692E 
+ 153      6300
+ 154              		.section	.text.app_postprocess_run,"ax",%progbits
+ 155              		.align	1
+ 156              		.global	app_postprocess_run
+ 157              		.syntax unified
+ 158              		.thumb
+ 159              		.thumb_func
+ 161              	app_postprocess_run:
+ 162              	.LVL9:
+ 163              	.LFB7344:
+  45:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** 
+  46:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** int32_t app_postprocess_run(void *pInput[], int nb_input, void *pOutput, void *pInput_param)
+  47:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** {
+ 164              		.loc 1 47 1 is_stmt 1 view -0
+ 165              		.cfi_startproc
+ 166              		@ args = 0, pretend = 0, frame = 8
+ 167              		@ frame_needed = 0, uses_anonymous_args = 0
+  48:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   assert(nb_input == 1);
+ 168              		.loc 1 48 3 view .LVU40
+  47:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   assert(nb_input == 1);
+ 169              		.loc 1 47 1 is_stmt 0 view .LVU41
+ 170 0000 13B5     		push	{r0, r1, r4, lr}
+ 171              		.cfi_def_cfa_offset 16
+ 172              		.cfi_offset 4, -8
+ 173              		.cfi_offset 14, -4
+  47:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   assert(nb_input == 1);
+ 174              		.loc 1 47 1 view .LVU42
+ 175 0002 0C46     		mov	r4, r1
+ 176              		.loc 1 48 3 view .LVU43
+ 177 0004 012C     		cmp	r4, #1
+  47:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   assert(nb_input == 1);
+ 178              		.loc 1 47 1 view .LVU44
+ 179 0006 1146     		mov	r1, r2
+ 180              	.LVL10:
+  47:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   assert(nb_input == 1);
+ 181              		.loc 1 47 1 view .LVU45
+ 182 0008 1A46     		mov	r2, r3
+ 183              	.LVL11:
+ 184              		.loc 1 48 3 view .LVU46
+ 185 000a 05D0     		beq	.L13
+ 186              		.loc 1 48 3 discriminator 1 view .LVU47
+ARM GAS  /tmp/ccdlWCT9.s 			page 11
+
+
+ 187 000c 3021     		movs	r1, #48
+ 188              	.LVL12:
+ 189              		.loc 1 48 3 discriminator 1 view .LVU48
+ 190 000e 074B     		ldr	r3, .L14
+ 191              	.LVL13:
+ 192              		.loc 1 48 3 discriminator 1 view .LVU49
+ 193 0010 074A     		ldr	r2, .L14+4
+ 194              	.LVL14:
+ 195              		.loc 1 48 3 discriminator 1 view .LVU50
+ 196 0012 0848     		ldr	r0, .L14+8
+ 197              	.LVL15:
+ 198              		.loc 1 48 3 discriminator 1 view .LVU51
+ 199 0014 FFF7FEFF 		bl	__assert_func
+ 200              	.LVL16:
+ 201              	.L13:
+  49:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   int32_t error = AI_OD_POSTPROCESS_ERROR_NO;
+ 202              		.loc 1 49 3 is_stmt 1 view .LVU52
+  50:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   od_pp_out_t *pObjDetOutput = (od_pp_out_t *) pOutput;
+ 203              		.loc 1 50 3 view .LVU53
+  51:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   pObjDetOutput->pOutBuff = out_detections;
+ 204              		.loc 1 51 3 view .LVU54
+ 205              		.loc 1 51 27 is_stmt 0 view .LVU55
+ 206 0018 074B     		ldr	r3, .L14+12
+ 207 001a 0B60     		str	r3, [r1]
+  52:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   od_yolov8_pp_in_centroid_t pp_input = {
+ 208              		.loc 1 52 3 is_stmt 1 view .LVU56
+ 209              		.loc 1 52 30 is_stmt 0 view .LVU57
+ 210 001c 0368     		ldr	r3, [r0]
+  53:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****       .pRaw_detections = (int8_t *) pInput[0]
+  54:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   };
+  55:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   error = od_yolov8_pp_process_int8(&pp_input, pObjDetOutput,
+ 211              		.loc 1 55 11 view .LVU58
+ 212 001e 01A8     		add	r0, sp, #4
+ 213              	.LVL17:
+  52:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   od_yolov8_pp_in_centroid_t pp_input = {
+ 214              		.loc 1 52 30 view .LVU59
+ 215 0020 0193     		str	r3, [sp, #4]
+ 216              		.loc 1 55 3 is_stmt 1 view .LVU60
+ 217              		.loc 1 55 11 is_stmt 0 view .LVU61
+ 218 0022 FFF7FEFF 		bl	od_yolov8_pp_process_int8
+ 219              	.LVL18:
+  56:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****                                     (od_yolov8_pp_static_param_t *) pInput_param);
+  57:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   return error;
+ 220              		.loc 1 57 3 is_stmt 1 view .LVU62
+  58:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** }
+ 221              		.loc 1 58 1 is_stmt 0 view .LVU63
+ 222 0026 02B0     		add	sp, sp, #8
+ 223              		.cfi_def_cfa_offset 8
+ 224              		@ sp needed
+ 225 0028 10BD     		pop	{r4, pc}
+ 226              	.LVL19:
+ 227              	.L15:
+ 228              		.loc 1 58 1 view .LVU64
+ 229 002a 00BF     		.align	2
+ 230              	.L14:
+ 231 002c 00000000 		.word	.LC2
+ 232 0030 00000000 		.word	__func__.0
+ARM GAS  /tmp/ccdlWCT9.s 			page 12
+
+
+ 233 0034 0E000000 		.word	.LC3
+ 234 0038 00000000 		.word	out_detections
+ 235              		.cfi_endproc
+ 236              	.LFE7344:
+ 238              		.section	.rodata.__func__.0,"a"
+ 241              	__func__.0:
+ 242 0000 6170705F 		.ascii	"app_postprocess_run\000"
+ 242      706F7374 
+ 242      70726F63 
+ 242      6573735F 
+ 242      72756E00 
+ 243              		.section	.rodata.__func__.1,"a"
+ 246              	__func__.1:
+ 247 0000 4C4C5F41 		.ascii	"LL_ATON_Output_Buffers_Info\000"
+ 247      544F4E5F 
+ 247      4F757470 
+ 247      75745F42 
+ 247      75666665 
+ 248              		.section	.bss.out_detections,"aw",%nobits
+ 249              		.align	2
+ 252              	out_detections:
+ 253 0000 00000000 		.space	50400
+ 253      00000000 
+ 253      00000000 
+ 253      00000000 
+ 253      00000000 
+ 254              		.section	.bss.scratch_buffer,"aw",%nobits
+ 257              	scratch_buffer:
+ 258 0000 00000000 		.space	12600
+ 258      00000000 
+ 258      00000000 
+ 258      00000000 
+ 258      00000000 
+ 259              		.text
+ 260              	.Letext0:
+ 261              		.file 3 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 262              		.file 4 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 263              		.file 5 "Lib/AI_Runtime/Npu/ll_aton/ll_aton_NN_interface.h"
+ 264              		.file 6 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 265              		.file 7 "Lib/lib_vision_models_pp/lib_vision_models_pp/Inc/od_pp_output_if.h"
+ 266              		.file 8 "Lib/lib_vision_models_pp/lib_vision_models_pp/Inc/od_yolov8_pp_if.h"
+ 267              		.file 9 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ARM GAS  /tmp/ccdlWCT9.s 			page 13
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 app_postprocess_od_yolov8_ui.c
+     /tmp/ccdlWCT9.s:33     .text.app_postprocess_init:00000000 $t
+     /tmp/ccdlWCT9.s:39     .text.app_postprocess_init:00000000 app_postprocess_init
+     /tmp/ccdlWCT9.s:141    .text.app_postprocess_init:00000050 $d
+     /tmp/ccdlWCT9.s:246    .rodata.__func__.1:00000000 __func__.1
+     /tmp/ccdlWCT9.s:257    .bss.scratch_buffer:00000000 scratch_buffer
+     /tmp/ccdlWCT9.s:155    .text.app_postprocess_run:00000000 $t
+     /tmp/ccdlWCT9.s:161    .text.app_postprocess_run:00000000 app_postprocess_run
+     /tmp/ccdlWCT9.s:231    .text.app_postprocess_run:0000002c $d
+     /tmp/ccdlWCT9.s:241    .rodata.__func__.0:00000000 __func__.0
+     /tmp/ccdlWCT9.s:252    .bss.out_detections:00000000 out_detections
+     /tmp/ccdlWCT9.s:249    .bss.out_detections:00000000 $d
+     /tmp/ccdlWCT9.s:258    .bss.scratch_buffer:00000000 $d
                            .group:00000000 wm4.0.c552ae9005b0f2cca11872fae5d4b7f2
                            .group:00000000 wm4._newlib_version.h.4.411db44ea2338a62eca2f0777f81481b
                            .group:00000000 wm4.newlib.h.27.4b972ceed5d01f491020c20f1e546cab
@@ -74,6 +763,9 @@ DEFINED SYMBOLS
                            .group:00000000 wm4.portable.h.61.d557c57974d490f056246a26cdcddd6c
                            .group:00000000 wm4.mpu_wrappers.h.30.ccc5f1a6903f941a88c268f5f62af3fe
                            .group:00000000 wm4.portable.h.189.522b8bd52a171d3fd1432ef06d0caa63
+ARM GAS  /tmp/ccdlWCT9.s 			page 14
+
+
                            .group:00000000 wm4.FreeRTOS.h.102.fb871f3e464d99c5a57b3115545a02ad
                            .group:00000000 wm4.list.h.59.bce6419520cd4f5f98779a1530bf2118
                            .group:00000000 wm4.task.h.56.84290139c73b47f5b9aac361361a2a31
@@ -86,9 +778,6 @@ DEFINED SYMBOLS
                            .group:00000000 wm4.stm32n657xx.h.26.acd272cb67318cc1a4791ce2f0720ca6
                            .group:00000000 wm4.cmsis_version.h.32.0ac195c83bb4537824e6ad1c47474b79
                            .group:00000000 wm4.core_cm55.h.68.832d5cf835639cc0d28219c3d2867330
-ARM GAS  /tmp/ccE5GjSm.s 			page 3
-
-
                            .group:00000000 wm4.cmsis_gcc.h.26.7a5fd1a99dbedde687044a4433ab3e15
                            .group:00000000 wm4.core_cm55.h.196.52e437a270752da561676e507b35baeb
                            .group:00000000 wm4.mpu_armv8.h.32.9d72426c8e2b47753456dcb84802c5b3
@@ -134,6 +823,9 @@ DEFINED SYMBOLS
                            .group:00000000 wm4.stm32n6xx_hal_tim_ex.h.21.e372d5ac63c13441211ea4ecbd353150
                            .group:00000000 wm4.stm32n6xx_hal_uart.h.21.230f549bfa0d5ebfd77bfb311b2aca15
                            .group:00000000 wm4.stm32n6xx_hal_uart_ex.h.21.a0d5511e1d0703b7b5278c8f5472b96d
+ARM GAS  /tmp/ccdlWCT9.s 			page 15
+
+
                            .group:00000000 wm4.stm32n6xx_hal_xspi.h.21.e17898be2073b6b6b19faf30b4e304e9
                            .group:00000000 wm4.stm32n6xx_hal_cacheaxi.h.21.7c3375b7903ec42376e4883320997f74
                            .group:00000000 wm4.stm32n6xx_hal_gpu2d.h.21.48d0249122abad294a630c39cc4ebaed
@@ -146,9 +838,6 @@ DEFINED SYMBOLS
                            .group:00000000 wm4.ll_aton_osal_freertos.h.62.85a065f77def7f6fef26149f92fe1378
                            .group:00000000 wm4.ll_aton_osal.h.116.bc018513feb9b28713cf2afc78ec679b
                            .group:00000000 wm4.ll_aton_rt_user_api.h.71.e6b7f8d03b2c998f838260ad3cb6cd40
-ARM GAS  /tmp/ccE5GjSm.s 			page 4
-
-
                            .group:00000000 wm4.od_pp_output_if.h.11.62a3da738caf687aa42d96759c237b2c
                            .group:00000000 wm4.float.h.29.0e9d9baf95ec39f9555dc80c6e28186b
                            .group:00000000 wm4.syslimits.h.34.de5cbd310098bc5895998b6bde577ed2
@@ -169,7 +858,10 @@ DEFINED SYMBOLS
                            .group:00000000 wm4.iseg_pp_output_if.h.11.df7e791a4e783022a9fba78cdb1c05d4
                            .group:00000000 wm4.sseg_pp_output_if.h.11.caf00fb1ae24f8dc9c80bee7827b96f2
                            .group:00000000 wm4.app_postprocess.h.49.6186ff44b2c06089fe0297042919e83a
-                           .group:00000000 wm4.postprocess_conf.h.12.06a1eaa1f8457a1a85b022a6249df0ba
+                           .group:00000000 wm4.postprocess_conf.h.12.87925dcce766981a0e8d7298b8c294cf
                            .group:00000000 wm4.app_config.h.23.726746aecdeac4550fc4bca4b08fd195
 
-NO UNDEFINED SYMBOLS
+UNDEFINED SYMBOLS
+__assert_func
+od_yolov8_pp_reset
+od_yolov8_pp_process_int8

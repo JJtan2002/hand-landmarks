@@ -57,8 +57,14 @@ C_SOURCES += Src/ld.c
 C_SOURCES += Src/app_fuseprogramming.c
 C_SOURCES += Src/stm32_lcd_ex.c
 C_SOURCES += Src/stm32n6xx_it.c
+C_SOURCES += Lib/lib_vision_models_pp/lib_vision_models_pp/Src/vision_models_pp.c
+C_SOURCES += Lib/lib_vision_models_pp/lib_vision_models_pp/Src/vision_models_pp_maxi_if32.c
+C_SOURCES += Lib/lib_vision_models_pp/lib_vision_models_pp/Src/vision_models_pp_maxi_is8.c
+C_SOURCES += Lib/lib_vision_models_pp/lib_vision_models_pp/Src/vision_models_pp_maxi_iu8.c
 C_SOURCES += Model/palm_detector.c
 C_SOURCES += Model/hand_landmark.c
+C_SOURCES += Model/yolo_detector.c
+C_SOURCES += Model/face_landmark.c
 C_SOURCES += Src/app_cam.c
 C_SOURCES += Src/freertos_bsp.c
 

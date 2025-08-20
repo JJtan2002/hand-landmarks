@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc5PcF7o.s 			page 1
+ARM GAS  /tmp/ccsTf54J.s 			page 1
 
 
    1              		.arch armv8.1-m.main
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
    8:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****  *
    9:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****  * Copyright (c) 2024 STMicroelectronics.
   10:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****  * All rights reserved.
-ARM GAS  /tmp/cc5PcF7o.s 			page 2
+ARM GAS  /tmp/ccsTf54J.s 			page 2
 
 
   11:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****  *
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
   65:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****  *
   66:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****  * \retval \e true  on success
   67:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****  * \retval \e false otherwise
-ARM GAS  /tmp/cc5PcF7o.s 			page 3
+ARM GAS  /tmp/ccsTf54J.s 			page 3
 
 
   68:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****  */
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  116:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****   ECFileEntry blob_offset = 0;
   47              		.loc 1 116 3 view .LVU3
  117:Lib/AI_Runtime/Npu/ll_aton/ecloader.c **** 
-ARM GAS  /tmp/cc5PcF7o.s 			page 4
+ARM GAS  /tmp/ccsTf54J.s 			page 4
 
 
  118:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****   magic = *((ECFileEntry *)ptr);
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
   74              	.LVL3:
   75              	.L2:
  129:Lib/AI_Runtime/Npu/ll_aton/ecloader.c **** 
-ARM GAS  /tmp/cc5PcF7o.s 			page 5
+ARM GAS  /tmp/ccsTf54J.s 			page 5
 
 
   76              		.loc 1 129 3 is_stmt 1 view .LVU14
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  109      6F66206D 
  109      656D6F72 
  110 00b5 6F6C6C65 		.ascii	"oller blob has not been specified\000"
-ARM GAS  /tmp/cc5PcF7o.s 			page 6
+ARM GAS  /tmp/ccsTf54J.s 			page 6
 
 
  110      7220626C 
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  164:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****  * \retval \e false otherwise
  165:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****  */
  166:Lib/AI_Runtime/Npu/ll_aton/ecloader.c **** 
-ARM GAS  /tmp/cc5PcF7o.s 			page 7
+ARM GAS  /tmp/ccsTf54J.s 			page 7
 
 
  167:Lib/AI_Runtime/Npu/ll_aton/ecloader.c **** bool ec_copy_blob(ECInstr *blob, const uint8_t *binary_ptr, unsigned int *blob_size)
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  183:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****   {
  184:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****     LL_ATON_PRINTF("Error: Invalid magic number of Epoch Controller blob\n");
  161              		.loc 1 184 5 is_stmt 1 view .LVU36
-ARM GAS  /tmp/cc5PcF7o.s 			page 8
+ARM GAS  /tmp/ccsTf54J.s 			page 8
 
 
  162 0016 1348     		ldr	r0, .L25+4
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  227:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****     blob[1] = size;
  228:Lib/AI_Runtime/Npu/ll_aton/ecloader.c **** 
  229:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****     memcpy((uint8_t *)(blob + 2), ptr, size * sizeof(ECInstr));
-ARM GAS  /tmp/cc5PcF7o.s 			page 9
+ARM GAS  /tmp/ccsTf54J.s 			page 9
 
 
  230:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****   }
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  208              	.LVL17:
  204:Lib/AI_Runtime/Npu/ll_aton/ecloader.c **** 
  209              		.loc 1 204 7 is_stmt 0 view .LVU56
-ARM GAS  /tmp/cc5PcF7o.s 			page 10
+ARM GAS  /tmp/ccsTf54J.s 			page 10
 
 
  210 0034 F0E7     		b	.L24
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  248 0054 9A00     		lsls	r2, r3, #2
  249 0056 04F10800 		add	r0, r4, #8
  250              	.LVL24:
-ARM GAS  /tmp/cc5PcF7o.s 			page 11
+ARM GAS  /tmp/ccsTf54J.s 			page 11
 
 
  229:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****   }
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  278      20746865 
  278      2045706F 
  278      63682043 
-ARM GAS  /tmp/cc5PcF7o.s 			page 12
+ARM GAS  /tmp/ccsTf54J.s 			page 12
 
 
  279 0149 6400     		.ascii	"d\000"
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  298              		@ frame_needed = 0, uses_anonymous_args = 0
  258:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****   const ECFileEntry *ptr = (const ECFileEntry *)binary_ptr;
  299              		.loc 1 258 3 view .LVU76
-ARM GAS  /tmp/cc5PcF7o.s 			page 13
+ARM GAS  /tmp/ccsTf54J.s 			page 13
 
 
  259:Lib/AI_Runtime/Npu/ll_aton/ecloader.c **** 
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  280:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****     return false;
  330              		.loc 1 280 5 is_stmt 1 view .LVU87
  331              	.L29:
-ARM GAS  /tmp/cc5PcF7o.s 			page 14
+ARM GAS  /tmp/ccsTf54J.s 			page 14
 
 
  268:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****   }
@@ -838,7 +838,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  331:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****       return false;
  332:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****     }
  333:Lib/AI_Runtime/Npu/ll_aton/ecloader.c **** 
-ARM GAS  /tmp/cc5PcF7o.s 			page 15
+ARM GAS  /tmp/ccsTf54J.s 			page 15
 
 
  334:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****     memcpy(reloc_table, binary_ptr + reloc_table_offset, size * 4);
@@ -898,7 +898,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  370              		.loc 1 291 3 is_stmt 1 view .LVU103
  291:Lib/AI_Runtime/Npu/ll_aton/ecloader.c **** 
  371              		.loc 1 291 15 is_stmt 0 view .LVU104
-ARM GAS  /tmp/cc5PcF7o.s 			page 16
+ARM GAS  /tmp/ccsTf54J.s 			page 16
 
 
  372 0032 E41B     		subs	r4, r4, r7
@@ -958,7 +958,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  410 004a 01D0     		beq	.L37
  311:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****           "Error: Memory allocated for the relocation table of the Epoch Controller blob must be 4-
  411              		.loc 1 311 7 is_stmt 1 view .LVU121
-ARM GAS  /tmp/cc5PcF7o.s 			page 17
+ARM GAS  /tmp/ccsTf54J.s 			page 17
 
 
  412 004c 0C48     		ldr	r0, .L44+16
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  452              	.LVL53:
  334:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****   }
  453              		.loc 1 334 5 view .LVU136
-ARM GAS  /tmp/cc5PcF7o.s 			page 18
+ARM GAS  /tmp/ccsTf54J.s 			page 18
 
 
  454 006e E9E7     		b	.L36
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  362:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****   if (magic != ECASM_BINARY_MAGIC)
  487              		.loc 1 362 3 view .LVU143
  350:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****   const uint8_t *ptr = binary_ptr;
-ARM GAS  /tmp/cc5PcF7o.s 			page 19
+ARM GAS  /tmp/ccsTf54J.s 			page 19
 
 
  488              		.loc 1 350 1 is_stmt 0 view .LVU144
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  526              	.L52:
  527 001e 00BF     		.align	2
  528              	.L51:
-ARM GAS  /tmp/cc5PcF7o.s 			page 20
+ARM GAS  /tmp/ccsTf54J.s 			page 20
 
 
  529 0020 3000BFEC 		.word	-323026896
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  565              		.global	ec_get_reloc_id
  566              		.syntax unified
  567              		.thumb
-ARM GAS  /tmp/cc5PcF7o.s 			page 21
+ARM GAS  /tmp/ccsTf54J.s 			page 21
 
 
  568              		.thumb_func
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  419:Lib/AI_Runtime/Npu/ll_aton/ecloader.c **** 
  595              		.loc 1 419 19 is_stmt 0 view .LVU174
  596 0008 0C23     		movs	r3, #12
-ARM GAS  /tmp/cc5PcF7o.s 			page 22
+ARM GAS  /tmp/ccsTf54J.s 			page 22
 
 
  597 000a 03FB0101 		mla	r1, r3, r1, r0
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  635              	.LFB9:
  427:Lib/AI_Runtime/Npu/ll_aton/ecloader.c **** 
  428:Lib/AI_Runtime/Npu/ll_aton/ecloader.c **** /**
-ARM GAS  /tmp/cc5PcF7o.s 			page 23
+ARM GAS  /tmp/ccsTf54J.s 			page 23
 
 
  429:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****  * Relocate all the values associated with a relocation specified by using an index.
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  664 000e 0020     		movs	r0, #0
  665 0010 07E0     		b	.L67
  666              	.LVL72:
-ARM GAS  /tmp/cc5PcF7o.s 			page 24
+ARM GAS  /tmp/ccsTf54J.s 			page 24
 
 
  667              	.L63:
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  489:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****   *prev_base = base;
  685              		.loc 1 489 3 is_stmt 1 view .LVU196
  686              		.loc 1 489 14 is_stmt 0 view .LVU197
-ARM GAS  /tmp/cc5PcF7o.s 			page 25
+ARM GAS  /tmp/ccsTf54J.s 			page 25
 
 
  687 001e 2B60     		str	r3, [r5]
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  725 0036 0B48     		ldr	r0, .L72+4
  726              	.LVL84:
  472:Lib/AI_Runtime/Npu/ll_aton/ecloader.c **** 
-ARM GAS  /tmp/cc5PcF7o.s 			page 26
+ARM GAS  /tmp/ccsTf54J.s 			page 26
 
 
  727              		.loc 1 472 7 is_stmt 0 view .LVU213
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  765 0052 54F82170 		ldr	r7, [r4, r1, lsl #2]
  766              	.LBE6:
  479:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****     {
-ARM GAS  /tmp/cc5PcF7o.s 			page 27
+ARM GAS  /tmp/ccsTf54J.s 			page 27
 
 
  767              		.loc 1 479 40 discriminator 3 view .LVU230
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  500:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****  * blob (that will be patched)
  501:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****  * \param[in]     id       is the identifier of the relocation whose values must be relocated
  502:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****  * \param[in]     base            is the offset that must be added to the values to be relocated
-ARM GAS  /tmp/cc5PcF7o.s 			page 28
+ARM GAS  /tmp/ccsTf54J.s 			page 28
 
 
  503:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****  * \param[in,out] prev_base       is the pointer to a memory location containing the previous value
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  518:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****   }
  519:Lib/AI_Runtime/Npu/ll_aton/ecloader.c **** 
  520:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****   if (base == *prev_base)
-ARM GAS  /tmp/cc5PcF7o.s 			page 29
+ARM GAS  /tmp/ccsTf54J.s 			page 29
 
 
  521:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****     return true;
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  845              		@ sp needed
  846 001c BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
  847              	.LVL96:
-ARM GAS  /tmp/cc5PcF7o.s 			page 30
+ARM GAS  /tmp/ccsTf54J.s 			page 30
 
 
  848              	.L75:
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  535:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****     {
  888              		.loc 1 535 9 view .LVU259
  889 0042 4046     		mov	r0, r8
-ARM GAS  /tmp/cc5PcF7o.s 			page 31
+ARM GAS  /tmp/ccsTf54J.s 			page 31
 
 
  890 0044 2144     		add	r1, r1, r4
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  927 0062 6218     		adds	r2, r4, r1
  928              	.LVL106:
  552:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****       {
-ARM GAS  /tmp/cc5PcF7o.s 			page 32
+ARM GAS  /tmp/ccsTf54J.s 			page 32
 
 
  929              		.loc 1 552 7 is_stmt 1 view .LVU277
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  969              		.loc 1 558 13 view .LVU291
  970 007a 0231     		adds	r1, r1, #2
  558:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****       }
-ARM GAS  /tmp/cc5PcF7o.s 			page 33
+ARM GAS  /tmp/ccsTf54J.s 			page 33
 
 
  971              		.loc 1 558 34 view .LVU292
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  1013              	.LC15:
  1014 0022 4572726F 		.ascii	"Error: Size of the patch table of an Epoch Controll"
  1014      723A2053 
-ARM GAS  /tmp/cc5PcF7o.s 			page 34
+ARM GAS  /tmp/ccsTf54J.s 			page 34
 
 
  1014      697A6520 
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  1035              	.LFB11:
  571:Lib/AI_Runtime/Npu/ll_aton/ecloader.c **** 
  572:Lib/AI_Runtime/Npu/ll_aton/ecloader.c **** /**
-ARM GAS  /tmp/cc5PcF7o.s 			page 35
+ARM GAS  /tmp/ccsTf54J.s 			page 35
 
 
  573:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****  * Copy to memory the patch table contained in an Epoch Controller binary.
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  1058 0008 0546     		mov	r5, r0
  1059              		.loc 1 601 6 view .LVU311
  1060 000a 9942     		cmp	r1, r3
-ARM GAS  /tmp/cc5PcF7o.s 			page 36
+ARM GAS  /tmp/ccsTf54J.s 			page 36
 
 
  1061 000c 04D0     		beq	.L89
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  642:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****   else
  643:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****   {
  644:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****     if ((((intptr_t)patch_table) % 4) != 0)
-ARM GAS  /tmp/cc5PcF7o.s 			page 37
+ARM GAS  /tmp/ccsTf54J.s 			page 37
 
 
  645:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****     {
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  1090 0020 1348     		ldr	r0, .L104+8
  1091              	.LVL120:
  616:Lib/AI_Runtime/Npu/ll_aton/ecloader.c **** 
-ARM GAS  /tmp/cc5PcF7o.s 			page 38
+ARM GAS  /tmp/ccsTf54J.s 			page 38
 
 
  1092              		.loc 1 616 5 is_stmt 0 view .LVU325
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  640:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****   }
  1130              		.loc 1 640 7 is_stmt 1 view .LVU342
  640:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****   }
-ARM GAS  /tmp/cc5PcF7o.s 			page 39
+ARM GAS  /tmp/ccsTf54J.s 			page 39
 
 
  1131              		.loc 1 640 25 is_stmt 0 view .LVU343
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  1171              		.loc 1 662 7 is_stmt 0 view .LVU357
  1172 0056 FFF7FEFF 		bl	printf
  1173              	.LVL136:
-ARM GAS  /tmp/cc5PcF7o.s 			page 40
+ARM GAS  /tmp/ccsTf54J.s 			page 40
 
 
  667:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****     }
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  1213              		@ args = 0, pretend = 0, frame = 0
  1214              		@ frame_needed = 0, uses_anonymous_args = 0
  687:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****   const uint8_t *ptr = binary_ptr;
-ARM GAS  /tmp/cc5PcF7o.s 			page 41
+ARM GAS  /tmp/ccsTf54J.s 			page 41
 
 
  1215              		.loc 1 687 3 view .LVU364
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  1245              	.L107:
  705:Lib/AI_Runtime/Npu/ll_aton/ecloader.c **** 
  1246              		.loc 1 705 3 is_stmt 1 view .LVU377
-ARM GAS  /tmp/cc5PcF7o.s 			page 42
+ARM GAS  /tmp/ccsTf54J.s 			page 42
 
 
  707:Lib/AI_Runtime/Npu/ll_aton/ecloader.c **** 
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  1285 0004 7047     		bx	lr
  1286              		.cfi_endproc
  1287              	.LFE19:
-ARM GAS  /tmp/cc5PcF7o.s 			page 43
+ARM GAS  /tmp/ccsTf54J.s 			page 43
 
 
  1289              		.section	.text.ec_get_patch_id,"ax",%progbits
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  1313 0002 0368     		ldr	r3, [r0]
  1314 0004 8B42     		cmp	r3, r1
  1315 0006 04D9     		bls	.L118
-ARM GAS  /tmp/cc5PcF7o.s 			page 44
+ARM GAS  /tmp/ccsTf54J.s 			page 44
 
 
  1316              	.LBB23:
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  771:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****  * \param[in] idx      is the index of the patch whose mask must be retrieved
  772:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****  *
  773:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****  * \return the mask associated with patch having index \e idx among the patches contained in the pa
-ARM GAS  /tmp/cc5PcF7o.s 			page 45
+ARM GAS  /tmp/ccsTf54J.s 			page 45
 
 
  774:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****  * contained in the memory area starting at \e patch_table_ptr, or 0 if that patch does not exist
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  1387              	.L122:
  795:Lib/AI_Runtime/Npu/ll_aton/ecloader.c **** }
  1388              		.loc 1 795 1 view .LVU414
-ARM GAS  /tmp/cc5PcF7o.s 			page 46
+ARM GAS  /tmp/ccsTf54J.s 			page 46
 
 
  1389 0012 7047     		bx	lr
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  1417              		.cfi_offset 5, -16
  1418              		.cfi_offset 6, -12
  1419              		.cfi_offset 7, -8
-ARM GAS  /tmp/cc5PcF7o.s 			page 47
+ARM GAS  /tmp/ccsTf54J.s 			page 47
 
 
  1420              		.cfi_offset 14, -4
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  839:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****     }
  840:Lib/AI_Runtime/Npu/ll_aton/ecloader.c **** 
  841:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****     ptr = (const ECFileEntry *)((const uint8_t *)patch_table_ptr + offset);
-ARM GAS  /tmp/cc5PcF7o.s 			page 48
+ARM GAS  /tmp/ccsTf54J.s 			page 48
 
 
  842:Lib/AI_Runtime/Npu/ll_aton/ecloader.c **** 
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  836:Lib/AI_Runtime/Npu/ll_aton/ecloader.c **** 
  1479              		.loc 1 836 7 is_stmt 1 view .LVU441
  1480 002c 0B48     		ldr	r0, .L135+4
-ARM GAS  /tmp/cc5PcF7o.s 			page 49
+ARM GAS  /tmp/ccsTf54J.s 			page 49
 
 
  1481              	.LVL171:
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  1520 0044 55F821C0 		ldr	ip, [r5, r1, lsl #2]
  850:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****     }
  1521              		.loc 1 850 7 is_stmt 1 view .LVU457
-ARM GAS  /tmp/cc5PcF7o.s 			page 50
+ARM GAS  /tmp/ccsTf54J.s 			page 50
 
 
  850:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****     }
@@ -2998,7 +2998,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  867:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****  * \retval \e true  on success
  868:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****  * \retval \e false otherwise
  869:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****  */
-ARM GAS  /tmp/cc5PcF7o.s 			page 51
+ARM GAS  /tmp/ccsTf54J.s 			page 51
 
 
  870:Lib/AI_Runtime/Npu/ll_aton/ecloader.c **** 
@@ -3058,7 +3058,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  885:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****   {
  886:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****     ptr = patch_table_ptr + 4 * n + 1;
  887:Lib/AI_Runtime/Npu/ll_aton/ecloader.c **** 
-ARM GAS  /tmp/cc5PcF7o.s 			page 52
+ARM GAS  /tmp/ccsTf54J.s 			page 52
 
 
  888:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****     ECFileEntry offset = *ptr;
@@ -3118,7 +3118,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  1604 001c 4FF00009 		mov	r9, #0
  1605              	.LBE30:
  882:Lib/AI_Runtime/Npu/ll_aton/ecloader.c **** 
-ARM GAS  /tmp/cc5PcF7o.s 			page 53
+ARM GAS  /tmp/ccsTf54J.s 			page 53
 
 
  1606              		.loc 1 882 15 view .LVU476
@@ -3178,7 +3178,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  896:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****       ECFileEntry num = *ptr++;
  1646              		.loc 1 896 7 view .LVU491
  899:Lib/AI_Runtime/Npu/ll_aton/ecloader.c **** 
-ARM GAS  /tmp/cc5PcF7o.s 			page 54
+ARM GAS  /tmp/ccsTf54J.s 			page 54
 
 
  1647              		.loc 1 899 19 is_stmt 0 view .LVU492
@@ -3238,7 +3238,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  1686              	.LBE36:
  920:Lib/AI_Runtime/Npu/ll_aton/ecloader.c ****     }
  1687              		.loc 1 920 14 is_stmt 0 view .LVU508
-ARM GAS  /tmp/cc5PcF7o.s 			page 55
+ARM GAS  /tmp/ccsTf54J.s 			page 55
 
 
  1688 005c 0120     		movs	r0, #1
@@ -3298,7 +3298,7 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  1729              	.L149:
  1730 0082 00BF     		.align	2
  1731              	.L148:
-ARM GAS  /tmp/cc5PcF7o.s 			page 56
+ARM GAS  /tmp/ccsTf54J.s 			page 56
 
 
  1732 0084 00000000 		.word	.LC19
@@ -3316,51 +3316,51 @@ ARM GAS  /tmp/cc5PcF7o.s 			page 1
  1745              		.file 6 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
  1746              		.file 7 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
  1747              		.file 8 "<built-in>"
-ARM GAS  /tmp/cc5PcF7o.s 			page 57
+ARM GAS  /tmp/ccsTf54J.s 			page 57
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 ecloader.c
-     /tmp/cc5PcF7o.s:32     .text.ec_get_blob_ptr:00000000 $t
-     /tmp/cc5PcF7o.s:38     .text.ec_get_blob_ptr:00000000 ec_get_blob_ptr
-     /tmp/cc5PcF7o.s:95     .text.ec_get_blob_ptr:00000020 $d
-     /tmp/cc5PcF7o.s:117    .text.ec_copy_blob:00000000 $t
-     /tmp/cc5PcF7o.s:123    .text.ec_copy_blob:00000000 ec_copy_blob
-     /tmp/cc5PcF7o.s:259    .text.ec_copy_blob:00000060 $d
-     /tmp/cc5PcF7o.s:286    .text.ec_copy_reloc_table:00000000 $t
-     /tmp/cc5PcF7o.s:292    .text.ec_copy_reloc_table:00000000 ec_copy_reloc_table
-     /tmp/cc5PcF7o.s:458    .text.ec_copy_reloc_table:00000070 $d
-     /tmp/cc5PcF7o.s:469    .text.ec_get_reloc_table_ptr:00000000 $t
-     /tmp/cc5PcF7o.s:475    .text.ec_get_reloc_table_ptr:00000000 ec_get_reloc_table_ptr
-     /tmp/cc5PcF7o.s:529    .text.ec_get_reloc_table_ptr:00000020 $d
-     /tmp/cc5PcF7o.s:535    .text.ec_get_num_relocs:00000000 $t
-     /tmp/cc5PcF7o.s:541    .text.ec_get_num_relocs:00000000 ec_get_num_relocs
-     /tmp/cc5PcF7o.s:564    .text.ec_get_reloc_id:00000000 $t
-     /tmp/cc5PcF7o.s:570    .text.ec_get_reloc_id:00000000 ec_get_reloc_id
-     /tmp/cc5PcF7o.s:627    .text.ec_reloc:00000000 $t
-     /tmp/cc5PcF7o.s:633    .text.ec_reloc:00000000 ec_reloc
-     /tmp/cc5PcF7o.s:783    .text.ec_reloc:00000060 $d
-     /tmp/cc5PcF7o.s:795    .text.ec_reloc_by_id:00000000 $t
-     /tmp/cc5PcF7o.s:801    .text.ec_reloc_by_id:00000000 ec_reloc_by_id
-     /tmp/cc5PcF7o.s:1003   .text.ec_reloc_by_id:00000094 $d
-     /tmp/cc5PcF7o.s:1027   .text.ec_copy_patch_table:00000000 $t
-     /tmp/cc5PcF7o.s:1033   .text.ec_copy_patch_table:00000000 ec_copy_patch_table
-     /tmp/cc5PcF7o.s:1191   .text.ec_copy_patch_table:00000068 $d
-     /tmp/cc5PcF7o.s:1202   .text.ec_get_patch_table_ptr:00000000 $t
-     /tmp/cc5PcF7o.s:1208   .text.ec_get_patch_table_ptr:00000000 ec_get_patch_table_ptr
-     /tmp/cc5PcF7o.s:1263   .text.ec_get_patch_table_ptr:00000020 $d
-     /tmp/cc5PcF7o.s:1269   .text.ec_get_num_patches:00000000 $t
-     /tmp/cc5PcF7o.s:1275   .text.ec_get_num_patches:00000000 ec_get_num_patches
-     /tmp/cc5PcF7o.s:1290   .text.ec_get_patch_id:00000000 $t
-     /tmp/cc5PcF7o.s:1296   .text.ec_get_patch_id:00000000 ec_get_patch_id
-     /tmp/cc5PcF7o.s:1345   .text.ec_get_patch_mask:00000000 $t
-     /tmp/cc5PcF7o.s:1351   .text.ec_get_patch_mask:00000000 ec_get_patch_mask
-     /tmp/cc5PcF7o.s:1398   .text.ec_patch:00000000 $t
-     /tmp/cc5PcF7o.s:1404   .text.ec_patch:00000000 ec_patch
-     /tmp/cc5PcF7o.s:1536   .text.ec_patch:00000058 $d
-     /tmp/cc5PcF7o.s:1548   .text.ec_patch_by_id:00000000 $t
-     /tmp/cc5PcF7o.s:1554   .text.ec_patch_by_id:00000000 ec_patch_by_id
-     /tmp/cc5PcF7o.s:1732   .text.ec_patch_by_id:00000084 $d
+     /tmp/ccsTf54J.s:32     .text.ec_get_blob_ptr:00000000 $t
+     /tmp/ccsTf54J.s:38     .text.ec_get_blob_ptr:00000000 ec_get_blob_ptr
+     /tmp/ccsTf54J.s:95     .text.ec_get_blob_ptr:00000020 $d
+     /tmp/ccsTf54J.s:117    .text.ec_copy_blob:00000000 $t
+     /tmp/ccsTf54J.s:123    .text.ec_copy_blob:00000000 ec_copy_blob
+     /tmp/ccsTf54J.s:259    .text.ec_copy_blob:00000060 $d
+     /tmp/ccsTf54J.s:286    .text.ec_copy_reloc_table:00000000 $t
+     /tmp/ccsTf54J.s:292    .text.ec_copy_reloc_table:00000000 ec_copy_reloc_table
+     /tmp/ccsTf54J.s:458    .text.ec_copy_reloc_table:00000070 $d
+     /tmp/ccsTf54J.s:469    .text.ec_get_reloc_table_ptr:00000000 $t
+     /tmp/ccsTf54J.s:475    .text.ec_get_reloc_table_ptr:00000000 ec_get_reloc_table_ptr
+     /tmp/ccsTf54J.s:529    .text.ec_get_reloc_table_ptr:00000020 $d
+     /tmp/ccsTf54J.s:535    .text.ec_get_num_relocs:00000000 $t
+     /tmp/ccsTf54J.s:541    .text.ec_get_num_relocs:00000000 ec_get_num_relocs
+     /tmp/ccsTf54J.s:564    .text.ec_get_reloc_id:00000000 $t
+     /tmp/ccsTf54J.s:570    .text.ec_get_reloc_id:00000000 ec_get_reloc_id
+     /tmp/ccsTf54J.s:627    .text.ec_reloc:00000000 $t
+     /tmp/ccsTf54J.s:633    .text.ec_reloc:00000000 ec_reloc
+     /tmp/ccsTf54J.s:783    .text.ec_reloc:00000060 $d
+     /tmp/ccsTf54J.s:795    .text.ec_reloc_by_id:00000000 $t
+     /tmp/ccsTf54J.s:801    .text.ec_reloc_by_id:00000000 ec_reloc_by_id
+     /tmp/ccsTf54J.s:1003   .text.ec_reloc_by_id:00000094 $d
+     /tmp/ccsTf54J.s:1027   .text.ec_copy_patch_table:00000000 $t
+     /tmp/ccsTf54J.s:1033   .text.ec_copy_patch_table:00000000 ec_copy_patch_table
+     /tmp/ccsTf54J.s:1191   .text.ec_copy_patch_table:00000068 $d
+     /tmp/ccsTf54J.s:1202   .text.ec_get_patch_table_ptr:00000000 $t
+     /tmp/ccsTf54J.s:1208   .text.ec_get_patch_table_ptr:00000000 ec_get_patch_table_ptr
+     /tmp/ccsTf54J.s:1263   .text.ec_get_patch_table_ptr:00000020 $d
+     /tmp/ccsTf54J.s:1269   .text.ec_get_num_patches:00000000 $t
+     /tmp/ccsTf54J.s:1275   .text.ec_get_num_patches:00000000 ec_get_num_patches
+     /tmp/ccsTf54J.s:1290   .text.ec_get_patch_id:00000000 $t
+     /tmp/ccsTf54J.s:1296   .text.ec_get_patch_id:00000000 ec_get_patch_id
+     /tmp/ccsTf54J.s:1345   .text.ec_get_patch_mask:00000000 $t
+     /tmp/ccsTf54J.s:1351   .text.ec_get_patch_mask:00000000 ec_get_patch_mask
+     /tmp/ccsTf54J.s:1398   .text.ec_patch:00000000 $t
+     /tmp/ccsTf54J.s:1404   .text.ec_patch:00000000 ec_patch
+     /tmp/ccsTf54J.s:1536   .text.ec_patch:00000058 $d
+     /tmp/ccsTf54J.s:1548   .text.ec_patch_by_id:00000000 $t
+     /tmp/ccsTf54J.s:1554   .text.ec_patch_by_id:00000000 ec_patch_by_id
+     /tmp/ccsTf54J.s:1732   .text.ec_patch_by_id:00000084 $d
                            .group:00000000 wm4.0.c552ae9005b0f2cca11872fae5d4b7f2
                            .group:00000000 wm4._newlib_version.h.4.411db44ea2338a62eca2f0777f81481b
                            .group:00000000 wm4.newlib.h.27.4b972ceed5d01f491020c20f1e546cab
@@ -3376,7 +3376,7 @@ DEFINED SYMBOLS
                            .group:00000000 wm4.inttypes.h.28.684aa7736e7ecc9a6ffc44acc61c7a90
                            .group:00000000 wm4.stddef.h.39.9af043fe601e315768567300ad642a8e
                            .group:00000000 wm4.cdefs.h.49.70fc7af612f78ddcace70fdd90b5623b
-ARM GAS  /tmp/cc5PcF7o.s 			page 58
+ARM GAS  /tmp/ccsTf54J.s 			page 58
 
 
                            .group:00000000 wm4._types.h.20.dd0d04dca3800a0d2a6129b87f3adbb2

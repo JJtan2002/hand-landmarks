@@ -18,9 +18,6 @@
 
 #include "arm_math.h"
 
-/* Select palm detector postprocess */
-#define POSTPROCESS_TYPE POSTPROCESS_MPE_PD_UF
-
 /* I/O configuration */
 #define AI_PD_MODEL_PP_WIDTH                      (192)
 #define AI_PD_MODEL_PP_HEIGHT                     (192)
@@ -31,6 +28,18 @@
 #define AI_PD_MODEL_PP_CONF_THRESHOLD              (0.5f)
 #define AI_PD_MODEL_PP_IOU_THRESHOLD               (0.4f)
 #define AI_PD_MODEL_PP_MAX_BOXES_LIMIT             (20)
+
+#define POSTPROCESS_TYPE    POSTPROCESS_OD_YOLO_V8_UI
+#define NB_CLASSES   (3)
+#define CLASSES_TABLE const char* classes_table[NB_CLASSES] = {\
+   "cigarette" ,   "phone" ,   "face"}\
+
+/* Postprocessing YOLO_V8 configuration */
+#define AI_OD_YOLOV8_PP_NB_CLASSES        (3)
+#define AI_OD_YOLOV8_PP_TOTAL_BOXES       (2100)
+#define AI_OD_YOLOV8_PP_MAX_BOXES_LIMIT   (10)
+#define AI_OD_YOLOV8_PP_CONF_THRESHOLD    (0.5)
+#define AI_OD_YOLOV8_PP_IOU_THRESHOLD     (0.5)
 
 #endif      /* __POSTPROCESS_CONF_H__  */
 

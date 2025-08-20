@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccXOK4tq.s 			page 1
+ARM GAS  /tmp/cc3LBuVK.s 			page 1
 
 
    1              		.arch armv8.1-m.main
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
   23:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c **** static int32_t pd_pp_nms_comparator(const void *arg1, const void *arg2)
   24:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c **** {
   34              		.loc 1 24 1 view -0
-ARM GAS  /tmp/ccXOK4tq.s 			page 2
+ARM GAS  /tmp/cc3LBuVK.s 			page 2
 
 
   35              		.cfi_startproc
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
   43:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c **** }
   44:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c **** 
   45:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c **** static float pd_pp_compute_iou(pd_pp_box_t *box0, pd_pp_box_t *box1)
-ARM GAS  /tmp/ccXOK4tq.s 			page 3
+ARM GAS  /tmp/cc3LBuVK.s 			page 3
 
 
   46:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c **** {
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  100:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c **** 
  101:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****   for (uint32_t i = 0; i < pInput_static_param->nb_total_boxes; i++) {
  102:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****     pd_pp_box_t *pBox = &pBoxes[box_nb]; //&pd_boxes[box_nb];
-ARM GAS  /tmp/ccXOK4tq.s 			page 4
+ARM GAS  /tmp/cc3LBuVK.s 			page 4
 
 
  103:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c **** 
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  157:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****     if (pRawProbs[i] >= threshold_s8) {
  158:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****       float32_t value = (float32_t)((int32_t)pRawProbs[i] - proba_zp) * proba_scale;
  159:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****       pBox->prob = 1.0f / (1.0f + expf(-value));
-ARM GAS  /tmp/ccXOK4tq.s 			page 5
+ARM GAS  /tmp/cc3LBuVK.s 			page 5
 
 
  160:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****       /* decode palm box */
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  199:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****                      pd_model_pp_static_param_t *pInput_static_param)
   81              		.loc 1 199 12 is_stmt 0 view .LVU15
   82 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
-ARM GAS  /tmp/ccXOK4tq.s 			page 6
+ARM GAS  /tmp/cc3LBuVK.s 			page 6
 
 
   83              		.cfi_def_cfa_offset 32
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  127              	.LBB17:
   39:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****   corners[0].y = box->y_center - box->height / 2;
  128              		.loc 1 39 32 view .LVU28
-ARM GAS  /tmp/ccXOK4tq.s 			page 7
+ARM GAS  /tmp/cc3LBuVK.s 			page 7
 
 
  129 0020 F6EE006A 		vmov.f32	s13, #5.0e-1
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
   48:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****   float32_t intersect_ymin;
  162              		.loc 1 48 3 view .LVU36
   49:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****   float32_t intersect_xmax;
-ARM GAS  /tmp/ccXOK4tq.s 			page 8
+ARM GAS  /tmp/cc3LBuVK.s 			page 8
 
 
  163              		.loc 1 49 3 view .LVU37
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  196 0058 8DED0A7A 		vstr.32	s14, [sp, #40]
   40:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****   corners[1].x = box->x_center + box->width / 2;
  197              		.loc 1 40 32 view .LVU59
-ARM GAS  /tmp/ccXOK4tq.s 			page 9
+ARM GAS  /tmp/cc3LBuVK.s 			page 9
 
 
  198 005c B0EE675A 		vmov.f32	s10, s15
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
   40:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****   corners[1].x = box->x_center + box->width / 2;
  244              		.loc 1 40 37 view .LVU68
  245 0084 93ED046A 		vldr.32	s12, [r3, #16]
-ARM GAS  /tmp/ccXOK4tq.s 			page 10
+ARM GAS  /tmp/cc3LBuVK.s 			page 10
 
 
  246              	.LBE28:
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  282              		.loc 1 42 16 view .LVU86
  283              	.LBE29:
  284              	.LBE38:
-ARM GAS  /tmp/ccXOK4tq.s 			page 11
+ARM GAS  /tmp/cc3LBuVK.s 			page 11
 
 
   63:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****     xmin[i] = MIN(corners[i][0].x, corners[i][1].x);
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  325              		.loc 1 67 15 discriminator 1 view .LVU100
  326 00f0 B4EE677A 		vcmp.f32	s14, s15
   64:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****     xmax[i] = MAX(corners[i][0].x, corners[i][1].x);
-ARM GAS  /tmp/ccXOK4tq.s 			page 12
+ARM GAS  /tmp/cc3LBuVK.s 			page 12
 
 
  327              		.loc 1 64 13 discriminator 4 view .LVU101
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  363              		.loc 1 71 46 view .LVU119
  364 012e 73EE427A 		vsub.f32	s15, s6, s4
   71:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****   }
-ARM GAS  /tmp/ccXOK4tq.s 			page 13
+ARM GAS  /tmp/cc3LBuVK.s 			page 13
 
 
  365              		.loc 1 71 35 view .LVU120
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
   76:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****   intersect_ymin = MAX(ymin[0], ymin[1]);
  401              		.loc 1 76 20 is_stmt 0 discriminator 1 view .LVU139
  402 016a B4EE452A 		vcmp.f32	s4, s10
-ARM GAS  /tmp/ccXOK4tq.s 			page 14
+ARM GAS  /tmp/cc3LBuVK.s 			page 14
 
 
  403 016e F1EE10FA 		vmrs	APSR_nzcv, FPSCR
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  441 01aa F1EE10FA 		vmrs	APSR_nzcv, FPSCR
  442              	.LVL22:
   81:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c **** 
-ARM GAS  /tmp/ccXOK4tq.s 			page 15
+ARM GAS  /tmp/cc3LBuVK.s 			page 15
 
 
  443              		.loc 1 81 65 discriminator 4 view .LVU156
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  221:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****       continue;
  483              		.loc 1 221 5 is_stmt 1 view .LVU171
  224:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****   }
-ARM GAS  /tmp/ccXOK4tq.s 			page 16
+ARM GAS  /tmp/cc3LBuVK.s 			page 16
 
 
  484              		.loc 1 224 5 view .LVU172
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  529              		.align	2
  530              	.L46:
  531 0214 00000000 		.word	pd_pp_nms_comparator
-ARM GAS  /tmp/ccXOK4tq.s 			page 17
+ARM GAS  /tmp/cc3LBuVK.s 			page 17
 
 
  532 0218 00000000 		.word	0
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  578              	.LBB54:
  579              	.LBI54:
   85:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****                             pd_pp_out_t *pOutput,
-ARM GAS  /tmp/ccXOK4tq.s 			page 18
+ARM GAS  /tmp/cc3LBuVK.s 			page 18
 
 
  580              		.loc 1 85 16 view .LVU189
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
   89:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c **** 
  624              		.loc 1 89 19 view .LVU200
  625 0024 0027     		movs	r7, #0
-ARM GAS  /tmp/ccXOK4tq.s 			page 19
+ARM GAS  /tmp/cc3LBuVK.s 			page 19
 
 
   99:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c **** 
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  663              	.LBE76:
  238:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****   int32_t ret = AI_PD_POSTPROCESS_ERROR;
  664              		.loc 1 238 1 is_stmt 0 view .LVU218
-ARM GAS  /tmp/ccXOK4tq.s 			page 20
+ARM GAS  /tmp/cc3LBuVK.s 			page 20
 
 
  665 003e 8846     		mov	r8, r1
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  702 005a 4046     		mov	r0, r8
  703 005c 2146     		mov	r1, r4
  704              	.LBB78:
-ARM GAS  /tmp/ccXOK4tq.s 			page 21
+ARM GAS  /tmp/cc3LBuVK.s 			page 21
 
 
  705              	.LBB71:
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  746              		.loc 1 102 18 view .LVU241
  747 0080 019B     		ldr	r3, [sp, #4]
  106:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****       /* decode palm box */
-ARM GAS  /tmp/ccXOK4tq.s 			page 22
+ARM GAS  /tmp/cc3LBuVK.s 			page 22
 
 
  748              		.loc 1 106 35 view .LVU242
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  786 00c4 81ED027A 		vstr.32	s14, [r1, #8]
  110:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****       pBox->height = pRawBoxes[i * in_struct_size + AI_PD_MODEL_PP_HEIGHTREL] / height;
  787              		.loc 1 110 7 is_stmt 1 view .LVU259
-ARM GAS  /tmp/ccXOK4tq.s 			page 23
+ARM GAS  /tmp/cc3LBuVK.s 			page 23
 
 
  110:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****       pBox->height = pRawBoxes[i * in_struct_size + AI_PD_MODEL_PP_HEIGHTREL] / height;
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  826 00fa 9945     		cmp	r9, r3
  827 00fc ADD2     		bcs	.L55
  828              	.LVL47:
-ARM GAS  /tmp/ccXOK4tq.s 			page 24
+ARM GAS  /tmp/cc3LBuVK.s 			page 24
 
 
  829              	.L51:
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  869              	.LVL51:
  114:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****         pBox->pKps[j].x = (pAnchors[i*2+0] * width  + pRawBoxes[i * in_struct_size + AI_PD_MODEL_PP
  870              		.loc 1 114 68 is_stmt 0 discriminator 3 view .LVU290
-ARM GAS  /tmp/ccXOK4tq.s 			page 25
+ARM GAS  /tmp/cc3LBuVK.s 			page 25
 
 
  871 013a D6E7     		b	.L53
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  916              		.cfi_offset 14, -4
  917 0008 2DED068B 		vpush.64	{d8, d9, d10}
  918              		.cfi_def_cfa_offset 60
-ARM GAS  /tmp/ccXOK4tq.s 			page 26
+ARM GAS  /tmp/cc3LBuVK.s 			page 26
 
 
  919              		.cfi_offset 80, -60
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  958              		.loc 1 139 3 view .LVU312
  140:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****   float32_t *pAnchors  = (float32_t *)pInput_static_param->pAnchors;
  959              		.loc 1 140 11 is_stmt 0 view .LVU313
-ARM GAS  /tmp/ccXOK4tq.s 			page 27
+ARM GAS  /tmp/cc3LBuVK.s 			page 27
 
 
  960 002e D0E90035 		ldrd	r3, r5, [r0]
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  150:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****   int8_t threshold_s8  = (int8_t)(computedThreshold / proba_scale + 0.5 + proba_zp);
  997              		.loc 1 150 3 view .LVU331
  998              	.LBE102:
-ARM GAS  /tmp/ccXOK4tq.s 			page 28
+ARM GAS  /tmp/cc3LBuVK.s 			page 28
 
 
  999              	.LBE108:
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  1037 0088 0AF10203 		add	r3, r10, #2
  1038 008c 5B00     		lsls	r3, r3, #1
  1039              	.LVL62:
-ARM GAS  /tmp/ccXOK4tq.s 			page 29
+ARM GAS  /tmp/cc3LBuVK.s 			page 29
 
 
  148:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****   size_t box_nb = 0;
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  1075              		.cfi_remember_state
  1076              		.cfi_def_cfa_offset 60
  1077              		@ sp needed
-ARM GAS  /tmp/ccXOK4tq.s 			page 30
+ARM GAS  /tmp/cc3LBuVK.s 			page 30
 
 
  1078 00a4 BDEC068B 		vldm	sp!, {d8-d10}
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  1120              		.loc 1 158 59 view .LVU371
  1121 00c4 9B1A     		subs	r3, r3, r2
  1122              	.LVL69:
-ARM GAS  /tmp/ccXOK4tq.s 			page 31
+ARM GAS  /tmp/cc3LBuVK.s 			page 31
 
 
  158:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****       pBox->prob = 1.0f / (1.0f + expf(-value));
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  1158              		.loc 1 166 52 view .LVU390
  1159 0102 C6EE887A 		vdiv.f32	s15, s13, s16
  166:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c **** 
-ARM GAS  /tmp/ccXOK4tq.s 			page 32
+ARM GAS  /tmp/cc3LBuVK.s 			page 32
 
 
  1160              		.loc 1 166 22 view .LVU391
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  1196 0138 A3EB0803 		sub	r3, r3, r8
  1197 013c 07EE903A 		vmov	s15, r3	@ int
  173:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****       pBox->width = value  / width;
-ARM GAS  /tmp/ccXOK4tq.s 			page 33
+ARM GAS  /tmp/cc3LBuVK.s 			page 33
 
 
  1198              		.loc 1 173 15 view .LVU410
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  180:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c ****         value = (float32_t)((int32_t)pRawBoxes[i * in_struct_size + AI_PD_MODEL_PP_KEYPOINTS + (2 *
  1236              		.loc 1 180 30 is_stmt 1 discriminator 1 view .LVU427
  1237 0176 BCF1010C 		subs	ip, ip, #1
-ARM GAS  /tmp/ccXOK4tq.s 			page 34
+ARM GAS  /tmp/cc3LBuVK.s 			page 34
 
 
  1238 017a 00F10200 		add	r0, r0, #2
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  1278 01a0 07EE903A 		vmov	s15, r3	@ int
  1279 01a4 F8EEE77A 		vcvt.f32.s32	s15, s15
  182:Lib/lib_vision_models_pp/lib_vision_models_pp/Src/pd_pp_model.c **** 
-ARM GAS  /tmp/ccXOK4tq.s 			page 35
+ARM GAS  /tmp/cc3LBuVK.s 			page 35
 
 
  1280              		.loc 1 182 46 view .LVU442
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  1318              	.LBE99:
  1319              	.LBE105:
  1320              	.LBE111:
-ARM GAS  /tmp/ccXOK4tq.s 			page 36
+ARM GAS  /tmp/cc3LBuVK.s 			page 36
 
 
  1321              		.cfi_endproc
@@ -2113,22 +2113,22 @@ ARM GAS  /tmp/ccXOK4tq.s 			page 1
  1331              		.file 7 "Lib/lib_vision_models_pp/lib_vision_models_pp/Inc/pd_model_pp_if.h"
  1332              		.file 8 "Lib/lib_vision_models_pp/lib_vision_models_pp/Src/vision_models_pp.h"
  1333              		.file 9 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
-ARM GAS  /tmp/ccXOK4tq.s 			page 37
+ARM GAS  /tmp/cc3LBuVK.s 			page 37
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 pd_pp_model.c
-     /tmp/ccXOK4tq.s:26     .text.pd_pp_nms_comparator:00000000 $t
-     /tmp/ccXOK4tq.s:31     .text.pd_pp_nms_comparator:00000000 pd_pp_nms_comparator
-     /tmp/ccXOK4tq.s:65     .text.pd_pp_nms.isra.0:00000000 $t
-     /tmp/ccXOK4tq.s:70     .text.pd_pp_nms.isra.0:00000000 pd_pp_nms.isra.0
-     /tmp/ccXOK4tq.s:531    .text.pd_pp_nms.isra.0:00000214 $d
-     /tmp/ccXOK4tq.s:539    .text.pd_model_pp_reset:00000000 $t
-     /tmp/ccXOK4tq.s:545    .text.pd_model_pp_reset:00000000 pd_model_pp_reset
-     /tmp/ccXOK4tq.s:563    .text.pd_model_pp_process:00000000 $t
-     /tmp/ccXOK4tq.s:569    .text.pd_model_pp_process:00000000 pd_model_pp_process
-     /tmp/ccXOK4tq.s:881    .text.pd_model_pp_process_int8:00000000 $t
-     /tmp/ccXOK4tq.s:887    .text.pd_model_pp_process_int8:00000000 pd_model_pp_process_int8
+     /tmp/cc3LBuVK.s:26     .text.pd_pp_nms_comparator:00000000 $t
+     /tmp/cc3LBuVK.s:31     .text.pd_pp_nms_comparator:00000000 pd_pp_nms_comparator
+     /tmp/cc3LBuVK.s:65     .text.pd_pp_nms.isra.0:00000000 $t
+     /tmp/cc3LBuVK.s:70     .text.pd_pp_nms.isra.0:00000000 pd_pp_nms.isra.0
+     /tmp/cc3LBuVK.s:531    .text.pd_pp_nms.isra.0:00000214 $d
+     /tmp/cc3LBuVK.s:539    .text.pd_model_pp_reset:00000000 $t
+     /tmp/cc3LBuVK.s:545    .text.pd_model_pp_reset:00000000 pd_model_pp_reset
+     /tmp/cc3LBuVK.s:563    .text.pd_model_pp_process:00000000 $t
+     /tmp/cc3LBuVK.s:569    .text.pd_model_pp_process:00000000 pd_model_pp_process
+     /tmp/cc3LBuVK.s:881    .text.pd_model_pp_process_int8:00000000 $t
+     /tmp/cc3LBuVK.s:887    .text.pd_model_pp_process_int8:00000000 pd_model_pp_process_int8
                            .group:00000000 wm4.0.c552ae9005b0f2cca11872fae5d4b7f2
                            .group:00000000 wm4._newlib_version.h.4.411db44ea2338a62eca2f0777f81481b
                            .group:00000000 wm4.features.h.33.e0c9f337c65cb9f22ed5f23d082bc78b
@@ -2173,7 +2173,7 @@ DEFINED SYMBOLS
 UNDEFINED SYMBOLS
 qsort
 logf
-ARM GAS  /tmp/ccXOK4tq.s 			page 38
+ARM GAS  /tmp/cc3LBuVK.s 			page 38
 
 
 expf

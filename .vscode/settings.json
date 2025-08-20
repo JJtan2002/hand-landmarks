@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "od_yolov8_pp_if.h": "c",
+        "vision_models_pp.h": "c"
+    }
+}

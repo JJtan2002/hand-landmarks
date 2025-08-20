@@ -165,6 +165,23 @@ typedef struct {
   pd_pp_out_t pd_out;
 } pd_model_info_t;
 
+/**
+ * @brief  YOLO detector model context struct
+ */
+typedef struct {
+  // Input buffer info
+  uint32_t nn_in_len;
+
+  // Raw output buffer info from the model
+  float *raw_detections_out;
+  uint32_t raw_detections_out_len;
+
+  // Post-processing parameters and final output
+  od_yolov8_pp_static_param_t static_param;
+  od_pp_out_t yolo_out; // CORRECTED: Using the provided output type
+
+} yolo_detector_info_t;
+
 typedef struct {
   uint8_t *nn_in;
   uint32_t nn_in_len;
@@ -214,6 +231,7 @@ static uint8_t screen_buffer[LCD_BG_WIDTH * LCD_BG_HEIGHT * 2] ALIGN_32 IN_PSRAM
 /* model */
  /* palm detector */
 LL_ATON_DECLARE_NAMED_NN_INSTANCE_AND_INTERFACE(palm_detector);
+LL_ATON_DECLARE_NAMED_NN_INSTANCE_AND_INTERFACE(yolo_detector);
 static roi_t rois[PD_MAX_HAND_NB];
  /* hand landmark */
 LL_ATON_DECLARE_NAMED_NN_INSTANCE_AND_INTERFACE(hand_landmark);
@@ -789,6 +807,72 @@ static void Display_NetworkOutput(display_info_t *info)
     UTIL_LCDEx_PrintfAt(0, LINE(line_nb),  RIGHT_MODE, "pd : %5.1f %%", info->pd_max_prob * 100);
 }
 
+/**
+ * @brief  Initializes the YOLO detector model info and post-processing
+ * @param  info  Pointer to the yolo_detector_info_t context struct
+ * @retval None
+ */
+static void yolo_detector_init(yolo_detector_info_t *info)
+{
+  // Assumes your YOLO model is named 'yolo_detector' in the Cube.AI tool
+  const LL_Buffer_InfoTypeDef *nn_out_info = LL_ATON_Output_Buffers_Info_yolo_detector();
+  const LL_Buffer_InfoTypeDef *nn_in_info = LL_ATON_Input_Buffers_Info_yolo_detector();
+  int ret;
+
+  /* Link model I/O buffers to the info struct */
+  info->nn_in_len = LL_Buffer_len(&nn_in_info[0]);
+  info->raw_detections_out = (float *) LL_Buffer_addr_start(&nn_out_info[0]);
+  info->raw_detections_out_len = LL_Buffer_len(&nn_out_info[0]);
+
+  /* Initialize YOLO post-processing static parameters */
+  info->static_param.nb_classes = 80;        // Example: 80 for COCO dataset
+  info->static_param.nb_total_boxes = 8400;  // Example: Standard for YOLOv8
+  info->static_param.max_boxes_limit = 100;  // Max boxes after NMS
+  info->static_param.conf_threshold = 0.40f; // Confidence threshold
+  info->static_param.iou_threshold = 0.45f;  // IoU threshold for NMS
+  // Note: Scale/ZeroPoint may not be needed if your model output is float32
+  info->static_param.raw_output_scale = 1.0f;
+  info->static_param.raw_output_zero_point = 0;
+
+  /* Initialize the post-processing module */
+  // Assumes a generic post-processing init function exists
+  ret = app_postprocess_init(&info->static_param, &NN_Instance_yolo_detector);
+  assert(ret == 0); // Assuming 0 is success for the generic post-processor
+}
+
+static int yolo_detector_run(uint8_t *buffer, yolo_detector_info_t *info, uint32_t *exec_time)
+{
+  uint32_t start_ts;
+  int detection_nb;
+  int ret;
+  int i;
+
+  start_ts = HAL_GetTick();
+  /* Note that we don't need to clean/invalidate those input buffers since they are only access in hardware */
+  ret = LL_ATON_Set_User_Input_Buffer_yolo_detector(0, buffer, info->nn_in_len);
+  assert(ret == LL_ATON_User_IO_NOERROR);
+
+  LL_ATON_RT_Main(&NN_Instance_yolo_detector);
+
+  /* Run post-processing on the model's raw output */
+  ret = app_postprocess_run((void * []){info->raw_detections_out}, 1, &info->yolo_out, &info->static_param);
+
+  // Get the number of final detections after NMS
+  detection_nb = info->yolo_out.nb_detect;
+
+  /* Optional: Post-process final bounding boxes (e.g., coordinate scaling) */
+  for (i = 0; i < detection_nb; i++) {
+    // cvt_yolo_coord_to_screen_coord(&info->yolo_out.pOutData[i]); // Example
+  }
+
+  /* Invalidate D-Cache for the output region to ensure CPU sees updated data */
+  CACHE_OP(SCB_InvalidateDCache_by_Addr(info->raw_detections_out, info->raw_detections_out_len));
+
+  *exec_time = HAL_GetTick() - start_ts;
+
+  return detection_nb;
+}
+
 static void palm_detector_init(pd_model_info_t *info)
 {
   const LL_Buffer_InfoTypeDef *nn_out_info = LL_ATON_Output_Buffers_Info_palm_detector();
@@ -1127,9 +1211,13 @@ static void nn_thread_fct(void *arg)
   int ret;
 
   /*
-   * MODEL INITIALIZATION REMOVED
-   * All model init functions have been removed.
+   * 2. Initialize the YOLO model
+   * This calls the init function to set up buffers and parameters.
+   * If the application runs past this point, the initialization is successful.
    */
+  yolo_detector_info_t yolo_info;
+  yolo_detector_init(&yolo_info);
+  int detection_nb;
 
   /*** App Loop ***************************************************************/
   nn_period[1] = HAL_GetTick();
@@ -1152,9 +1240,10 @@ static void nn_thread_fct(void *arg)
 
 
     /**************************************************************************
-     * MODEL EXECUTION DISABLED
-     * All model run calls are removed. We now force a "no detection" state.
+     * MODEL EXECUTION 
      **************************************************************************/
+    detection_nb = yolo_detector_run(capture_buffer, &yolo_info, &pd_ms);
+    
     is_tracking = 0; // Force state to "not tracking"
     pd_ms = 0;       // Set inference time to 0
     hl_ms = 0;       // Set inference time to 0

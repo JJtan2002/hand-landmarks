@@ -128,7 +128,7 @@ build/Lib/ai-postprocessing-wrapper/app_postprocess_mpe_pd_uf.o: \
  Lib/lib_vision_models_pp/lib_vision_models_pp/Inc/sseg_deeplabv3_pp_if.h \
  Lib/lib_vision_models_pp/lib_vision_models_pp/Inc/sseg_pp_output_if.h \
  Lib/lib_vision_models_pp/lib_vision_models_pp/Inc/sseg_pp_output_if.h \
- Inc/app_config.h Inc/postprocess_conf.h Src/pd_anchors.c
+ Inc/app_config.h Inc/postprocess_conf.h
 Lib/ai-postprocessing-wrapper/app_postprocess.h:
 Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h:
 Lib/AI_Runtime/Npu/ll_aton/ll_aton_NN_interface.h:
@@ -262,4 +262,3 @@ Lib/lib_vision_models_pp/lib_vision_models_pp/Inc/sseg_pp_output_if.h:
 Lib/lib_vision_models_pp/lib_vision_models_pp/Inc/sseg_pp_output_if.h:
 Inc/app_config.h:
 Inc/postprocess_conf.h:
-Src/pd_anchors.c:
