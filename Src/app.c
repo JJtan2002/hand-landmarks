@@ -230,11 +230,11 @@ static uint8_t screen_buffer[LCD_BG_WIDTH * LCD_BG_HEIGHT * 2] ALIGN_32 IN_PSRAM
 
 /* model */
  /* palm detector */
-LL_ATON_DECLARE_NAMED_NN_INSTANCE_AND_INTERFACE(palm_detector);
+//LL_ATON_DECLARE_NAMED_NN_INSTANCE_AND_INTERFACE(palm_detector);
 LL_ATON_DECLARE_NAMED_NN_INSTANCE_AND_INTERFACE(yolo_detector);
 static roi_t rois[PD_MAX_HAND_NB];
  /* hand landmark */
-LL_ATON_DECLARE_NAMED_NN_INSTANCE_AND_INTERFACE(hand_landmark);
+//LL_ATON_DECLARE_NAMED_NN_INSTANCE_AND_INTERFACE(hand_landmark);
 static ld_point_t ld_landmarks[PD_MAX_HAND_NB][LD_LANDMARK_NB];
 static uint32_t frame_event_nb;
 static volatile uint32_t frame_event_nb_for_resize;
@@ -873,72 +873,72 @@ static int yolo_detector_run(uint8_t *buffer, yolo_detector_info_t *info, uint32
   return detection_nb;
 }
 
-static void palm_detector_init(pd_model_info_t *info)
-{
-  const LL_Buffer_InfoTypeDef *nn_out_info = LL_ATON_Output_Buffers_Info_palm_detector();
-  const LL_Buffer_InfoTypeDef *nn_in_info = LL_ATON_Input_Buffers_Info_palm_detector();
-  int ret;
+// static void palm_detector_init(pd_model_info_t *info)
+// {
+//   const LL_Buffer_InfoTypeDef *nn_out_info = LL_ATON_Output_Buffers_Info_palm_detector();
+//   const LL_Buffer_InfoTypeDef *nn_in_info = LL_ATON_Input_Buffers_Info_palm_detector();
+//   int ret;
 
-  /* model info */
-  info->nn_in_len = LL_Buffer_len(&nn_in_info[0]);
-  info->prob_out = (float *) LL_Buffer_addr_start(&nn_out_info[0]);
-  info->prob_out_len = LL_Buffer_len(&nn_out_info[0]);
-  assert(info->prob_out_len == AI_PD_MODEL_PP_TOTAL_DETECTIONS * sizeof(float));
-  info->boxes_out = (float *) LL_Buffer_addr_start(&nn_out_info[1]);
-  info->boxes_out_len = LL_Buffer_len(&nn_out_info[1]);
-  assert(info->boxes_out_len == AI_PD_MODEL_PP_TOTAL_DETECTIONS * sizeof(float) * 18);
+//   /* model info */
+//   info->nn_in_len = LL_Buffer_len(&nn_in_info[0]);
+//   info->prob_out = (float *) LL_Buffer_addr_start(&nn_out_info[0]);
+//   info->prob_out_len = LL_Buffer_len(&nn_out_info[0]);
+//   assert(info->prob_out_len == AI_PD_MODEL_PP_TOTAL_DETECTIONS * sizeof(float));
+//   info->boxes_out = (float *) LL_Buffer_addr_start(&nn_out_info[1]);
+//   info->boxes_out_len = LL_Buffer_len(&nn_out_info[1]);
+//   assert(info->boxes_out_len == AI_PD_MODEL_PP_TOTAL_DETECTIONS * sizeof(float) * 18);
 
-  /* post processor info */
-  ret = app_postprocess_init(&info->static_param, &NN_Instance_palm_detector);
-  assert(ret == AI_PD_POSTPROCESS_ERROR_NO);
-}
+//   /* post processor info */
+//   ret = app_postprocess_init(&info->static_param, &NN_Instance_palm_detector);
+//   assert(ret == AI_PD_POSTPROCESS_ERROR_NO);
+// }
 
-static int palm_detector_run(uint8_t *buffer, pd_model_info_t *info, uint32_t *pd_exec_time)
-{
-  uint32_t start_ts;
-  int hand_nb;
-  int ret;
-  int i;
+// static int palm_detector_run(uint8_t *buffer, pd_model_info_t *info, uint32_t *pd_exec_time)
+// {
+//   uint32_t start_ts;
+//   int hand_nb;
+//   int ret;
+//   int i;
 
-  start_ts = HAL_GetTick();
-  /* Note that we don't need to clean/invalidate those input buffers since they are only access in hardware */
-  ret = LL_ATON_Set_User_Input_Buffer_palm_detector(0, buffer, info->nn_in_len);
-  assert(ret == LL_ATON_User_IO_NOERROR);
+//   start_ts = HAL_GetTick();
+//   /* Note that we don't need to clean/invalidate those input buffers since they are only access in hardware */
+//   ret = LL_ATON_Set_User_Input_Buffer_palm_detector(0, buffer, info->nn_in_len);
+//   assert(ret == LL_ATON_User_IO_NOERROR);
 
-  LL_ATON_RT_Main(&NN_Instance_palm_detector);
+//   LL_ATON_RT_Main(&NN_Instance_palm_detector);
 
-  ret = app_postprocess_run((void * []){info->prob_out, info->boxes_out}, 2, &info->pd_out, &info->static_param);
-  assert(ret == AI_PD_POSTPROCESS_ERROR_NO);
-  hand_nb = MIN(info->pd_out.box_nb, PD_MAX_HAND_NB);
+//   ret = app_postprocess_run((void * []){info->prob_out, info->boxes_out}, 2, &info->pd_out, &info->static_param);
+//   assert(ret == AI_PD_POSTPROCESS_ERROR_NO);
+//   hand_nb = MIN(info->pd_out.box_nb, PD_MAX_HAND_NB);
 
-  for (i = 0; i < hand_nb; i++) {
-    cvt_pd_coord_to_screen_coord(&info->pd_out.pOutData[i]);
-    pd_box_to_roi(&info->pd_out.pOutData[i], &rois[i]);
-  }
+//   for (i = 0; i < hand_nb; i++) {
+//     cvt_pd_coord_to_screen_coord(&info->pd_out.pOutData[i]);
+//     pd_box_to_roi(&info->pd_out.pOutData[i], &rois[i]);
+//   }
 
-  /* Discard nn_out region (used by pp_outputs variables) to avoid Dcache evictions during nn inference */
-  CACHE_OP(SCB_InvalidateDCache_by_Addr(info->prob_out, info->prob_out_len));
-  CACHE_OP(SCB_InvalidateDCache_by_Addr(info->boxes_out, info->boxes_out_len));
+//   /* Discard nn_out region (used by pp_outputs variables) to avoid Dcache evictions during nn inference */
+//   CACHE_OP(SCB_InvalidateDCache_by_Addr(info->prob_out, info->prob_out_len));
+//   CACHE_OP(SCB_InvalidateDCache_by_Addr(info->boxes_out, info->boxes_out_len));
 
-  *pd_exec_time = HAL_GetTick() - start_ts;
+//   *pd_exec_time = HAL_GetTick() - start_ts;
 
-  return hand_nb;
-}
+//   return hand_nb;
+// }
 
-static void hand_landmark_init(hl_model_info_t *info)
-{
-  const LL_Buffer_InfoTypeDef *nn_out_info = LL_ATON_Output_Buffers_Info_hand_landmark();
-  const LL_Buffer_InfoTypeDef *nn_in_info = LL_ATON_Input_Buffers_Info_hand_landmark();
+// static void hand_landmark_init(hl_model_info_t *info)
+// {
+//   const LL_Buffer_InfoTypeDef *nn_out_info = LL_ATON_Output_Buffers_Info_hand_landmark();
+//   const LL_Buffer_InfoTypeDef *nn_in_info = LL_ATON_Input_Buffers_Info_hand_landmark();
 
-  info->nn_in = LL_Buffer_addr_start(&nn_in_info[0]);
-  info->nn_in_len = LL_Buffer_len(&nn_in_info[0]);
-  info->prob_out = (float *) LL_Buffer_addr_start(&nn_out_info[2]);
-  info->prob_out_len = LL_Buffer_len(&nn_out_info[2]);
-  assert(info->prob_out_len == sizeof(float));
-  info->landmarks_out = (float *) LL_Buffer_addr_start(&nn_out_info[3]);
-  info->landmarks_out_len = LL_Buffer_len(&nn_out_info[3]);
-  assert(info->landmarks_out_len == sizeof(float) * 63);
-}
+//   info->nn_in = LL_Buffer_addr_start(&nn_in_info[0]);
+//   info->nn_in_len = LL_Buffer_len(&nn_in_info[0]);
+//   info->prob_out = (float *) LL_Buffer_addr_start(&nn_out_info[2]);
+//   info->prob_out_len = LL_Buffer_len(&nn_out_info[2]);
+//   assert(info->prob_out_len == sizeof(float));
+//   info->landmarks_out = (float *) LL_Buffer_addr_start(&nn_out_info[3]);
+//   info->landmarks_out_len = LL_Buffer_len(&nn_out_info[3]);
+//   assert(info->landmarks_out_len == sizeof(float) * 63);
+// }
 
 #if HAS_ROTATION_SUPPORT == 0
 static int hand_landmark_prepare_input(uint8_t *buffer, roi_t *roi, hl_model_info_t *info)
@@ -1070,27 +1070,27 @@ static int hand_landmark_prepare_input(uint8_t *buffer, roi_t *roi, hl_model_inf
 }
 #endif
 
-static int hand_landmark_run(uint8_t *buffer, hl_model_info_t *info, roi_t *roi,
-                             ld_point_t ld_landmarks[LD_LANDMARK_NB])
-{
-  int is_clamped;
-  int is_valid;
+// static int hand_landmark_run(uint8_t *buffer, hl_model_info_t *info, roi_t *roi,
+//                              ld_point_t ld_landmarks[LD_LANDMARK_NB])
+// {
+//   int is_clamped;
+//   int is_valid;
 
-  is_clamped = hand_landmark_prepare_input(buffer, roi, info);
-  CACHE_OP(SCB_CleanInvalidateDCache_by_Addr(info->nn_in, info->nn_in_len));
-  if (is_clamped)
-    return 0;
+//   is_clamped = hand_landmark_prepare_input(buffer, roi, info);
+//   CACHE_OP(SCB_CleanInvalidateDCache_by_Addr(info->nn_in, info->nn_in_len));
+//   if (is_clamped)
+//     return 0;
 
-  LL_ATON_RT_Main(&NN_Instance_hand_landmark);
+//   LL_ATON_RT_Main(&NN_Instance_hand_landmark);
 
-  is_valid = ld_post_process(info->prob_out, info->landmarks_out, ld_landmarks);
+//   is_valid = ld_post_process(info->prob_out, info->landmarks_out, ld_landmarks);
 
-  /* Discard nn_out region (used by pp_input and pp_outputs variables) to avoid Dcache evictions during nn inference */
-  CACHE_OP(SCB_InvalidateDCache_by_Addr(info->prob_out, info->prob_out_len));
-  CACHE_OP(SCB_InvalidateDCache_by_Addr(info->landmarks_out, info->landmarks_out_len));
+//   /* Discard nn_out region (used by pp_input and pp_outputs variables) to avoid Dcache evictions during nn inference */
+//   CACHE_OP(SCB_InvalidateDCache_by_Addr(info->prob_out, info->prob_out_len));
+//   CACHE_OP(SCB_InvalidateDCache_by_Addr(info->landmarks_out, info->landmarks_out_len));
 
-  return is_valid;
-}
+//   return is_valid;
+// }
 
 #if HAS_ROTATION_SUPPORT == 1
 static void app_rot_init(hl_model_info_t *info)
@@ -1245,7 +1245,6 @@ static void nn_thread_fct(void *arg)
     detection_nb = yolo_detector_run(capture_buffer, &yolo_info, &pd_ms);
     
     is_tracking = 0; // Force state to "not tracking"
-    pd_ms = 0;       // Set inference time to 0
     hl_ms = 0;       // Set inference time to 0
 
     // Update filtered times with our zero values
@@ -1281,101 +1280,101 @@ static void nn_thread_fct(void *arg)
   }
 }
 
-static void backup(void *arg)
-{
-  float nn_period_filtered_ms = 0;
-  float pd_filtered_ms = 0;
-  float ld_filtered_ms = 0;
-  hl_model_info_t hl_info;
-  pd_model_info_t pd_info;
-  uint32_t nn_period_ms;
-  uint32_t nn_period[2];
-  uint8_t *nn_pipe_dst;
-  pd_pp_point_t box_next_keypoints[AI_PD_MODEL_PP_NB_KEYPOINTS];
-  pd_pp_box_t box_next;
-  int is_tracking = 0;
-  roi_t roi_next;
-  uint32_t pd_ms;
-  uint32_t hl_ms;
-  int ret;
-  int j;
+// static void backup(void *arg)
+// {
+//   float nn_period_filtered_ms = 0;
+//   float pd_filtered_ms = 0;
+//   float ld_filtered_ms = 0;
+//   hl_model_info_t hl_info;
+//   pd_model_info_t pd_info;
+//   uint32_t nn_period_ms;
+//   uint32_t nn_period[2];
+//   uint8_t *nn_pipe_dst;
+//   pd_pp_point_t box_next_keypoints[AI_PD_MODEL_PP_NB_KEYPOINTS];
+//   pd_pp_box_t box_next;
+//   int is_tracking = 0;
+//   roi_t roi_next;
+//   uint32_t pd_ms;
+//   uint32_t hl_ms;
+//   int ret;
+//   int j;
 
-  /* Current tracking algo only support single hand */
-  assert(PD_MAX_HAND_NB == 1);
+//   /* Current tracking algo only support single hand */
+//   assert(PD_MAX_HAND_NB == 1);
 
-  /* setup models buffer info */
-  palm_detector_init(&pd_info);
-  box_next.pKps = box_next_keypoints;
-  hand_landmark_init(&hl_info);
+//   /* setup models buffer info */
+//   palm_detector_init(&pd_info);
+//   box_next.pKps = box_next_keypoints;
+//   hand_landmark_init(&hl_info);
 
-#if HAS_ROTATION_SUPPORT == 1
-  app_rot_init(&hl_info);
-#endif
+// #if HAS_ROTATION_SUPPORT == 1
+//   app_rot_init(&hl_info);
+// #endif
 
-  /*** App Loop ***************************************************************/
-  nn_period[1] = HAL_GetTick();
-  nn_pipe_dst = bqueue_get_free(&nn_input_queue, 0);
-  assert(nn_pipe_dst);
-  CAM_NNPipe_Start(nn_pipe_dst, CMW_MODE_CONTINUOUS);
-  while (1)
-  {
-    uint8_t *capture_buffer;
-    int idx_for_resize;
+//   /*** App Loop ***************************************************************/
+//   nn_period[1] = HAL_GetTick();
+//   nn_pipe_dst = bqueue_get_free(&nn_input_queue, 0);
+//   assert(nn_pipe_dst);
+//   CAM_NNPipe_Start(nn_pipe_dst, CMW_MODE_CONTINUOUS);
+//   while (1)
+//   {
+//     uint8_t *capture_buffer;
+//     int idx_for_resize;
 
-    nn_period[0] = nn_period[1];
-    nn_period[1] = HAL_GetTick();
-    nn_period_ms = nn_period[1] - nn_period[0];
-    nn_period_filtered_ms = USE_FILTERED_TS ? (15 * nn_period_filtered_ms + nn_period_ms) / 16 : nn_period_ms;
+//     nn_period[0] = nn_period[1];
+//     nn_period[1] = HAL_GetTick();
+//     nn_period_ms = nn_period[1] - nn_period[0];
+//     nn_period_filtered_ms = USE_FILTERED_TS ? (15 * nn_period_filtered_ms + nn_period_ms) / 16 : nn_period_ms;
 
-    capture_buffer = bqueue_get_ready(&nn_input_queue);
-    assert(capture_buffer);
-    idx_for_resize = frame_event_nb_for_resize % DISPLAY_BUFFER_NB;
+//     capture_buffer = bqueue_get_ready(&nn_input_queue);
+//     assert(capture_buffer);
+//     idx_for_resize = frame_event_nb_for_resize % DISPLAY_BUFFER_NB;
 
-    /* Only start palm detector when not tracking hand */
-    if (!is_tracking) {
-      is_tracking = palm_detector_run(capture_buffer, &pd_info, &pd_ms);
-      box_next.prob = pd_info.pd_out.pOutData[0].prob;
-    } else {
-      rois[0] = roi_next;
-      copy_pd_box(&pd_info.pd_out.pOutData[0], &box_next);
-      pd_ms = 0;
-    }
-    pd_filtered_ms = USE_FILTERED_TS ? (7 * pd_filtered_ms + pd_ms) / 8 : pd_ms;
-    bqueue_put_free(&nn_input_queue);
+//     /* Only start palm detector when not tracking hand */
+//     if (!is_tracking) {
+//       is_tracking = palm_detector_run(capture_buffer, &pd_info, &pd_ms);
+//       box_next.prob = pd_info.pd_out.pOutData[0].prob;
+//     } else {
+//       rois[0] = roi_next;
+//       copy_pd_box(&pd_info.pd_out.pOutData[0], &box_next);
+//       pd_ms = 0;
+//     }
+//     pd_filtered_ms = USE_FILTERED_TS ? (7 * pd_filtered_ms + pd_ms) / 8 : pd_ms;
+//     bqueue_put_free(&nn_input_queue);
 
-    /* then run hand landmark detector if needed */
-    if (is_tracking) {
-      hl_ms = HAL_GetTick();
-      is_tracking = hand_landmark_run(lcd_bg_buffer[idx_for_resize], &hl_info, &rois[0], ld_landmarks[0]);
-      CACHE_OP(SCB_InvalidateDCache_by_Addr(lcd_bg_buffer[idx_for_resize], sizeof(lcd_bg_buffer[idx_for_resize])));
-      if (is_tracking)
-        compute_next_roi(&rois[0], ld_landmarks[0], &roi_next, &box_next);
-      hl_ms = HAL_GetTick() - hl_ms;
-    } else {
-      hl_ms = 0;
-    }
-    ld_filtered_ms = USE_FILTERED_TS ? (7 * ld_filtered_ms + hl_ms) / 8 : hl_ms;
+//     /* then run hand landmark detector if needed */
+//     if (is_tracking) {
+//       hl_ms = HAL_GetTick();
+//       is_tracking = hand_landmark_run(lcd_bg_buffer[idx_for_resize], &hl_info, &rois[0], ld_landmarks[0]);
+//       CACHE_OP(SCB_InvalidateDCache_by_Addr(lcd_bg_buffer[idx_for_resize], sizeof(lcd_bg_buffer[idx_for_resize])));
+//       if (is_tracking)
+//         compute_next_roi(&rois[0], ld_landmarks[0], &roi_next, &box_next);
+//       hl_ms = HAL_GetTick() - hl_ms;
+//     } else {
+//       hl_ms = 0;
+//     }
+//     ld_filtered_ms = USE_FILTERED_TS ? (7 * ld_filtered_ms + hl_ms) / 8 : hl_ms;
 
-    /* update display stats */
-    ret = xSemaphoreTake(disp.lock, portMAX_DELAY);
-    assert(ret == pdTRUE);
-    disp.info.pd_ms = is_tracking ? 0 : (int)pd_filtered_ms;
-    disp.info.hl_ms = is_tracking ? (int)ld_filtered_ms : 0;
-    disp.info.nn_period_ms = nn_period_filtered_ms;
-    disp.info.pd_hand_nb = is_tracking;
-    disp.info.pd_max_prob = pd_info.pd_out.pOutData[0].prob;
-    disp.info.hands[0].is_valid = is_tracking;
-    copy_pd_box(&disp.info.hands[0].pd_hands, &pd_info.pd_out.pOutData[0]);
-    disp.info.hands[0].roi = rois[0];
-    for (j = 0; j < LD_LANDMARK_NB; j++)
-      disp.info.hands[0].ld_landmarks[j] = ld_landmarks[0][j];
-    ret = xSemaphoreGive(disp.lock);
-    assert(ret == pdTRUE);
+//     /* update display stats */
+//     ret = xSemaphoreTake(disp.lock, portMAX_DELAY);
+//     assert(ret == pdTRUE);
+//     disp.info.pd_ms = is_tracking ? 0 : (int)pd_filtered_ms;
+//     disp.info.hl_ms = is_tracking ? (int)ld_filtered_ms : 0;
+//     disp.info.nn_period_ms = nn_period_filtered_ms;
+//     disp.info.pd_hand_nb = is_tracking;
+//     disp.info.pd_max_prob = pd_info.pd_out.pOutData[0].prob;
+//     disp.info.hands[0].is_valid = is_tracking;
+//     copy_pd_box(&disp.info.hands[0].pd_hands, &pd_info.pd_out.pOutData[0]);
+//     disp.info.hands[0].roi = rois[0];
+//     for (j = 0; j < LD_LANDMARK_NB; j++)
+//       disp.info.hands[0].ld_landmarks[j] = ld_landmarks[0][j];
+//     ret = xSemaphoreGive(disp.lock);
+//     assert(ret == pdTRUE);
 
-    /* It's possible xqueue is empty if display is slow. So don't check error code that may by pdFALSE in that case */
-    xSemaphoreGive(disp.update);
-  }
-}
+//     /* It's possible xqueue is empty if display is slow. So don't check error code that may by pdFALSE in that case */
+//     xSemaphoreGive(disp.update);
+//   }
+// }
 
 static void dp_update_drawing_area()
 {
