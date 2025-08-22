@@ -67,6 +67,19 @@
       <locationURI>PARENT-2-PROJECT_LOC/Model/palm_detector.c</locationURI>
     </link>
     <link>
+    <link>
+      <name>Model/yolo_detector.c</name>
+      <type>1</type>
+      <locationURI>PARENT-2-PROJECT_LOC/Model/yolo_detector.c</locationURI>
+    </link>
+    <link>
+    <link>
+      <name>Model/face_landmark.c</name>
+      <type>1</type>
+      <locationURI>PARENT-2-PROJECT_LOC/Model/face_landmark.c</locationURI>
+    </link>
+    <link>
+
       <name>Model/hand_landmark.c</name>
       <type>1</type>
       <locationURI>PARENT-2-PROJECT_LOC/Model/hand_landmark.c</locationURI>

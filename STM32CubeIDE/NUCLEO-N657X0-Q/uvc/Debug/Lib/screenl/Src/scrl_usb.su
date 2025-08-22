@@ -1,0 +1,9 @@
+/home/tanjiajun2002/Work/local/st/hand-landmarks/Lib/screenl/Src/scrl_usb.c:287:13:usb_frame_release_cb	0	static
+/home/tanjiajun2002/Work/local/st/hand-landmarks/Lib/screenl/Src/scrl_usb.c:253:13:update_thread_fct	64	static
+/home/tanjiajun2002/Work/local/st/hand-landmarks/Lib/screenl/Src/scrl_usb.c:214:6:SCRC_Composition_Done_Callback	8	static
+/home/tanjiajun2002/Work/local/st/hand-landmarks/Lib/screenl/Src/scrl_usb.c:435:5:SCRL_Init	80	static
+/home/tanjiajun2002/Work/local/st/hand-landmarks/Lib/screenl/Src/scrl_usb.c:467:5:SCRL_SetAddress_NoReload	0	static
+/home/tanjiajun2002/Work/local/st/hand-landmarks/Lib/screenl/Src/scrl_usb.c:476:5:SCRL_ReloadLayer	0	static
+/home/tanjiajun2002/Work/local/st/hand-landmarks/Lib/screenl/Src/scrl_usb.c:485:5:SRCL_Update	8	static
+/home/tanjiajun2002/Work/local/st/hand-landmarks/Lib/screenl/Src/scrl_usb.c:501:6:HAL_PCD_MspInit	32	static
+/home/tanjiajun2002/Work/local/st/hand-landmarks/Lib/screenl/Src/scrl_usb.c:536:6:USB1_OTG_HS_IRQHandler	0	static

@@ -19,10 +19,9 @@
 #define _HAND_LANDMARK_
 
 /* model hard coded values */
-#define LD_WIDTH              224.0f
-#define LD_HEIGHT             224.0f
-#define LD_LANDMARK_NB        21
-#define LD_BINDING_NB         21
+#define LD_WIDTH              192.0f
+#define LD_HEIGHT             192.0f
+#define LD_LANDMARK_NB        468
 /* you can tune this */
 #define LD_PROB_THRESHOLD     0.25f
 
@@ -31,7 +30,6 @@ typedef struct {
   float y;
 } ld_point_t;
 
-extern const int ld_bindings_idx[LD_BINDING_NB][2];
 
 int ld_post_process(float *probs, float *raw_landmarks, ld_point_t landmarks[LD_LANDMARK_NB]);
 

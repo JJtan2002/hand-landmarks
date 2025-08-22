@@ -178,8 +178,7 @@ typedef struct {
 
   // Post-processing parameters and final output
   od_yolov8_pp_static_param_t static_param;
-  od_pp_out_t yolo_out; // CORRECTED: Using the provided output type
-
+  od_pp_out_t yolo_out; 
 } yolo_detector_info_t;
 
 typedef struct {
@@ -190,6 +189,15 @@ typedef struct {
   float *landmarks_out;
   uint32_t landmarks_out_len;
 } hl_model_info_t;
+
+typedef struct {
+  uint8_t *nn_in;
+  uint32_t nn_in_len;
+  float *prob_out;
+  uint32_t prob_out_len;
+  float *landmarks_out;
+  uint32_t landmarks_out_len;
+} fl_model_info_t;
 
 typedef struct {
   Button_TypeDef button_id;
@@ -229,9 +237,8 @@ static cpuload_info_t cpu_load;
 static uint8_t screen_buffer[LCD_BG_WIDTH * LCD_BG_HEIGHT * 2] ALIGN_32 IN_PSRAM;
 
 /* model */
- /* palm detector */
-//LL_ATON_DECLARE_NAMED_NN_INSTANCE_AND_INTERFACE(palm_detector);
 LL_ATON_DECLARE_NAMED_NN_INSTANCE_AND_INTERFACE(yolo_detector);
+LL_ATON_DECLARE_NAMED_NN_INSTANCE_AND_INTERFACE(face_landmark);
 static roi_t rois[PD_MAX_HAND_NB];
  /* hand landmark */
 //LL_ATON_DECLARE_NAMED_NN_INSTANCE_AND_INTERFACE(hand_landmark);
@@ -245,7 +252,7 @@ static bqueue_t nn_input_queue;
 
  /* rtos */
 static StaticTask_t nn_thread;
-static StackType_t nn_thread_stack[2 * configMINIMAL_STACK_SIZE];
+static StackType_t nn_thread_stack[4 * configMINIMAL_STACK_SIZE];
 static StaticTask_t dp_thread;
 static StackType_t dp_thread_stack[2 *configMINIMAL_STACK_SIZE];
 static StaticTask_t isp_thread;
@@ -742,14 +749,6 @@ static void display_ld_hand(hand_info_t *hand)
       continue;
     UTIL_LCD_FillCircle(x[i], y[i], disk_radius, UTIL_LCD_COLOR_YELLOW);
   }
-
-  for (i = 0; i < LD_BINDING_NB; i++) {
-    if (is_clamped[ld_bindings_idx[i][0]] || is_clamped[ld_bindings_idx[i][1]])
-      continue;
-    UTIL_LCD_DrawLine(x[ld_bindings_idx[i][0]], y[ld_bindings_idx[i][0]],
-                      x[ld_bindings_idx[i][1]], y[ld_bindings_idx[i][1]],
-                      UTIL_LCD_COLOR_BLACK);
-  }
 }
 
 void display_hand(display_info_t *info, hand_info_t *hand)
@@ -825,11 +824,11 @@ static void yolo_detector_init(yolo_detector_info_t *info)
   info->raw_detections_out_len = LL_Buffer_len(&nn_out_info[0]);
 
   /* Initialize YOLO post-processing static parameters */
-  info->static_param.nb_classes = 80;        // Example: 80 for COCO dataset
-  info->static_param.nb_total_boxes = 8400;  // Example: Standard for YOLOv8
-  info->static_param.max_boxes_limit = 100;  // Max boxes after NMS
-  info->static_param.conf_threshold = 0.40f; // Confidence threshold
-  info->static_param.iou_threshold = 0.45f;  // IoU threshold for NMS
+  info->static_param.nb_classes = AI_OD_YOLOV8_PP_NB_CLASSES;        // Example: 80 for COCO dataset
+  info->static_param.nb_total_boxes = AI_OD_YOLOV8_PP_TOTAL_BOXES;  // Example: Standard for YOLOv8
+  info->static_param.max_boxes_limit = 10;  // Max boxes after NMS
+  info->static_param.conf_threshold = AI_PD_MODEL_PP_CONF_THRESHOLD; // Confidence threshold
+  info->static_param.iou_threshold = AI_PD_MODEL_PP_IOU_THRESHOLD;  // IoU threshold for NMS
   // Note: Scale/ZeroPoint may not be needed if your model output is float32
   info->static_param.raw_output_scale = 1.0f;
   info->static_param.raw_output_zero_point = 0;
@@ -871,6 +870,114 @@ static int yolo_detector_run(uint8_t *buffer, yolo_detector_info_t *info, uint32
   *exec_time = HAL_GetTick() - start_ts;
 
   return detection_nb;
+}
+
+static void face_landmark_init(fl_model_info_t *info)
+{
+  const LL_Buffer_InfoTypeDef *nn_out_info = LL_ATON_Output_Buffers_Info_face_landmark();
+  const LL_Buffer_InfoTypeDef *nn_in_info = LL_ATON_Input_Buffers_Info_face_landmark();
+
+  info->nn_in = LL_Buffer_addr_start(&nn_in_info[0]);
+  info->nn_in_len = LL_Buffer_len(&nn_in_info[0]);
+  info->prob_out = (float *) LL_Buffer_addr_start(&nn_out_info[0]);
+  info->prob_out_len = LL_Buffer_len(&nn_out_info[0]);
+  assert(info->prob_out_len == sizeof(float));
+  info->landmarks_out = (float *) LL_Buffer_addr_start(&nn_out_info[1]);
+  info->landmarks_out_len = LL_Buffer_len(&nn_out_info[1]);
+  assert(info->landmarks_out_len == sizeof(float) * 1404);
+}
+
+static int face_landmark_prepare_input(uint8_t *buffer, roi_t *roi, fl_model_info_t *info)
+{
+  float corners_f[4][2];
+  int corners[4][2];
+  uint8_t* out_data;
+  size_t height_out;
+  uint8_t *in_data;
+  size_t height_in;
+  size_t width_out;
+  size_t width_in;
+  int is_clamped;
+
+  /* defaults when no clamping occurs */
+  out_data = info->nn_in;
+  width_out = LD_WIDTH;
+  height_out = LD_HEIGHT;
+
+  roi_to_corners(roi, corners_f);
+  is_clamped = clamp_corners(corners_f, corners);
+
+  /* If clamp perform a partial resize */
+  if (is_clamped) {
+    int offset_x;
+    int offset_y;
+
+    /* clear target memory since resize will partially write it */
+    memset(info->nn_in, 0, info->nn_in_len);
+
+    /* compute start address of output buffer */
+    offset_x = (int)(((corners[0][0] - corners_f[0][0]) * LD_WIDTH) / (corners_f[2][0] - corners_f[0][0]));
+    offset_y = (int)(((corners[0][1] - corners_f[0][1]) * LD_HEIGHT) / (corners_f[2][1] - corners_f[0][1]));
+    out_data += offset_y * (int)LD_WIDTH * DISPLAY_BPP + offset_x * DISPLAY_BPP;
+
+    /* compute output width and height */
+    width_out = (int)((corners[2][0] - corners[0][0]) / (corners_f[2][0] - corners_f[0][0]) * LD_WIDTH);
+    height_out = (int)((corners[2][1] - corners[0][1]) / (corners_f[2][1] - corners_f[0][1]) * LD_HEIGHT);
+
+    assert(width_out > 0);
+    assert(height_out > 0);
+    {
+      uint8_t* out_data_end;
+
+      out_data_end = out_data + (int)LD_WIDTH * DISPLAY_BPP * (height_out - 1) + DISPLAY_BPP * width_out - 1;
+
+      assert(out_data_end >= info->nn_in);
+      assert(out_data_end < info->nn_in + info->nn_in_len);
+    }
+  }
+
+  in_data = buffer + corners[0][1] * LCD_BG_WIDTH * DISPLAY_BPP + corners[0][0]* DISPLAY_BPP;
+  width_in = corners[2][0] - corners[0][0];
+  height_in = corners[2][1] - corners[0][1];
+
+  assert(width_in > 0);
+  assert(height_in > 0);
+  {
+    uint8_t* in_data_end;
+
+    in_data_end = in_data + LCD_BG_WIDTH * DISPLAY_BPP * (height_in - 1) + DISPLAY_BPP * width_in - 1;
+
+    assert(in_data_end >= buffer);
+    assert(in_data_end < buffer + LCD_BG_WIDTH * LCD_BG_HEIGHT * DISPLAY_BPP);
+  }
+
+  IPL_resize_bilinear_iu8ou8_with_strides_RGB(in_data, out_data, LCD_BG_WIDTH * DISPLAY_BPP, LD_WIDTH * DISPLAY_BPP,
+                                              width_in, height_in, width_out, height_out);
+
+  return 0;
+}
+
+
+static int face_landmark_run(uint8_t *buffer, fl_model_info_t *info, roi_t *roi,
+                             ld_point_t ld_landmarks[LD_LANDMARK_NB])
+{
+  int is_clamped;
+  int is_valid;
+
+  is_clamped = face_landmark_prepare_input(buffer, roi, info);
+  CACHE_OP(SCB_CleanInvalidateDCache_by_Addr(info->nn_in, info->nn_in_len));
+  if (is_clamped)
+    return 0;
+
+  LL_ATON_RT_Main(&NN_Instance_face_landmark);
+
+  is_valid = ld_post_process(info->prob_out, info->landmarks_out, ld_landmarks);
+
+  /* Discard nn_out region (used by pp_input and pp_outputs variables) to avoid Dcache evictions during nn inference */
+  CACHE_OP(SCB_InvalidateDCache_by_Addr(info->prob_out, info->prob_out_len));
+  CACHE_OP(SCB_InvalidateDCache_by_Addr(info->landmarks_out, info->landmarks_out_len));
+
+  return is_valid;
 }
 
 // static void palm_detector_init(pd_model_info_t *info)
@@ -939,6 +1046,7 @@ static int yolo_detector_run(uint8_t *buffer, yolo_detector_info_t *info, uint32
 //   info->landmarks_out_len = LL_Buffer_len(&nn_out_info[3]);
 //   assert(info->landmarks_out_len == sizeof(float) * 63);
 // }
+
 
 #if HAS_ROTATION_SUPPORT == 0
 static int hand_landmark_prepare_input(uint8_t *buffer, roi_t *roi, hl_model_info_t *info)
@@ -1209,6 +1317,14 @@ static void nn_thread_fct(void *arg)
   uint32_t pd_ms;
   uint32_t hl_ms;
   int ret;
+  roi_t roi_dummy;
+  int is_landmark_valid;
+
+  roi_dummy.cx = 100;
+  roi_dummy.cy = 100;
+  roi_dummy.w = 50;
+  roi_dummy.h = 50;
+
 
   /*
    * 2. Initialize the YOLO model
@@ -1217,6 +1333,10 @@ static void nn_thread_fct(void *arg)
    */
   yolo_detector_info_t yolo_info;
   yolo_detector_init(&yolo_info);
+
+  fl_model_info_t face_info;
+  face_landmark_init(&face_info);
+
   int detection_nb;
 
   /*** App Loop ***************************************************************/
@@ -1243,9 +1363,11 @@ static void nn_thread_fct(void *arg)
      * MODEL EXECUTION 
      **************************************************************************/
     detection_nb = yolo_detector_run(capture_buffer, &yolo_info, &pd_ms);
-    
+    hl_ms = HAL_GetTick();
+    is_landmark_valid = face_landmark_run(capture_buffer, &face_info, &roi_dummy, ld_landmarks[0]);
+    hl_ms = HAL_GetTick() - hl_ms;
+
     is_tracking = 0; // Force state to "not tracking"
-    hl_ms = 0;       // Set inference time to 0
 
     // Update filtered times with our zero values
     pd_filtered_ms = USE_FILTERED_TS ? (7 * pd_filtered_ms + pd_ms) / 8 : pd_ms;
@@ -1267,10 +1389,18 @@ static void nn_thread_fct(void *arg)
     disp.info.nn_period_ms = nn_period_filtered_ms;
     disp.info.pd_hand_nb = 0;
     disp.info.pd_max_prob = 0.0f;
-    disp.info.hands[0].is_valid = 0; // Set hand as invalid
+    disp.info.hands[0].is_valid = is_landmark_valid; // Set hand as invalid
 
     // NOTE: We no longer copy box or landmark data, as none exists.
     // The display thread should check the 'is_valid' flag before drawing.
+    if (is_landmark_valid)
+    {
+      // If valid, show the dummy ROI as the bounding box
+      disp.info.hands[0].roi = roi_dummy;
+      // Copy the landmark data for the display thread
+      for (int j = 0; j < LD_LANDMARK_NB; j++)
+        disp.info.hands[0].ld_landmarks[j] = ld_landmarks[0][j];
+    }
 
     ret = xSemaphoreGive(disp.lock);
     assert(ret == pdTRUE);
@@ -1554,7 +1684,7 @@ void app_run()
   CAM_DisplayPipe_Start(lcd_bg_buffer[0], CMW_MODE_CONTINUOUS);
 
   /* threads init */
-  hdl = xTaskCreateStatic(nn_thread_fct, "nn", configMINIMAL_STACK_SIZE * 2, NULL, nn_priority, nn_thread_stack,
+  hdl = xTaskCreateStatic(nn_thread_fct, "nn", configMINIMAL_STACK_SIZE * 4, NULL, nn_priority, nn_thread_stack,
                           &nn_thread);
   assert(hdl != NULL);
   hdl = xTaskCreateStatic(dp_thread_fct, "dp", configMINIMAL_STACK_SIZE * 2, NULL, dp_priority, dp_thread_stack,

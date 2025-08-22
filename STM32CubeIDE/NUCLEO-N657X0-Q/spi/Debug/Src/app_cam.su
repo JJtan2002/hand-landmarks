@@ -1,0 +1,5 @@
+/home/tanjiajun2002/Work/local/st/hand-landmarks/Src/app_cam.c:26:13:CAM_InitCropConfig	8	static
+/home/tanjiajun2002/Work/local/st/hand-landmarks/Src/app_cam.c:83:6:CAM_Init	88	static
+/home/tanjiajun2002/Work/local/st/hand-landmarks/Src/app_cam.c:103:6:CAM_DisplayPipe_Start	8	static
+/home/tanjiajun2002/Work/local/st/hand-landmarks/Src/app_cam.c:111:6:CAM_NNPipe_Start	8	static
+/home/tanjiajun2002/Work/local/st/hand-landmarks/Src/app_cam.c:119:6:CAM_IspUpdate	8	static
