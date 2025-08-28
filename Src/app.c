@@ -803,9 +803,9 @@ static void Display_NetworkOutput(display_info_t *info)
   line_nb += 2;
   UTIL_LCDEx_PrintfAt(0, LINE(line_nb), RIGHT_MODE, "Inferences");
   line_nb += 1;
-  UTIL_LCDEx_PrintfAt(0, LINE(line_nb), RIGHT_MODE, " pd %2ums", info->pd_ms);
+  UTIL_LCDEx_PrintfAt(0, LINE(line_nb), RIGHT_MODE, " face_conf %2u", info->pd_ms);
   line_nb += 1;
-  UTIL_LCDEx_PrintfAt(0, LINE(line_nb), RIGHT_MODE, " hl %2ums", info->hl_ms);
+  UTIL_LCDEx_PrintfAt(0, LINE(line_nb), RIGHT_MODE, " yolo_num_detections %2u", info->hl_ms);
   line_nb += 2;
   UTIL_LCDEx_PrintfAt(0, LINE(line_nb), RIGHT_MODE, "  %.1f FPS", nn_fps);
   line_nb += 2;
@@ -847,8 +847,8 @@ static void yolo_detector_init(yolo_detector_info_t *info)
   info->static_param.nb_classes = AI_OD_YOLOV8_PP_NB_CLASSES;        // Example: 80 for COCO dataset
   info->static_param.nb_total_boxes = AI_OD_YOLOV8_PP_TOTAL_BOXES;  // Example: Standard for YOLOv8
   info->static_param.max_boxes_limit = 10;  // Max boxes after NMS
-  info->static_param.conf_threshold = AI_PD_MODEL_PP_CONF_THRESHOLD; // Confidence threshold
-  info->static_param.iou_threshold = AI_PD_MODEL_PP_IOU_THRESHOLD;  // IoU threshold for NMS
+  info->static_param.conf_threshold = AI_OD_YOLOV8_PP_CONF_THRESHOLD; // Confidence threshold
+  info->static_param.iou_threshold = AI_OD_YOLOV8_PP_IOU_THRESHOLD;  // IoU threshold for NMS
   // Note: Scale/ZeroPoint may not be needed if your model output is float32
   info->static_param.raw_output_scale = 1.0f;
   info->static_param.raw_output_zero_point = 0;
@@ -1339,7 +1339,7 @@ static void nn_thread_fct(void *arg)
   int ret;
   roi_t roi_dummy;
   int is_landmark_valid;
-
+  int best_face_idx = -1;
   roi_dummy.cx = 100;
   roi_dummy.cy = 100;
   roi_dummy.w = 50;
@@ -1404,17 +1404,49 @@ static void nn_thread_fct(void *arg)
     assert(ret == pdTRUE);
     // NEW: Loop through all detections to find the highest confidence score
     float max_confidence = 0.0f;
+    // 1. Loop through all detections from the model's output
     for (int i = 0; i < yolo_info.yolo_out.nb_detect; i++)
-      {
-        // If the current object's confidence is the highest so far, save it
-        if (yolo_info.yolo_out.pOutBuff[i].conf > max_confidence)
+    {
+        // 2. Check if the current detection is a face
+        if (yolo_info.yolo_out.pOutBuff[i].class_index == 2)
         {
-          max_confidence = yolo_info.yolo_out.pOutBuff[i].x_center;
+            // 3. Check if this face has the highest confidence so far
+            if (yolo_info.yolo_out.pOutBuff[i].conf > max_confidence)
+            {
+                // If yes, save its confidence and index
+                max_confidence = yolo_info.yolo_out.pOutBuff[i].conf;
+                best_face_idx = i;
+            }
         }
-      }
+    }
+    roi_t face_roi;
+    int is_face_present = 0; // A flag to know if we should run the second model
+    // 4. Check if a valid face was found in this frame
+    if (best_face_idx != -1)
+    {
+        // A face was detected with sufficient confidence
+        is_face_present = 1;
+        
+        // Get the normalized coordinates of the best face detection
+        od_pp_outBuffer_t best_face = yolo_info.yolo_out.pOutBuff[best_face_idx];
+
+        // 5. Convert normalized coordinates [0.0, 1.0] to pixel coordinates
+        //    'NN_WIDTH' and 'NN_HEIGHT' should be the dimensions of your model's input (e.g., 192, 192)
+        face_roi.w  = (int)(best_face.width * NN_WIDTH);
+        face_roi.h  = (int)(best_face.height * NN_HEIGHT);
+        face_roi.cx = (int)(best_face.x_center * NN_WIDTH);
+        face_roi.cy = (int)(best_face.y_center * NN_HEIGHT);
+
+        // Now, 'face_roi' is ready to be passed to your face_landmark_run() function.
+    }
+    else
+    {
+        // No face was found that meets the criteria
+        is_face_present = 0;
+    }
 
     // Populate display structure with valid, non-model data
-    disp.info.pd_ms = (int)(max_confidence * NN_WIDTH);
+    disp.info.pd_ms = (int)(max_confidence * 100.0f); // This is now the class index of the highest confidence detection (INTENTIONAL)
     disp.info.hl_ms = (int)yolo_info.yolo_out.nb_detect;
     disp.info.nn_period_ms = nn_period_filtered_ms;
     disp.info.pd_hand_nb = yolo_info.yolo_out.nb_detect;
