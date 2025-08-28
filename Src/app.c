@@ -375,6 +375,26 @@ static void pd_box_to_roi(pd_pp_box_t *box,  roi_t *roi)
 #endif
 }
 
+static void copy_yolo_box(od_pp_outBuffer_t *dst, const od_pp_outBuffer_t *src)
+{
+  dst->conf = src->conf;
+  dst->x_center = src->x_center;
+  dst->y_center = src->y_center;
+  dst->width = src->width;
+  dst->height = src->height;
+  dst->class_index = src->class_index;
+}
+
+static void clear_yolo_output(od_pp_outBuffer_t *output, int max_count) {
+    for (int i = 0; i < max_count; i++) {
+        output[i].conf = 0.0f;
+        output[i].x_center = 0.0f;
+        output[i].y_center = 0.0f;
+        output[i].width = 0.0f;
+        output[i].height = 0.0f;
+        output[i].class_index = -1;  // invalid
+    }
+}
 static void copy_pd_box(pd_pp_box_t *dst, pd_pp_box_t *src)
 {
   int i;
@@ -1347,7 +1367,7 @@ static void nn_thread_fct(void *arg)
   while (1)
   {
     uint8_t *capture_buffer;
-
+    memset(&yolo_info.yolo_out, 0, sizeof(yolo_info.yolo_out));
     // Standard frame timing
     nn_period[0] = nn_period[1];
     nn_period[1] = HAL_GetTick();
@@ -1358,7 +1378,7 @@ static void nn_thread_fct(void *arg)
     capture_buffer = bqueue_get_ready(&nn_input_queue);
     assert(capture_buffer);
 
-
+    SCB_InvalidateDCache_by_Addr((uint32_t *)capture_buffer, NN_WIDTH * NN_HEIGHT * NN_BPP);
     /**************************************************************************
      * MODEL EXECUTION 
      **************************************************************************/
@@ -1378,16 +1398,26 @@ static void nn_thread_fct(void *arg)
 
 
     /*
-     * Update display stats with the "no detection" info
+     * Update display stats
      */
     ret = xSemaphoreTake(disp.lock, portMAX_DELAY);
     assert(ret == pdTRUE);
+    // NEW: Loop through all detections to find the highest confidence score
+    float max_confidence = 0.0f;
+    for (int i = 0; i < yolo_info.yolo_out.nb_detect; i++)
+      {
+        // If the current object's confidence is the highest so far, save it
+        if (yolo_info.yolo_out.pOutBuff[i].conf > max_confidence)
+        {
+          max_confidence = yolo_info.yolo_out.pOutBuff[i].x_center;
+        }
+      }
 
     // Populate display structure with valid, non-model data
-    disp.info.pd_ms = (int)pd_filtered_ms;
-    disp.info.hl_ms = (int)ld_filtered_ms;
+    disp.info.pd_ms = (int)(max_confidence * NN_WIDTH);
+    disp.info.hl_ms = (int)yolo_info.yolo_out.nb_detect;
     disp.info.nn_period_ms = nn_period_filtered_ms;
-    disp.info.pd_hand_nb = 0;
+    disp.info.pd_hand_nb = yolo_info.yolo_out.nb_detect;
     disp.info.pd_max_prob = 0.0f;
     disp.info.hands[0].is_valid = is_landmark_valid; // Set hand as invalid
 

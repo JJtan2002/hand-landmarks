@@ -38,8 +38,8 @@
 #define AI_OD_YOLOV8_PP_NB_CLASSES        (3)
 #define AI_OD_YOLOV8_PP_TOTAL_BOXES       (2100)
 #define AI_OD_YOLOV8_PP_MAX_BOXES_LIMIT   (10)
-#define AI_OD_YOLOV8_PP_CONF_THRESHOLD    (0.5)
-#define AI_OD_YOLOV8_PP_IOU_THRESHOLD     (0.5)
+#define AI_OD_YOLOV8_PP_CONF_THRESHOLD    (0.8)
+#define AI_OD_YOLOV8_PP_IOU_THRESHOLD     (0.2)
 
 #endif      /* __POSTPROCESS_CONF_H__  */
 
