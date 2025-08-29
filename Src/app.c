@@ -692,9 +692,10 @@ static void roi_to_corners(roi_t *roi, float corners[4][2])
 
   memcpy(corners, corners_init, sizeof(corners_init));
   /* rotate */
+  /*
   for (i = 0; i < 4; i++)
     rotate_point(corners[i], roi->rotation);
-
+  */
   /* shift */
   for (i = 0; i < 4; i++) {
     corners[i][0] += roi->cx;
@@ -1431,11 +1432,10 @@ static void nn_thread_fct(void *arg)
         od_pp_outBuffer_t best_face = yolo_info.yolo_out.pOutBuff[best_face_idx];
 
         // 5. Convert normalized coordinates [0.0, 1.0] to pixel coordinates
-        //    'NN_WIDTH' and 'NN_HEIGHT' should be the dimensions of your model's input (e.g., 192, 192)
-        face_roi.w  = (int)(best_face.width * NN_WIDTH);
-        face_roi.h  = (int)(best_face.height * NN_HEIGHT);
-        face_roi.cx = (int)(best_face.x_center * NN_WIDTH);
-        face_roi.cy = (int)(best_face.y_center * NN_HEIGHT);
+        face_roi.w  = (int)(best_face.width * LCD_BG_WIDTH);
+        face_roi.h  = (int)(best_face.height * LCD_BG_HEIGHT);
+        face_roi.cx = (int)(best_face.x_center * LCD_BG_WIDTH);
+        face_roi.cy = (int)(best_face.y_center * LCD_BG_HEIGHT);
 
         // Now, 'face_roi' is ready to be passed to your face_landmark_run() function.
     }
@@ -1446,7 +1446,7 @@ static void nn_thread_fct(void *arg)
     }
 
     // Populate display structure with valid, non-model data
-    disp.info.pd_ms = (int)(max_confidence * 100.0f); // This is now the class index of the highest confidence detection (INTENTIONAL)
+    disp.info.pd_ms = (int)(max_confidence * 100.0f);
     disp.info.hl_ms = (int)yolo_info.yolo_out.nb_detect;
     disp.info.nn_period_ms = nn_period_filtered_ms;
     disp.info.pd_hand_nb = yolo_info.yolo_out.nb_detect;
