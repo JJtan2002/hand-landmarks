@@ -24,11 +24,11 @@ int ld_post_process(float *probs, float *raw_landmarks, ld_point_t landmarks[LD_
   int i;
 
   if (*probs < LD_PROB_THRESHOLD)
-    return 0;
+    //return 0;
 
   for (i = 0; i < LD_LANDMARK_NB; i++) {
-    landmarks[i].x = raw_landmarks[i * 3 + 0] / LD_WIDTH;
-    landmarks[i].y = raw_landmarks[i * 3 + 1] / LD_WIDTH;
+    landmarks[i].x = raw_landmarks[i * 3 + 0];
+    landmarks[i].y = raw_landmarks[i * 3 + 1];
   }
 
   return 1;

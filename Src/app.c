@@ -195,8 +195,8 @@ typedef struct {
   uint32_t nn_in_len;
   float *prob_out;
   uint32_t prob_out_len;
-  float *landmarks_out;
-  uint32_t landmarks_out_len;
+  int8_t *landmarks_out; // CHANGE THIS from float* to int8_t*
+  size_t landmarks_out_len;
 } fl_model_info_t;
 
 typedef struct {
@@ -385,16 +385,6 @@ static void copy_yolo_box(od_pp_outBuffer_t *dst, const od_pp_outBuffer_t *src)
   dst->class_index = src->class_index;
 }
 
-static void clear_yolo_output(od_pp_outBuffer_t *output, int max_count) {
-    for (int i = 0; i < max_count; i++) {
-        output[i].conf = 0.0f;
-        output[i].x_center = 0.0f;
-        output[i].y_center = 0.0f;
-        output[i].width = 0.0f;
-        output[i].height = 0.0f;
-        output[i].class_index = -1;  // invalid
-    }
-}
 static void copy_pd_box(pd_pp_box_t *dst, pd_pp_box_t *src)
 {
   int i;
@@ -881,9 +871,9 @@ static int yolo_detector_run(uint8_t *buffer, yolo_detector_info_t *info, uint32
   detection_nb = info->yolo_out.nb_detect;
 
   /* Optional: Post-process final bounding boxes (e.g., coordinate scaling) */
-  for (i = 0; i < detection_nb; i++) {
-    // cvt_yolo_coord_to_screen_coord(&info->yolo_out.pOutData[i]); // Example
-  }
+  // for (i = 0; i < detection_nb; i++) {
+  //   // cvt_yolo_coord_to_screen_coord(&info->yolo_out.pOutData[i]); // Example
+  // }
 
   /* Invalidate D-Cache for the output region to ensure CPU sees updated data */
   CACHE_OP(SCB_InvalidateDCache_by_Addr(info->raw_detections_out, info->raw_detections_out_len));
@@ -903,8 +893,11 @@ static void face_landmark_init(fl_model_info_t *info)
   info->prob_out = (float *) LL_Buffer_addr_start(&nn_out_info[0]);
   info->prob_out_len = LL_Buffer_len(&nn_out_info[0]);
   assert(info->prob_out_len == sizeof(float));
-  info->landmarks_out = (float *) LL_Buffer_addr_start(&nn_out_info[1]);
+  // CORRECTED: Cast to the proper int8_t pointer type
+  info->landmarks_out = (int8_t *) LL_Buffer_addr_start(&nn_out_info[1]);
   info->landmarks_out_len = LL_Buffer_len(&nn_out_info[1]);
+  
+  // CORRECTED: Assert now checks for the expected number of bytes for integer data
   assert(info->landmarks_out_len == sizeof(float) * 1404);
 }
 
@@ -992,11 +985,9 @@ static int face_landmark_run(uint8_t *buffer, fl_model_info_t *info, roi_t *roi,
 
   LL_ATON_RT_Main(&NN_Instance_face_landmark);
 
-  is_valid = ld_post_process(info->prob_out, info->landmarks_out, ld_landmarks);
-
-  /* Discard nn_out region (used by pp_input and pp_outputs variables) to avoid Dcache evictions during nn inference */
   CACHE_OP(SCB_InvalidateDCache_by_Addr(info->prob_out, info->prob_out_len));
   CACHE_OP(SCB_InvalidateDCache_by_Addr(info->landmarks_out, info->landmarks_out_len));
+  is_valid = ld_post_process(info->prob_out, info->landmarks_out, ld_landmarks);
 
   return is_valid;
 }
@@ -1338,14 +1329,8 @@ static void nn_thread_fct(void *arg)
   uint32_t pd_ms;
   uint32_t hl_ms;
   int ret;
-  roi_t roi_dummy;
   int is_landmark_valid;
   int best_face_idx = -1;
-  roi_dummy.cx = 100;
-  roi_dummy.cy = 100;
-  roi_dummy.w = 50;
-  roi_dummy.h = 50;
-
 
   /*
    * 2. Initialize the YOLO model
@@ -1367,6 +1352,7 @@ static void nn_thread_fct(void *arg)
   CAM_NNPipe_Start(nn_pipe_dst, CMW_MODE_CONTINUOUS);
   while (1)
   {
+    best_face_idx = -1; // Reset best face index for each frame
     uint8_t *capture_buffer;
     memset(&yolo_info.yolo_out, 0, sizeof(yolo_info.yolo_out));
     // Standard frame timing
@@ -1385,17 +1371,9 @@ static void nn_thread_fct(void *arg)
      **************************************************************************/
     detection_nb = yolo_detector_run(capture_buffer, &yolo_info, &pd_ms);
     hl_ms = HAL_GetTick();
-    is_landmark_valid = face_landmark_run(capture_buffer, &face_info, &roi_dummy, ld_landmarks[0]);
     hl_ms = HAL_GetTick() - hl_ms;
 
     is_tracking = 0; // Force state to "not tracking"
-
-    // Update filtered times with our zero values
-    pd_filtered_ms = USE_FILTERED_TS ? (7 * pd_filtered_ms + pd_ms) / 8 : pd_ms;
-    ld_filtered_ms = USE_FILTERED_TS ? (7 * ld_filtered_ms + hl_ms) / 8 : hl_ms;
-
-    // We are done with the buffer, release it
-    bqueue_put_free(&nn_input_queue);
 
 
     /*
@@ -1436,34 +1414,51 @@ static void nn_thread_fct(void *arg)
         face_roi.h  = (int)(best_face.height * LCD_BG_HEIGHT);
         face_roi.cx = (int)(best_face.x_center * LCD_BG_WIDTH);
         face_roi.cy = (int)(best_face.y_center * LCD_BG_HEIGHT);
+        face_roi.rotation = 0.0f;
 
         // Now, 'face_roi' is ready to be passed to your face_landmark_run() function.
+        hl_ms = HAL_GetTick();
+        is_landmark_valid = face_landmark_run(capture_buffer, &face_info, &face_roi, ld_landmarks[0]);
+        hl_ms = HAL_GetTick() - hl_ms;
+        SCB_InvalidateDCache_by_Addr((uint32_t *)ld_landmarks, sizeof(ld_landmarks));
     }
     else
     {
         // No face was found that meets the criteria
         is_face_present = 0;
     }
+        // Update filtered times with our zero values
+    pd_filtered_ms = USE_FILTERED_TS ? (7 * pd_filtered_ms + pd_ms) / 8 : pd_ms;
+    ld_filtered_ms = USE_FILTERED_TS ? (7 * ld_filtered_ms + hl_ms) / 8 : hl_ms;
+
+    // We are done with the buffer, release it
+    bqueue_put_free(&nn_input_queue);
+    int8_t* landmarks_raw_int_ptr = (int8_t*)face_info.landmarks_out;
 
     // Populate display structure with valid, non-model data
     disp.info.pd_ms = (int)(max_confidence * 100.0f);
-    disp.info.hl_ms = (int)yolo_info.yolo_out.nb_detect;
     disp.info.nn_period_ms = nn_period_filtered_ms;
     disp.info.pd_hand_nb = yolo_info.yolo_out.nb_detect;
     disp.info.pd_max_prob = 0.0f;
-    disp.info.hands[0].is_valid = is_landmark_valid; // Set hand as invalid
-
+    //disp.info.hands[0].is_valid = is_landmark_valid; // Set hand as invalid
+    disp.info.hands[0].is_valid = 0; // Set hand as invalid
     // NOTE: We no longer copy box or landmark data, as none exists.
     // The display thread should check the 'is_valid' flag before drawing.
-    if (is_landmark_valid)
+    if (is_face_present)
     {
+      disp.info.hl_ms = (int)(ld_landmarks[0][4].x * LCD_BG_WIDTH);
+      
       // If valid, show the dummy ROI as the bounding box
-      disp.info.hands[0].roi = roi_dummy;
+      disp.info.hands[0].roi = face_roi;
+
       // Copy the landmark data for the display thread
       for (int j = 0; j < LD_LANDMARK_NB; j++)
         disp.info.hands[0].ld_landmarks[j] = ld_landmarks[0][j];
     }
-
+    else
+    {
+      disp.info.hl_ms = 0;
+    }
     ret = xSemaphoreGive(disp.lock);
     assert(ret == pdTRUE);
 
