@@ -979,7 +979,6 @@ static int face_landmark_run(uint8_t *buffer, fl_model_info_t *info, roi_t *roi,
   int is_valid;
 
   is_clamped = face_landmark_prepare_input(buffer, roi, info);
-  CACHE_OP(SCB_CleanInvalidateDCache_by_Addr(info->nn_in, info->nn_in_len));
   if (is_clamped)
     return 0;
 
@@ -1420,7 +1419,6 @@ static void nn_thread_fct(void *arg)
         hl_ms = HAL_GetTick();
         is_landmark_valid = face_landmark_run(capture_buffer, &face_info, &face_roi, ld_landmarks[0]);
         hl_ms = HAL_GetTick() - hl_ms;
-        SCB_InvalidateDCache_by_Addr((uint32_t *)ld_landmarks, sizeof(ld_landmarks));
     }
     else
     {
@@ -1446,7 +1444,25 @@ static void nn_thread_fct(void *arg)
     // The display thread should check the 'is_valid' flag before drawing.
     if (is_face_present)
     {
-      disp.info.hl_ms = (int)(ld_landmarks[0][4].x * LCD_BG_WIDTH);
+      // 1. Get the landmark's coordinate relative to the cropped ROI.
+      float landmark_relative_x = ld_landmarks[0][4].x;
+
+      // 2. Calculate the starting X position of the ROI on the full screen.
+      // The ROI gives center_x, so we subtract half the width to get the top-left corner.
+      float roi_start_x = face_roi.cx - (face_roi.w / 2.0f);
+
+      // 3. Scale the relative landmark coordinate to the ROI's size on the main screen.
+      // LD_WIDTH is the width of the landmark model's input (e.g., 192).
+      // We need to scale the landmark's position from that space to the ROI's actual width.
+      float landmark_scaled_x = landmark_relative_x * (face_roi.w / (float)LD_WIDTH);
+
+      // 4. Add the ROI's starting position to get the final, absolute screen coordinate.
+      int final_screen_x = (int)(roi_start_x + landmark_scaled_x);
+
+      // Now, display the correct, absolute coordinate.
+      disp.info.hl_ms = final_screen_x;
+
+      // --- END OF FIX ---      disp.info.hl_ms = (int)(ld_landmarks[0][467].x);
       
       // If valid, show the dummy ROI as the bounding box
       disp.info.hands[0].roi = face_roi;

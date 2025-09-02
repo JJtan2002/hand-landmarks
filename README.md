@@ -145,7 +145,9 @@ make -j8
 2. Open a GDB server connected to the STM32 target:
 
 ```bash
-ST-LINK_gdbserver -p 61234 -l 1 -d -s -cp <path-to-stm32cubeprogramer-bin-dir> -m 1 -g
+export PATH=/home/tanjiajun2002/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.stlink-gdb-server.linux64_2.2.200.202505060755/tools/bin:$PATH
+
+ST-LINK_gdbserver -p 61234 -l 1 -d -s -cp /home/tanjiajun2002/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin -m 1 -g
 ```
 
 3. In a separate terminal session, launch a GDB session to load the firmware image into the device memory:
@@ -189,7 +191,7 @@ STM32_SigningTool_CLI -bin build/Project.bin -nk -t ssbl -hv 2.3 -o build/Projec
 You can program the signed bin file at the address `0x70100000`.
 
 ```bash
-export DKEL="<STM32CubeProgrammer_N6 Install Folder>/bin/ExternalLoader/MX66UW1G45G_STM32N6570-DK.stldr"
+export DKEL="/home/tanjiajun2002/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin/ExternalLoader/MX66UW1G45G_STM32N6570-DK.stldr"
 
 # Adapt build path to your IDE
 STM32_Programmer_CLI -c port=SWD mode=HOTPLUG -el $DKEL -hardRst -w build/Project_sign.bin 0x70100000
