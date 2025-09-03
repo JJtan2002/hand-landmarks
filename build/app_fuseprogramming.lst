@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc2baIju.s 			page 1
+ARM GAS  /tmp/ccI6IEoE.s 			page 1
 
 
    1              		.arch armv8.1-m.main
@@ -16,7 +16,7 @@ ARM GAS  /tmp/cc2baIju.s 			page 1
   13              		.eabi_attribute 24, 1
   14              		.eabi_attribute 25, 1
   15              		.eabi_attribute 26, 1
-  16              		.eabi_attribute 30, 4
+  16              		.eabi_attribute 30, 6
   17              		.eabi_attribute 34, 1
   18              		.eabi_attribute 38, 1
   19              		.eabi_attribute 18, 4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc2baIju.s 			page 1
   23:Src/app_fuseprogramming.c **** #define BSEC_HWS_HSLV_VDDIO3     15U
   24:Src/app_fuseprogramming.c **** #define BSEC_HWS_HSLV_VDDIO2     16U
   25:Src/app_fuseprogramming.c **** 
-ARM GAS  /tmp/cc2baIju.s 			page 2
+ARM GAS  /tmp/ccI6IEoE.s 			page 2
 
 
   26:Src/app_fuseprogramming.c **** #define BSEC_FUSE_ADDRESS        BSEC_HW_CONFIG_ID
@@ -73,124 +73,114 @@ ARM GAS  /tmp/cc2baIju.s 			page 1
   35:Src/app_fuseprogramming.c ****   */
   36:Src/app_fuseprogramming.c **** void Fuse_Programming(void)
   37:Src/app_fuseprogramming.c **** {
-  34              		.loc 1 37 1 view -0
+  34              		.loc 1 37 1
   35              		.cfi_startproc
-  36              		@ args = 0, pretend = 0, frame = 16
-  37              		@ frame_needed = 0, uses_anonymous_args = 0
+  36              		@ args = 0, pretend = 0, frame = 24
+  37              		@ frame_needed = 1, uses_anonymous_args = 0
+  38 0000 80B5     		push	{r7, lr}
+  39              		.cfi_def_cfa_offset 8
+  40              		.cfi_offset 7, -8
+  41              		.cfi_offset 14, -4
+  42 0002 86B0     		sub	sp, sp, #24
+  43              		.cfi_def_cfa_offset 32
+  44 0004 00AF     		add	r7, sp, #0
+  45              		.cfi_def_cfa_register 7
   38:Src/app_fuseprogramming.c ****   uint32_t fuse_id, bit_mask, data;
-  38              		.loc 1 38 3 view .LVU1
   39:Src/app_fuseprogramming.c **** 
   40:Src/app_fuseprogramming.c ****   BSEC_HandleTypeDef sBsecHandler;
-  39              		.loc 1 40 3 view .LVU2
   41:Src/app_fuseprogramming.c **** 
   42:Src/app_fuseprogramming.c ****   sBsecHandler.Instance = BSEC;
-  40              		.loc 1 42 3 view .LVU3
-  37:Src/app_fuseprogramming.c ****   uint32_t fuse_id, bit_mask, data;
-  41              		.loc 1 37 1 is_stmt 0 view .LVU4
-  42 0000 1FB5     		push	{r0, r1, r2, r3, r4, lr}
-  43              		.cfi_def_cfa_offset 24
-  44              		.cfi_offset 14, -4
-  45              		.loc 1 42 25 view .LVU5
-  46 0002 154B     		ldr	r3, .L18
+  46              		.loc 1 42 25
+  47 0006 214B     		ldr	r3, .L7
+  48 0008 7B60     		str	r3, [r7, #4]
   43:Src/app_fuseprogramming.c **** 
   44:Src/app_fuseprogramming.c ****   /* Read current value of fuse */
   45:Src/app_fuseprogramming.c ****   fuse_id = BSEC_FUSE_ADDRESS;
+  49              		.loc 1 45 11
+  50 000a 7C23     		movs	r3, #124
+  51 000c 7B61     		str	r3, [r7, #20]
   46:Src/app_fuseprogramming.c ****   if (HAL_BSEC_OTP_Read(&sBsecHandler, fuse_id, &data) == HAL_OK)
-  47              		.loc 1 46 7 view .LVU6
-  48 0004 7C21     		movs	r1, #124
-  49 0006 01AA     		add	r2, sp, #4
-  50 0008 02A8     		add	r0, sp, #8
-  42:Src/app_fuseprogramming.c **** 
-  51              		.loc 1 42 25 view .LVU7
-  52 000a 0293     		str	r3, [sp, #8]
-  45:Src/app_fuseprogramming.c ****   if (HAL_BSEC_OTP_Read(&sBsecHandler, fuse_id, &data) == HAL_OK)
-  53              		.loc 1 45 3 is_stmt 1 view .LVU8
-  54              	.LVL0:
-  55              		.loc 1 46 3 view .LVU9
-  56              		.loc 1 46 7 is_stmt 0 view .LVU10
-  57 000c FFF7FEFF 		bl	HAL_BSEC_OTP_Read
-  58              	.LVL1:
-  59              		.loc 1 46 6 discriminator 1 view .LVU11
-  60 0010 0346     		mov	r3, r0
-  61 0012 E0B9     		cbnz	r0, .L2
+  52              		.loc 1 46 7
+  53 000e 07F10C02 		add	r2, r7, #12
+  54 0012 3B1D     		adds	r3, r7, #4
+  55 0014 7969     		ldr	r1, [r7, #20]
+  56 0016 1846     		mov	r0, r3
+  57 0018 FFF7FEFF 		bl	HAL_BSEC_OTP_Read
+  58 001c 0346     		mov	r3, r0
+  59              		.loc 1 46 6 discriminator 1
+  60 001e 002B     		cmp	r3, #0
+  61 0020 2ED1     		bne	.L2
   47:Src/app_fuseprogramming.c ****   {
   48:Src/app_fuseprogramming.c ****     /* Check if bit has already been set */
   49:Src/app_fuseprogramming.c ****     bit_mask = BSEC_FUSE_MASK;
-  62              		.loc 1 49 5 is_stmt 1 view .LVU12
-  63              	.LVL2:
-ARM GAS  /tmp/cc2baIju.s 			page 3
-
-
-  64              		.loc 1 49 30 view .LVU13
+  62              		.loc 1 49 14
+  63 0022 4FF4C033 		mov	r3, #98304
+  64 0026 3B61     		str	r3, [r7, #16]
   50:Src/app_fuseprogramming.c ****     if ((data & bit_mask) != bit_mask)
-  65              		.loc 1 50 5 view .LVU14
-  66              		.loc 1 50 15 is_stmt 0 view .LVU15
-  67 0014 019A     		ldr	r2, [sp, #4]
-  68 0016 02F4C031 		and	r1, r2, #98304
-  69              		.loc 1 50 8 view .LVU16
-  70 001a B1F5C03F 		cmp	r1, #98304
-  71 001e 17D0     		beq	.L1
+  65              		.loc 1 50 15
+ARM GAS  /tmp/ccI6IEoE.s 			page 3
+
+
+  66 0028 FA68     		ldr	r2, [r7, #12]
+  67 002a 3B69     		ldr	r3, [r7, #16]
+  68 002c 1340     		ands	r3, r3, r2
+  69              		.loc 1 50 8
+  70 002e 3A69     		ldr	r2, [r7, #16]
+  71 0030 9A42     		cmp	r2, r3
+  72 0032 27D0     		beq	.L6
   51:Src/app_fuseprogramming.c ****     {
   52:Src/app_fuseprogramming.c ****       data |= bit_mask;
-  72              		.loc 1 52 7 is_stmt 1 view .LVU17
-  73              		.loc 1 52 12 is_stmt 0 view .LVU18
-  74 0020 42F4C032 		orr	r2, r2, #98304
+  73              		.loc 1 52 12
+  74 0034 FA68     		ldr	r2, [r7, #12]
+  75 0036 3B69     		ldr	r3, [r7, #16]
+  76 0038 1343     		orrs	r3, r3, r2
+  77 003a FB60     		str	r3, [r7, #12]
   53:Src/app_fuseprogramming.c ****       /* Bitwise programming of lower bits */
   54:Src/app_fuseprogramming.c ****       if (HAL_BSEC_OTP_Program(&sBsecHandler, fuse_id, data, HAL_BSEC_NORMAL_PROG) == HAL_OK)
-  75              		.loc 1 54 11 view .LVU19
-  76 0024 7C21     		movs	r1, #124
-  77 0026 02A8     		add	r0, sp, #8
-  52:Src/app_fuseprogramming.c ****       /* Bitwise programming of lower bits */
-  78              		.loc 1 52 12 view .LVU20
-  79 0028 0192     		str	r2, [sp, #4]
-  80              		.loc 1 54 7 is_stmt 1 view .LVU21
-  81              		.loc 1 54 11 is_stmt 0 view .LVU22
-  82 002a FFF7FEFF 		bl	HAL_BSEC_OTP_Program
-  83              	.LVL3:
-  84              		.loc 1 54 10 discriminator 1 view .LVU23
-  85 002e 68B9     		cbnz	r0, .L4
+  78              		.loc 1 54 11
+  79 003c FA68     		ldr	r2, [r7, #12]
+  80 003e 381D     		adds	r0, r7, #4
+  81 0040 0023     		movs	r3, #0
+  82 0042 7969     		ldr	r1, [r7, #20]
+  83 0044 FFF7FEFF 		bl	HAL_BSEC_OTP_Program
+  84 0048 0346     		mov	r3, r0
+  85              		.loc 1 54 10 discriminator 1
+  86 004a 002B     		cmp	r3, #0
+  87 004c 15D1     		bne	.L4
   55:Src/app_fuseprogramming.c ****       {
   56:Src/app_fuseprogramming.c ****         /* Read lower bits to verify the correct programming */
   57:Src/app_fuseprogramming.c ****         if (HAL_BSEC_OTP_Read(&sBsecHandler, fuse_id, &data) == HAL_OK)
-  86              		.loc 1 57 9 is_stmt 1 view .LVU24
-  87              		.loc 1 57 13 is_stmt 0 view .LVU25
-  88 0030 7C21     		movs	r1, #124
-  89 0032 01AA     		add	r2, sp, #4
-  90 0034 02A8     		add	r0, sp, #8
-  91 0036 FFF7FEFF 		bl	HAL_BSEC_OTP_Read
-  92              	.LVL4:
-  93              		.loc 1 57 12 discriminator 1 view .LVU26
-  94 003a 30B9     		cbnz	r0, .L5
+  88              		.loc 1 57 13
+  89 004e 07F10C02 		add	r2, r7, #12
+  90 0052 3B1D     		adds	r3, r7, #4
+  91 0054 7969     		ldr	r1, [r7, #20]
+  92 0056 1846     		mov	r0, r3
+  93 0058 FFF7FEFF 		bl	HAL_BSEC_OTP_Read
+  94 005c 0346     		mov	r3, r0
+  95              		.loc 1 57 12 discriminator 1
+  96 005e 002B     		cmp	r3, #0
+  97 0060 08D1     		bne	.L5
   58:Src/app_fuseprogramming.c ****         {
   59:Src/app_fuseprogramming.c ****           if ((data & bit_mask) != bit_mask)
-  95              		.loc 1 59 11 is_stmt 1 view .LVU27
-  96              		.loc 1 59 21 is_stmt 0 view .LVU28
-  97 003c 019B     		ldr	r3, [sp, #4]
-  98 003e 03F4C033 		and	r3, r3, #98304
-  99              		.loc 1 59 14 view .LVU29
- 100 0042 B3F5C03F 		cmp	r3, #98304
- 101 0046 03D0     		beq	.L1
- 102              	.L6:
- 103 0048 FEE7     		b	.L6
- 104              	.L5:
- 105 004a FEE7     		b	.L5
- 106              	.L4:
- 107 004c FEE7     		b	.L4
- 108              	.LVL5:
- 109              	.L2:
-ARM GAS  /tmp/cc2baIju.s 			page 4
-
-
- 110              		.loc 1 59 14 view .LVU30
- 111 004e FEE7     		b	.L2
- 112              	.LVL6:
- 113              	.L1:
+  98              		.loc 1 59 21
+  99 0062 FA68     		ldr	r2, [r7, #12]
+ 100 0064 3B69     		ldr	r3, [r7, #16]
+ 101 0066 1340     		ands	r3, r3, r2
+ 102              		.loc 1 59 14
+ 103 0068 3A69     		ldr	r2, [r7, #16]
+ 104 006a 9A42     		cmp	r2, r3
+ 105 006c 0AD0     		beq	.L6
   60:Src/app_fuseprogramming.c ****           {
   61:Src/app_fuseprogramming.c ****             /* Error : Fuse programming not taken in account */
   62:Src/app_fuseprogramming.c ****             ErrorHandler();
+ 106              		.loc 1 62 13
+ 107 006e FFF7FEFF 		bl	ErrorHandler
   63:Src/app_fuseprogramming.c ****           }
   64:Src/app_fuseprogramming.c ****         }
   65:Src/app_fuseprogramming.c ****         else
+ARM GAS  /tmp/ccI6IEoE.s 			page 4
+
+
   66:Src/app_fuseprogramming.c ****         {
   67:Src/app_fuseprogramming.c ****           /* Error : Fuse read unsuccessful */
   68:Src/app_fuseprogramming.c ****           ErrorHandler();
@@ -213,33 +203,91 @@ ARM GAS  /tmp/cc2baIju.s 			page 1
   85:Src/app_fuseprogramming.c ****     ErrorHandler();
   86:Src/app_fuseprogramming.c ****   }
   87:Src/app_fuseprogramming.c **** }
- 114              		.loc 1 87 1 view .LVU31
- 115 0050 05B0     		add	sp, sp, #20
- 116              		.cfi_def_cfa_offset 4
- 117              		@ sp needed
- 118 0052 5DF804FB 		ldr	pc, [sp], #4
- 119              	.L19:
- 120 0056 00BF     		.align	2
- 121              	.L18:
- 122 0058 00900056 		.word	1442877440
- 123              		.cfi_endproc
- 124              	.LFE238:
- 126              		.text
- 127              	.Letext0:
- 128              		.file 2 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 129              		.file 3 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 130              		.file 4 "STM32Cube_FW_N6/Drivers/CMSIS/Device/ST/STM32N6xx/Include/stm32n657xx.h"
- 131              		.file 5 "STM32Cube_FW_N6/Drivers/STM32N6xx_HAL_Driver/Inc/stm32n6xx_hal_def.h"
- 132              		.file 6 "STM32Cube_FW_N6/Drivers/STM32N6xx_HAL_Driver/Inc/stm32n6xx_hal_bsec.h"
-ARM GAS  /tmp/cc2baIju.s 			page 5
+ 108              		.loc 1 87 1
+ 109 0072 07E0     		b	.L6
+ 110              	.L5:
+  68:Src/app_fuseprogramming.c ****         }
+ 111              		.loc 1 68 11
+ 112 0074 FFF7FEFF 		bl	ErrorHandler
+ 113              		.loc 1 87 1
+ 114 0078 04E0     		b	.L6
+ 115              	.L4:
+  74:Src/app_fuseprogramming.c ****       }
+ 116              		.loc 1 74 9
+ 117 007a FFF7FEFF 		bl	ErrorHandler
+ 118              		.loc 1 87 1
+ 119 007e 01E0     		b	.L6
+ 120              	.L2:
+  85:Src/app_fuseprogramming.c ****   }
+ 121              		.loc 1 85 5
+ 122 0080 FFF7FEFF 		bl	ErrorHandler
+ 123              	.L6:
+ 124              		.loc 1 87 1
+ 125 0084 00BF     		nop
+ 126 0086 1837     		adds	r7, r7, #24
+ 127              		.cfi_def_cfa_offset 8
+ 128 0088 BD46     		mov	sp, r7
+ 129              		.cfi_def_cfa_register 13
+ 130              		@ sp needed
+ 131 008a 80BD     		pop	{r7, pc}
+ 132              	.L8:
+ 133              		.align	2
+ 134              	.L7:
+ 135 008c 00900056 		.word	1442877440
+ 136              		.cfi_endproc
+ 137              	.LFE238:
+ 139              		.section	.text.ErrorHandler,"ax",%progbits
+ 140              		.align	1
+ARM GAS  /tmp/ccI6IEoE.s 			page 5
+
+
+ 141              		.syntax unified
+ 142              		.thumb
+ 143              		.thumb_func
+ 145              	ErrorHandler:
+ 146              	.LFB239:
+  88:Src/app_fuseprogramming.c **** 
+  89:Src/app_fuseprogramming.c **** /**
+  90:Src/app_fuseprogramming.c ****   * @brief  Handle error which occurs when calling HAL API
+  91:Src/app_fuseprogramming.c ****   * @retval None
+  92:Src/app_fuseprogramming.c ****   */
+  93:Src/app_fuseprogramming.c **** static void ErrorHandler(void)
+  94:Src/app_fuseprogramming.c **** {
+ 147              		.loc 1 94 1
+ 148              		.cfi_startproc
+ 149              		@ args = 0, pretend = 0, frame = 0
+ 150              		@ frame_needed = 1, uses_anonymous_args = 0
+ 151              		@ link register save eliminated.
+ 152 0000 80B4     		push	{r7}
+ 153              		.cfi_def_cfa_offset 4
+ 154              		.cfi_offset 7, -4
+ 155 0002 00AF     		add	r7, sp, #0
+ 156              		.cfi_def_cfa_register 7
+ 157              	.L10:
+  95:Src/app_fuseprogramming.c ****   while(1);
+ 158              		.loc 1 95 8
+ 159 0004 00BF     		nop
+ 160 0006 FDE7     		b	.L10
+ 161              		.cfi_endproc
+ 162              	.LFE239:
+ 164              		.text
+ 165              	.Letext0:
+ 166              		.file 2 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 167              		.file 3 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 168              		.file 4 "STM32Cube_FW_N6/Drivers/CMSIS/Device/ST/STM32N6xx/Include/stm32n657xx.h"
+ 169              		.file 5 "STM32Cube_FW_N6/Drivers/STM32N6xx_HAL_Driver/Inc/stm32n6xx_hal_def.h"
+ 170              		.file 6 "STM32Cube_FW_N6/Drivers/STM32N6xx_HAL_Driver/Inc/stm32n6xx_hal_bsec.h"
+ARM GAS  /tmp/ccI6IEoE.s 			page 6
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 app_fuseprogramming.c
-     /tmp/cc2baIju.s:26     .text.Fuse_Programming:00000000 $t
-     /tmp/cc2baIju.s:32     .text.Fuse_Programming:00000000 Fuse_Programming
-     /tmp/cc2baIju.s:122    .text.Fuse_Programming:00000058 $d
-                           .group:00000000 wm4.0.c552ae9005b0f2cca11872fae5d4b7f2
+     /tmp/ccI6IEoE.s:26     .text.Fuse_Programming:00000000 $t
+     /tmp/ccI6IEoE.s:32     .text.Fuse_Programming:00000000 Fuse_Programming
+     /tmp/ccI6IEoE.s:145    .text.ErrorHandler:00000000 ErrorHandler
+     /tmp/ccI6IEoE.s:135    .text.Fuse_Programming:0000008c $d
+     /tmp/ccI6IEoE.s:140    .text.ErrorHandler:00000000 $t
+                           .group:00000000 wm4.0.2a10773746a5c5ebb5552f50e466f80b
                            .group:00000000 wm4.stddef.h.39.0dc9006b34572d4d9cae4c8b422c4971
                            .group:00000000 wm4.arm_cmse.h.103.a0d15a79c4c9a67da8d5831704d7248e
                            .group:00000000 wm4.stm32n6xx.h.34.80585dd08aa426c932f6311fdb7386da

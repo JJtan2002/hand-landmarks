@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccmdKKmE.s 			page 1
+ARM GAS  /tmp/ccPH4bKf.s 			page 1
 
 
    1              		.arch armv8.1-m.main
@@ -16,7 +16,7 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
   13              		.eabi_attribute 24, 1
   14              		.eabi_attribute 25, 1
   15              		.eabi_attribute 26, 1
-  16              		.eabi_attribute 30, 4
+  16              		.eabi_attribute 30, 6
   17              		.eabi_attribute 34, 1
   18              		.eabi_attribute 38, 1
   19              		.eabi_attribute 18, 4
@@ -25,25 +25,46 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
   22              	.Ltext0:
   23              		.cfi_sections	.debug_frame
   24              		.file 1 "Gcc/Src/freertos_libc.c"
-  25              		.section	.rodata.freertos_libc_init.str1.1,"aMS",%progbits,1
-  26              	.LC0:
-  27 0000 6C696263 		.ascii	"libc_lock\000"
-  27      5F6C6F63 
-  27      6B00
-  28              	.LC1:
-  29 000a 4763632F 		.ascii	"Gcc/Src/freertos_libc.c\000"
-  29      5372632F 
-  29      66726565 
-  29      72746F73 
-  29      5F6C6962 
-  30              		.section	.text.freertos_libc_init,"ax",%progbits
-  31              		.align	1
-  32              		.global	freertos_libc_init
-  33              		.syntax unified
-  34              		.thumb
-  35              		.thumb_func
-  37              	freertos_libc_init:
-  38              	.LFB141:
+  25              		.section	.bss.is_tx_rt_init_done,"aw",%nobits
+  26              		.align	2
+  29              	is_tx_rt_init_done:
+  30 0000 00000000 		.space	4
+  31              		.section	.bss.libc_lock,"aw",%nobits
+  32              		.align	2
+  35              	libc_lock:
+  36 0000 00000000 		.space	4
+  37              		.section	.bss.libc_lock_buffer,"aw",%nobits
+  38              		.align	2
+  41              	libc_lock_buffer:
+  42 0000 00000000 		.space	80
+  42      00000000 
+  42      00000000 
+  42      00000000 
+  42      00000000 
+  43              		.section	.rodata
+  44              		.align	2
+  45              	.LC0:
+  46 0000 6C696263 		.ascii	"libc_lock\000"
+  46      5F6C6F63 
+  46      6B00
+  47 000a 0000     		.align	2
+  48              	.LC1:
+  49 000c 4763632F 		.ascii	"Gcc/Src/freertos_libc.c\000"
+  49      5372632F 
+  49      66726565 
+  49      72746F73 
+  49      5F6C6962 
+  50              		.section	.text.freertos_libc_init,"ax",%progbits
+  51              		.align	1
+  52              		.global	freertos_libc_init
+  53              		.syntax unified
+ARM GAS  /tmp/ccPH4bKf.s 			page 2
+
+
+  54              		.thumb
+  55              		.thumb_func
+  57              	freertos_libc_init:
+  58              	.LFB141:
    1:Gcc/Src/freertos_libc.c ****  /**
    2:Gcc/Src/freertos_libc.c ****  ******************************************************************************
    3:Gcc/Src/freertos_libc.c ****  * @file    freertos_libc.c
@@ -58,9 +79,6 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
   12:Gcc/Src/freertos_libc.c ****  * This software is licensed under terms that can be found in the LICENSE file
   13:Gcc/Src/freertos_libc.c ****  * in the root directory of this software component.
   14:Gcc/Src/freertos_libc.c ****  * If no LICENSE file comes with this software, it is provided AS-IS.
-ARM GAS  /tmp/ccmdKKmE.s 			page 2
-
-
   15:Gcc/Src/freertos_libc.c ****  *
   16:Gcc/Src/freertos_libc.c ****  ******************************************************************************
   17:Gcc/Src/freertos_libc.c ****  */
@@ -82,116 +100,136 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
   33:Gcc/Src/freertos_libc.c **** 
   34:Gcc/Src/freertos_libc.c **** void freertos_libc_init()
   35:Gcc/Src/freertos_libc.c **** {
-  39              		.loc 1 35 1 view -0
-  40              		.cfi_startproc
-  41              		@ args = 0, pretend = 0, frame = 0
-  42              		@ frame_needed = 0, uses_anonymous_args = 0
+  59              		.loc 1 35 1
+  60              		.cfi_startproc
+  61              		@ args = 0, pretend = 0, frame = 0
+  62              		@ frame_needed = 1, uses_anonymous_args = 0
+  63 0000 80B5     		push	{r7, lr}
+  64              		.cfi_def_cfa_offset 8
+  65              		.cfi_offset 7, -8
+  66              		.cfi_offset 14, -4
+  67 0002 00AF     		add	r7, sp, #0
+  68              		.cfi_def_cfa_register 7
   36:Gcc/Src/freertos_libc.c ****   libc_lock = xSemaphoreCreateMutexStatic(&libc_lock_buffer);
-  43              		.loc 1 36 3 view .LVU1
-  35:Gcc/Src/freertos_libc.c ****   libc_lock = xSemaphoreCreateMutexStatic(&libc_lock_buffer);
-  44              		.loc 1 35 1 is_stmt 0 view .LVU2
-  45 0000 08B5     		push	{r3, lr}
-  46              		.cfi_def_cfa_offset 8
-  47              		.cfi_offset 3, -8
-  48              		.cfi_offset 14, -4
-  49              		.loc 1 36 15 view .LVU3
-  50 0002 0120     		movs	r0, #1
-  51 0004 0749     		ldr	r1, .L3
-  52 0006 FFF7FEFF 		bl	xQueueCreateMutexStatic
-  53              	.LVL0:
-  54              		.loc 1 36 13 discriminator 1 view .LVU4
-  55 000a 074B     		ldr	r3, .L3+4
-  56 000c 1860     		str	r0, [r3]
+  69              		.loc 1 36 15
+  70 0004 0A49     		ldr	r1, .L3
+  71 0006 0120     		movs	r0, #1
+  72 0008 FFF7FEFF 		bl	xQueueCreateMutexStatic
+  73 000c 0346     		mov	r3, r0
+  74              		.loc 1 36 13 discriminator 1
+  75 000e 094A     		ldr	r2, .L3+4
+ARM GAS  /tmp/ccPH4bKf.s 			page 3
+
+
+  76 0010 1360     		str	r3, [r2]
   37:Gcc/Src/freertos_libc.c ****   assert(libc_lock);
-  57              		.loc 1 37 3 is_stmt 1 view .LVU5
-  58 000e 28B9     		cbnz	r0, .L2
-  59              		.loc 1 37 3 is_stmt 0 discriminator 1 view .LVU6
-  60 0010 2521     		movs	r1, #37
-  61 0012 064B     		ldr	r3, .L3+8
-  62 0014 064A     		ldr	r2, .L3+12
-  63 0016 0748     		ldr	r0, .L3+16
-  64 0018 FFF7FEFF 		bl	__assert_func
-  65              	.LVL1:
-  66              	.L2:
+  77              		.loc 1 37 3
+  78 0012 084B     		ldr	r3, .L3+4
+  79 0014 1B68     		ldr	r3, [r3]
+  80 0016 002B     		cmp	r3, #0
+  81 0018 05D1     		bne	.L2
+  82              		.loc 1 37 3 is_stmt 0 discriminator 1
+  83 001a 074B     		ldr	r3, .L3+8
+  84 001c 074A     		ldr	r2, .L3+12
+  85 001e 2521     		movs	r1, #37
+  86 0020 0748     		ldr	r0, .L3+16
+  87 0022 FFF7FEFF 		bl	__assert_func
+  88              	.L2:
   38:Gcc/Src/freertos_libc.c **** 
   39:Gcc/Src/freertos_libc.c ****   is_tx_rt_init_done = 1;
-  67              		.loc 1 39 3 is_stmt 1 view .LVU7
-  68              		.loc 1 39 22 is_stmt 0 view .LVU8
-  69 001c 0122     		movs	r2, #1
-ARM GAS  /tmp/ccmdKKmE.s 			page 3
-
-
-  70 001e 064B     		ldr	r3, .L3+20
-  71 0020 1A60     		str	r2, [r3]
+  89              		.loc 1 39 22 is_stmt 1
+  90 0026 074B     		ldr	r3, .L3+20
+  91 0028 0122     		movs	r2, #1
+  92 002a 1A60     		str	r2, [r3]
   40:Gcc/Src/freertos_libc.c **** }
-  72              		.loc 1 40 1 view .LVU9
-  73 0022 08BD     		pop	{r3, pc}
-  74              	.L4:
-  75              		.align	2
-  76              	.L3:
-  77 0024 00000000 		.word	libc_lock_buffer
-  78 0028 00000000 		.word	libc_lock
-  79 002c 00000000 		.word	.LC0
-  80 0030 00000000 		.word	__func__.2
-  81 0034 0A000000 		.word	.LC1
-  82 0038 00000000 		.word	is_tx_rt_init_done
-  83              		.cfi_endproc
-  84              	.LFE141:
-  86              		.section	.rodata.__malloc_lock.str1.1,"aMS",%progbits,1
-  87              	.LC2:
-  88 0000 2149535F 		.ascii	"!IS_IRQ_MODE()\000"
-  88      4952515F 
-  88      4D4F4445 
-  88      282900
-  89              	.LC3:
-  90 000f 72657420 		.ascii	"ret == pdTRUE\000"
-  90      3D3D2070 
-  90      64545255 
-  90      4500
-  91              		.section	.text.__malloc_lock,"ax",%progbits
-  92              		.align	1
-  93              		.global	__malloc_lock
-  94              		.syntax unified
-  95              		.thumb
-  96              		.thumb_func
-  98              	__malloc_lock:
-  99              	.LVL2:
- 100              	.LFB142:
+  93              		.loc 1 40 1
+  94 002c 00BF     		nop
+  95 002e 80BD     		pop	{r7, pc}
+  96              	.L4:
+  97              		.align	2
+  98              	.L3:
+  99 0030 00000000 		.word	libc_lock_buffer
+ 100 0034 00000000 		.word	libc_lock
+ 101 0038 00000000 		.word	.LC0
+ 102 003c 00000000 		.word	__func__.2
+ 103 0040 0C000000 		.word	.LC1
+ 104 0044 00000000 		.word	is_tx_rt_init_done
+ 105              		.cfi_endproc
+ 106              	.LFE141:
+ 108              		.section	.rodata
+ 109              		.align	2
+ 110              	.LC2:
+ 111 0024 69735F74 		.ascii	"is_tx_rt_init_done\000"
+ 111      785F7274 
+ 111      5F696E69 
+ 111      745F646F 
+ 111      6E6500
+ 112 0037 00       		.align	2
+ 113              	.LC3:
+ 114 0038 2149535F 		.ascii	"!IS_IRQ_MODE()\000"
+ 114      4952515F 
+ 114      4D4F4445 
+ 114      282900
+ 115 0047 00       		.align	2
+ 116              	.LC4:
+ 117 0048 72657420 		.ascii	"ret == pdTRUE\000"
+ 117      3D3D2070 
+ 117      64545255 
+ 117      4500
+ 118              		.section	.text.__malloc_lock,"ax",%progbits
+ 119              		.align	1
+ARM GAS  /tmp/ccPH4bKf.s 			page 4
+
+
+ 120              		.global	__malloc_lock
+ 121              		.syntax unified
+ 122              		.thumb
+ 123              		.thumb_func
+ 125              	__malloc_lock:
+ 126              	.LFB142:
   41:Gcc/Src/freertos_libc.c **** 
   42:Gcc/Src/freertos_libc.c **** void __malloc_lock (struct _reent *reent)
   43:Gcc/Src/freertos_libc.c **** {
- 101              		.loc 1 43 1 is_stmt 1 view -0
- 102              		.cfi_startproc
- 103              		@ args = 0, pretend = 0, frame = 0
- 104              		@ frame_needed = 0, uses_anonymous_args = 0
+ 127              		.loc 1 43 1
+ 128              		.cfi_startproc
+ 129              		@ args = 0, pretend = 0, frame = 16
+ 130              		@ frame_needed = 1, uses_anonymous_args = 0
+ 131 0000 80B5     		push	{r7, lr}
+ 132              		.cfi_def_cfa_offset 8
+ 133              		.cfi_offset 7, -8
+ 134              		.cfi_offset 14, -4
+ 135 0002 84B0     		sub	sp, sp, #16
+ 136              		.cfi_def_cfa_offset 24
+ 137 0004 00AF     		add	r7, sp, #0
+ 138              		.cfi_def_cfa_register 7
+ 139 0006 7860     		str	r0, [r7, #4]
   44:Gcc/Src/freertos_libc.c ****   int ret;
- 105              		.loc 1 44 3 view .LVU11
   45:Gcc/Src/freertos_libc.c **** 
   46:Gcc/Src/freertos_libc.c ****   if (!is_tx_rt_init_done)
- 106              		.loc 1 46 3 view .LVU12
-  43:Gcc/Src/freertos_libc.c ****   int ret;
- 107              		.loc 1 43 1 is_stmt 0 view .LVU13
- 108 0000 08B5     		push	{r3, lr}
- 109              		.cfi_def_cfa_offset 8
- 110              		.cfi_offset 3, -8
- 111              		.cfi_offset 14, -4
- 112              		.loc 1 46 7 view .LVU14
- 113 0002 0C4B     		ldr	r3, .L15
- 114              		.loc 1 46 6 view .LVU15
-ARM GAS  /tmp/ccmdKKmE.s 			page 4
-
-
- 115 0004 1B68     		ldr	r3, [r3]
- 116 0006 A3B1     		cbz	r3, .L5
+ 140              		.loc 1 46 7
+ 141 0008 174B     		ldr	r3, .L12
+ 142 000a 1B68     		ldr	r3, [r3]
+ 143              		.loc 1 46 6
+ 144 000c 002B     		cmp	r3, #0
+ 145 000e 26D0     		beq	.L11
   47:Gcc/Src/freertos_libc.c ****     return ;
   48:Gcc/Src/freertos_libc.c **** 
   49:Gcc/Src/freertos_libc.c ****   assert(is_tx_rt_init_done);
- 117              		.loc 1 49 3 is_stmt 1 view .LVU16
-  50:Gcc/Src/freertos_libc.c ****   assert(!IS_IRQ_MODE());
- 118              		.loc 1 50 3 view .LVU17
- 119              	.LBB6:
- 120              	.LBI6:
- 121              		.file 2 "STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h"
+ 146              		.loc 1 49 3
+ 147 0010 154B     		ldr	r3, .L12
+ 148 0012 1B68     		ldr	r3, [r3]
+ 149 0014 002B     		cmp	r3, #0
+ 150 0016 05D1     		bne	.L8
+ 151              		.loc 1 49 3 is_stmt 0 discriminator 1
+ 152 0018 144B     		ldr	r3, .L12+4
+ 153 001a 154A     		ldr	r2, .L12+8
+ 154 001c 3121     		movs	r1, #49
+ 155 001e 1548     		ldr	r0, .L12+12
+ 156 0020 FFF7FEFF 		bl	__assert_func
+ 157              	.L8:
+ 158              	.LBB6:
+ 159              	.LBB7:
+ 160              		.file 2 "STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h"
    1:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** /**************************************************************************//**
    2:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****  * @file     cmsis_gcc.h
    3:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****  * @brief    CMSIS compiler GCC header file
@@ -200,6 +238,9 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
    6:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****  ******************************************************************************/
    7:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** /*
    8:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****  * Copyright (c) 2009-2021 Arm Limited. All rights reserved.
+ARM GAS  /tmp/ccPH4bKf.s 			page 5
+
+
    9:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****  *
   10:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****  * SPDX-License-Identifier: Apache-2.0
   11:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****  *
@@ -238,9 +279,6 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
   44:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __INLINE                               inline
   45:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
   46:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __STATIC_INLINE
-ARM GAS  /tmp/ccmdKKmE.s 			page 5
-
-
   47:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __STATIC_INLINE                        static inline
   48:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
   49:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __STATIC_FORCEINLINE
@@ -260,6 +298,9 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
   63:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
   64:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __PACKED_STRUCT
   65:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __PACKED_STRUCT                        struct __attribute__((packed, aligned(1)))
+ARM GAS  /tmp/ccPH4bKf.s 			page 6
+
+
   66:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
   67:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __PACKED_UNION
   68:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __PACKED_UNION                         union __attribute__((packed, aligned(1)))
@@ -298,9 +339,6 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  101:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
  102:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32_READ
  103:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
-ARM GAS  /tmp/ccmdKKmE.s 			page 6
-
-
  104:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
  105:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
  106:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT32_READ { uint32_t v; };
@@ -320,6 +358,9 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  120:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** /* #########################  Startup and Lowlevel Init  ######################## */
  121:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
  122:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef __PROGRAM_START
+ARM GAS  /tmp/ccPH4bKf.s 			page 7
+
+
  123:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
  124:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** /**
  125:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Initializes data and bss sections
@@ -358,9 +399,6 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  158:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
  159:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****       pTable->dest[i] = 0u;
  160:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****     }
-ARM GAS  /tmp/ccmdKKmE.s 			page 7
-
-
  161:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   }
  162:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
  163:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   _start();
@@ -380,6 +418,9 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  177:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef __VECTOR_TABLE
  178:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #define __VECTOR_TABLE            __Vectors
  179:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ARM GAS  /tmp/ccPH4bKf.s 			page 8
+
+
  180:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
  181:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef __VECTOR_TABLE_ATTRIBUTE
  182:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #define __VECTOR_TABLE_ATTRIBUTE  __attribute__((used, section(".vectors")))
@@ -418,9 +459,6 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  215:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #define __CMSIS_GCC_OUT_REG(r) "=l" (r)
  216:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #define __CMSIS_GCC_RW_REG(r) "+l" (r)
  217:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #define __CMSIS_GCC_USE_REG(r) "l" (r)
-ARM GAS  /tmp/ccmdKKmE.s 			page 8
-
-
  218:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #else
  219:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #define __CMSIS_GCC_OUT_REG(r) "=r" (r)
  220:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #define __CMSIS_GCC_RW_REG(r) "+r" (r)
@@ -440,6 +478,9 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  234:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #define __WFI()                             __ASM volatile ("wfi":::"memory")
  235:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
  236:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccPH4bKf.s 			page 9
+
+
  237:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** /**
  238:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Wait For Event
  239:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Wait For Event is a hint instruction that permits the processor to enter
@@ -478,9 +519,6 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  272:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** }
  273:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
  274:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/ccmdKKmE.s 			page 9
-
-
  275:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** /**
  276:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Data Memory Barrier
  277:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Ensures the apparent order of the explicit memory operations before
@@ -500,6 +538,9 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  291:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****  */
  292:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __REV(uint32_t value)
  293:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ARM GAS  /tmp/ccPH4bKf.s 			page 10
+
+
  294:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #if (__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 5)
  295:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   return __builtin_bswap32(value);
  296:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #else
@@ -538,9 +579,6 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  329:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   return (int16_t)__builtin_bswap16(value);
  330:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #else
  331:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   int16_t result;
-ARM GAS  /tmp/ccmdKKmE.s 			page 10
-
-
  332:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
  333:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM ("revsh %0, %1" : __CMSIS_GCC_OUT_REG (result) : __CMSIS_GCC_USE_REG (value) );
  334:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   return result;
@@ -560,6 +598,9 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  348:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   op2 %= 32U;
  349:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   if (op2 == 0U)
  350:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   {
+ARM GAS  /tmp/ccPH4bKf.s 			page 11
+
+
  351:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****     return op1;
  352:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   }
  353:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   return (op1 >> op2) | (op1 << (32U - op2));
@@ -598,9 +639,6 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  386:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   {
  387:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****     result <<= 1U;
  388:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****     result |= value & 1U;
-ARM GAS  /tmp/ccmdKKmE.s 			page 11
-
-
  389:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****     s--;
  390:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   }
  391:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   result <<= s;                        /* shift when v's highest bits are zero */
@@ -620,6 +658,9 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  405:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   /* Even though __builtin_clz produces a CLZ instruction on ARM, formally
  406:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****      __builtin_clz(0) is undefined behaviour, so handle this case specially.
  407:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****      This guarantees ARM-compatible results if happening to compile on a non-ARM
+ARM GAS  /tmp/ccPH4bKf.s 			page 12
+
+
  408:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****      target, and ensures the compiler doesn't decide to activate any
  409:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****      optimisations using the logic "value was passed to __builtin_clz, so it
  410:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****      is non-zero".
@@ -658,9 +699,6 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  443:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
  444:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****    return ((uint8_t) result);    /* Add explicit type cast here */
  445:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** }
-ARM GAS  /tmp/ccmdKKmE.s 			page 12
-
-
  446:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
  447:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
  448:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** /**
@@ -680,6 +718,9 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  462:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****        accepted by assembler. So has to use following less efficient pattern.
  463:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****     */
  464:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****    __ASM volatile ("ldrexh %0, [%1]" : "=r" (result) : "r" (addr) : "memory" );
+ARM GAS  /tmp/ccPH4bKf.s 			page 13
+
+
  465:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
  466:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****    return ((uint16_t) result);    /* Add explicit type cast here */
  467:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** }
@@ -718,9 +759,6 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  500:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
  501:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
  502:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** /**
-ARM GAS  /tmp/ccmdKKmE.s 			page 13
-
-
  503:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   STR Exclusive (16 bit)
  504:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Executes a exclusive STR instruction for 16 bit values.
  505:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]  value  Value to store
@@ -740,6 +778,9 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  519:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** /**
  520:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   STR Exclusive (32 bit)
  521:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Executes a exclusive STR instruction for 32 bit values.
+ARM GAS  /tmp/ccPH4bKf.s 			page 14
+
+
  522:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]  value  Value to store
  523:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to location
  524:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \return          0  Function succeeded
@@ -778,9 +819,6 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  557:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]  ARG1  Value to be saturated
  558:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]  ARG2  Bit position to saturate to (1..32)
  559:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \return             Saturated value
-ARM GAS  /tmp/ccmdKKmE.s 			page 14
-
-
  560:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****  */
  561:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #define __SSAT(ARG1, ARG2) \
  562:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** __extension__ \
@@ -800,6 +838,9 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  576:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****  */
  577:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #define __USAT(ARG1, ARG2) \
  578:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** __extension__ \
+ARM GAS  /tmp/ccPH4bKf.s 			page 15
+
+
  579:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** ({                          \
  580:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t __RES, __ARG1 = (ARG1); \
  581:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("usat %0, %1, %2" : "=r" (__RES) :  "I" (ARG2), "r" (__ARG1) : "cc" ); \
@@ -838,9 +879,6 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  614:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #else
  615:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****     /* Prior to GCC 4.8, "Q" will be expanded to [rx, #0] which is not
  616:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****        accepted by assembler. So has to use following less efficient pattern.
-ARM GAS  /tmp/ccmdKKmE.s 			page 15
-
-
  617:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****     */
  618:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****    __ASM volatile ("ldrbt %0, [%1]" : "=r" (result) : "r" (ptr) : "memory" );
  619:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
@@ -860,6 +898,9 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  633:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
  634:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #if (__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 8)
  635:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****    __ASM volatile ("ldrht %0, %1" : "=r" (result) : "Q" (*ptr) );
+ARM GAS  /tmp/ccPH4bKf.s 			page 16
+
+
  636:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #else
  637:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****     /* Prior to GCC 4.8, "Q" will be expanded to [rx, #0] which is not
  638:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****        accepted by assembler. So has to use following less efficient pattern.
@@ -898,9 +939,6 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  671:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
  672:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
  673:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** /**
-ARM GAS  /tmp/ccmdKKmE.s 			page 16
-
-
  674:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   STRT Unprivileged (16 bit)
  675:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Executes a Unprivileged STRT instruction for 16 bit values.
  676:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]  value  Value to store
@@ -920,6 +958,9 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  690:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****  */
  691:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __STRT(uint32_t value, volatile uint32_t *ptr)
  692:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ARM GAS  /tmp/ccPH4bKf.s 			page 17
+
+
  693:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****    __ASM volatile ("strt %1, %0" : "=Q" (*ptr) : "r" (value) );
  694:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** }
  695:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
@@ -958,9 +999,6 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  728:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]  value  Value to be saturated
  729:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    sat  Bit position to saturate to (0..31)
  730:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \return             Saturated value
-ARM GAS  /tmp/ccmdKKmE.s 			page 17
-
-
  731:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****  */
  732:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __USAT(int32_t val, uint32_t sat)
  733:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** {
@@ -980,6 +1018,9 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  747:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** }
  748:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
  749:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif /* ((defined (__ARM_ARCH_7M__      ) && (__ARM_ARCH_7M__      == 1)) || \
+ARM GAS  /tmp/ccPH4bKf.s 			page 18
+
+
  750:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****            (defined (__ARM_ARCH_7EM__     ) && (__ARM_ARCH_7EM__     == 1)) || \
  751:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****            (defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1))    ) */
  752:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
@@ -1018,9 +1059,6 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  785:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
  786:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** /**
  787:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Load-Acquire (32 bit)
-ARM GAS  /tmp/ccmdKKmE.s 			page 18
-
-
  788:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Executes a LDA instruction for 32 bit values.
  789:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to data
  790:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \return        value of type uint32_t at (*ptr)
@@ -1040,6 +1078,9 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  804:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]  value  Value to store
  805:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to location
  806:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ARM GAS  /tmp/ccPH4bKf.s 			page 19
+
+
  807:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __STLB(uint8_t value, volatile uint8_t *ptr)
  808:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** {
  809:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****    __ASM volatile ("stlb %1, %0" : "=Q" (*ptr) : "r" ((uint32_t)value) : "memory" );
@@ -1078,9 +1119,6 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  842:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****  */
  843:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint8_t __LDAEXB(volatile uint8_t *ptr)
  844:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** {
-ARM GAS  /tmp/ccmdKKmE.s 			page 19
-
-
  845:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****     uint32_t result;
  846:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
  847:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****    __ASM volatile ("ldaexb %0, %1" : "=r" (result) : "Q" (*ptr) : "memory" );
@@ -1100,6 +1138,9 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  861:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
  862:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****    __ASM volatile ("ldaexh %0, %1" : "=r" (result) : "Q" (*ptr) : "memory" );
  863:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****    return ((uint16_t) result);
+ARM GAS  /tmp/ccPH4bKf.s 			page 20
+
+
  864:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** }
  865:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
  866:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
@@ -1138,9 +1179,6 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  899:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** /**
  900:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Store-Release Exclusive (16 bit)
  901:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Executes a STLH exclusive instruction for 16 bit values.
-ARM GAS  /tmp/ccmdKKmE.s 			page 20
-
-
  902:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]  value  Value to store
  903:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to location
  904:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \return          0  Function succeeded
@@ -1160,6 +1198,9 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  918:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Executes a STL exclusive instruction for 32 bit values.
  919:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]  value  Value to store
  920:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to location
+ARM GAS  /tmp/ccPH4bKf.s 			page 21
+
+
  921:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \return          0  Function succeeded
  922:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \return          1  Function failed
  923:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****  */
@@ -1198,9 +1239,6 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  956:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Disable IRQ Interrupts
  957:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Disables IRQ interrupts by setting special-purpose register PRIMASK.
  958:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
-ARM GAS  /tmp/ccmdKKmE.s 			page 21
-
-
  959:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****  */
  960:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __disable_irq(void)
  961:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** {
@@ -1220,6 +1258,9 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
  975:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, control" : "=r" (result) );
  976:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
  977:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ARM GAS  /tmp/ccPH4bKf.s 			page 22
+
+
  978:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
  979:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
  980:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
@@ -1258,9 +1299,6 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
 1013:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****  */
 1014:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_CONTROL_NS(uint32_t control)
 1015:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** {
-ARM GAS  /tmp/ccmdKKmE.s 			page 22
-
-
 1016:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR control_ns, %0" : : "r" (control) : "memory");
 1017:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   __ISB();
 1018:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** }
@@ -1273,271 +1311,272 @@ ARM GAS  /tmp/ccmdKKmE.s 			page 1
 1025:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               IPSR Register value
 1026:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****  */
 1027:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_IPSR(void)
- 122              		.loc 2 1027 31 view .LVU18
- 123              	.LBB7:
 1028:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** {
 1029:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
- 124              		.loc 2 1029 3 view .LVU19
 1030:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
 1031:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, ipsr" : "=r" (result) );
- 125              		.loc 2 1031 3 view .LVU20
- 126              		.syntax unified
- 127              	@ 1031 "STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h" 1
- 128 0008 EFF30583 		MRS r3, ipsr
- 129              	@ 0 "" 2
- 130              	.LVL3:
+ 161              		.loc 2 1031 3 is_stmt 1
+ 162              		.syntax unified
+ 163              	@ 1031 "STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ARM GAS  /tmp/ccPH4bKf.s 			page 23
+
+
+ 164 0024 EFF30583 		MRS r3, ipsr
+ 165              	@ 0 "" 2
+ 166              		.thumb
+ 167              		.syntax unified
+ 168 0028 BB60     		str	r3, [r7, #8]
 1032:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
- 131              		.loc 2 1032 3 view .LVU21
- 132              		.loc 2 1032 3 is_stmt 0 view .LVU22
- 133              		.thumb
- 134              		.syntax unified
- 135              	.LBE7:
- 136              	.LBE6:
- 137              		.loc 1 50 3 discriminator 1 view .LVU23
- 138 000c 2BB1     		cbz	r3, .L7
- 139 000e 3221     		movs	r1, #50
- 140 0010 094B     		ldr	r3, .L15+4
- 141 0012 0A4A     		ldr	r2, .L15+8
- 142              	.LVL4:
- 143              	.L14:
+ 169              		.loc 2 1032 9
+ 170 002a BB68     		ldr	r3, [r7, #8]
+ 171              	.LBE7:
+ 172              	.LBE6:
+  50:Gcc/Src/freertos_libc.c ****   assert(!IS_IRQ_MODE());
+ 173              		.loc 1 50 3 discriminator 1
+ 174 002c 002B     		cmp	r3, #0
+ 175 002e 05D0     		beq	.L10
+ 176 0030 114B     		ldr	r3, .L12+16
+ 177 0032 0F4A     		ldr	r2, .L12+8
+ 178 0034 3221     		movs	r1, #50
+ 179 0036 0F48     		ldr	r0, .L12+12
+ 180 0038 FFF7FEFF 		bl	__assert_func
+ 181              	.L10:
   51:Gcc/Src/freertos_libc.c **** 
   52:Gcc/Src/freertos_libc.c ****   ret = xSemaphoreTake(libc_lock, portMAX_DELAY);
+ 182              		.loc 1 52 9
+ 183 003c 0F4B     		ldr	r3, .L12+20
+ 184 003e 1B68     		ldr	r3, [r3]
+ 185 0040 4FF0FF31 		mov	r1, #-1
+ 186 0044 1846     		mov	r0, r3
+ 187 0046 FFF7FEFF 		bl	xQueueSemaphoreTake
+ 188 004a F860     		str	r0, [r7, #12]
   53:Gcc/Src/freertos_libc.c ****   assert(ret == pdTRUE);
- 144              		.loc 1 53 3 discriminator 1 view .LVU24
- 145 0014 0A48     		ldr	r0, .L15+12
- 146 0016 FFF7FEFF 		bl	__assert_func
- 147              	.LVL5:
- 148              	.L7:
-  52:Gcc/Src/freertos_libc.c ****   assert(ret == pdTRUE);
- 149              		.loc 1 52 3 is_stmt 1 view .LVU25
-  52:Gcc/Src/freertos_libc.c ****   assert(ret == pdTRUE);
- 150              		.loc 1 52 9 is_stmt 0 view .LVU26
- 151 001a 0A4B     		ldr	r3, .L15+16
- 152 001c 4FF0FF31 		mov	r1, #-1
- 153 0020 1868     		ldr	r0, [r3]
- 154              	.LVL6:
-  52:Gcc/Src/freertos_libc.c ****   assert(ret == pdTRUE);
- 155              		.loc 1 52 9 view .LVU27
-ARM GAS  /tmp/ccmdKKmE.s 			page 23
-
-
- 156 0022 FFF7FEFF 		bl	xQueueSemaphoreTake
- 157              	.LVL7:
- 158              		.loc 1 53 3 is_stmt 1 view .LVU28
- 159 0026 0128     		cmp	r0, #1
- 160 0028 03D0     		beq	.L5
- 161              		.loc 1 53 3 is_stmt 0 discriminator 1 view .LVU29
- 162 002a 3521     		movs	r1, #53
- 163 002c 064B     		ldr	r3, .L15+20
- 164 002e 034A     		ldr	r2, .L15+8
- 165 0030 F0E7     		b	.L14
- 166              	.LVL8:
- 167              	.L5:
+ 189              		.loc 1 53 3
+ 190 004c FB68     		ldr	r3, [r7, #12]
+ 191 004e 012B     		cmp	r3, #1
+ 192 0050 06D0     		beq	.L5
+ 193              		.loc 1 53 3 is_stmt 0 discriminator 1
+ 194 0052 0B4B     		ldr	r3, .L12+24
+ 195 0054 064A     		ldr	r2, .L12+8
+ 196 0056 3521     		movs	r1, #53
+ 197 0058 0648     		ldr	r0, .L12+12
+ 198 005a FFF7FEFF 		bl	__assert_func
+ 199              	.L11:
+  47:Gcc/Src/freertos_libc.c **** 
+ 200              		.loc 1 47 5 is_stmt 1
+ 201 005e 00BF     		nop
+ 202              	.L5:
   54:Gcc/Src/freertos_libc.c **** }
- 168              		.loc 1 54 1 view .LVU30
- 169 0032 08BD     		pop	{r3, pc}
- 170              	.L16:
- 171              		.align	2
- 172              	.L15:
- 173 0034 00000000 		.word	is_tx_rt_init_done
- 174 0038 00000000 		.word	.LC2
- 175 003c 00000000 		.word	__func__.1
- 176 0040 0A000000 		.word	.LC1
- 177 0044 00000000 		.word	libc_lock
- 178 0048 0F000000 		.word	.LC3
- 179              		.cfi_endproc
- 180              	.LFE142:
- 182              		.section	.text.__malloc_unlock,"ax",%progbits
- 183              		.align	1
- 184              		.global	__malloc_unlock
- 185              		.syntax unified
- 186              		.thumb
- 187              		.thumb_func
- 189              	__malloc_unlock:
- 190              	.LVL9:
- 191              	.LFB143:
+ 203              		.loc 1 54 1
+ 204 0060 1037     		adds	r7, r7, #16
+ 205              		.cfi_def_cfa_offset 8
+ 206 0062 BD46     		mov	sp, r7
+ 207              		.cfi_def_cfa_register 13
+ 208              		@ sp needed
+ 209 0064 80BD     		pop	{r7, pc}
+ 210              	.L13:
+ 211 0066 00BF     		.align	2
+ 212              	.L12:
+ 213 0068 00000000 		.word	is_tx_rt_init_done
+ARM GAS  /tmp/ccPH4bKf.s 			page 24
+
+
+ 214 006c 24000000 		.word	.LC2
+ 215 0070 00000000 		.word	__func__.1
+ 216 0074 0C000000 		.word	.LC1
+ 217 0078 38000000 		.word	.LC3
+ 218 007c 00000000 		.word	libc_lock
+ 219 0080 48000000 		.word	.LC4
+ 220              		.cfi_endproc
+ 221              	.LFE142:
+ 223              		.section	.text.__malloc_unlock,"ax",%progbits
+ 224              		.align	1
+ 225              		.global	__malloc_unlock
+ 226              		.syntax unified
+ 227              		.thumb
+ 228              		.thumb_func
+ 230              	__malloc_unlock:
+ 231              	.LFB143:
   55:Gcc/Src/freertos_libc.c **** 
   56:Gcc/Src/freertos_libc.c **** void __malloc_unlock (struct _reent *reent)
   57:Gcc/Src/freertos_libc.c **** {
- 192              		.loc 1 57 1 is_stmt 1 view -0
- 193              		.cfi_startproc
- 194              		@ args = 0, pretend = 0, frame = 0
- 195              		@ frame_needed = 0, uses_anonymous_args = 0
+ 232              		.loc 1 57 1
+ 233              		.cfi_startproc
+ 234              		@ args = 0, pretend = 0, frame = 16
+ 235              		@ frame_needed = 1, uses_anonymous_args = 0
+ 236 0000 80B5     		push	{r7, lr}
+ 237              		.cfi_def_cfa_offset 8
+ 238              		.cfi_offset 7, -8
+ 239              		.cfi_offset 14, -4
+ 240 0002 84B0     		sub	sp, sp, #16
+ 241              		.cfi_def_cfa_offset 24
+ 242 0004 00AF     		add	r7, sp, #0
+ 243              		.cfi_def_cfa_register 7
+ 244 0006 7860     		str	r0, [r7, #4]
   58:Gcc/Src/freertos_libc.c ****   int ret;
- 196              		.loc 1 58 3 view .LVU32
   59:Gcc/Src/freertos_libc.c **** 
   60:Gcc/Src/freertos_libc.c ****   if (!is_tx_rt_init_done)
- 197              		.loc 1 60 3 view .LVU33
-  57:Gcc/Src/freertos_libc.c ****   int ret;
- 198              		.loc 1 57 1 is_stmt 0 view .LVU34
- 199 0000 08B5     		push	{r3, lr}
- 200              		.cfi_def_cfa_offset 8
- 201              		.cfi_offset 3, -8
- 202              		.cfi_offset 14, -4
- 203              		.loc 1 60 7 view .LVU35
- 204 0002 0C4B     		ldr	r3, .L27
- 205              		.loc 1 60 6 view .LVU36
- 206 0004 1B68     		ldr	r3, [r3]
-ARM GAS  /tmp/ccmdKKmE.s 			page 24
-
-
- 207 0006 A3B1     		cbz	r3, .L17
+ 245              		.loc 1 60 7
+ 246 0008 174B     		ldr	r3, .L21
+ 247 000a 1B68     		ldr	r3, [r3]
+ 248              		.loc 1 60 6
+ 249 000c 002B     		cmp	r3, #0
+ 250 000e 26D0     		beq	.L20
   61:Gcc/Src/freertos_libc.c ****     return ;
   62:Gcc/Src/freertos_libc.c **** 
   63:Gcc/Src/freertos_libc.c ****   assert(is_tx_rt_init_done);
- 208              		.loc 1 63 3 is_stmt 1 view .LVU37
-  64:Gcc/Src/freertos_libc.c ****   assert(!IS_IRQ_MODE());
- 209              		.loc 1 64 3 view .LVU38
- 210              	.LBB8:
- 211              	.LBI8:
-1027:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** {
- 212              		.loc 2 1027 31 view .LVU39
- 213              	.LBB9:
-1029:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
- 214              		.loc 2 1029 3 view .LVU40
+ 251              		.loc 1 63 3
+ 252 0010 154B     		ldr	r3, .L21
+ 253 0012 1B68     		ldr	r3, [r3]
+ 254 0014 002B     		cmp	r3, #0
+ 255 0016 05D1     		bne	.L17
+ 256              		.loc 1 63 3 is_stmt 0 discriminator 1
+ 257 0018 144B     		ldr	r3, .L21+4
+ 258 001a 154A     		ldr	r2, .L21+8
+ 259 001c 3F21     		movs	r1, #63
+ 260 001e 1548     		ldr	r0, .L21+12
+ 261 0020 FFF7FEFF 		bl	__assert_func
+ 262              	.L17:
+ 263              	.LBB8:
+ARM GAS  /tmp/ccPH4bKf.s 			page 25
+
+
+ 264              	.LBB9:
 1031:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
- 215              		.loc 2 1031 3 view .LVU41
- 216              		.syntax unified
- 217              	@ 1031 "STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h" 1
- 218 0008 EFF30583 		MRS r3, ipsr
- 219              	@ 0 "" 2
- 220              	.LVL10:
- 221              		.loc 2 1032 3 view .LVU42
- 222              		.loc 2 1032 3 is_stmt 0 view .LVU43
- 223              		.thumb
- 224              		.syntax unified
- 225              	.LBE9:
- 226              	.LBE8:
- 227              		.loc 1 64 3 discriminator 1 view .LVU44
- 228 000c 2BB1     		cbz	r3, .L19
- 229 000e 4021     		movs	r1, #64
- 230 0010 094B     		ldr	r3, .L27+4
- 231 0012 0A4A     		ldr	r2, .L27+8
- 232              	.LVL11:
- 233              	.L26:
+ 265              		.loc 2 1031 3 is_stmt 1
+ 266              		.syntax unified
+ 267              	@ 1031 "STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 268 0024 EFF30583 		MRS r3, ipsr
+ 269              	@ 0 "" 2
+ 270              		.thumb
+ 271              		.syntax unified
+ 272 0028 BB60     		str	r3, [r7, #8]
+ 273              		.loc 2 1032 9
+ 274 002a BB68     		ldr	r3, [r7, #8]
+ 275              	.LBE9:
+ 276              	.LBE8:
+  64:Gcc/Src/freertos_libc.c ****   assert(!IS_IRQ_MODE());
+ 277              		.loc 1 64 3 discriminator 1
+ 278 002c 002B     		cmp	r3, #0
+ 279 002e 05D0     		beq	.L19
+ 280 0030 114B     		ldr	r3, .L21+16
+ 281 0032 0F4A     		ldr	r2, .L21+8
+ 282 0034 4021     		movs	r1, #64
+ 283 0036 0F48     		ldr	r0, .L21+12
+ 284 0038 FFF7FEFF 		bl	__assert_func
+ 285              	.L19:
   65:Gcc/Src/freertos_libc.c **** 
   66:Gcc/Src/freertos_libc.c ****   ret = xSemaphoreGive(libc_lock);
+ 286              		.loc 1 66 9
+ 287 003c 0F4B     		ldr	r3, .L21+20
+ 288 003e 1868     		ldr	r0, [r3]
+ 289 0040 0023     		movs	r3, #0
+ 290 0042 0022     		movs	r2, #0
+ 291 0044 0021     		movs	r1, #0
+ 292 0046 FFF7FEFF 		bl	xQueueGenericSend
+ 293 004a F860     		str	r0, [r7, #12]
   67:Gcc/Src/freertos_libc.c ****   assert(ret == pdTRUE);
- 234              		.loc 1 67 3 discriminator 1 view .LVU45
- 235 0014 0A48     		ldr	r0, .L27+12
- 236 0016 FFF7FEFF 		bl	__assert_func
- 237              	.LVL12:
- 238              	.L19:
-  66:Gcc/Src/freertos_libc.c ****   assert(ret == pdTRUE);
- 239              		.loc 1 66 3 is_stmt 1 view .LVU46
-  66:Gcc/Src/freertos_libc.c ****   assert(ret == pdTRUE);
- 240              		.loc 1 66 9 is_stmt 0 view .LVU47
- 241 001a 0A48     		ldr	r0, .L27+16
- 242              	.LVL13:
-  66:Gcc/Src/freertos_libc.c ****   assert(ret == pdTRUE);
- 243              		.loc 1 66 9 view .LVU48
- 244 001c 1A46     		mov	r2, r3
- 245 001e 1946     		mov	r1, r3
- 246 0020 0068     		ldr	r0, [r0]
- 247 0022 FFF7FEFF 		bl	xQueueGenericSend
- 248              	.LVL14:
- 249              		.loc 1 67 3 is_stmt 1 view .LVU49
- 250 0026 0128     		cmp	r0, #1
-ARM GAS  /tmp/ccmdKKmE.s 			page 25
-
-
- 251 0028 03D0     		beq	.L17
- 252              		.loc 1 67 3 is_stmt 0 discriminator 1 view .LVU50
- 253 002a 4321     		movs	r1, #67
- 254 002c 064B     		ldr	r3, .L27+20
- 255 002e 034A     		ldr	r2, .L27+8
- 256 0030 F0E7     		b	.L26
- 257              	.LVL15:
- 258              	.L17:
+ 294              		.loc 1 67 3
+ 295 004c FB68     		ldr	r3, [r7, #12]
+ 296 004e 012B     		cmp	r3, #1
+ 297 0050 06D0     		beq	.L14
+ 298              		.loc 1 67 3 is_stmt 0 discriminator 1
+ 299 0052 0B4B     		ldr	r3, .L21+24
+ 300 0054 064A     		ldr	r2, .L21+8
+ 301 0056 4321     		movs	r1, #67
+ 302 0058 0648     		ldr	r0, .L21+12
+ 303 005a FFF7FEFF 		bl	__assert_func
+ 304              	.L20:
+  61:Gcc/Src/freertos_libc.c **** 
+ 305              		.loc 1 61 5 is_stmt 1
+ 306 005e 00BF     		nop
+ 307              	.L14:
   68:Gcc/Src/freertos_libc.c **** }
- 259              		.loc 1 68 1 view .LVU51
- 260 0032 08BD     		pop	{r3, pc}
- 261              	.L28:
- 262              		.align	2
- 263              	.L27:
- 264 0034 00000000 		.word	is_tx_rt_init_done
- 265 0038 00000000 		.word	.LC2
- 266 003c 00000000 		.word	__func__.0
- 267 0040 0A000000 		.word	.LC1
- 268 0044 00000000 		.word	libc_lock
- 269 0048 0F000000 		.word	.LC3
- 270              		.cfi_endproc
- 271              	.LFE143:
- 273              		.section	.rodata.__func__.0,"a"
- 276              	__func__.0:
- 277 0000 5F5F6D61 		.ascii	"__malloc_unlock\000"
- 277      6C6C6F63 
- 277      5F756E6C 
- 277      6F636B00 
- 278              		.section	.rodata.__func__.1,"a"
- 281              	__func__.1:
- 282 0000 5F5F6D61 		.ascii	"__malloc_lock\000"
- 282      6C6C6F63 
- 282      5F6C6F63 
- 282      6B00
- 283              		.section	.rodata.__func__.2,"a"
- 286              	__func__.2:
- 287 0000 66726565 		.ascii	"freertos_libc_init\000"
- 287      72746F73 
- 287      5F6C6962 
- 287      635F696E 
- 287      697400
- 288              		.section	.bss.libc_lock_buffer,"aw",%nobits
- 289              		.align	2
- 292              	libc_lock_buffer:
- 293 0000 00000000 		.space	80
- 293      00000000 
- 293      00000000 
- 293      00000000 
- 293      00000000 
- 294              		.section	.bss.libc_lock,"aw",%nobits
- 295              		.align	2
- 298              	libc_lock:
- 299 0000 00000000 		.space	4
- 300              		.section	.bss.is_tx_rt_init_done,"aw",%nobits
- 301              		.align	2
- 304              	is_tx_rt_init_done:
- 305 0000 00000000 		.space	4
-ARM GAS  /tmp/ccmdKKmE.s 			page 26
+ 308              		.loc 1 68 1
+ 309 0060 1037     		adds	r7, r7, #16
+ 310              		.cfi_def_cfa_offset 8
+ 311 0062 BD46     		mov	sp, r7
+ 312              		.cfi_def_cfa_register 13
+ 313              		@ sp needed
+ARM GAS  /tmp/ccPH4bKf.s 			page 26
 
 
- 306              		.text
- 307              	.Letext0:
- 308              		.file 3 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 309              		.file 4 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 310              		.file 5 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 311              		.file 6 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 312              		.file 7 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 313              		.file 8 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 314              		.file 9 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portmacrocommon.h"
- 315              		.file 10 "Lib/FreeRTOS/Source/include/FreeRTOS.h"
- 316              		.file 11 "Lib/FreeRTOS/Source/include/queue.h"
- 317              		.file 12 "Lib/FreeRTOS/Source/include/semphr.h"
- 318              		.file 13 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-
-ARM GAS  /tmp/ccmdKKmE.s 			page 27
+ 314 0064 80BD     		pop	{r7, pc}
+ 315              	.L22:
+ 316 0066 00BF     		.align	2
+ 317              	.L21:
+ 318 0068 00000000 		.word	is_tx_rt_init_done
+ 319 006c 24000000 		.word	.LC2
+ 320 0070 00000000 		.word	__func__.0
+ 321 0074 0C000000 		.word	.LC1
+ 322 0078 38000000 		.word	.LC3
+ 323 007c 00000000 		.word	libc_lock
+ 324 0080 48000000 		.word	.LC4
+ 325              		.cfi_endproc
+ 326              	.LFE143:
+ 328              		.section	.rodata.__func__.2,"a"
+ 329              		.align	2
+ 332              	__func__.2:
+ 333 0000 66726565 		.ascii	"freertos_libc_init\000"
+ 333      72746F73 
+ 333      5F6C6962 
+ 333      635F696E 
+ 333      697400
+ 334              		.section	.rodata.__func__.1,"a"
+ 335              		.align	2
+ 338              	__func__.1:
+ 339 0000 5F5F6D61 		.ascii	"__malloc_lock\000"
+ 339      6C6C6F63 
+ 339      5F6C6F63 
+ 339      6B00
+ 340              		.section	.rodata.__func__.0,"a"
+ 341              		.align	2
+ 344              	__func__.0:
+ 345 0000 5F5F6D61 		.ascii	"__malloc_unlock\000"
+ 345      6C6C6F63 
+ 345      5F756E6C 
+ 345      6F636B00 
+ 346              		.text
+ 347              	.Letext0:
+ 348              		.file 3 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 349              		.file 4 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 350              		.file 5 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 351              		.file 6 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 352              		.file 7 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 353              		.file 8 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 354              		.file 9 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portmacrocommon.h"
+ 355              		.file 10 "Lib/FreeRTOS/Source/include/FreeRTOS.h"
+ 356              		.file 11 "Lib/FreeRTOS/Source/include/queue.h"
+ 357              		.file 12 "Lib/FreeRTOS/Source/include/semphr.h"
+ 358              		.file 13 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-
+ARM GAS  /tmp/ccPH4bKf.s 			page 27
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 freertos_libc.c
-     /tmp/ccmdKKmE.s:31     .text.freertos_libc_init:00000000 $t
-     /tmp/ccmdKKmE.s:37     .text.freertos_libc_init:00000000 freertos_libc_init
-     /tmp/ccmdKKmE.s:77     .text.freertos_libc_init:00000024 $d
-     /tmp/ccmdKKmE.s:292    .bss.libc_lock_buffer:00000000 libc_lock_buffer
-     /tmp/ccmdKKmE.s:298    .bss.libc_lock:00000000 libc_lock
-     /tmp/ccmdKKmE.s:286    .rodata.__func__.2:00000000 __func__.2
-     /tmp/ccmdKKmE.s:304    .bss.is_tx_rt_init_done:00000000 is_tx_rt_init_done
-     /tmp/ccmdKKmE.s:92     .text.__malloc_lock:00000000 $t
-     /tmp/ccmdKKmE.s:98     .text.__malloc_lock:00000000 __malloc_lock
-     /tmp/ccmdKKmE.s:173    .text.__malloc_lock:00000034 $d
-     /tmp/ccmdKKmE.s:281    .rodata.__func__.1:00000000 __func__.1
-     /tmp/ccmdKKmE.s:183    .text.__malloc_unlock:00000000 $t
-     /tmp/ccmdKKmE.s:189    .text.__malloc_unlock:00000000 __malloc_unlock
-     /tmp/ccmdKKmE.s:264    .text.__malloc_unlock:00000034 $d
-     /tmp/ccmdKKmE.s:276    .rodata.__func__.0:00000000 __func__.0
-     /tmp/ccmdKKmE.s:289    .bss.libc_lock_buffer:00000000 $d
-     /tmp/ccmdKKmE.s:295    .bss.libc_lock:00000000 $d
-     /tmp/ccmdKKmE.s:301    .bss.is_tx_rt_init_done:00000000 $d
-                           .group:00000000 wm4.0.c552ae9005b0f2cca11872fae5d4b7f2
+     /tmp/ccPH4bKf.s:26     .bss.is_tx_rt_init_done:00000000 $d
+     /tmp/ccPH4bKf.s:29     .bss.is_tx_rt_init_done:00000000 is_tx_rt_init_done
+     /tmp/ccPH4bKf.s:32     .bss.libc_lock:00000000 $d
+     /tmp/ccPH4bKf.s:35     .bss.libc_lock:00000000 libc_lock
+     /tmp/ccPH4bKf.s:38     .bss.libc_lock_buffer:00000000 $d
+     /tmp/ccPH4bKf.s:41     .bss.libc_lock_buffer:00000000 libc_lock_buffer
+     /tmp/ccPH4bKf.s:44     .rodata:00000000 $d
+     /tmp/ccPH4bKf.s:51     .text.freertos_libc_init:00000000 $t
+     /tmp/ccPH4bKf.s:57     .text.freertos_libc_init:00000000 freertos_libc_init
+     /tmp/ccPH4bKf.s:99     .text.freertos_libc_init:00000030 $d
+     /tmp/ccPH4bKf.s:332    .rodata.__func__.2:00000000 __func__.2
+     /tmp/ccPH4bKf.s:119    .text.__malloc_lock:00000000 $t
+     /tmp/ccPH4bKf.s:125    .text.__malloc_lock:00000000 __malloc_lock
+     /tmp/ccPH4bKf.s:213    .text.__malloc_lock:00000068 $d
+     /tmp/ccPH4bKf.s:338    .rodata.__func__.1:00000000 __func__.1
+     /tmp/ccPH4bKf.s:224    .text.__malloc_unlock:00000000 $t
+     /tmp/ccPH4bKf.s:230    .text.__malloc_unlock:00000000 __malloc_unlock
+     /tmp/ccPH4bKf.s:318    .text.__malloc_unlock:00000068 $d
+     /tmp/ccPH4bKf.s:344    .rodata.__func__.0:00000000 __func__.0
+     /tmp/ccPH4bKf.s:329    .rodata.__func__.2:00000000 $d
+     /tmp/ccPH4bKf.s:335    .rodata.__func__.1:00000000 $d
+     /tmp/ccPH4bKf.s:341    .rodata.__func__.0:00000000 $d
+                           .group:00000000 wm4.0.2a10773746a5c5ebb5552f50e466f80b
                            .group:00000000 wm4._newlib_version.h.4.411db44ea2338a62eca2f0777f81481b
                            .group:00000000 wm4.newlib.h.27.4b972ceed5d01f491020c20f1e546cab
                            .group:00000000 wm4.ieeefp.h.77.bd5feb87d9990dd328793ced294f6a87
@@ -1570,13 +1609,13 @@ DEFINED SYMBOLS
                            .group:00000000 wm4.portmacro.h.30.cbb4b2da41f551c2a9904f0d03a1ce3e
                            .group:00000000 wm4.portmacrocommon.h.30.d5cb67896ab50a95311be7e023da5c4f
                            .group:00000000 wm4.portmacro.h.68.4051ecf710d074fb55b16d91dfebeeaa
+ARM GAS  /tmp/ccPH4bKf.s 			page 28
+
+
                            .group:00000000 wm4.portable.h.61.d557c57974d490f056246a26cdcddd6c
                            .group:00000000 wm4.mpu_wrappers.h.30.ccc5f1a6903f941a88c268f5f62af3fe
                            .group:00000000 wm4.portable.h.189.522b8bd52a171d3fd1432ef06d0caa63
                            .group:00000000 wm4.FreeRTOS.h.102.fb871f3e464d99c5a57b3115545a02ad
-ARM GAS  /tmp/ccmdKKmE.s 			page 28
-
-
                            .group:00000000 wm4.list.h.59.bce6419520cd4f5f98779a1530bf2118
                            .group:00000000 wm4.task.h.56.84290139c73b47f5b9aac361361a2a31
                            .group:00000000 wm4.queue.h.68.219f47fba8b59640449b84d04c5bd6d8

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccTiOeVc.s 			page 1
+ARM GAS  /tmp/ccJ1yVlt.s 			page 1
 
 
    1              		.arch armv8.1-m.main
@@ -16,7 +16,7 @@ ARM GAS  /tmp/ccTiOeVc.s 			page 1
   13              		.eabi_attribute 24, 1
   14              		.eabi_attribute 25, 1
   15              		.eabi_attribute 26, 1
-  16              		.eabi_attribute 30, 4
+  16              		.eabi_attribute 30, 6
   17              		.eabi_attribute 34, 1
   18              		.eabi_attribute 38, 1
   19              		.eabi_attribute 18, 4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccTiOeVc.s 			page 1
   23:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****  *
   24:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****  * https://www.FreeRTOS.org
   25:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****  * https://github.com/FreeRTOS
-ARM GAS  /tmp/ccTiOeVc.s 			page 2
+ARM GAS  /tmp/ccJ1yVlt.s 			page 2
 
 
   26:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****  *
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccTiOeVc.s 			page 1
   80:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "    str r3, [r1]                                 \n" /* Program RNR = 8. */
   81:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "    ldmia r0!, {r4-r11}                          \n" /* Read 4 sets of RBAR/RLAR regis
   82:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "    stmia r2, {r4-r11}                           \n" /* Write 4 set of RBAR/RLAR regis
-ARM GAS  /tmp/ccTiOeVc.s 			page 3
+ARM GAS  /tmp/ccJ1yVlt.s 			page 3
 
 
   83:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "    movs r3, #12                                 \n" /* r3 = 12. */
@@ -168,17 +168,17 @@ ARM GAS  /tmp/ccTiOeVc.s 			page 1
  127:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** 
  128:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****     void vRestoreContextOfFirstTask( void ) /* __attribute__ (( naked )) PRIVILEGED_FUNCTION */
  129:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****     {
-  34              		.loc 1 129 5 view -0
+  34              		.loc 1 129 5
   35              		.cfi_startproc
   36              		@ Naked Function: prologue and epilogue provided by programmer.
   37              		@ args = 0, pretend = 0, frame = 0
-  38              		@ frame_needed = 0, uses_anonymous_args = 0
+  38              		@ frame_needed = 1, uses_anonymous_args = 0
  130:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         __asm volatile
-  39              		.loc 1 130 9 view .LVU1
+  39              		.loc 1 130 9
   40              		.syntax unified
   41              	@ 130 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c" 1
   42              		   .syntax unified                                 
-ARM GAS  /tmp/ccTiOeVc.s 			page 4
+ARM GAS  /tmp/ccJ1yVlt.s 			page 4
 
 
   43              	                                                   
@@ -225,49 +225,50 @@ ARM GAS  /tmp/ccTiOeVc.s 			page 1
  150:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "pxCurrentTCBConst2: .word pxCurrentTCB             \n"
  151:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         );
  152:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****     }
-  63              		.loc 1 152 5 is_stmt 0 view .LVU2
+  63              		.loc 1 152 5
   64              		.thumb
   65              		.syntax unified
-  66              		.cfi_endproc
-  67              	.LFE0:
-  69              		.section	.text.xIsPrivileged,"ax",%progbits
-  70              		.align	1
-  71              		.global	xIsPrivileged
-  72              		.syntax unified
-  73              		.thumb
-  74              		.thumb_func
-  76              	xIsPrivileged:
-  77              	.LFB1:
-ARM GAS  /tmp/ccTiOeVc.s 			page 5
+  66 0034 00BF     		nop
+  67              		.cfi_endproc
+  68              	.LFE0:
+  70 0036 00BF     		.section	.text.xIsPrivileged,"ax",%progbits
+  71              		.align	1
+  72              		.global	xIsPrivileged
+  73              		.syntax unified
+  74              		.thumb
+  75              		.thumb_func
+  77              	xIsPrivileged:
+ARM GAS  /tmp/ccJ1yVlt.s 			page 5
 
 
+  78              	.LFB1:
  153:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** 
  154:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** #endif /* configENABLE_MPU */
  155:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** /*-----------------------------------------------------------*/
  156:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** 
  157:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** BaseType_t xIsPrivileged( void ) /* __attribute__ (( naked )) */
  158:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** {
-  78              		.loc 1 158 1 is_stmt 1 view -0
-  79              		.cfi_startproc
-  80              		@ Naked Function: prologue and epilogue provided by programmer.
-  81              		@ args = 0, pretend = 0, frame = 0
-  82              		@ frame_needed = 0, uses_anonymous_args = 0
+  79              		.loc 1 158 1
+  80              		.cfi_startproc
+  81              		@ Naked Function: prologue and epilogue provided by programmer.
+  82              		@ args = 0, pretend = 0, frame = 0
+  83              		@ frame_needed = 1, uses_anonymous_args = 0
  159:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****     __asm volatile
-  83              		.loc 1 159 5 view .LVU4
-  84              		.syntax unified
-  85              	@ 159 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c" 1
-  86              		   .syntax unified                                 
-  87              	                                                   
-  88 0000 EFF31480 	   mrs r0, control                                 
-  89 0004 10F0010F 	   tst r0, #1                                      
-  90 0008 14BF     	   ite ne                                          
-  91 000a 0020     	   movne r0, #0                                    
-  92 000c 0120     	   moveq r0, #1                                    
-  93 000e 7047     	   bx lr                                           
-  94              	                                                   
-  95              	   .align 4                                        
-  96              	
-  97              	@ 0 "" 2
+  84              		.loc 1 159 5
+  85              		.syntax unified
+  86              	@ 159 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c" 1
+  87              		   .syntax unified                                 
+  88              	                                                   
+  89 0000 EFF31480 	   mrs r0, control                                 
+  90 0004 10F0010F 	   tst r0, #1                                      
+  91 0008 14BF     	   ite ne                                          
+  92 000a 0020     	   movne r0, #0                                    
+  93 000c 0120     	   moveq r0, #1                                    
+  94 000e 7047     	   bx lr                                           
+  95              	                                                   
+  96              	   .align 4                                        
+  97              	
+  98              	@ 0 "" 2
  160:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****     (
  161:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         "   .syntax unified                                 \n"
  162:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         "                                                   \n"
@@ -282,43 +283,45 @@ ARM GAS  /tmp/ccTiOeVc.s 			page 1
  171:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         ::: "r0", "memory"
  172:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****     );
  173:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** }
-  98              		.loc 1 173 1 is_stmt 0 view .LVU5
-  99              		.thumb
- 100              		.syntax unified
- 101              		.cfi_endproc
- 102              	.LFE1:
- 104              		.section	.text.vRaisePrivilege,"ax",%progbits
- 105              		.align	1
- 106              		.global	vRaisePrivilege
- 107              		.syntax unified
- 108              		.thumb
- 109              		.thumb_func
- 111              	vRaisePrivilege:
- 112              	.LFB2:
+  99              		.loc 1 173 1
+ 100              		.thumb
+ 101              		.syntax unified
+ 102 0010 00BF     		nop
+ 103 0012 1846     		mov	r0, r3
+ 104              		.cfi_endproc
+ 105              	.LFE1:
+ 107              		.section	.text.vRaisePrivilege,"ax",%progbits
+ 108              		.align	1
+ 109              		.global	vRaisePrivilege
+ 110              		.syntax unified
+ 111              		.thumb
+ 112              		.thumb_func
+ 114              	vRaisePrivilege:
+ 115              	.LFB2:
+ARM GAS  /tmp/ccJ1yVlt.s 			page 6
+
+
  174:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** /*-----------------------------------------------------------*/
  175:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** 
  176:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** void vRaisePrivilege( void ) /* __attribute__ (( naked )) PRIVILEGED_FUNCTION */
-ARM GAS  /tmp/ccTiOeVc.s 			page 6
-
-
  177:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** {
- 113              		.loc 1 177 1 is_stmt 1 view -0
- 114              		.cfi_startproc
- 115              		@ Naked Function: prologue and epilogue provided by programmer.
- 116              		@ args = 0, pretend = 0, frame = 0
- 117              		@ frame_needed = 0, uses_anonymous_args = 0
+ 116              		.loc 1 177 1
+ 117              		.cfi_startproc
+ 118              		@ Naked Function: prologue and epilogue provided by programmer.
+ 119              		@ args = 0, pretend = 0, frame = 0
+ 120              		@ frame_needed = 1, uses_anonymous_args = 0
  178:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****     __asm volatile
- 118              		.loc 1 178 5 view .LVU7
- 119              		.syntax unified
- 120              	@ 178 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c" 1
- 121              		   .syntax unified                                 
- 122              	                                                   
- 123 0000 EFF31480 	   mrs  r0, control                                
- 124 0004 20F00100 	   bic r0, #1                                      
- 125 0008 80F31488 	   msr  control, r0                                
- 126 000c 7047     	   bx lr                                           
- 127              	
- 128              	@ 0 "" 2
+ 121              		.loc 1 178 5
+ 122              		.syntax unified
+ 123              	@ 178 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c" 1
+ 124              		   .syntax unified                                 
+ 125              	                                                   
+ 126 0000 EFF31480 	   mrs  r0, control                                
+ 127 0004 20F00100 	   bic r0, #1                                      
+ 128 0008 80F31488 	   msr  control, r0                                
+ 129 000c 7047     	   bx lr                                           
+ 130              	
+ 131              	@ 0 "" 2
  179:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****     (
  180:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         "   .syntax unified                                 \n"
  181:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         "                                                   \n"
@@ -329,43 +332,44 @@ ARM GAS  /tmp/ccTiOeVc.s 			page 1
  186:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         ::: "r0", "memory"
  187:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****     );
  188:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** }
- 129              		.loc 1 188 1 is_stmt 0 view .LVU8
- 130              		.thumb
- 131              		.syntax unified
- 132              		.cfi_endproc
- 133              	.LFE2:
- 135              		.section	.text.vResetPrivilege,"ax",%progbits
- 136              		.align	1
- 137              		.global	vResetPrivilege
- 138              		.syntax unified
- 139              		.thumb
- 140              		.thumb_func
- 142              	vResetPrivilege:
- 143              	.LFB3:
+ 132              		.loc 1 188 1
+ 133              		.thumb
+ 134              		.syntax unified
+ 135 000e 00BF     		nop
+ 136              		.cfi_endproc
+ 137              	.LFE2:
+ 139              		.section	.text.vResetPrivilege,"ax",%progbits
+ 140              		.align	1
+ 141              		.global	vResetPrivilege
+ 142              		.syntax unified
+ 143              		.thumb
+ 144              		.thumb_func
+ 146              	vResetPrivilege:
+ 147              	.LFB3:
  189:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** /*-----------------------------------------------------------*/
  190:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** 
  191:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** void vResetPrivilege( void ) /* __attribute__ (( naked )) */
  192:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** {
- 144              		.loc 1 192 1 is_stmt 1 view -0
- 145              		.cfi_startproc
- 146              		@ Naked Function: prologue and epilogue provided by programmer.
- 147              		@ args = 0, pretend = 0, frame = 0
- 148              		@ frame_needed = 0, uses_anonymous_args = 0
+ 148              		.loc 1 192 1
+ 149              		.cfi_startproc
+ 150              		@ Naked Function: prologue and epilogue provided by programmer.
+ 151              		@ args = 0, pretend = 0, frame = 0
+ 152              		@ frame_needed = 1, uses_anonymous_args = 0
  193:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****     __asm volatile
- 149              		.loc 1 193 5 view .LVU10
- 150              		.syntax unified
- 151              	@ 193 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c" 1
- 152              		   .syntax unified                                 
- 153              	                                                   
- 154 0000 EFF31480 	   mrs r0, control                                 
-ARM GAS  /tmp/ccTiOeVc.s 			page 7
+ 153              		.loc 1 193 5
+ 154              		.syntax unified
+ARM GAS  /tmp/ccJ1yVlt.s 			page 7
 
 
- 155 0004 40F00100 	   orr r0, #1                                      
- 156 0008 80F31488 	   msr control, r0                                 
- 157 000c 7047     	   bx lr                                           
- 158              	
- 159              	@ 0 "" 2
+ 155              	@ 193 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c" 1
+ 156              		   .syntax unified                                 
+ 157              	                                                   
+ 158 0000 EFF31480 	   mrs r0, control                                 
+ 159 0004 40F00100 	   orr r0, #1                                      
+ 160 0008 80F31488 	   msr control, r0                                 
+ 161 000c 7047     	   bx lr                                           
+ 162              	
+ 163              	@ 0 "" 2
  194:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****     (
  195:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         "   .syntax unified                                 \n"
  196:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         "                                                   \n"
@@ -376,53 +380,54 @@ ARM GAS  /tmp/ccTiOeVc.s 			page 1
  201:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         ::: "r0", "memory"
  202:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****     );
  203:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** }
- 160              		.loc 1 203 1 is_stmt 0 view .LVU11
- 161              		.thumb
- 162              		.syntax unified
- 163              		.cfi_endproc
- 164              	.LFE3:
- 166              		.section	.text.vStartFirstTask,"ax",%progbits
- 167              		.align	1
- 168              		.global	vStartFirstTask
- 169              		.syntax unified
- 170              		.thumb
- 171              		.thumb_func
- 173              	vStartFirstTask:
- 174              	.LFB4:
+ 164              		.loc 1 203 1
+ 165              		.thumb
+ 166              		.syntax unified
+ 167 000e 00BF     		nop
+ 168              		.cfi_endproc
+ 169              	.LFE3:
+ 171              		.section	.text.vStartFirstTask,"ax",%progbits
+ 172              		.align	1
+ 173              		.global	vStartFirstTask
+ 174              		.syntax unified
+ 175              		.thumb
+ 176              		.thumb_func
+ 178              	vStartFirstTask:
+ 179              	.LFB4:
  204:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** /*-----------------------------------------------------------*/
  205:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** 
  206:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** void vStartFirstTask( void ) /* __attribute__ (( naked )) PRIVILEGED_FUNCTION */
  207:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** {
- 175              		.loc 1 207 1 is_stmt 1 view -0
- 176              		.cfi_startproc
- 177              		@ Naked Function: prologue and epilogue provided by programmer.
- 178              		@ args = 0, pretend = 0, frame = 0
- 179              		@ frame_needed = 0, uses_anonymous_args = 0
+ 180              		.loc 1 207 1
+ 181              		.cfi_startproc
+ 182              		@ Naked Function: prologue and epilogue provided by programmer.
+ 183              		@ args = 0, pretend = 0, frame = 0
+ 184              		@ frame_needed = 1, uses_anonymous_args = 0
  208:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****     __asm volatile
- 180              		.loc 1 208 5 view .LVU13
- 181              		.syntax unified
- 182              	@ 208 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c" 1
- 183              		   .syntax unified                                 
- 184              	                                                   
- 185 0000 0748     	   ldr r0, xVTORConst                              
- 186 0002 0068     	   ldr r0, [r0]                                    
- 187 0004 0068     	   ldr r0, [r0]                                    
- 188 0006 80F30888 	   msr msp, r0                                     
- 189 000a 62B6     	   cpsie i                                         
- 190 000c 61B6     	   cpsie f                                         
- 191 000e BFF34F8F 	   dsb                                             
- 192 0012 BFF36F8F 	   isb                                             
- 193 0016 66DF     	   svc #102                                          
- 194 0018 00BF     	   nop                                             
- 195              	                                                   
- 196 001a 00BFAFF3 	   .align 4                                        
- 196      0080
- 197 0020 08ED00E0 	xVTORConst: .word 0xe000ed08                       
-ARM GAS  /tmp/ccTiOeVc.s 			page 8
+ 185              		.loc 1 208 5
+ 186              		.syntax unified
+ 187              	@ 208 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c" 1
+ 188              		   .syntax unified                                 
+ 189              	                                                   
+ 190 0000 0748     	   ldr r0, xVTORConst                              
+ 191 0002 0068     	   ldr r0, [r0]                                    
+ 192 0004 0068     	   ldr r0, [r0]                                    
+ 193 0006 80F30888 	   msr msp, r0                                     
+ 194 000a 62B6     	   cpsie i                                         
+ 195 000c 61B6     	   cpsie f                                         
+ 196 000e BFF34F8F 	   dsb                                             
+ 197 0012 BFF36F8F 	   isb                                             
+ 198 0016 66DF     	   svc #102                                          
+ARM GAS  /tmp/ccJ1yVlt.s 			page 8
 
 
- 198              	
- 199              	@ 0 "" 2
+ 199 0018 00BF     	   nop                                             
+ 200              	                                                   
+ 201 001a 00BFAFF3 	   .align 4                                        
+ 201      0080
+ 202 0020 08ED00E0 	xVTORConst: .word 0xe000ed08                       
+ 203              	
+ 204              	@ 0 "" 2
  209:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****     (
  210:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         "   .syntax unified                                 \n"
  211:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         "                                                   \n"
@@ -442,45 +447,46 @@ ARM GAS  /tmp/ccTiOeVc.s 			page 1
  225:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         ::"i" ( portSVC_START_SCHEDULER ) : "memory"
  226:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****     );
  227:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** }
- 200              		.loc 1 227 1 is_stmt 0 view .LVU14
- 201              		.thumb
- 202              		.syntax unified
- 203              		.cfi_endproc
- 204              	.LFE4:
- 206              		.section	.text.ulSetInterruptMask,"ax",%progbits
- 207              		.align	1
- 208              		.global	ulSetInterruptMask
- 209              		.syntax unified
- 210              		.thumb
- 211              		.thumb_func
- 213              	ulSetInterruptMask:
- 214              	.LFB5:
+ 205              		.loc 1 227 1
+ 206              		.thumb
+ 207              		.syntax unified
+ 208 0024 00BF     		nop
+ 209              		.cfi_endproc
+ 210              	.LFE4:
+ 212 0026 00BF     		.section	.text.ulSetInterruptMask,"ax",%progbits
+ 213              		.align	1
+ 214              		.global	ulSetInterruptMask
+ 215              		.syntax unified
+ 216              		.thumb
+ 217              		.thumb_func
+ 219              	ulSetInterruptMask:
+ 220              	.LFB5:
  228:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** /*-----------------------------------------------------------*/
  229:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** 
  230:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** uint32_t ulSetInterruptMask( void ) /* __attribute__(( naked )) PRIVILEGED_FUNCTION */
  231:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** {
- 215              		.loc 1 231 1 is_stmt 1 view -0
- 216              		.cfi_startproc
- 217              		@ Naked Function: prologue and epilogue provided by programmer.
- 218              		@ args = 0, pretend = 0, frame = 0
- 219              		@ frame_needed = 0, uses_anonymous_args = 0
+ 221              		.loc 1 231 1
+ 222              		.cfi_startproc
+ 223              		@ Naked Function: prologue and epilogue provided by programmer.
+ 224              		@ args = 0, pretend = 0, frame = 0
+ 225              		@ frame_needed = 1, uses_anonymous_args = 0
  232:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****     __asm volatile
- 220              		.loc 1 232 5 view .LVU16
- 221              		.syntax unified
- 222              	@ 232 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c" 1
- 223              		   .syntax unified                                 
- 224              	                                                   
- 225 0000 EFF31180 	   mrs r0, basepri                                 
- 226 0004 4FF05001 	   mov r1, #80                                      
- 227 0008 81F31188 	   msr basepri, r1                                 
- 228 000c BFF34F8F 	   dsb                                             
- 229 0010 BFF36F8F 	   isb                                             
- 230 0014 7047     	   bx lr                                           
- 231              	
- 232              	@ 0 "" 2
-ARM GAS  /tmp/ccTiOeVc.s 			page 9
+ 226              		.loc 1 232 5
+ 227              		.syntax unified
+ 228              	@ 232 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c" 1
+ 229              		   .syntax unified                                 
+ 230              	                                                   
+ 231 0000 EFF31180 	   mrs r0, basepri                                 
+ 232 0004 4FF05001 	   mov r1, #80                                      
+ARM GAS  /tmp/ccJ1yVlt.s 			page 9
 
 
+ 233 0008 81F31188 	   msr basepri, r1                                 
+ 234 000c BFF34F8F 	   dsb                                             
+ 235 0010 BFF36F8F 	   isb                                             
+ 236 0014 7047     	   bx lr                                           
+ 237              	
+ 238              	@ 0 "" 2
  233:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****     (
  234:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         "   .syntax unified                                 \n"
  235:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         "                                                   \n"
@@ -493,44 +499,48 @@ ARM GAS  /tmp/ccTiOeVc.s 			page 1
  242:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         ::"i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
  243:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****     );
  244:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** }
- 233              		.loc 1 244 1 is_stmt 0 view .LVU17
- 234              		.thumb
- 235              		.syntax unified
- 236              		.cfi_endproc
- 237              	.LFE5:
- 239              		.section	.text.vClearInterruptMask,"ax",%progbits
- 240              		.align	1
- 241              		.global	vClearInterruptMask
- 242              		.syntax unified
- 243              		.thumb
- 244              		.thumb_func
- 246              	vClearInterruptMask:
- 247              	.LVL0:
- 248              	.LFB6:
+ 239              		.loc 1 244 1
+ 240              		.thumb
+ 241              		.syntax unified
+ 242 0016 00BF     		nop
+ 243 0018 1846     		mov	r0, r3
+ 244              		.cfi_endproc
+ 245              	.LFE5:
+ 247              		.section	.text.vClearInterruptMask,"ax",%progbits
+ 248              		.align	1
+ 249              		.global	vClearInterruptMask
+ 250              		.syntax unified
+ 251              		.thumb
+ 252              		.thumb_func
+ 254              	vClearInterruptMask:
+ 255              	.LFB6:
  245:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** /*-----------------------------------------------------------*/
  246:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** 
  247:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** void vClearInterruptMask( __attribute__( ( unused ) ) uint32_t ulMask ) /* __attribute__(( naked ))
  248:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** {
- 249              		.loc 1 248 1 is_stmt 1 view -0
- 250              		.cfi_startproc
- 251              		@ Naked Function: prologue and epilogue provided by programmer.
- 252              		@ args = 0, pretend = 0, frame = 0
- 253              		@ frame_needed = 0, uses_anonymous_args = 0
+ 256              		.loc 1 248 1
+ 257              		.cfi_startproc
+ 258              		@ Naked Function: prologue and epilogue provided by programmer.
+ 259              		@ args = 0, pretend = 0, frame = 0
+ 260              		@ frame_needed = 1, uses_anonymous_args = 0
  249:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****     __asm volatile
- 254              		.loc 1 249 5 view .LVU19
- 255              		.syntax unified
- 256              	@ 249 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c" 1
- 257              		   .syntax unified                                 
- 258              	                                                   
- 259 0000 80F31188 	   msr basepri, r0                                 
- 260 0004 BFF34F8F 	   dsb                                             
- 261 0008 BFF36F8F 	   isb                                             
- 262 000c 7047     	   bx lr                                           
- 263              	
- 264              	@ 0 "" 2
+ 261              		.loc 1 249 5
+ 262              		.syntax unified
+ 263              	@ 249 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c" 1
+ 264              		   .syntax unified                                 
+ 265              	                                                   
+ 266 0000 80F31188 	   msr basepri, r0                                 
+ 267 0004 BFF34F8F 	   dsb                                             
+ 268 0008 BFF36F8F 	   isb                                             
+ 269 000c 7047     	   bx lr                                           
+ 270              	
+ 271              	@ 0 "" 2
  250:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****     (
  251:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         "   .syntax unified                                 \n"
  252:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         "                                                   \n"
+ARM GAS  /tmp/ccJ1yVlt.s 			page 10
+
+
  253:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         "   msr basepri, r0                                 \n" /* basepri = ulMask. */
  254:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         "   dsb                                             \n"
  255:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         "   isb                                             \n"
@@ -538,22 +548,20 @@ ARM GAS  /tmp/ccTiOeVc.s 			page 1
  257:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         ::: "memory"
  258:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****     );
  259:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** }
-ARM GAS  /tmp/ccTiOeVc.s 			page 10
-
-
- 265              		.loc 1 259 1 is_stmt 0 view .LVU20
- 266              		.thumb
- 267              		.syntax unified
- 268              		.cfi_endproc
- 269              	.LFE6:
- 271              		.section	.text.PendSV_Handler,"ax",%progbits
- 272              		.align	1
- 273              		.global	PendSV_Handler
+ 272              		.loc 1 259 1
+ 273              		.thumb
  274              		.syntax unified
- 275              		.thumb
- 276              		.thumb_func
- 278              	PendSV_Handler:
- 279              	.LFB7:
+ 275 000e 00BF     		nop
+ 276              		.cfi_endproc
+ 277              	.LFE6:
+ 279              		.section	.text.PendSV_Handler,"ax",%progbits
+ 280              		.align	1
+ 281              		.global	PendSV_Handler
+ 282              		.syntax unified
+ 283              		.thumb
+ 284              		.thumb_func
+ 286              	PendSV_Handler:
+ 287              	.LFB7:
  260:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** /*-----------------------------------------------------------*/
  261:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** 
  262:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** #if ( configENABLE_MPU == 1 )
@@ -590,6 +598,9 @@ ARM GAS  /tmp/ccTiOeVc.s 			page 1
  293:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "    stmia r1!, {r2-r4, lr}                       \n" /* Store original PSP (after hard
  294:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "    str r1, [r0]                                 \n" /* Save the location from where t
  295:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "                                                 \n"
+ARM GAS  /tmp/ccJ1yVlt.s 			page 11
+
+
  296:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             " select_next_task:                               \n"
  297:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "    mov r0, %0                                   \n" /* r0 = configMAX_SYSCALL_INTERRU
  298:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "    msr basepri, r0                              \n" /* Disable interrupts upto config
@@ -598,9 +609,6 @@ ARM GAS  /tmp/ccTiOeVc.s 			page 1
  301:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "    bl vTaskSwitchContext                        \n"
  302:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "    mov r0, #0                                   \n" /* r0 = 0. */
  303:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "    msr basepri, r0                              \n" /* Enable interrupts. */
-ARM GAS  /tmp/ccTiOeVc.s 			page 11
-
-
  304:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "                                                 \n"
  305:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             " program_mpu:                                    \n"
  306:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "    ldr r2, pxCurrentTCBConst                    \n" /* Read the location of pxCurrent
@@ -650,6 +658,9 @@ ARM GAS  /tmp/ccTiOeVc.s 			page 1
  350:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "                                                 \n"
  351:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             " restore_special_regs:                           \n"
  352:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "    ldmdb r1!, {r2-r4, lr}                       \n" /* r2 = original PSP, r3 = PSPLIM
+ARM GAS  /tmp/ccJ1yVlt.s 			page 12
+
+
  353:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "    msr psp, r2                                  \n"
  354:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "    msr psplim, r3                               \n"
  355:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "    msr control, r4                              \n"
@@ -658,9 +669,6 @@ ARM GAS  /tmp/ccTiOeVc.s 			page 1
  358:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "    ldmdb r1!, {r4-r11}                          \n" /* r4-r11 contain hardware saved 
  359:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "    stmia r2!, {r4-r11}                          \n" /* Copy the hardware saved contex
  360:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "    ldmdb r1!, {r4-r11}                          \n" /* r4-r11 restored. */
-ARM GAS  /tmp/ccTiOeVc.s 			page 12
-
-
  361:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         #if ( ( configENABLE_FPU == 1 ) || ( configENABLE_MVE == 1 ) )
  362:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "    tst lr, #0x10                                \n"
  363:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "    ittt eq                                      \n"
@@ -687,61 +695,61 @@ ARM GAS  /tmp/ccTiOeVc.s 			page 1
  384:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** 
  385:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****     void PendSV_Handler( void ) /* __attribute__ (( naked )) PRIVILEGED_FUNCTION */
  386:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****     {
- 280              		.loc 1 386 5 is_stmt 1 view -0
- 281              		.cfi_startproc
- 282              		@ Naked Function: prologue and epilogue provided by programmer.
- 283              		@ args = 0, pretend = 0, frame = 0
- 284              		@ frame_needed = 0, uses_anonymous_args = 0
+ 288              		.loc 1 386 5
+ 289              		.cfi_startproc
+ 290              		@ Naked Function: prologue and epilogue provided by programmer.
+ 291              		@ args = 0, pretend = 0, frame = 0
+ 292              		@ frame_needed = 1, uses_anonymous_args = 0
  387:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         __asm volatile
- 285              		.loc 1 387 9 view .LVU22
- 286              		.syntax unified
- 287              	@ 387 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c" 1
- 288              		   .syntax unified                                 
- 289              	                                                   
- 290 0000 EFF30980 	   mrs r0, psp                                     
- 291              	                                                   
- 292 0004 1EF0100F 	   tst lr, #0x10                                   
- 293 0008 08BF     	   it eq                                           
- 294 000a 20ED108A 	   vstmdbeq r0!, {s16-s31}                         
- 295              	                                                   
- 296 000e EFF30B82 	   mrs r2, psplim                                  
- 297 0012 7346     	   mov r3, lr                                      
- 298 0014 20E9FC0F 	   stmdb r0!, {r2-r11}                             
+ 293              		.loc 1 387 9
+ 294              		.syntax unified
+ 295              	@ 387 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c" 1
+ 296              		   .syntax unified                                 
+ 297              	                                                   
+ 298 0000 EFF30980 	   mrs r0, psp                                     
  299              	                                                   
- 300 0018 114A     	   ldr r2, pxCurrentTCBConst                       
- 301 001a 1168     	   ldr r1, [r2]                                    
- 302 001c 0860     	   str r0, [r1]                                    
+ 300 0004 1EF0100F 	   tst lr, #0x10                                   
+ 301 0008 08BF     	   it eq                                           
+ 302 000a 20ED108A 	   vstmdbeq r0!, {s16-s31}                         
  303              	                                                   
- 304 001e 4FF05000 	   mov r0, #80                                      
- 305 0022 80F31188 	   msr basepri, r0                                 
- 306 0026 BFF34F8F 	   dsb                                             
- 307 002a BFF36F8F 	   isb                                             
- 308 002e FFF7FEFF 	   bl vTaskSwitchContext                           
- 309 0032 4FF00000 	   mov r0, #0                                      
-ARM GAS  /tmp/ccTiOeVc.s 			page 13
+ 304 000e EFF30B82 	   mrs r2, psplim                                  
+ 305 0012 7346     	   mov r3, lr                                      
+ 306 0014 20E9FC0F 	   stmdb r0!, {r2-r11}                             
+ 307              	                                                   
+ 308 0018 114A     	   ldr r2, pxCurrentTCBConst                       
+ 309 001a 1168     	   ldr r1, [r2]                                    
+ARM GAS  /tmp/ccJ1yVlt.s 			page 13
 
 
- 310 0036 80F31188 	   msr basepri, r0                                 
+ 310 001c 0860     	   str r0, [r1]                                    
  311              	                                                   
- 312 003a 094A     	   ldr r2, pxCurrentTCBConst                       
- 313 003c 1168     	   ldr r1, [r2]                                    
- 314 003e 0868     	   ldr r0, [r1]                                    
- 315              	                                                   
- 316 0040 B0E8FC0F 	   ldmia r0!, {r2-r11}                             
- 317              	                                                   
- 318 0044 13F0100F 	   tst r3, #0x10                                   
- 319 0048 08BF     	   it eq                                           
- 320 004a B0EC108A 	   vldmiaeq r0!, {s16-s31}                         
- 321              	                                                   
- 322 004e 82F30B88 	   msr psplim, r2                                  
- 323 0052 80F30988 	   msr psp, r0                                     
- 324 0056 1847     	   bx r3                                           
+ 312 001e 4FF05000 	   mov r0, #80                                      
+ 313 0022 80F31188 	   msr basepri, r0                                 
+ 314 0026 BFF34F8F 	   dsb                                             
+ 315 002a BFF36F8F 	   isb                                             
+ 316 002e FFF7FEFF 	   bl vTaskSwitchContext                           
+ 317 0032 4FF00000 	   mov r0, #0                                      
+ 318 0036 80F31188 	   msr basepri, r0                                 
+ 319              	                                                   
+ 320 003a 094A     	   ldr r2, pxCurrentTCBConst                       
+ 321 003c 1168     	   ldr r1, [r2]                                    
+ 322 003e 0868     	   ldr r0, [r1]                                    
+ 323              	                                                   
+ 324 0040 B0E8FC0F 	   ldmia r0!, {r2-r11}                             
  325              	                                                   
- 326 0058 AFF30080 	   .align 4                                        
- 326      AFF30080 
- 327 0060 00000000 	pxCurrentTCBConst: .word pxCurrentTCB              
- 328              	
- 329              	@ 0 "" 2
+ 326 0044 13F0100F 	   tst r3, #0x10                                   
+ 327 0048 08BF     	   it eq                                           
+ 328 004a B0EC108A 	   vldmiaeq r0!, {s16-s31}                         
+ 329              	                                                   
+ 330 004e 82F30B88 	   msr psplim, r2                                  
+ 331 0052 80F30988 	   msr psp, r0                                     
+ 332 0056 1847     	   bx r3                                           
+ 333              	                                                   
+ 334 0058 AFF30080 	   .align 4                                        
+ 334      AFF30080 
+ 335 0060 00000000 	pxCurrentTCBConst: .word pxCurrentTCB              
+ 336              	
+ 337              	@ 0 "" 2
  388:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         (
  389:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "   .syntax unified                                 \n"
  390:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "                                                   \n"
@@ -770,6 +778,9 @@ ARM GAS  /tmp/ccTiOeVc.s 			page 1
  413:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "   msr basepri, r0                                 \n" /* Enable interrupts. */
  414:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "                                                   \n"
  415:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "   ldr r2, pxCurrentTCBConst                       \n" /* Read the location of pxCurre
+ARM GAS  /tmp/ccJ1yVlt.s 			page 14
+
+
  416:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "   ldr r1, [r2]                                    \n" /* Read pxCurrentTCB. */
  417:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "   ldr r0, [r1]                                    \n" /* The first item in pxCurrentT
  418:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "                                                   \n"
@@ -778,9 +789,6 @@ ARM GAS  /tmp/ccTiOeVc.s 			page 1
  421:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         #if ( ( configENABLE_FPU == 1 ) || ( configENABLE_MVE == 1 ) )
  422:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "   tst r3, #0x10                                   \n" /* Test Bit[4] in LR. Bit[4] of
  423:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "   it eq                                           \n"
-ARM GAS  /tmp/ccTiOeVc.s 			page 14
-
-
  424:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "   vldmiaeq r0!, {s16-s31}                         \n" /* Restore the additional FP co
  425:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         #endif /* configENABLE_FPU || configENABLE_MVE */
  426:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "                                                   \n"
@@ -793,19 +801,20 @@ ARM GAS  /tmp/ccTiOeVc.s 			page 1
  433:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             ::"i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY )
  434:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         );
  435:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****     }
- 330              		.loc 1 435 5 is_stmt 0 view .LVU23
- 331              		.thumb
- 332              		.syntax unified
- 333              		.cfi_endproc
- 334              	.LFE7:
- 336              		.section	.text.SVC_Handler,"ax",%progbits
- 337              		.align	1
- 338              		.global	SVC_Handler
- 339              		.syntax unified
- 340              		.thumb
- 341              		.thumb_func
- 343              	SVC_Handler:
- 344              	.LFB8:
+ 338              		.loc 1 435 5
+ 339              		.thumb
+ 340              		.syntax unified
+ 341 0064 00BF     		nop
+ 342              		.cfi_endproc
+ 343              	.LFE7:
+ 345 0066 00BF     		.section	.text.SVC_Handler,"ax",%progbits
+ 346              		.align	1
+ 347              		.global	SVC_Handler
+ 348              		.syntax unified
+ 349              		.thumb
+ 350              		.thumb_func
+ 352              	SVC_Handler:
+ 353              	.LFB8:
  436:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** 
  437:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** #endif /* configENABLE_MPU */
  438:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** /*-----------------------------------------------------------*/
@@ -829,6 +838,9 @@ ARM GAS  /tmp/ccTiOeVc.s 			page 1
  456:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "ldr r1, [r0, #24]              \n"
  457:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "ldrb r2, [r1, #-2]             \n"
  458:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "cmp r2, %0                     \n"
+ARM GAS  /tmp/ccJ1yVlt.s 			page 15
+
+
  459:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "blt syscall_enter              \n"
  460:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "cmp r2, %1                     \n"
  461:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "beq syscall_exit               \n"
@@ -838,9 +850,6 @@ ARM GAS  /tmp/ccTiOeVc.s 			page 1
  465:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "    mov r1, lr                 \n"
  466:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "    b vSystemCallEnter         \n"
  467:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "                               \n"
-ARM GAS  /tmp/ccTiOeVc.s 			page 15
-
-
  468:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "syscall_exit:                  \n"
  469:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "    mov r1, lr                 \n"
  470:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "    b vSystemCallExit          \n"
@@ -855,31 +864,31 @@ ARM GAS  /tmp/ccTiOeVc.s 			page 1
  479:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c **** 
  480:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****     void SVC_Handler( void ) /* __attribute__ (( naked )) PRIVILEGED_FUNCTION */
  481:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****     {
- 345              		.loc 1 481 5 is_stmt 1 view -0
- 346              		.cfi_startproc
- 347              		@ Naked Function: prologue and epilogue provided by programmer.
- 348              		@ args = 0, pretend = 0, frame = 0
- 349              		@ frame_needed = 0, uses_anonymous_args = 0
+ 354              		.loc 1 481 5
+ 355              		.cfi_startproc
+ 356              		@ Naked Function: prologue and epilogue provided by programmer.
+ 357              		@ args = 0, pretend = 0, frame = 0
+ 358              		@ frame_needed = 1, uses_anonymous_args = 0
  482:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         __asm volatile
- 350              		.loc 1 482 9 view .LVU25
- 351              		.syntax unified
- 352              	@ 482 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c" 1
- 353              		   .syntax unified                                 
- 354              	                                                   
- 355 0000 1EF0040F 	   tst lr, #4                                      
- 356 0004 0CBF     	   ite eq                                          
- 357 0006 EFF30880 	   mrseq r0, msp                                   
- 358 000a EFF30980 	   mrsne r0, psp                                   
- 359 000e 0449     	   ldr r1, svchandler_address_const                
- 360 0010 0847     	   bx r1                                           
- 361              	                                                   
- 362 0012 00BFAFF3 	   .align 4                                        
- 362      0080AFF3 
- 362      0080AFF3 
- 362      0080
- 363 0020 00000000 	svchandler_address_const: .word vPortSVCHandler_C  
- 364              	
- 365              	@ 0 "" 2
+ 359              		.loc 1 482 9
+ 360              		.syntax unified
+ 361              	@ 482 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c" 1
+ 362              		   .syntax unified                                 
+ 363              	                                                   
+ 364 0000 1EF0040F 	   tst lr, #4                                      
+ 365 0004 0CBF     	   ite eq                                          
+ 366 0006 EFF30880 	   mrseq r0, msp                                   
+ 367 000a EFF30980 	   mrsne r0, psp                                   
+ 368 000e 0449     	   ldr r1, svchandler_address_const                
+ 369 0010 0847     	   bx r1                                           
+ 370              	                                                   
+ 371 0012 00BFAFF3 	   .align 4                                        
+ 371      0080AFF3 
+ 371      0080AFF3 
+ 371      0080
+ 372 0020 00000000 	svchandler_address_const: .word vPortSVCHandler_C  
+ 373              	
+ 374              	@ 0 "" 2
  483:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         (
  484:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "   .syntax unified                                 \n"
  485:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "                                                   \n"
@@ -889,56 +898,61 @@ ARM GAS  /tmp/ccTiOeVc.s 			page 1
  489:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "   mrsne r0, psp                                   \n"
  490:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "   ldr r1, svchandler_address_const                \n"
  491:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "   bx r1                                           \n"
+ARM GAS  /tmp/ccJ1yVlt.s 			page 16
+
+
  492:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "                                                   \n"
  493:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "   .align 4                                        \n"
  494:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****             "svchandler_address_const: .word vPortSVCHandler_C  \n"
  495:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****         );
  496:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c ****     }
- 366              		.loc 1 496 5 is_stmt 0 view .LVU26
- 367              		.thumb
- 368              		.syntax unified
- 369              		.cfi_endproc
-ARM GAS  /tmp/ccTiOeVc.s 			page 16
-
-
- 370              	.LFE8:
- 372              		.text
- 373              	.Letext0:
- 374              		.file 2 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 375              		.file 3 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 376              		.file 4 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portmacrocommon.h"
-ARM GAS  /tmp/ccTiOeVc.s 			page 17
+ 375              		.loc 1 496 5
+ 376              		.thumb
+ 377              		.syntax unified
+ 378 0024 00BF     		nop
+ 379              		.cfi_endproc
+ 380              	.LFE8:
+ 382 0026 00BF     		.text
+ 383              	.Letext0:
+ 384              		.file 2 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 385              		.file 3 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 386              		.file 4 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portmacrocommon.h"
+ARM GAS  /tmp/ccJ1yVlt.s 			page 17
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 portasm.c
-     /tmp/ccTiOeVc.s:26     .text.vRestoreContextOfFirstTask:00000000 $t
-     /tmp/ccTiOeVc.s:32     .text.vRestoreContextOfFirstTask:00000000 vRestoreContextOfFirstTask
-     /tmp/ccTiOeVc.s:60     .text.vRestoreContextOfFirstTask:00000030 pxCurrentTCBConst2
-     /tmp/ccTiOeVc.s:60     .text.vRestoreContextOfFirstTask:00000030 $d
-     /tmp/ccTiOeVc.s:70     .text.xIsPrivileged:00000000 $t
-     /tmp/ccTiOeVc.s:76     .text.xIsPrivileged:00000000 xIsPrivileged
-     /tmp/ccTiOeVc.s:105    .text.vRaisePrivilege:00000000 $t
-     /tmp/ccTiOeVc.s:111    .text.vRaisePrivilege:00000000 vRaisePrivilege
-     /tmp/ccTiOeVc.s:136    .text.vResetPrivilege:00000000 $t
-     /tmp/ccTiOeVc.s:142    .text.vResetPrivilege:00000000 vResetPrivilege
-     /tmp/ccTiOeVc.s:167    .text.vStartFirstTask:00000000 $t
-     /tmp/ccTiOeVc.s:173    .text.vStartFirstTask:00000000 vStartFirstTask
-     /tmp/ccTiOeVc.s:197    .text.vStartFirstTask:00000020 xVTORConst
-     /tmp/ccTiOeVc.s:197    .text.vStartFirstTask:00000020 $d
-     /tmp/ccTiOeVc.s:207    .text.ulSetInterruptMask:00000000 $t
-     /tmp/ccTiOeVc.s:213    .text.ulSetInterruptMask:00000000 ulSetInterruptMask
-     /tmp/ccTiOeVc.s:240    .text.vClearInterruptMask:00000000 $t
-     /tmp/ccTiOeVc.s:246    .text.vClearInterruptMask:00000000 vClearInterruptMask
-     /tmp/ccTiOeVc.s:272    .text.PendSV_Handler:00000000 $t
-     /tmp/ccTiOeVc.s:278    .text.PendSV_Handler:00000000 PendSV_Handler
-     /tmp/ccTiOeVc.s:327    .text.PendSV_Handler:00000060 pxCurrentTCBConst
-     /tmp/ccTiOeVc.s:327    .text.PendSV_Handler:00000060 $d
-     /tmp/ccTiOeVc.s:337    .text.SVC_Handler:00000000 $t
-     /tmp/ccTiOeVc.s:343    .text.SVC_Handler:00000000 SVC_Handler
-     /tmp/ccTiOeVc.s:363    .text.SVC_Handler:00000020 svchandler_address_const
-     /tmp/ccTiOeVc.s:363    .text.SVC_Handler:00000020 $d
-                           .group:00000000 wm4.0.c552ae9005b0f2cca11872fae5d4b7f2
+     /tmp/ccJ1yVlt.s:26     .text.vRestoreContextOfFirstTask:00000000 $t
+     /tmp/ccJ1yVlt.s:32     .text.vRestoreContextOfFirstTask:00000000 vRestoreContextOfFirstTask
+     /tmp/ccJ1yVlt.s:60     .text.vRestoreContextOfFirstTask:00000030 pxCurrentTCBConst2
+     /tmp/ccJ1yVlt.s:60     .text.vRestoreContextOfFirstTask:00000030 $d
+     /tmp/ccJ1yVlt.s:66     .text.vRestoreContextOfFirstTask:00000034 $t
+     /tmp/ccJ1yVlt.s:71     .text.xIsPrivileged:00000000 $t
+     /tmp/ccJ1yVlt.s:77     .text.xIsPrivileged:00000000 xIsPrivileged
+     /tmp/ccJ1yVlt.s:108    .text.vRaisePrivilege:00000000 $t
+     /tmp/ccJ1yVlt.s:114    .text.vRaisePrivilege:00000000 vRaisePrivilege
+     /tmp/ccJ1yVlt.s:140    .text.vResetPrivilege:00000000 $t
+     /tmp/ccJ1yVlt.s:146    .text.vResetPrivilege:00000000 vResetPrivilege
+     /tmp/ccJ1yVlt.s:172    .text.vStartFirstTask:00000000 $t
+     /tmp/ccJ1yVlt.s:178    .text.vStartFirstTask:00000000 vStartFirstTask
+     /tmp/ccJ1yVlt.s:202    .text.vStartFirstTask:00000020 xVTORConst
+     /tmp/ccJ1yVlt.s:202    .text.vStartFirstTask:00000020 $d
+     /tmp/ccJ1yVlt.s:208    .text.vStartFirstTask:00000024 $t
+     /tmp/ccJ1yVlt.s:213    .text.ulSetInterruptMask:00000000 $t
+     /tmp/ccJ1yVlt.s:219    .text.ulSetInterruptMask:00000000 ulSetInterruptMask
+     /tmp/ccJ1yVlt.s:248    .text.vClearInterruptMask:00000000 $t
+     /tmp/ccJ1yVlt.s:254    .text.vClearInterruptMask:00000000 vClearInterruptMask
+     /tmp/ccJ1yVlt.s:280    .text.PendSV_Handler:00000000 $t
+     /tmp/ccJ1yVlt.s:286    .text.PendSV_Handler:00000000 PendSV_Handler
+     /tmp/ccJ1yVlt.s:335    .text.PendSV_Handler:00000060 pxCurrentTCBConst
+     /tmp/ccJ1yVlt.s:335    .text.PendSV_Handler:00000060 $d
+     /tmp/ccJ1yVlt.s:341    .text.PendSV_Handler:00000064 $t
+     /tmp/ccJ1yVlt.s:346    .text.SVC_Handler:00000000 $t
+     /tmp/ccJ1yVlt.s:352    .text.SVC_Handler:00000000 SVC_Handler
+     /tmp/ccJ1yVlt.s:372    .text.SVC_Handler:00000020 svchandler_address_const
+     /tmp/ccJ1yVlt.s:372    .text.SVC_Handler:00000020 $d
+     /tmp/ccJ1yVlt.s:378    .text.SVC_Handler:00000024 $t
+                           .group:00000000 wm4.0.2a10773746a5c5ebb5552f50e466f80b
                            .group:00000000 wm4._newlib_version.h.4.411db44ea2338a62eca2f0777f81481b
                            .group:00000000 wm4.features.h.33.e0c9f337c65cb9f22ed5f23d082bc78b
                            .group:00000000 wm4._default_types.h.15.247e5cd201eca3442cbf5404108c4935
@@ -963,11 +977,11 @@ DEFINED SYMBOLS
                            .group:00000000 wm4.portable.h.189.522b8bd52a171d3fd1432ef06d0caa63
                            .group:00000000 wm4.FreeRTOS.h.102.fb871f3e464d99c5a57b3115545a02ad
                            .group:00000000 wm4.mpu_syscall_numbers.h.30.0a27a9934a6f5d596ea064151c3c3bfa
+ARM GAS  /tmp/ccJ1yVlt.s 			page 18
+
+
 
 UNDEFINED SYMBOLS
 pxCurrentTCB
 vTaskSwitchContext
-ARM GAS  /tmp/ccTiOeVc.s 			page 18
-
-
 vPortSVCHandler_C

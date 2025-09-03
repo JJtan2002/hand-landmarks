@@ -742,9 +742,9 @@ static void display_ld_hand(hand_info_t *hand)
 {
   const int disk_radius = DISK_RADIUS;
   roi_t *roi = &hand->roi;
-  int x[LD_LANDMARK_NB];
-  int y[LD_LANDMARK_NB];
-  int is_clamped[LD_LANDMARK_NB];
+  static int x[LD_LANDMARK_NB];
+  static int y[LD_LANDMARK_NB];
+  static int is_clamped[LD_LANDMARK_NB];
   ld_point_t decoded;
   int i;
 
@@ -1438,8 +1438,7 @@ static void nn_thread_fct(void *arg)
     disp.info.nn_period_ms = nn_period_filtered_ms;
     disp.info.pd_hand_nb = yolo_info.yolo_out.nb_detect;
     disp.info.pd_max_prob = 0.0f;
-    //disp.info.hands[0].is_valid = is_landmark_valid; // Set hand as invalid
-    disp.info.hands[0].is_valid = 0; // Set hand as invalid
+    disp.info.hands[0].is_valid = is_landmark_valid; // Set hand as invalid
     // NOTE: We no longer copy box or landmark data, as none exists.
     // The display thread should check the 'is_valid' flag before drawing.
     if (is_face_present)
@@ -1462,7 +1461,7 @@ static void nn_thread_fct(void *arg)
       // Now, display the correct, absolute coordinate.
       disp.info.hl_ms = final_screen_x;
 
-      // --- END OF FIX ---      disp.info.hl_ms = (int)(ld_landmarks[0][467].x);
+      // --- END OF FIX ---  
       
       // If valid, show the dummy ROI as the bounding box
       disp.info.hands[0].roi = face_roi;
@@ -1475,6 +1474,8 @@ static void nn_thread_fct(void *arg)
     {
       disp.info.hl_ms = 0;
     }
+    
+    SCB_CleanDCache_by_Addr((uint32_t *)&disp.info.hands[0], sizeof(hand_info_t));
     ret = xSemaphoreGive(disp.lock);
     assert(ret == pdTRUE);
 

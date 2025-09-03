@@ -1,1 +1,2 @@
-Src/app_fuseprogramming.c:36:6:Fuse_Programming	24	static
+Src/app_fuseprogramming.c:36:6:Fuse_Programming	32	static
+Src/app_fuseprogramming.c:93:13:ErrorHandler	4	static

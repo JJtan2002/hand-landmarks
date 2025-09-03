@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccoTQc4E.s 			page 1
+ARM GAS  /tmp/ccd9ELl9.s 			page 1
 
 
    1              		.arch armv8.1-m.main
@@ -16,7 +16,7 @@ ARM GAS  /tmp/ccoTQc4E.s 			page 1
   13              		.eabi_attribute 24, 1
   14              		.eabi_attribute 25, 1
   15              		.eabi_attribute 26, 1
-  16              		.eabi_attribute 30, 4
+  16              		.eabi_attribute 30, 6
   17              		.eabi_attribute 34, 1
   18              		.eabi_attribute 38, 1
   19              		.eabi_attribute 18, 4
@@ -32,8 +32,7 @@ ARM GAS  /tmp/ccoTQc4E.s 			page 1
   29              		.thumb
   30              		.thumb_func
   32              	UTIL_LCDEx_PrintfAtLine:
-  33              	.LVL0:
-  34              	.LFB3:
+  33              	.LFB3:
    1:Src/stm32_lcd_ex.c ****  /**
    2:Src/stm32_lcd_ex.c ****  ******************************************************************************
    3:Src/stm32_lcd_ex.c ****  * @file    stm32_lcd_ex.c
@@ -58,229 +57,197 @@ ARM GAS  /tmp/ccoTQc4E.s 			page 1
   22:Src/stm32_lcd_ex.c **** #include <stdarg.h>
   23:Src/stm32_lcd_ex.c **** 
   24:Src/stm32_lcd_ex.c **** /* Private define ------------------------------------------------------------*/
-ARM GAS  /tmp/ccoTQc4E.s 			page 2
-
-
   25:Src/stm32_lcd_ex.c **** #define N_PRINTABLE_CHARS    47 /*!< 800px wide screen / 17px wide font */
+ARM GAS  /tmp/ccd9ELl9.s 			page 2
+
+
   26:Src/stm32_lcd_ex.c **** 
   27:Src/stm32_lcd_ex.c **** /* Functions Definition ------------------------------------------------------*/
   28:Src/stm32_lcd_ex.c **** void UTIL_LCDEx_PrintfAtLine(uint16_t line, const char * format, ...)
   29:Src/stm32_lcd_ex.c **** {
-  35              		.loc 1 29 1 view -0
-  36              		.cfi_startproc
-  37              		@ args = 4, pretend = 12, frame = 8
-  38              		@ frame_needed = 0, uses_anonymous_args = 1
+  34              		.loc 1 29 1
+  35              		.cfi_startproc
+  36              		@ args = 4, pretend = 12, frame = 16
+  37              		@ frame_needed = 1, uses_anonymous_args = 1
+  38 0000 0EB4     		push	{r1, r2, r3}
+  39              		.cfi_def_cfa_offset 12
+  40              		.cfi_offset 1, -12
+  41              		.cfi_offset 2, -8
+  42              		.cfi_offset 3, -4
+  43 0002 80B5     		push	{r7, lr}
+  44              		.cfi_def_cfa_offset 20
+  45              		.cfi_offset 7, -20
+  46              		.cfi_offset 14, -16
+  47 0004 85B0     		sub	sp, sp, #20
+  48              		.cfi_def_cfa_offset 40
+  49 0006 00AF     		add	r7, sp, #0
+  50              		.cfi_def_cfa_register 7
+  51 0008 0346     		mov	r3, r0
+  52 000a FB80     		strh	r3, [r7, #6]	@ movhi
   30:Src/stm32_lcd_ex.c ****   static char buffer[N_PRINTABLE_CHARS + 1];
-  39              		.loc 1 30 3 view .LVU1
   31:Src/stm32_lcd_ex.c ****   va_list args;
-  40              		.loc 1 31 3 view .LVU2
   32:Src/stm32_lcd_ex.c ****   va_start(args, format);
-  41              		.loc 1 32 3 view .LVU3
-  29:Src/stm32_lcd_ex.c ****   static char buffer[N_PRINTABLE_CHARS + 1];
-  42              		.loc 1 29 1 is_stmt 0 view .LVU4
-  43 0000 0EB4     		push	{r1, r2, r3}
-  44              		.cfi_def_cfa_offset 12
-  45              		.cfi_offset 1, -12
-  46              		.cfi_offset 2, -8
-  47              		.cfi_offset 3, -4
-  48 0002 33B5     		push	{r0, r1, r4, r5, lr}
-  49              		.cfi_def_cfa_offset 32
-  50              		.cfi_offset 4, -24
-  51              		.cfi_offset 5, -20
-  52              		.cfi_offset 14, -16
-  29:Src/stm32_lcd_ex.c ****   static char buffer[N_PRINTABLE_CHARS + 1];
-  53              		.loc 1 29 1 view .LVU5
-  54 0004 0446     		mov	r4, r0
-  55 0006 05AB     		add	r3, sp, #20
+  53              		.loc 1 32 3
+  54 000c 07F12003 		add	r3, r7, #32
+  55 0010 FB60     		str	r3, [r7, #12]
   33:Src/stm32_lcd_ex.c ****   vsnprintf(buffer, N_PRINTABLE_CHARS + 1, format, args);
-  56              		.loc 1 33 3 view .LVU6
-  57 0008 084D     		ldr	r5, .L2
-  29:Src/stm32_lcd_ex.c ****   static char buffer[N_PRINTABLE_CHARS + 1];
-  58              		.loc 1 29 1 view .LVU7
-  59 000a 53F8042B 		ldr	r2, [r3], #4
-  60              		.loc 1 33 3 view .LVU8
-  61 000e 3021     		movs	r1, #48
-  62 0010 2846     		mov	r0, r5
-  63              	.LVL1:
-  32:Src/stm32_lcd_ex.c ****   va_start(args, format);
-  64              		.loc 1 32 3 view .LVU9
-  65 0012 0193     		str	r3, [sp, #4]
-  66              		.loc 1 33 3 is_stmt 1 view .LVU10
-  67 0014 FFF7FEFF 		bl	vsnprintf
-  68              	.LVL2:
+  56              		.loc 1 33 3
+  57 0012 FB68     		ldr	r3, [r7, #12]
+  58 0014 FA69     		ldr	r2, [r7, #28]
+  59 0016 3021     		movs	r1, #48
+  60 0018 0748     		ldr	r0, .L2
+  61 001a FFF7FEFF 		bl	vsnprintf
   34:Src/stm32_lcd_ex.c ****   UTIL_LCD_DisplayStringAtLine(line, (uint8_t *) buffer);
-  69              		.loc 1 34 3 view .LVU11
-  70 0018 2946     		mov	r1, r5
-  71 001a 2046     		mov	r0, r4
-  72 001c FFF7FEFF 		bl	UTIL_LCD_DisplayStringAtLine
-  73              	.LVL3:
+  62              		.loc 1 34 3
+  63 001e FB88     		ldrh	r3, [r7, #6]
+  64 0020 0549     		ldr	r1, .L2
+  65 0022 1846     		mov	r0, r3
+  66 0024 FFF7FEFF 		bl	UTIL_LCD_DisplayStringAtLine
   35:Src/stm32_lcd_ex.c ****   va_end(args);
-  74              		.loc 1 35 3 view .LVU12
   36:Src/stm32_lcd_ex.c **** }
-  75              		.loc 1 36 1 is_stmt 0 view .LVU13
-ARM GAS  /tmp/ccoTQc4E.s 			page 3
+  67              		.loc 1 36 1
+  68 0028 00BF     		nop
+  69 002a 1437     		adds	r7, r7, #20
+  70              		.cfi_def_cfa_offset 20
+  71 002c BD46     		mov	sp, r7
+  72              		.cfi_def_cfa_register 13
+  73              		@ sp needed
+  74 002e BDE88040 		pop	{r7, lr}
+  75              		.cfi_restore 14
+  76              		.cfi_restore 7
+  77              		.cfi_def_cfa_offset 12
+  78 0032 03B0     		add	sp, sp, #12
+  79              		.cfi_restore 3
+ARM GAS  /tmp/ccd9ELl9.s 			page 3
 
 
-  76 0020 02B0     		add	sp, sp, #8
-  77              		.cfi_def_cfa_offset 24
-  78              		@ sp needed
-  79 0022 BDE83040 		pop	{r4, r5, lr}
-  80              		.cfi_restore 14
-  81              		.cfi_restore 5
-  82              		.cfi_restore 4
-  83              		.cfi_def_cfa_offset 12
-  84              	.LVL4:
-  85              		.loc 1 36 1 view .LVU14
-  86 0026 03B0     		add	sp, sp, #12
-  87              		.cfi_restore 3
-  88              		.cfi_restore 2
-  89              		.cfi_restore 1
-  90              		.cfi_def_cfa_offset 0
-  91 0028 7047     		bx	lr
-  92              	.L3:
-  93 002a 00BF     		.align	2
-  94              	.L2:
-  95 002c 00000000 		.word	buffer.1
-  96              		.cfi_endproc
-  97              	.LFE3:
-  99              		.section	.text.UTIL_LCDEx_PrintfAt,"ax",%progbits
- 100              		.align	1
- 101              		.global	UTIL_LCDEx_PrintfAt
- 102              		.syntax unified
- 103              		.thumb
- 104              		.thumb_func
- 106              	UTIL_LCDEx_PrintfAt:
- 107              	.LVL5:
- 108              	.LFB4:
+  80              		.cfi_restore 2
+  81              		.cfi_restore 1
+  82              		.cfi_def_cfa_offset 0
+  83 0034 7047     		bx	lr
+  84              	.L3:
+  85 0036 00BF     		.align	2
+  86              	.L2:
+  87 0038 00000000 		.word	buffer.1
+  88              		.cfi_endproc
+  89              	.LFE3:
+  91              		.section	.text.UTIL_LCDEx_PrintfAt,"ax",%progbits
+  92              		.align	1
+  93              		.global	UTIL_LCDEx_PrintfAt
+  94              		.syntax unified
+  95              		.thumb
+  96              		.thumb_func
+  98              	UTIL_LCDEx_PrintfAt:
+  99              	.LFB4:
   37:Src/stm32_lcd_ex.c **** 
   38:Src/stm32_lcd_ex.c **** void UTIL_LCDEx_PrintfAt(uint32_t x_pos, uint32_t y_pos, Text_AlignModeTypdef mode, const char * fo
   39:Src/stm32_lcd_ex.c **** {
- 109              		.loc 1 39 1 is_stmt 1 view -0
- 110              		.cfi_startproc
- 111              		@ args = 4, pretend = 4, frame = 8
- 112              		@ frame_needed = 0, uses_anonymous_args = 1
+ 100              		.loc 1 39 1
+ 101              		.cfi_startproc
+ 102              		@ args = 4, pretend = 4, frame = 24
+ 103              		@ frame_needed = 1, uses_anonymous_args = 1
+ 104 0000 08B4     		push	{r3}
+ 105              		.cfi_def_cfa_offset 4
+ 106              		.cfi_offset 3, -4
+ 107 0002 80B5     		push	{r7, lr}
+ 108              		.cfi_def_cfa_offset 12
+ 109              		.cfi_offset 7, -12
+ 110              		.cfi_offset 14, -8
+ 111 0004 87B0     		sub	sp, sp, #28
+ 112              		.cfi_def_cfa_offset 40
+ 113 0006 00AF     		add	r7, sp, #0
+ 114              		.cfi_def_cfa_register 7
+ 115 0008 F860     		str	r0, [r7, #12]
+ 116 000a B960     		str	r1, [r7, #8]
+ 117 000c 1346     		mov	r3, r2
+ 118 000e FB71     		strb	r3, [r7, #7]
   40:Src/stm32_lcd_ex.c ****   static char buffer[N_PRINTABLE_CHARS + 1];
- 113              		.loc 1 40 3 view .LVU16
   41:Src/stm32_lcd_ex.c ****   va_list args;
- 114              		.loc 1 41 3 view .LVU17
   42:Src/stm32_lcd_ex.c ****   va_start(args, format);
- 115              		.loc 1 42 3 view .LVU18
-  39:Src/stm32_lcd_ex.c ****   static char buffer[N_PRINTABLE_CHARS + 1];
- 116              		.loc 1 39 1 is_stmt 0 view .LVU19
- 117 0000 08B4     		push	{r3}
- 118              		.cfi_def_cfa_offset 4
- 119              		.cfi_offset 3, -4
- 120 0002 F3B5     		push	{r0, r1, r4, r5, r6, r7, lr}
- 121              		.cfi_def_cfa_offset 32
- 122              		.cfi_offset 4, -24
- 123              		.cfi_offset 5, -20
- 124              		.cfi_offset 6, -16
- 125              		.cfi_offset 7, -12
- 126              		.cfi_offset 14, -8
-  39:Src/stm32_lcd_ex.c ****   static char buffer[N_PRINTABLE_CHARS + 1];
-ARM GAS  /tmp/ccoTQc4E.s 			page 4
-
-
- 127              		.loc 1 39 1 view .LVU20
- 128 0004 0446     		mov	r4, r0
- 129 0006 0D46     		mov	r5, r1
- 130 0008 1646     		mov	r6, r2
- 131 000a 07AB     		add	r3, sp, #28
+ 119              		.loc 1 42 3
+ 120 0010 07F12803 		add	r3, r7, #40
+ 121 0014 7B61     		str	r3, [r7, #20]
   43:Src/stm32_lcd_ex.c ****   vsnprintf(buffer, N_PRINTABLE_CHARS + 1, format, args);
- 132              		.loc 1 43 3 view .LVU21
- 133 000c 094F     		ldr	r7, .L5
-  39:Src/stm32_lcd_ex.c ****   static char buffer[N_PRINTABLE_CHARS + 1];
- 134              		.loc 1 39 1 view .LVU22
- 135 000e 53F8042B 		ldr	r2, [r3], #4
- 136              	.LVL6:
- 137              		.loc 1 43 3 view .LVU23
- 138 0012 3021     		movs	r1, #48
- 139              	.LVL7:
- 140              		.loc 1 43 3 view .LVU24
- 141 0014 3846     		mov	r0, r7
- 142              	.LVL8:
-  42:Src/stm32_lcd_ex.c ****   va_start(args, format);
- 143              		.loc 1 42 3 view .LVU25
- 144 0016 0193     		str	r3, [sp, #4]
- 145              		.loc 1 43 3 is_stmt 1 view .LVU26
- 146 0018 FFF7FEFF 		bl	vsnprintf
- 147              	.LVL9:
+ 122              		.loc 1 43 3
+ 123 0016 7B69     		ldr	r3, [r7, #20]
+ 124 0018 7A6A     		ldr	r2, [r7, #36]
+ 125 001a 3021     		movs	r1, #48
+ 126 001c 0748     		ldr	r0, .L5
+ 127 001e FFF7FEFF 		bl	vsnprintf
   44:Src/stm32_lcd_ex.c ****   UTIL_LCD_DisplayStringAt(x_pos, y_pos, (uint8_t *) buffer, mode);
- 148              		.loc 1 44 3 view .LVU27
- 149 001c 3346     		mov	r3, r6
- 150 001e 3A46     		mov	r2, r7
- 151 0020 2946     		mov	r1, r5
- 152 0022 2046     		mov	r0, r4
- 153 0024 FFF7FEFF 		bl	UTIL_LCD_DisplayStringAt
- 154              	.LVL10:
+ 128              		.loc 1 44 3
+ 129 0022 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 130 0024 054A     		ldr	r2, .L5
+ARM GAS  /tmp/ccd9ELl9.s 			page 4
+
+
+ 131 0026 B968     		ldr	r1, [r7, #8]
+ 132 0028 F868     		ldr	r0, [r7, #12]
+ 133 002a FFF7FEFF 		bl	UTIL_LCD_DisplayStringAt
   45:Src/stm32_lcd_ex.c ****   va_end(args);
- 155              		.loc 1 45 3 view .LVU28
   46:Src/stm32_lcd_ex.c **** }
- 156              		.loc 1 46 1 is_stmt 0 view .LVU29
- 157 0028 02B0     		add	sp, sp, #8
- 158              		.cfi_def_cfa_offset 24
- 159              		@ sp needed
- 160 002a BDE8F040 		pop	{r4, r5, r6, r7, lr}
- 161              		.cfi_restore 14
- 162              		.cfi_restore 7
- 163              		.cfi_restore 6
- 164              		.cfi_restore 5
- 165              		.cfi_restore 4
- 166              		.cfi_def_cfa_offset 4
- 167              	.LVL11:
- 168              		.loc 1 46 1 view .LVU30
- 169 002e 01B0     		add	sp, sp, #4
- 170              		.cfi_restore 3
- 171              		.cfi_def_cfa_offset 0
- 172 0030 7047     		bx	lr
- 173              	.L6:
- 174 0032 00BF     		.align	2
- 175              	.L5:
- 176 0034 00000000 		.word	buffer.0
- 177              		.cfi_endproc
-ARM GAS  /tmp/ccoTQc4E.s 			page 5
-
-
- 178              	.LFE4:
- 180              		.section	.bss.buffer.0,"aw",%nobits
- 183              	buffer.0:
- 184 0000 00000000 		.space	48
- 184      00000000 
- 184      00000000 
- 184      00000000 
- 184      00000000 
- 185              		.section	.bss.buffer.1,"aw",%nobits
- 188              	buffer.1:
- 189 0000 00000000 		.space	48
- 189      00000000 
- 189      00000000 
- 189      00000000 
- 189      00000000 
- 190              		.text
- 191              	.Letext0:
- 192              		.file 2 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 193              		.file 3 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 194              		.file 4 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 195              		.file 5 "STM32Cube_FW_N6/Utilities/lcd/stm32_lcd.h"
- 196              		.file 6 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 197              		.file 7 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 198              		.file 8 "<built-in>"
-ARM GAS  /tmp/ccoTQc4E.s 			page 6
+ 134              		.loc 1 46 1
+ 135 002e 00BF     		nop
+ 136 0030 1C37     		adds	r7, r7, #28
+ 137              		.cfi_def_cfa_offset 12
+ 138 0032 BD46     		mov	sp, r7
+ 139              		.cfi_def_cfa_register 13
+ 140              		@ sp needed
+ 141 0034 BDE88040 		pop	{r7, lr}
+ 142              		.cfi_restore 14
+ 143              		.cfi_restore 7
+ 144              		.cfi_def_cfa_offset 4
+ 145 0038 01B0     		add	sp, sp, #4
+ 146              		.cfi_restore 3
+ 147              		.cfi_def_cfa_offset 0
+ 148 003a 7047     		bx	lr
+ 149              	.L6:
+ 150              		.align	2
+ 151              	.L5:
+ 152 003c 00000000 		.word	buffer.0
+ 153              		.cfi_endproc
+ 154              	.LFE4:
+ 156              		.section	.bss.buffer.1,"aw",%nobits
+ 157              		.align	2
+ 160              	buffer.1:
+ 161 0000 00000000 		.space	48
+ 161      00000000 
+ 161      00000000 
+ 161      00000000 
+ 161      00000000 
+ 162              		.section	.bss.buffer.0,"aw",%nobits
+ 163              		.align	2
+ 166              	buffer.0:
+ 167 0000 00000000 		.space	48
+ 167      00000000 
+ 167      00000000 
+ 167      00000000 
+ 167      00000000 
+ 168              		.text
+ 169              	.Letext0:
+ 170              		.file 2 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 171              		.file 3 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 172              		.file 4 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 173              		.file 5 "STM32Cube_FW_N6/Utilities/lcd/stm32_lcd.h"
+ 174              		.file 6 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 175              		.file 7 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 176              		.file 8 "<built-in>"
+ARM GAS  /tmp/ccd9ELl9.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32_lcd_ex.c
-     /tmp/ccoTQc4E.s:26     .text.UTIL_LCDEx_PrintfAtLine:00000000 $t
-     /tmp/ccoTQc4E.s:32     .text.UTIL_LCDEx_PrintfAtLine:00000000 UTIL_LCDEx_PrintfAtLine
-     /tmp/ccoTQc4E.s:95     .text.UTIL_LCDEx_PrintfAtLine:0000002c $d
-     /tmp/ccoTQc4E.s:188    .bss.buffer.1:00000000 buffer.1
-     /tmp/ccoTQc4E.s:100    .text.UTIL_LCDEx_PrintfAt:00000000 $t
-     /tmp/ccoTQc4E.s:106    .text.UTIL_LCDEx_PrintfAt:00000000 UTIL_LCDEx_PrintfAt
-     /tmp/ccoTQc4E.s:176    .text.UTIL_LCDEx_PrintfAt:00000034 $d
-     /tmp/ccoTQc4E.s:183    .bss.buffer.0:00000000 buffer.0
-     /tmp/ccoTQc4E.s:184    .bss.buffer.0:00000000 $d
-     /tmp/ccoTQc4E.s:189    .bss.buffer.1:00000000 $d
-                           .group:00000000 wm4.0.c552ae9005b0f2cca11872fae5d4b7f2
+     /tmp/ccd9ELl9.s:26     .text.UTIL_LCDEx_PrintfAtLine:00000000 $t
+     /tmp/ccd9ELl9.s:32     .text.UTIL_LCDEx_PrintfAtLine:00000000 UTIL_LCDEx_PrintfAtLine
+     /tmp/ccd9ELl9.s:87     .text.UTIL_LCDEx_PrintfAtLine:00000038 $d
+     /tmp/ccd9ELl9.s:160    .bss.buffer.1:00000000 buffer.1
+     /tmp/ccd9ELl9.s:92     .text.UTIL_LCDEx_PrintfAt:00000000 $t
+     /tmp/ccd9ELl9.s:98     .text.UTIL_LCDEx_PrintfAt:00000000 UTIL_LCDEx_PrintfAt
+     /tmp/ccd9ELl9.s:152    .text.UTIL_LCDEx_PrintfAt:0000003c $d
+     /tmp/ccd9ELl9.s:166    .bss.buffer.0:00000000 buffer.0
+     /tmp/ccd9ELl9.s:157    .bss.buffer.1:00000000 $d
+     /tmp/ccd9ELl9.s:163    .bss.buffer.0:00000000 $d
+                           .group:00000000 wm4.0.2a10773746a5c5ebb5552f50e466f80b
                            .group:00000000 wm4._newlib_version.h.4.411db44ea2338a62eca2f0777f81481b
                            .group:00000000 wm4.features.h.33.e0c9f337c65cb9f22ed5f23d082bc78b
                            .group:00000000 wm4._default_types.h.15.247e5cd201eca3442cbf5404108c4935

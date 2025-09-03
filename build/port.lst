@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccQesb1V.s 			page 1
+ARM GAS  /tmp/ccsuQooq.s 			page 1
 
 
    1              		.arch armv8.1-m.main
@@ -16,7 +16,7 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
   13              		.eabi_attribute 24, 1
   14              		.eabi_attribute 25, 1
   15              		.eabi_attribute 26, 1
-  16              		.eabi_attribute 30, 4
+  16              		.eabi_attribute 30, 6
   17              		.eabi_attribute 34, 1
   18              		.eabi_attribute 38, 1
   19              		.eabi_attribute 18, 4
@@ -25,26 +25,29 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
   22              	.Ltext0:
   23              		.cfi_sections	.debug_frame
   24              		.file 1 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c"
-  25              		.section	.rodata.prvTaskExitError.str1.1,"aMS",%progbits,1
-  26              	.LC0:
-  27 0000 3000     		.ascii	"0\000"
-  28              	.LC1:
-  29 0002 4C69622F 		.ascii	"Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_s"
-  29      46726565 
-  29      52544F53 
-  29      2F536F75 
-  29      7263652F 
-  30 0035 65637572 		.ascii	"ecure/port.c\000"
-  30      652F706F 
-  30      72742E63 
-  30      00
-  31              		.section	.text.prvTaskExitError,"ax",%progbits
-  32              		.align	1
-  33              		.syntax unified
-  34              		.thumb
-  35              		.thumb_func
-  37              	prvTaskExitError:
-  38              	.LFB1:
+  25              		.section	.data.ulCriticalNesting,"aw"
+  26              		.align	2
+  29              	ulCriticalNesting:
+  30 0000 AAAAAAAA 		.word	-1431655766
+  31              		.section	.bss.ucMaxSysCallPriority,"aw",%nobits
+  34              	ucMaxSysCallPriority:
+  35 0000 00       		.space	1
+  36              		.section	.bss.ulMaxPRIGROUPValue,"aw",%nobits
+  37              		.align	2
+  40              	ulMaxPRIGROUPValue:
+  41 0000 00000000 		.space	4
+  42              		.section	.rodata.pcInterruptPriorityRegisters,"a"
+  43              		.align	2
+  46              	pcInterruptPriorityRegisters:
+  47 0000 F0E300E0 		.word	-536812560
+  48              		.section	.text.vPortSetupTimerInterrupt,"ax",%progbits
+  49              		.align	1
+  50              		.weak	vPortSetupTimerInterrupt
+  51              		.syntax unified
+  52              		.thumb
+  53              		.thumb_func
+  55              	vPortSetupTimerInterrupt:
+  56              	.LFB0:
    1:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** /*
    2:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  * FreeRTOS Kernel V10.6.2
    3:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
@@ -55,12 +58,12 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
    8:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  * this software and associated documentation files (the "Software"), to deal in
    9:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  * the Software without restriction, including without limitation the rights to
   10:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ARM GAS  /tmp/ccsuQooq.s 			page 2
+
+
   11:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  * the Software, and to permit persons to whom the Software is furnished to do so,
   12:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  * subject to the following conditions:
   13:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  *
-ARM GAS  /tmp/ccQesb1V.s 			page 2
-
-
   14:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  * The above copyright notice and this permission notice shall be included in all
   15:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  * copies or substantial portions of the Software.
   16:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  *
@@ -115,12 +118,12 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
   65:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  * 3. Run FreeRTOS on the Non-Secure Side only i.e. no Secure Side function call support:
   66:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  *    configRUN_FREERTOS_SECURE_ONLY = 0 and configENABLE_TRUSTZONE = 0
   67:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  */
+ARM GAS  /tmp/ccsuQooq.s 			page 3
+
+
   68:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #if ( ( configRUN_FREERTOS_SECURE_ONLY == 1 ) && ( configENABLE_TRUSTZONE == 1 ) )
   69:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     #error TrustZone needs to be disabled in order to run FreeRTOS on the Secure Side.
   70:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #endif
-ARM GAS  /tmp/ccQesb1V.s 			page 3
-
-
   71:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** /*-----------------------------------------------------------*/
   72:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
   73:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** /**
@@ -175,12 +178,12 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
  122:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #define portCPACR_CP10_VALUE    ( 3UL )
  123:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #define portCPACR_CP11_VALUE    portCPACR_CP10_VALUE
  124:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #define portCPACR_CP10_POS      ( 20UL )
+ARM GAS  /tmp/ccsuQooq.s 			page 4
+
+
  125:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #define portCPACR_CP11_POS      ( 22UL )
  126:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  127:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #define portFPCCR               ( ( volatile uint32_t * ) 0xe000ef34 )              /* Floating Poi
-ARM GAS  /tmp/ccQesb1V.s 			page 4
-
-
  128:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #define portFPCCR_ASPEN_POS     ( 31UL )
  129:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #define portFPCCR_ASPEN_MASK    ( 1UL << portFPCCR_ASPEN_POS )
  130:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #define portFPCCR_LSPEN_POS     ( 30UL )
@@ -235,12 +238,12 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
  179:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #define portMPU_MAIR_ATTR3_MASK               ( 0xff000000 )
  180:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  181:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #define portMPU_MAIR_ATTR4_POS                ( 0UL )
+ARM GAS  /tmp/ccsuQooq.s 			page 5
+
+
  182:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #define portMPU_MAIR_ATTR4_MASK               ( 0x000000ff )
  183:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  184:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #define portMPU_MAIR_ATTR5_POS                ( 8UL )
-ARM GAS  /tmp/ccQesb1V.s 			page 5
-
-
  185:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #define portMPU_MAIR_ATTR5_MASK               ( 0x0000ff00 )
  186:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  187:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #define portMPU_MAIR_ATTR6_POS                ( 16UL )
@@ -295,12 +298,12 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
  236:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** /*-----------------------------------------------------------*/
  237:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  238:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** /**
+ARM GAS  /tmp/ccsuQooq.s 			page 6
+
+
  239:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  * @brief The maximum 24-bit number.
  240:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  *
  241:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  * It is needed because the systick is a 24-bit counter.
-ARM GAS  /tmp/ccQesb1V.s 			page 6
-
-
  242:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  */
  243:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #define portMAX_24_BIT_NUMBER       ( 0xffffffUL )
  244:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
@@ -355,12 +358,12 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
  293:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  294:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** /**
  295:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  * @brief CONTROL register privileged bit mask.
+ARM GAS  /tmp/ccsuQooq.s 			page 7
+
+
  296:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  *
  297:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  * Bit[0] in CONTROL register tells the privilege:
  298:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  *  Bit[0] = 0 ==> The task is privileged.
-ARM GAS  /tmp/ccQesb1V.s 			page 7
-
-
  299:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  *  Bit[0] = 1 ==> The task is not privileged.
  300:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  */
  301:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #define portCONTROL_PRIVILEGED_MASK         ( 1UL << 0UL )
@@ -415,12 +418,12 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
  350:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  * function.
  351:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  */
  352:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** static void prvTaskExitError( void );
+ARM GAS  /tmp/ccsuQooq.s 			page 8
+
+
  353:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  354:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #if ( configENABLE_MPU == 1 )
  355:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
-ARM GAS  /tmp/ccQesb1V.s 			page 8
-
-
  356:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** /**
  357:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  * @brief Extract MPU region's access permissions from the Region Base Address
  358:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  * Register (RBAR) value.
@@ -475,12 +478,12 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
  407:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** void vPortEnterCritical( void ) PRIVILEGED_FUNCTION;
  408:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  409:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** /**
+ARM GAS  /tmp/ccsuQooq.s 			page 9
+
+
  410:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  * @brief Exit from critical section.
  411:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  */
  412:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** void vPortExitCritical( void ) PRIVILEGED_FUNCTION;
-ARM GAS  /tmp/ccQesb1V.s 			page 9
-
-
  413:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  414:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** /**
  415:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  * @brief SysTick handler.
@@ -535,12 +538,12 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
  464:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  465:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     /**
  466:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****      * @brief Checks whether or not the calling task is privileged.
+ARM GAS  /tmp/ccsuQooq.s 			page 10
+
+
  467:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****      *
  468:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****      * @return pdTRUE if the calling task is privileged, pdFALSE otherwise.
  469:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****      */
-ARM GAS  /tmp/ccQesb1V.s 			page 10
-
-
  470:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     BaseType_t xPortIsTaskPrivileged( void ) PRIVILEGED_FUNCTION;
  471:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  472:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #endif /* configENABLE_MPU == 1 */
@@ -595,12 +598,12 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
  521:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  * limited by the 24 bit resolution of the SysTick timer.
  522:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  */
  523:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     PRIVILEGED_DATA static uint32_t xMaximumPossibleSuppressedTicks = 0;
+ARM GAS  /tmp/ccsuQooq.s 			page 11
+
+
  524:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  525:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** /**
  526:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  * @brief Compensate for the CPU cycles that pass while the SysTick is
-ARM GAS  /tmp/ccQesb1V.s 			page 11
-
-
  527:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  * stopped (low power functionality only).
  528:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****  */
  529:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     PRIVILEGED_DATA static uint32_t ulStoppedTimerCompensation = 0;
@@ -655,12 +658,12 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
  578:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  579:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             /* Calculate the reload value required to wait xExpectedIdleTime
  580:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****              * tick periods.  -1 is used because this code normally executes part
+ARM GAS  /tmp/ccsuQooq.s 			page 12
+
+
  581:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****              * way through the first tick period.  But if the SysTick IRQ is now
  582:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****              * pending, then clear the IRQ, suppressing the first tick, and correct
  583:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****              * the reload value to reflect that the second tick period is already
-ARM GAS  /tmp/ccQesb1V.s 			page 12
-
-
  584:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****              * underway.  The expected idle time is always at least two ticks. */
  585:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             ulReloadValue = ulSysTickDecrementsLeft + ( ulTimerCountsForOneTick * ( xExpectedIdleTi
  586:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
@@ -715,12 +718,12 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
  635:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****              * time. */
  636:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             __asm volatile ( "cpsid i" ::: "memory" );
  637:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             __asm volatile ( "dsb" );
+ARM GAS  /tmp/ccsuQooq.s 			page 13
+
+
  638:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             __asm volatile ( "isb" );
  639:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  640:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             /* Disable the SysTick clock without reading the
-ARM GAS  /tmp/ccQesb1V.s 			page 13
-
-
  641:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****              * portNVIC_SYSTICK_CTRL_REG register to ensure the
  642:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****              * portNVIC_SYSTICK_COUNT_FLAG_BIT is not cleared if it is set.  Again,
  643:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****              * the time the SysTick is stopped for is accounted for as best it can
@@ -775,12 +778,12 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
  692:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                         ulSysTickDecrementsLeft = ulReloadValue;
  693:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                     }
  694:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                 }
+ARM GAS  /tmp/ccsuQooq.s 			page 14
+
+
  695:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                 #endif /* portNVIC_SYSTICK_CLK_BIT_CONFIG */
  696:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  697:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                 /* Work out how long the sleep lasted rounded to complete tick
-ARM GAS  /tmp/ccQesb1V.s 			page 14
-
-
  698:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                  * periods (not the ulReload value which accounted for part
  699:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                  * ticks). */
  700:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                 ulCompletedSysTickDecrements = ( xExpectedIdleTime * ulTimerCountsForOneTick ) - ul
@@ -835,12 +838,22 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
  749:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #endif /* configUSE_TICKLESS_IDLE */
  750:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** /*-----------------------------------------------------------*/
  751:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
+ARM GAS  /tmp/ccsuQooq.s 			page 15
+
+
  752:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** __attribute__( ( weak ) ) void vPortSetupTimerInterrupt( void ) /* PRIVILEGED_FUNCTION */
  753:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** {
+  57              		.loc 1 753 1
+  58              		.cfi_startproc
+  59              		@ args = 0, pretend = 0, frame = 0
+  60              		@ frame_needed = 1, uses_anonymous_args = 0
+  61              		@ link register save eliminated.
+  62 0000 80B4     		push	{r7}
+  63              		.cfi_def_cfa_offset 4
+  64              		.cfi_offset 7, -4
+  65 0002 00AF     		add	r7, sp, #0
+  66              		.cfi_def_cfa_register 7
  754:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     /* Calculate the constants required to configure the tick interrupt. */
-ARM GAS  /tmp/ccQesb1V.s 			page 15
-
-
  755:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     #if ( configUSE_TICKLESS_IDLE == 1 )
  756:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     {
  757:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         ulTimerCountsForOneTick = ( configSYSTICK_CLOCK_HZ / configTICK_RATE_HZ );
@@ -851,31 +864,106 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
  762:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  763:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     /* Stop and reset the SysTick. */
  764:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     portNVIC_SYSTICK_CTRL_REG = 0UL;
+  67              		.loc 1 764 5
+  68 0004 0B4B     		ldr	r3, .L2
+  69              		.loc 1 764 31
+  70 0006 0022     		movs	r2, #0
+  71 0008 1A60     		str	r2, [r3]
  765:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     portNVIC_SYSTICK_CURRENT_VALUE_REG = 0UL;
+  72              		.loc 1 765 5
+  73 000a 0B4B     		ldr	r3, .L2+4
+  74              		.loc 1 765 40
+  75 000c 0022     		movs	r2, #0
+  76 000e 1A60     		str	r2, [r3]
  766:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  767:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     /* Configure SysTick to interrupt at the requested rate. */
  768:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     portNVIC_SYSTICK_LOAD_REG = ( configSYSTICK_CLOCK_HZ / configTICK_RATE_HZ ) - 1UL;
+  77              		.loc 1 768 58
+  78 0010 0A4B     		ldr	r3, .L2+8
+  79 0012 1B68     		ldr	r3, [r3]
+  80 0014 0A4A     		ldr	r2, .L2+12
+  81 0016 A2FB0323 		umull	r2, r3, r2, r3
+  82 001a 9B09     		lsrs	r3, r3, #6
+  83              		.loc 1 768 5
+  84 001c 094A     		ldr	r2, .L2+16
+  85              		.loc 1 768 81
+  86 001e 013B     		subs	r3, r3, #1
+  87              		.loc 1 768 31
+  88 0020 1360     		str	r3, [r2]
  769:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     portNVIC_SYSTICK_CTRL_REG = portNVIC_SYSTICK_CLK_BIT_CONFIG | portNVIC_SYSTICK_INT_BIT | portNV
+  89              		.loc 1 769 5
+  90 0022 044B     		ldr	r3, .L2
+  91              		.loc 1 769 31
+  92 0024 0722     		movs	r2, #7
+  93 0026 1A60     		str	r2, [r3]
  770:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** }
+  94              		.loc 1 770 1
+ARM GAS  /tmp/ccsuQooq.s 			page 16
+
+
+  95 0028 00BF     		nop
+  96 002a BD46     		mov	sp, r7
+  97              		.cfi_def_cfa_register 13
+  98              		@ sp needed
+  99 002c 5DF8047B 		ldr	r7, [sp], #4
+ 100              		.cfi_restore 7
+ 101              		.cfi_def_cfa_offset 0
+ 102 0030 7047     		bx	lr
+ 103              	.L3:
+ 104 0032 00BF     		.align	2
+ 105              	.L2:
+ 106 0034 10E000E0 		.word	-536813552
+ 107 0038 18E000E0 		.word	-536813544
+ 108 003c 00000000 		.word	SystemCoreClock
+ 109 0040 D34D6210 		.word	274877907
+ 110 0044 14E000E0 		.word	-536813548
+ 111              		.cfi_endproc
+ 112              	.LFE0:
+ 114              		.section	.rodata
+ 115              		.align	2
+ 116              	.LC0:
+ 117 0000 3000     		.ascii	"0\000"
+ 118 0002 0000     		.align	2
+ 119              	.LC1:
+ 120 0004 4C69622F 		.ascii	"Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_s"
+ 120      46726565 
+ 120      52544F53 
+ 120      2F536F75 
+ 120      7263652F 
+ 121 0037 65637572 		.ascii	"ecure/port.c\000"
+ 121      652F706F 
+ 121      72742E63 
+ 121      00
+ 122              		.section	.text.prvTaskExitError,"ax",%progbits
+ 123              		.align	1
+ 124              		.syntax unified
+ 125              		.thumb
+ 126              		.thumb_func
+ 128              	prvTaskExitError:
+ 129              	.LFB1:
  771:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** /*-----------------------------------------------------------*/
  772:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  773:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** static void prvTaskExitError( void )
  774:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** {
-  39              		.loc 1 774 1 view -0
-  40              		.cfi_startproc
-  41              		@ args = 0, pretend = 0, frame = 8
-  42              		@ frame_needed = 0, uses_anonymous_args = 0
+ 130              		.loc 1 774 1
+ 131              		.cfi_startproc
+ 132              		@ args = 0, pretend = 0, frame = 8
+ 133              		@ frame_needed = 1, uses_anonymous_args = 0
+ 134 0000 80B5     		push	{r7, lr}
+ 135              		.cfi_def_cfa_offset 8
+ 136              		.cfi_offset 7, -8
+ 137              		.cfi_offset 14, -4
+ 138 0002 82B0     		sub	sp, sp, #8
+ 139              		.cfi_def_cfa_offset 16
+ 140 0004 00AF     		add	r7, sp, #0
+ 141              		.cfi_def_cfa_register 7
  775:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     volatile uint32_t ulDummy = 0UL;
-  43              		.loc 1 775 5 view .LVU1
-  44              		.loc 1 775 23 is_stmt 0 view .LVU2
-  45 0000 0023     		movs	r3, #0
- 774:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     volatile uint32_t ulDummy = 0UL;
-  46              		.loc 1 774 1 view .LVU3
-  47 0002 07B5     		push	{r0, r1, r2, lr}
-  48              		.cfi_def_cfa_offset 16
-  49              		.cfi_offset 14, -4
-  50              		.loc 1 775 23 view .LVU4
-  51 0004 0193     		str	r3, [sp, #4]
+ARM GAS  /tmp/ccsuQooq.s 			page 17
+
+
+ 142              		.loc 1 775 23
+ 143 0006 0023     		movs	r3, #0
+ 144 0008 7B60     		str	r3, [r7, #4]
  776:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  777:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     /* A function that implements a task must not exit or attempt to return to
  778:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****      * its caller as there is nothing to return to. If a task wants to exit it
@@ -883,41 +971,31 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
  780:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****      * to be triggered if configASSERT() is defined, then stop here so
  781:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****      * application writers can catch the error. */
  782:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     configASSERT( ulCriticalNesting == ~0UL );
-  52              		.loc 1 782 5 is_stmt 1 view .LVU5
-  53 0006 0A4B     		ldr	r3, .L6
-  54 0008 1B68     		ldr	r3, [r3]
-  55 000a 0133     		adds	r3, r3, #1
-  56 000c 08D0     		beq	.L2
-  57              	.LBB4:
-  58              	.LBI4:
- 773:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** {
-  59              		.loc 1 773 13 view .LVU6
-  60              	.LBB5:
-  61              		.loc 1 782 5 discriminator 1 view .LVU7
-  62 000e FFF7FEFF 		bl	ulSetInterruptMask
-  63              	.LVL0:
-  64              		.loc 1 782 5 discriminator 1 view .LVU8
-  65 0012 40F20E31 		movw	r1, #782
-ARM GAS  /tmp/ccQesb1V.s 			page 16
-
-
-  66 0016 074B     		ldr	r3, .L6+4
-  67 0018 074A     		ldr	r2, .L6+8
-  68 001a 0848     		ldr	r0, .L6+12
-  69 001c FFF7FEFF 		bl	__assert_func
-  70              	.LVL1:
-  71              	.L2:
-  72              	.LBE5:
-  73              	.LBE4:
-  74              		.loc 1 782 46 discriminator 2 view .LVU9
+ 145              		.loc 1 782 5
+ 146 000a 0C4B     		ldr	r3, .L7
+ 147 000c 1B68     		ldr	r3, [r3]
+ 148 000e B3F1FF3F 		cmp	r3, #-1
+ 149 0012 08D0     		beq	.L5
+ 150              		.loc 1 782 5 is_stmt 0 discriminator 1
+ 151 0014 FFF7FEFF 		bl	ulSetInterruptMask
+ 152 0018 094B     		ldr	r3, .L7+4
+ 153 001a 0A4A     		ldr	r2, .L7+8
+ 154 001c 40F20E31 		movw	r1, #782
+ 155 0020 0948     		ldr	r0, .L7+12
+ 156 0022 FFF7FEFF 		bl	__assert_func
+ 157              	.L5:
  783:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     portDISABLE_INTERRUPTS();
-  75              		.loc 1 783 5 view .LVU10
-  76 0020 FFF7FEFF 		bl	ulSetInterruptMask
-  77              	.LVL2:
+ 158              		.loc 1 783 5 is_stmt 1
+ 159 0026 FFF7FEFF 		bl	ulSetInterruptMask
  784:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  785:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     while( ulDummy == 0 )
-  78              		.loc 1 785 5 view .LVU11
-  79              	.L3:
+ 160              		.loc 1 785 10
+ 161 002a 00BF     		nop
+ 162              	.L6:
+ 163              		.loc 1 785 20 discriminator 1
+ 164 002c 7B68     		ldr	r3, [r7, #4]
+ 165 002e 002B     		cmp	r3, #0
+ 166 0030 FCD0     		beq	.L6
  786:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     {
  787:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         /* This file calls prvTaskExitError() after the scheduler has been
  788:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * started to remove a compiler warning about the function being
@@ -927,100 +1005,35 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
  792:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * and therefore not output an 'unreachable code' warning for code that
  793:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * appears after it. */
  794:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     }
-  80              		.loc 1 794 5 view .LVU12
- 785:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     {
-  81              		.loc 1 785 20 discriminator 1 view .LVU13
-  82 0024 019B     		ldr	r3, [sp, #4]
-  83 0026 002B     		cmp	r3, #0
-  84 0028 FCD0     		beq	.L3
  795:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** }
-  85              		.loc 1 795 1 is_stmt 0 view .LVU14
-  86 002a 03B0     		add	sp, sp, #12
-  87              		.cfi_def_cfa_offset 4
-  88              		@ sp needed
-  89 002c 5DF804FB 		ldr	pc, [sp], #4
-  90              	.L7:
-  91              		.align	2
-  92              	.L6:
-  93 0030 00000000 		.word	ulCriticalNesting
-  94 0034 00000000 		.word	.LC0
-  95 0038 00000000 		.word	__func__.3
-  96 003c 02000000 		.word	.LC1
-  97              		.cfi_endproc
-  98              	.LFE1:
- 100              		.section	.text.vPortSetupTimerInterrupt,"ax",%progbits
- 101              		.align	1
- 102              		.weak	vPortSetupTimerInterrupt
- 103              		.syntax unified
- 104              		.thumb
- 105              		.thumb_func
- 107              	vPortSetupTimerInterrupt:
- 108              	.LFB0:
- 753:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     /* Calculate the constants required to configure the tick interrupt. */
- 109              		.loc 1 753 1 is_stmt 1 view -0
-ARM GAS  /tmp/ccQesb1V.s 			page 17
+ 167              		.loc 1 795 1
+ 168 0032 00BF     		nop
+ 169 0034 00BF     		nop
+ 170 0036 0837     		adds	r7, r7, #8
+ 171              		.cfi_def_cfa_offset 8
+ 172 0038 BD46     		mov	sp, r7
+ 173              		.cfi_def_cfa_register 13
+ 174              		@ sp needed
+ 175 003a 80BD     		pop	{r7, pc}
+ 176              	.L8:
+ 177              		.align	2
+ 178              	.L7:
+ARM GAS  /tmp/ccsuQooq.s 			page 18
 
 
- 110              		.cfi_startproc
- 111              		@ args = 0, pretend = 0, frame = 0
- 112              		@ frame_needed = 0, uses_anonymous_args = 0
- 113              		@ link register save eliminated.
- 764:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     portNVIC_SYSTICK_CURRENT_VALUE_REG = 0UL;
- 114              		.loc 1 764 5 view .LVU16
- 764:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     portNVIC_SYSTICK_CURRENT_VALUE_REG = 0UL;
- 115              		.loc 1 764 31 is_stmt 0 view .LVU17
- 116 0000 4FF0E022 		mov	r2, #-536813568
- 117 0004 0023     		movs	r3, #0
- 768:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     portNVIC_SYSTICK_CTRL_REG = portNVIC_SYSTICK_CLK_BIT_CONFIG | portNVIC_SYSTICK_INT_BIT | portNV
- 118              		.loc 1 768 58 view .LVU18
- 119 0006 4FF47A71 		mov	r1, #1000
- 764:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     portNVIC_SYSTICK_CURRENT_VALUE_REG = 0UL;
- 120              		.loc 1 764 31 view .LVU19
- 121 000a 1361     		str	r3, [r2, #16]
- 765:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
- 122              		.loc 1 765 5 is_stmt 1 view .LVU20
- 765:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
- 123              		.loc 1 765 40 is_stmt 0 view .LVU21
- 124 000c 9361     		str	r3, [r2, #24]
- 768:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     portNVIC_SYSTICK_CTRL_REG = portNVIC_SYSTICK_CLK_BIT_CONFIG | portNVIC_SYSTICK_INT_BIT | portNV
- 125              		.loc 1 768 5 is_stmt 1 view .LVU22
- 768:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     portNVIC_SYSTICK_CTRL_REG = portNVIC_SYSTICK_CLK_BIT_CONFIG | portNVIC_SYSTICK_INT_BIT | portNV
- 126              		.loc 1 768 58 is_stmt 0 view .LVU23
- 127 000e 044B     		ldr	r3, .L9
- 128 0010 1B68     		ldr	r3, [r3]
- 129 0012 B3FBF1F3 		udiv	r3, r3, r1
- 768:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     portNVIC_SYSTICK_CTRL_REG = portNVIC_SYSTICK_CLK_BIT_CONFIG | portNVIC_SYSTICK_INT_BIT | portNV
- 130              		.loc 1 768 81 view .LVU24
- 131 0016 013B     		subs	r3, r3, #1
- 768:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     portNVIC_SYSTICK_CTRL_REG = portNVIC_SYSTICK_CLK_BIT_CONFIG | portNVIC_SYSTICK_INT_BIT | portNV
- 132              		.loc 1 768 31 view .LVU25
- 133 0018 5361     		str	r3, [r2, #20]
- 769:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** }
- 134              		.loc 1 769 5 is_stmt 1 view .LVU26
- 769:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** }
- 135              		.loc 1 769 31 is_stmt 0 view .LVU27
- 136 001a 0723     		movs	r3, #7
- 137 001c 1361     		str	r3, [r2, #16]
- 770:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** /*-----------------------------------------------------------*/
- 138              		.loc 1 770 1 view .LVU28
- 139 001e 7047     		bx	lr
- 140              	.L10:
- 141              		.align	2
- 142              	.L9:
- 143 0020 00000000 		.word	SystemCoreClock
- 144              		.cfi_endproc
- 145              	.LFE0:
- 147              		.section	.text.vPortYield,"ax",%progbits
- 148              		.align	1
- 149              		.global	vPortYield
- 150              		.syntax unified
- 151              		.thumb
- 152              		.thumb_func
- 154              	vPortYield:
- 155              	.LFB3:
-ARM GAS  /tmp/ccQesb1V.s 			page 18
-
-
+ 179 003c 00000000 		.word	ulCriticalNesting
+ 180 0040 00000000 		.word	.LC0
+ 181 0044 00000000 		.word	__func__.5
+ 182 0048 04000000 		.word	.LC1
+ 183              		.cfi_endproc
+ 184              	.LFE1:
+ 186              		.section	.text.prvSetupFPU,"ax",%progbits
+ 187              		.align	1
+ 188              		.syntax unified
+ 189              		.thumb
+ 190              		.thumb_func
+ 192              	prvSetupFPU:
+ 193              	.LFB2:
  796:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** /*-----------------------------------------------------------*/
  797:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  798:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #if ( configENABLE_MPU == 1 )
@@ -1065,6 +1078,9 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
  837:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             extern uint32_t __syscalls_flash_end__[];
  838:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             extern uint32_t __unprivileged_flash_start__[];
  839:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             extern uint32_t __unprivileged_flash_end__[];
+ARM GAS  /tmp/ccsuQooq.s 			page 19
+
+
  840:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             extern uint32_t __privileged_sram_start__[];
  841:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             extern uint32_t __privileged_sram_end__[];
  842:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         #endif /* defined( __ARMCC_VERSION ) */
@@ -1078,9 +1094,6 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
  850:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         /* Check that the MPU is present. */
  851:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         if( portMPU_TYPE_REG == portEXPECTED_MPU_TYPE_VALUE )
  852:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         {
-ARM GAS  /tmp/ccQesb1V.s 			page 19
-
-
  853:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             /* MAIR0 - Index 0. */
  854:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             portMPU_MAIR0_REG |= ( ( portMPU_NORMAL_MEMORY_BUFFERABLE_CACHEABLE << portMPU_MAIR_ATT
  855:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             /* MAIR0 - Index 1. */
@@ -1125,6 +1138,9 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
  894:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             portMPU_RLAR_REG = ( ( ( uint32_t ) __privileged_sram_end__ ) & portMPU_RLAR_ADDRESS_MA
  895:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                                ( portMPU_RLAR_ATTR_INDEX0 ) |
  896:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                                ( portMPU_RLAR_REGION_ENABLE );
+ARM GAS  /tmp/ccsuQooq.s 			page 20
+
+
  897:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  898:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             /* Enable mem fault. */
  899:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             portSCB_SYS_HANDLER_CTRL_STATE_REG |= portSCB_MEM_FAULT_ENABLE_BIT;
@@ -1138,11 +1154,18 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
  907:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** /*-----------------------------------------------------------*/
  908:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  909:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #if ( configENABLE_FPU == 1 )
-ARM GAS  /tmp/ccQesb1V.s 			page 20
-
-
  910:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     static void prvSetupFPU( void ) /* PRIVILEGED_FUNCTION */
  911:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     {
+ 194              		.loc 1 911 5
+ 195              		.cfi_startproc
+ 196              		@ args = 0, pretend = 0, frame = 0
+ 197              		@ frame_needed = 1, uses_anonymous_args = 0
+ 198              		@ link register save eliminated.
+ 199 0000 80B4     		push	{r7}
+ 200              		.cfi_def_cfa_offset 4
+ 201              		.cfi_offset 7, -4
+ 202 0002 00AF     		add	r7, sp, #0
+ 203              		.cfi_def_cfa_register 7
  912:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         #if ( configENABLE_TRUSTZONE == 1 )
  913:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         {
  914:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             /* Enable non-secure access to the FPU. */
@@ -1154,6 +1177,13 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
  920:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * unprivileged code should be able to access FPU. CP11 should be
  921:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * programmed to the same value as CP10. */
  922:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         *( portCPACR ) |= ( ( portCPACR_CP10_VALUE << portCPACR_CP10_POS ) |
+ 204              		.loc 1 922 9
+ 205 0004 084B     		ldr	r3, .L10
+ 206 0006 1B68     		ldr	r3, [r3]
+ 207 0008 074A     		ldr	r2, .L10
+ 208              		.loc 1 922 24
+ 209 000a 43F47003 		orr	r3, r3, #15728640
+ 210 000e 1360     		str	r3, [r2]
  923:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                             ( portCPACR_CP11_VALUE << portCPACR_CP11_POS )
  924:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                             );
  925:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
@@ -1161,287 +1191,333 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
  927:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * context on exception entry and restore on exception return.
  928:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * LSPEN = 1 ==> Enable lazy context save of FP state. */
  929:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         *( portFPCCR ) |= ( portFPCCR_ASPEN_MASK | portFPCCR_LSPEN_MASK );
+ 211              		.loc 1 929 9
+ 212 0010 064B     		ldr	r3, .L10+4
+ 213 0012 1B68     		ldr	r3, [r3]
+ 214 0014 054A     		ldr	r2, .L10+4
+ 215              		.loc 1 929 24
+ 216 0016 43F04043 		orr	r3, r3, #-1073741824
+ 217 001a 1360     		str	r3, [r2]
+ARM GAS  /tmp/ccsuQooq.s 			page 21
+
+
  930:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     }
+ 218              		.loc 1 930 5
+ 219 001c 00BF     		nop
+ 220 001e BD46     		mov	sp, r7
+ 221              		.cfi_def_cfa_register 13
+ 222              		@ sp needed
+ 223 0020 5DF8047B 		ldr	r7, [sp], #4
+ 224              		.cfi_restore 7
+ 225              		.cfi_def_cfa_offset 0
+ 226 0024 7047     		bx	lr
+ 227              	.L11:
+ 228 0026 00BF     		.align	2
+ 229              	.L10:
+ 230 0028 88ED00E0 		.word	-536810104
+ 231 002c 34EF00E0 		.word	-536809676
+ 232              		.cfi_endproc
+ 233              	.LFE2:
+ 235              		.section	.text.vPortYield,"ax",%progbits
+ 236              		.align	1
+ 237              		.global	vPortYield
+ 238              		.syntax unified
+ 239              		.thumb
+ 240              		.thumb_func
+ 242              	vPortYield:
+ 243              	.LFB3:
  931:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #endif /* configENABLE_FPU */
  932:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** /*-----------------------------------------------------------*/
  933:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  934:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** void vPortYield( void ) /* PRIVILEGED_FUNCTION */
  935:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** {
- 156              		.loc 1 935 1 is_stmt 1 view -0
- 157              		.cfi_startproc
- 158              		@ args = 0, pretend = 0, frame = 0
- 159              		@ frame_needed = 0, uses_anonymous_args = 0
- 160              		@ link register save eliminated.
+ 244              		.loc 1 935 1
+ 245              		.cfi_startproc
+ 246              		@ args = 0, pretend = 0, frame = 0
+ 247              		@ frame_needed = 1, uses_anonymous_args = 0
+ 248              		@ link register save eliminated.
+ 249 0000 80B4     		push	{r7}
+ 250              		.cfi_def_cfa_offset 4
+ 251              		.cfi_offset 7, -4
+ 252 0002 00AF     		add	r7, sp, #0
+ 253              		.cfi_def_cfa_register 7
  936:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     /* Set a PendSV to request a context switch. */
  937:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     portNVIC_INT_CTRL_REG = portNVIC_PENDSVSET_BIT;
- 161              		.loc 1 937 5 view .LVU30
- 162              		.loc 1 937 27 is_stmt 0 view .LVU31
- 163 0000 4FF0E023 		mov	r3, #-536813568
- 164 0004 4FF08052 		mov	r2, #268435456
- 165 0008 C3F8042D 		str	r2, [r3, #3332]
+ 254              		.loc 1 937 5
+ 255 0004 064B     		ldr	r3, .L13
+ 256              		.loc 1 937 27
+ 257 0006 4FF08052 		mov	r2, #268435456
+ 258 000a 1A60     		str	r2, [r3]
  938:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  939:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     /* Barriers are normally not required but do ensure the code is
  940:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****      * completely within the specified behaviour for the architecture. */
  941:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     __asm volatile ( "dsb" ::: "memory" );
- 166              		.loc 1 941 5 is_stmt 1 view .LVU32
- 167              		.syntax unified
- 168              	@ 941 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c" 1
- 169 000c BFF34F8F 		dsb
- 170              	@ 0 "" 2
+ 259              		.loc 1 941 5
+ 260              		.syntax unified
+ 261              	@ 941 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c" 1
+ 262 000c BFF34F8F 		dsb
+ 263              	@ 0 "" 2
  942:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     __asm volatile ( "isb" );
- 171              		.loc 1 942 5 view .LVU33
- 172              	@ 942 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c" 1
- 173 0010 BFF36F8F 		isb
- 174              	@ 0 "" 2
+ARM GAS  /tmp/ccsuQooq.s 			page 22
+
+
+ 264              		.loc 1 942 5
+ 265              	@ 942 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c" 1
+ 266 0010 BFF36F8F 		isb
+ 267              	@ 0 "" 2
  943:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** }
- 175              		.loc 1 943 1 is_stmt 0 view .LVU34
- 176              		.thumb
- 177              		.syntax unified
- 178 0014 7047     		bx	lr
-ARM GAS  /tmp/ccQesb1V.s 			page 21
-
-
- 179              		.cfi_endproc
- 180              	.LFE3:
- 182              		.section	.text.vPortEnterCritical,"ax",%progbits
- 183              		.align	1
- 184              		.global	vPortEnterCritical
- 185              		.syntax unified
- 186              		.thumb
- 187              		.thumb_func
- 189              	vPortEnterCritical:
- 190              	.LFB4:
+ 268              		.loc 1 943 1
+ 269              		.thumb
+ 270              		.syntax unified
+ 271 0014 00BF     		nop
+ 272 0016 BD46     		mov	sp, r7
+ 273              		.cfi_def_cfa_register 13
+ 274              		@ sp needed
+ 275 0018 5DF8047B 		ldr	r7, [sp], #4
+ 276              		.cfi_restore 7
+ 277              		.cfi_def_cfa_offset 0
+ 278 001c 7047     		bx	lr
+ 279              	.L14:
+ 280 001e 00BF     		.align	2
+ 281              	.L13:
+ 282 0020 04ED00E0 		.word	-536810236
+ 283              		.cfi_endproc
+ 284              	.LFE3:
+ 286              		.section	.text.vPortEnterCritical,"ax",%progbits
+ 287              		.align	1
+ 288              		.global	vPortEnterCritical
+ 289              		.syntax unified
+ 290              		.thumb
+ 291              		.thumb_func
+ 293              	vPortEnterCritical:
+ 294              	.LFB4:
  944:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** /*-----------------------------------------------------------*/
  945:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  946:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** void vPortEnterCritical( void ) /* PRIVILEGED_FUNCTION */
  947:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** {
- 191              		.loc 1 947 1 is_stmt 1 view -0
- 192              		.cfi_startproc
- 193              		@ args = 0, pretend = 0, frame = 0
- 194              		@ frame_needed = 0, uses_anonymous_args = 0
+ 295              		.loc 1 947 1
+ 296              		.cfi_startproc
+ 297              		@ args = 0, pretend = 0, frame = 0
+ 298              		@ frame_needed = 1, uses_anonymous_args = 0
+ 299 0000 80B5     		push	{r7, lr}
+ 300              		.cfi_def_cfa_offset 8
+ 301              		.cfi_offset 7, -8
+ 302              		.cfi_offset 14, -4
+ 303 0002 00AF     		add	r7, sp, #0
+ 304              		.cfi_def_cfa_register 7
  948:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     portDISABLE_INTERRUPTS();
- 195              		.loc 1 948 5 view .LVU36
- 947:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     portDISABLE_INTERRUPTS();
- 196              		.loc 1 947 1 is_stmt 0 view .LVU37
- 197 0000 08B5     		push	{r3, lr}
- 198              		.cfi_def_cfa_offset 8
- 199              		.cfi_offset 3, -8
- 200              		.cfi_offset 14, -4
- 201              		.loc 1 948 5 view .LVU38
- 202 0002 FFF7FEFF 		bl	ulSetInterruptMask
- 203              	.LVL3:
+ 305              		.loc 1 948 5
+ 306 0004 FFF7FEFF 		bl	ulSetInterruptMask
  949:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     ulCriticalNesting++;
- 204              		.loc 1 949 5 is_stmt 1 view .LVU39
- 205              		.loc 1 949 22 is_stmt 0 view .LVU40
- 206 0006 044A     		ldr	r2, .L13
- 207 0008 1368     		ldr	r3, [r2]
- 208 000a 0133     		adds	r3, r3, #1
- 209 000c 1360     		str	r3, [r2]
+ 307              		.loc 1 949 22
+ 308 0008 054B     		ldr	r3, .L16
+ 309 000a 1B68     		ldr	r3, [r3]
+ 310 000c 0133     		adds	r3, r3, #1
+ 311 000e 044A     		ldr	r2, .L16
+ 312 0010 1360     		str	r3, [r2]
  950:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  951:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     /* Barriers are normally not required but do ensure the code is
  952:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****      * completely within the specified behaviour for the architecture. */
+ARM GAS  /tmp/ccsuQooq.s 			page 23
+
+
  953:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     __asm volatile ( "dsb" ::: "memory" );
- 210              		.loc 1 953 5 is_stmt 1 view .LVU41
- 211              		.syntax unified
- 212              	@ 953 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c" 1
- 213 000e BFF34F8F 		dsb
- 214              	@ 0 "" 2
+ 313              		.loc 1 953 5
+ 314              		.syntax unified
+ 315              	@ 953 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c" 1
+ 316 0012 BFF34F8F 		dsb
+ 317              	@ 0 "" 2
  954:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     __asm volatile ( "isb" );
- 215              		.loc 1 954 5 view .LVU42
- 216              	@ 954 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c" 1
- 217 0012 BFF36F8F 		isb
- 218              	@ 0 "" 2
+ 318              		.loc 1 954 5
+ 319              	@ 954 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c" 1
+ 320 0016 BFF36F8F 		isb
+ 321              	@ 0 "" 2
  955:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** }
- 219              		.loc 1 955 1 is_stmt 0 view .LVU43
- 220              		.thumb
- 221              		.syntax unified
- 222 0016 08BD     		pop	{r3, pc}
- 223              	.L14:
- 224              		.align	2
-ARM GAS  /tmp/ccQesb1V.s 			page 22
-
-
- 225              	.L13:
- 226 0018 00000000 		.word	ulCriticalNesting
- 227              		.cfi_endproc
- 228              	.LFE4:
- 230              		.section	.text.vPortExitCritical,"ax",%progbits
- 231              		.align	1
- 232              		.global	vPortExitCritical
- 233              		.syntax unified
- 234              		.thumb
- 235              		.thumb_func
- 237              	vPortExitCritical:
- 238              	.LFB5:
+ 322              		.loc 1 955 1
+ 323              		.thumb
+ 324              		.syntax unified
+ 325 001a 00BF     		nop
+ 326 001c 80BD     		pop	{r7, pc}
+ 327              	.L17:
+ 328 001e 00BF     		.align	2
+ 329              	.L16:
+ 330 0020 00000000 		.word	ulCriticalNesting
+ 331              		.cfi_endproc
+ 332              	.LFE4:
+ 334              		.section	.text.vPortExitCritical,"ax",%progbits
+ 335              		.align	1
+ 336              		.global	vPortExitCritical
+ 337              		.syntax unified
+ 338              		.thumb
+ 339              		.thumb_func
+ 341              	vPortExitCritical:
+ 342              	.LFB5:
  956:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** /*-----------------------------------------------------------*/
  957:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  958:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** void vPortExitCritical( void ) /* PRIVILEGED_FUNCTION */
  959:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** {
- 239              		.loc 1 959 1 is_stmt 1 view -0
- 240              		.cfi_startproc
- 241              		@ args = 0, pretend = 0, frame = 0
- 242              		@ frame_needed = 0, uses_anonymous_args = 0
+ 343              		.loc 1 959 1
+ 344              		.cfi_startproc
+ 345              		@ args = 0, pretend = 0, frame = 0
+ 346              		@ frame_needed = 1, uses_anonymous_args = 0
+ 347 0000 80B5     		push	{r7, lr}
+ 348              		.cfi_def_cfa_offset 8
+ 349              		.cfi_offset 7, -8
+ 350              		.cfi_offset 14, -4
+ 351 0002 00AF     		add	r7, sp, #0
+ 352              		.cfi_def_cfa_register 7
  960:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     configASSERT( ulCriticalNesting );
- 243              		.loc 1 960 5 view .LVU45
- 959:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     configASSERT( ulCriticalNesting );
- 244              		.loc 1 959 1 is_stmt 0 view .LVU46
- 245 0000 08B5     		push	{r3, lr}
- 246              		.cfi_def_cfa_offset 8
- 247              		.cfi_offset 3, -8
- 248              		.cfi_offset 14, -4
- 249              		.loc 1 960 5 view .LVU47
- 250 0002 0B4B     		ldr	r3, .L18
- 251 0004 1A68     		ldr	r2, [r3]
- 252 0006 42B9     		cbnz	r2, .L16
- 253              		.loc 1 960 5 is_stmt 1 discriminator 1 view .LVU48
- 254 0008 FFF7FEFF 		bl	ulSetInterruptMask
- 255              	.LVL4:
- 256              		.loc 1 960 5 discriminator 1 view .LVU49
- 257 000c 4FF47071 		mov	r1, #960
- 258 0010 084B     		ldr	r3, .L18+4
- 259 0012 094A     		ldr	r2, .L18+8
- 260 0014 0948     		ldr	r0, .L18+12
- 261 0016 FFF7FEFF 		bl	__assert_func
- 262              	.LVL5:
- 263              	.L16:
- 264              		.loc 1 960 38 discriminator 2 view .LVU50
+ 353              		.loc 1 960 5
+ 354 0004 0D4B     		ldr	r3, .L22
+ 355 0006 1B68     		ldr	r3, [r3]
+ 356 0008 002B     		cmp	r3, #0
+ 357 000a 08D1     		bne	.L19
+ 358              		.loc 1 960 5 is_stmt 0 discriminator 1
+ 359 000c FFF7FEFF 		bl	ulSetInterruptMask
+ 360 0010 0B4B     		ldr	r3, .L22+4
+ 361 0012 0C4A     		ldr	r2, .L22+8
+ 362 0014 4FF47071 		mov	r1, #960
+ 363 0018 0B48     		ldr	r0, .L22+12
+ARM GAS  /tmp/ccsuQooq.s 			page 24
+
+
+ 364 001a FFF7FEFF 		bl	__assert_func
+ 365              	.L19:
  961:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     ulCriticalNesting--;
- 265              		.loc 1 961 5 view .LVU51
- 266              		.loc 1 961 22 is_stmt 0 view .LVU52
- 267 001a 1A68     		ldr	r2, [r3]
- 268 001c 013A     		subs	r2, r2, #1
- 269 001e 1A60     		str	r2, [r3]
+ 366              		.loc 1 961 22 is_stmt 1
+ 367 001e 074B     		ldr	r3, .L22
+ 368 0020 1B68     		ldr	r3, [r3]
+ 369 0022 013B     		subs	r3, r3, #1
+ 370 0024 054A     		ldr	r2, .L22
+ 371 0026 1360     		str	r3, [r2]
  962:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  963:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     if( ulCriticalNesting == 0 )
- 270              		.loc 1 963 5 is_stmt 1 view .LVU53
- 271              		.loc 1 963 27 is_stmt 0 view .LVU54
- 272 0020 1868     		ldr	r0, [r3]
- 273              		.loc 1 963 7 view .LVU55
- 274 0022 18B9     		cbnz	r0, .L15
-ARM GAS  /tmp/ccQesb1V.s 			page 23
-
-
+ 372              		.loc 1 963 27
+ 373 0028 044B     		ldr	r3, .L22
+ 374 002a 1B68     		ldr	r3, [r3]
+ 375              		.loc 1 963 7
+ 376 002c 002B     		cmp	r3, #0
+ 377 002e 02D1     		bne	.L21
  964:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     {
  965:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         portENABLE_INTERRUPTS();
- 275              		.loc 1 965 9 is_stmt 1 view .LVU56
+ 378              		.loc 1 965 9
+ 379 0030 0020     		movs	r0, #0
+ 380 0032 FFF7FEFF 		bl	vClearInterruptMask
+ 381              	.L21:
  966:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     }
  967:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** }
- 276              		.loc 1 967 1 is_stmt 0 view .LVU57
- 277 0024 BDE80840 		pop	{r3, lr}
- 278              		.cfi_remember_state
- 279              		.cfi_restore 14
- 280              		.cfi_restore 3
- 281              		.cfi_def_cfa_offset 0
- 965:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     }
- 282              		.loc 1 965 9 view .LVU58
- 283 0028 FFF7FEBF 		b	vClearInterruptMask
- 284              	.LVL6:
- 285              	.L15:
- 286              		.cfi_restore_state
- 287              		.loc 1 967 1 view .LVU59
- 288 002c 08BD     		pop	{r3, pc}
- 289              	.L19:
- 290 002e 00BF     		.align	2
- 291              	.L18:
- 292 0030 00000000 		.word	ulCriticalNesting
- 293 0034 00000000 		.word	.LC0
- 294 0038 00000000 		.word	__func__.5
- 295 003c 02000000 		.word	.LC1
- 296              		.cfi_endproc
- 297              	.LFE5:
- 299              		.section	.text.SysTick_Handler,"ax",%progbits
- 300              		.align	1
- 301              		.global	SysTick_Handler
- 302              		.syntax unified
- 303              		.thumb
- 304              		.thumb_func
- 306              	SysTick_Handler:
- 307              	.LFB6:
+ 382              		.loc 1 967 1
+ 383 0036 00BF     		nop
+ 384 0038 80BD     		pop	{r7, pc}
+ 385              	.L23:
+ 386 003a 00BF     		.align	2
+ 387              	.L22:
+ 388 003c 00000000 		.word	ulCriticalNesting
+ 389 0040 00000000 		.word	.LC0
+ 390 0044 00000000 		.word	__func__.4
+ 391 0048 04000000 		.word	.LC1
+ 392              		.cfi_endproc
+ 393              	.LFE5:
+ 395              		.section	.text.SysTick_Handler,"ax",%progbits
+ 396              		.align	1
+ 397              		.global	SysTick_Handler
+ 398              		.syntax unified
+ 399              		.thumb
+ 400              		.thumb_func
+ 402              	SysTick_Handler:
+ 403              	.LFB6:
  968:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** /*-----------------------------------------------------------*/
  969:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  970:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** void SysTick_Handler( void ) /* PRIVILEGED_FUNCTION */
  971:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** {
- 308              		.loc 1 971 1 is_stmt 1 view -0
- 309              		.cfi_startproc
- 310              		@ args = 0, pretend = 0, frame = 0
- 311              		@ frame_needed = 0, uses_anonymous_args = 0
+ 404              		.loc 1 971 1
+ 405              		.cfi_startproc
+ 406              		@ args = 0, pretend = 0, frame = 8
+ 407              		@ frame_needed = 1, uses_anonymous_args = 0
+ 408 0000 80B5     		push	{r7, lr}
+ 409              		.cfi_def_cfa_offset 8
+ 410              		.cfi_offset 7, -8
+ 411              		.cfi_offset 14, -4
+ARM GAS  /tmp/ccsuQooq.s 			page 25
+
+
+ 412 0002 82B0     		sub	sp, sp, #8
+ 413              		.cfi_def_cfa_offset 16
+ 414 0004 00AF     		add	r7, sp, #0
+ 415              		.cfi_def_cfa_register 7
  972:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     uint32_t ulPreviousMask;
- 312              		.loc 1 972 5 view .LVU61
  973:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  974:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     ulPreviousMask = portSET_INTERRUPT_MASK_FROM_ISR();
- 313              		.loc 1 974 5 view .LVU62
- 971:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     uint32_t ulPreviousMask;
- 314              		.loc 1 971 1 is_stmt 0 view .LVU63
- 315 0000 10B5     		push	{r4, lr}
- 316              		.cfi_def_cfa_offset 8
- 317              		.cfi_offset 4, -8
- 318              		.cfi_offset 14, -4
- 319              		.loc 1 974 22 view .LVU64
- 320 0002 FFF7FEFF 		bl	ulSetInterruptMask
-ARM GAS  /tmp/ccQesb1V.s 			page 24
-
-
- 321              	.LVL7:
- 322 0006 0446     		mov	r4, r0
- 323              	.LVL8:
+ 416              		.loc 1 974 22
+ 417 0006 FFF7FEFF 		bl	ulSetInterruptMask
+ 418 000a 7860     		str	r0, [r7, #4]
  975:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     {
  976:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         /* Increment the RTOS tick. */
  977:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         if( xTaskIncrementTick() != pdFALSE )
- 324              		.loc 1 977 9 is_stmt 1 view .LVU65
- 325              		.loc 1 977 13 is_stmt 0 view .LVU66
- 326 0008 FFF7FEFF 		bl	xTaskIncrementTick
- 327              	.LVL9:
- 328              		.loc 1 977 11 discriminator 1 view .LVU67
- 329 000c 28B1     		cbz	r0, .L21
+ 419              		.loc 1 977 13
+ 420 000c FFF7FEFF 		bl	xTaskIncrementTick
+ 421 0010 0346     		mov	r3, r0
+ 422              		.loc 1 977 11 discriminator 1
+ 423 0012 002B     		cmp	r3, #0
+ 424 0014 03D0     		beq	.L25
  978:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         {
  979:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             /* Pend a context switch. */
  980:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             portNVIC_INT_CTRL_REG = portNVIC_PENDSVSET_BIT;
- 330              		.loc 1 980 13 is_stmt 1 view .LVU68
- 331              		.loc 1 980 35 is_stmt 0 view .LVU69
- 332 000e 4FF0E023 		mov	r3, #-536813568
- 333 0012 4FF08052 		mov	r2, #268435456
- 334 0016 C3F8042D 		str	r2, [r3, #3332]
- 335              	.L21:
+ 425              		.loc 1 980 13
+ 426 0016 054B     		ldr	r3, .L26
+ 427              		.loc 1 980 35
+ 428 0018 4FF08052 		mov	r2, #268435456
+ 429 001c 1A60     		str	r2, [r3]
+ 430              	.L25:
  981:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         }
  982:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     }
  983:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     portCLEAR_INTERRUPT_MASK_FROM_ISR( ulPreviousMask );
- 336              		.loc 1 983 5 is_stmt 1 view .LVU70
- 337 001a 2046     		mov	r0, r4
+ 431              		.loc 1 983 5
+ 432 001e 7868     		ldr	r0, [r7, #4]
+ 433 0020 FFF7FEFF 		bl	vClearInterruptMask
  984:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** }
- 338              		.loc 1 984 1 is_stmt 0 view .LVU71
- 339 001c BDE81040 		pop	{r4, lr}
- 340              		.cfi_restore 14
- 341              		.cfi_restore 4
- 342              		.cfi_def_cfa_offset 0
- 343              	.LVL10:
- 983:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** }
- 344              		.loc 1 983 5 view .LVU72
- 345 0020 FFF7FEBF 		b	vClearInterruptMask
- 346              	.LVL11:
- 983:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** }
- 347              		.loc 1 983 5 view .LVU73
- 348              		.cfi_endproc
- 349              	.LFE6:
- 351              		.section	.text.vPortSVCHandler_C,"ax",%progbits
- 352              		.align	1
- 353              		.global	vPortSVCHandler_C
- 354              		.syntax unified
- 355              		.thumb
- 356              		.thumb_func
- 358              	vPortSVCHandler_C:
- 359              	.LVL12:
- 360              	.LFB7:
+ 434              		.loc 1 984 1
+ 435 0024 00BF     		nop
+ 436 0026 0837     		adds	r7, r7, #8
+ 437              		.cfi_def_cfa_offset 8
+ 438 0028 BD46     		mov	sp, r7
+ 439              		.cfi_def_cfa_register 13
+ 440              		@ sp needed
+ 441 002a 80BD     		pop	{r7, pc}
+ 442              	.L27:
+ 443              		.align	2
+ 444              	.L26:
+ 445 002c 04ED00E0 		.word	-536810236
+ 446              		.cfi_endproc
+ 447              	.LFE6:
+ 449              		.section	.text.vPortSVCHandler_C,"ax",%progbits
+ 450              		.align	1
+ 451              		.global	vPortSVCHandler_C
+ 452              		.syntax unified
+ 453              		.thumb
+ 454              		.thumb_func
+ 456              	vPortSVCHandler_C:
+ 457              	.LFB7:
+ARM GAS  /tmp/ccsuQooq.s 			page 26
+
+
  985:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** /*-----------------------------------------------------------*/
  986:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
  987:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** void vPortSVCHandler_C( uint32_t * pulCallerStackAddress ) /* PRIVILEGED_FUNCTION portDONT_DISCARD 
  988:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** {
- 361              		.loc 1 988 1 is_stmt 1 view -0
- 362              		.cfi_startproc
- 363              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  /tmp/ccQesb1V.s 			page 25
-
-
- 364              		@ frame_needed = 0, uses_anonymous_args = 0
+ 458              		.loc 1 988 1
+ 459              		.cfi_startproc
+ 460              		@ args = 0, pretend = 0, frame = 16
+ 461              		@ frame_needed = 1, uses_anonymous_args = 0
+ 462 0000 80B5     		push	{r7, lr}
+ 463              		.cfi_def_cfa_offset 8
+ 464              		.cfi_offset 7, -8
+ 465              		.cfi_offset 14, -4
+ 466 0002 84B0     		sub	sp, sp, #16
+ 467              		.cfi_def_cfa_offset 24
+ 468 0004 00AF     		add	r7, sp, #0
+ 469              		.cfi_def_cfa_register 7
+ 470 0006 7860     		str	r0, [r7, #4]
  989:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     #if ( ( configENABLE_MPU == 1 ) && ( configUSE_MPU_WRAPPERS_V1 == 1 ) )
  990:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         #if defined( __ARMCC_VERSION )
  991:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             /* Declaration when these variable are defined in code instead of being
@@ -1456,7 +1532,6 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1000:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     #endif /* ( configENABLE_MPU == 1 ) && ( configUSE_MPU_WRAPPERS_V1 == 1 ) */
 1001:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1002:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     uint32_t ulPC;
- 365              		.loc 1 1002 5 view .LVU75
 1003:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1004:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     #if ( configENABLE_TRUSTZONE == 1 )
 1005:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         uint32_t ulR0, ulR1;
@@ -1466,30 +1541,30 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1009:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         #endif /* configENABLE_MPU */
 1010:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     #endif /* configENABLE_TRUSTZONE */
 1011:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     uint8_t ucSVCNumber;
- 366              		.loc 1 1011 5 view .LVU76
 1012:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1013:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     /* Register are stored on the stack in the following order - R0, R1, R2, R3,
 1014:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****      * R12, LR, PC, xPSR. */
 1015:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     ulPC = pulCallerStackAddress[ portOFFSET_TO_PC ];
- 367              		.loc 1 1015 5 view .LVU77
+ 471              		.loc 1 1015 10
+ 472 0008 7B68     		ldr	r3, [r7, #4]
+ 473 000a 9B69     		ldr	r3, [r3, #24]
+ 474 000c FB60     		str	r3, [r7, #12]
 1016:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     ucSVCNumber = ( ( uint8_t * ) ulPC )[ -2 ];
- 368              		.loc 1 1016 5 view .LVU78
+ 475              		.loc 1 1016 41
+ 476 000e FB68     		ldr	r3, [r7, #12]
+ 477 0010 023B     		subs	r3, r3, #2
+ 478              		.loc 1 1016 17
+ 479 0012 1B78     		ldrb	r3, [r3]
+ 480 0014 FB72     		strb	r3, [r7, #11]
 1017:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1018:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     switch( ucSVCNumber )
- 369              		.loc 1 1018 5 view .LVU79
- 988:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     #if ( ( configENABLE_MPU == 1 ) && ( configUSE_MPU_WRAPPERS_V1 == 1 ) )
- 370              		.loc 1 988 1 is_stmt 0 view .LVU80
- 371 0000 08B5     		push	{r3, lr}
- 372              		.cfi_def_cfa_offset 8
- 373              		.cfi_offset 3, -8
- 374              		.cfi_offset 14, -4
-1016:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     ucSVCNumber = ( ( uint8_t * ) ulPC )[ -2 ];
- 375              		.loc 1 1016 17 view .LVU81
- 376 0002 8369     		ldr	r3, [r0, #24]
- 377              		.loc 1 1018 5 view .LVU82
- 378 0004 13F8023C 		ldrb	r3, [r3, #-2]	@ zero_extendqisi2
- 379 0008 662B     		cmp	r3, #102
- 380 000a 11D1     		bne	.L26
+ARM GAS  /tmp/ccsuQooq.s 			page 27
+
+
+ 481              		.loc 1 1018 5
+ 482 0016 FB7A     		ldrb	r3, [r7, #11]	@ zero_extendqisi2
+ 483 0018 662B     		cmp	r3, #102
+ 484 001a 04D1     		bne	.L31
 1019:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     {
 1020:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         #if ( configENABLE_TRUSTZONE == 1 )
 1021:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             case portSVC_ALLOCATE_SECURE_CONTEXT:
@@ -1498,9 +1573,6 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1024:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                  * vPortAllocateSecureContext function. */
 1025:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                 ulR0 = pulCallerStackAddress[ 0 ];
 1026:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
-ARM GAS  /tmp/ccQesb1V.s 			page 26
-
-
 1027:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                 #if ( configENABLE_MPU == 1 )
 1028:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                 {
 1029:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                     /* Read the CONTROL register value. */
@@ -1546,47 +1618,29 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1069:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                 /* Initialize the secure context management system. */
 1070:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                 SecureContext_Init();
 1071:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             }
+ARM GAS  /tmp/ccsuQooq.s 			page 28
+
+
 1072:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             #endif /* configENABLE_TRUSTZONE */
 1073:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1074:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             #if ( configENABLE_FPU == 1 )
 1075:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             {
 1076:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                 /* Setup the Floating Point Unit (FPU). */
 1077:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                 prvSetupFPU();
- 381              		.loc 1 1077 17 is_stmt 1 view .LVU83
- 382              	.LBB8:
- 383              	.LBI8:
- 910:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     {
- 384              		.loc 1 910 17 view .LVU84
- 385              	.LBB9:
-ARM GAS  /tmp/ccQesb1V.s 			page 27
-
-
- 922:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                             ( portCPACR_CP11_VALUE << portCPACR_CP11_POS )
- 386              		.loc 1 922 9 view .LVU85
- 387 000c 4FF0E023 		mov	r3, #-536813568
- 388 0010 D3F8882D 		ldr	r2, [r3, #3464]
- 922:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                             ( portCPACR_CP11_VALUE << portCPACR_CP11_POS )
- 389              		.loc 1 922 24 is_stmt 0 view .LVU86
- 390 0014 42F47002 		orr	r2, r2, #15728640
- 391 0018 C3F8882D 		str	r2, [r3, #3464]
- 392              	.LVL13:
- 929:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     }
- 393              		.loc 1 929 9 is_stmt 1 view .LVU87
- 394 001c D3F8342F 		ldr	r2, [r3, #3892]
- 929:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     }
- 395              		.loc 1 929 24 is_stmt 0 view .LVU88
- 396 0020 42F04042 		orr	r2, r2, #-1073741824
- 397 0024 C3F8342F 		str	r2, [r3, #3892]
- 398              	.LBE9:
- 399              	.LBE8:
+ 485              		.loc 1 1077 17
+ 486 001c FFF7FEFF 		bl	prvSetupFPU
 1078:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             }
 1079:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             #endif /* configENABLE_FPU */
 1080:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1081:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             /* Setup the context of the first task so that the first task starts
 1082:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****              * executing. */
 1083:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             vRestoreContextOfFirstTask();
- 400              		.loc 1 1083 13 is_stmt 1 view .LVU89
+ 487              		.loc 1 1083 13
+ 488 0020 FFF7FEFF 		bl	vRestoreContextOfFirstTask
 1084:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             break;
+ 489              		.loc 1 1084 13
+ 490 0024 08E0     		b	.L32
+ 491              	.L31:
 1085:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1086:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         #if ( ( configENABLE_MPU == 1 ) && ( configUSE_MPU_WRAPPERS_V1 == 1 ) )
 1087:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             case portSVC_RAISE_PRIVILEGE:
@@ -1604,54 +1658,43 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1099:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         default:
 1100:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             /* Incorrect SVC call. */
 1101:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             configASSERT( pdFALSE );
+ 492              		.loc 1 1101 13 discriminator 1
+ 493 0026 FFF7FEFF 		bl	ulSetInterruptMask
+ 494 002a 054B     		ldr	r3, .L33
+ 495 002c 054A     		ldr	r2, .L33+4
+ 496 002e 40F24D41 		movw	r1, #1101
+ 497 0032 0548     		ldr	r0, .L33+8
+ 498 0034 FFF7FEFF 		bl	__assert_func
+ 499              	.L32:
 1102:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     }
 1103:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** }
- 401              		.loc 1 1103 1 is_stmt 0 view .LVU90
- 402 0028 BDE80840 		pop	{r3, lr}
- 403              		.cfi_remember_state
- 404              		.cfi_restore 14
- 405              		.cfi_restore 3
- 406              		.cfi_def_cfa_offset 0
-1083:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             break;
- 407              		.loc 1 1083 13 view .LVU91
- 408 002c FFF7FEBF 		b	vRestoreContextOfFirstTask
- 409              	.LVL14:
- 410              	.L26:
- 411              		.cfi_restore_state
-ARM GAS  /tmp/ccQesb1V.s 			page 28
+ 500              		.loc 1 1103 1
+ 501 0038 00BF     		nop
+ 502 003a 1037     		adds	r7, r7, #16
+ 503              		.cfi_def_cfa_offset 8
+ 504 003c BD46     		mov	sp, r7
+ 505              		.cfi_def_cfa_register 13
+ 506              		@ sp needed
+ 507 003e 80BD     		pop	{r7, pc}
+ 508              	.L34:
+ 509              		.align	2
+ARM GAS  /tmp/ccsuQooq.s 			page 29
 
 
-1101:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     }
- 412              		.loc 1 1101 13 is_stmt 1 view .LVU92
-1101:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     }
- 413              		.loc 1 1101 13 discriminator 1 view .LVU93
- 414 0030 FFF7FEFF 		bl	ulSetInterruptMask
- 415              	.LVL15:
-1101:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     }
- 416              		.loc 1 1101 13 discriminator 1 view .LVU94
- 417 0034 40F24D41 		movw	r1, #1101
- 418 0038 024B     		ldr	r3, .L27
- 419 003a 034A     		ldr	r2, .L27+4
- 420 003c 0348     		ldr	r0, .L27+8
- 421 003e FFF7FEFF 		bl	__assert_func
- 422              	.LVL16:
- 423              	.L28:
- 424 0042 00BF     		.align	2
- 425              	.L27:
- 426 0044 00000000 		.word	.LC0
- 427 0048 00000000 		.word	__func__.4
- 428 004c 02000000 		.word	.LC1
- 429              		.cfi_endproc
- 430              	.LFE7:
- 432              		.section	.text.pxPortInitialiseStack,"ax",%progbits
- 433              		.align	1
- 434              		.global	pxPortInitialiseStack
- 435              		.syntax unified
- 436              		.thumb
- 437              		.thumb_func
- 439              	pxPortInitialiseStack:
- 440              	.LVL17:
- 441              	.LFB8:
+ 510              	.L33:
+ 511 0040 00000000 		.word	.LC0
+ 512 0044 00000000 		.word	__func__.3
+ 513 0048 04000000 		.word	.LC1
+ 514              		.cfi_endproc
+ 515              	.LFE7:
+ 517              		.section	.text.pxPortInitialiseStack,"ax",%progbits
+ 518              		.align	1
+ 519              		.global	pxPortInitialiseStack
+ 520              		.syntax unified
+ 521              		.thumb
+ 522              		.thumb_func
+ 524              	pxPortInitialiseStack:
+ 525              	.LFB8:
 1104:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** /*-----------------------------------------------------------*/
 1105:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1106:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #if ( ( configENABLE_MPU == 1 ) && ( configUSE_MPU_WRAPPERS_V1 == 0 ) )
@@ -1678,9 +1721,6 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1127:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         #endif /* #if defined( __ARMCC_VERSION ) */
 1128:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1129:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         ulSystemCallLocation = pulTaskStack[ portOFFSET_TO_PC ];
-ARM GAS  /tmp/ccQesb1V.s 			page 29
-
-
 1130:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         pxMpuSettings = xTaskGetMPUSettings( pxCurrentTCB );
 1131:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1132:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         /* Checks:
@@ -1698,6 +1738,9 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1144:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         if( ( ulSystemCallLocation >= ( uint32_t ) __syscalls_flash_start__ ) &&
 1145:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             ( ulSystemCallLocation <= ( uint32_t ) __syscalls_flash_end__ ) &&
 1146:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             ( pxMpuSettings->xSystemCallStackInfo.pulTaskStack == NULL ) &&
+ARM GAS  /tmp/ccsuQooq.s 			page 30
+
+
 1147:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             ( uxSystemCallImplementations[ ucSystemCallNumber ] != ( UBaseType_t ) 0 ) )
 1148:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         {
 1149:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pulSystemCallStack = pxMpuSettings->xSystemCallStackInfo.pulSystemCallStack;
@@ -1738,9 +1781,6 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1184:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1185:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             /* Store the value of the Link Register before the SVC was raised.
 1186:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****              * It contains the address of the caller of the System Call entry
-ARM GAS  /tmp/ccQesb1V.s 			page 30
-
-
 1187:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****              * point (i.e. the caller of the MPU_<API>). We need to restore it
 1188:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****              * when we exit from the system call. */
 1189:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxMpuSettings->xSystemCallStackInfo.ulLinkRegisterAtSystemCallEntry = pulTaskStack[ por
@@ -1758,6 +1798,9 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1201:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1202:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             /* Raise a request to exit from the system call upon finishing the
 1203:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****              * system call. */
+ARM GAS  /tmp/ccsuQooq.s 			page 31
+
+
 1204:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pulSystemCallStack[ portOFFSET_TO_LR ] = ( uint32_t ) vRequestSystemCallExit;
 1205:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1206:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             /* Remember the location where we should copy the stack frame when we exit from
@@ -1798,9 +1841,6 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1241:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #if ( ( configENABLE_MPU == 1 ) && ( configUSE_MPU_WRAPPERS_V1 == 0 ) )
 1242:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1243:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     void vRequestSystemCallExit( void ) /* __attribute__( ( naked ) ) PRIVILEGED_FUNCTION */
-ARM GAS  /tmp/ccQesb1V.s 			page 31
-
-
 1244:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     {
 1245:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         __asm volatile ( "svc %0 \n" ::"i" ( portSVC_SYSTEM_CALL_EXIT ) : "memory" );
 1246:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     }
@@ -1818,6 +1858,9 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1258:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         uint32_t * pulTaskStack;
 1259:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         uint32_t ulStackFrameSize, ulSystemCallLocation, i;
 1260:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
+ARM GAS  /tmp/ccsuQooq.s 			page 32
+
+
 1261:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         #if defined( __ARMCC_VERSION )
 1262:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             /* Declaration when these variable are defined in code instead of being
 1263:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****              * exported from linker scripts. */
@@ -1858,9 +1901,6 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1298:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                         " vpush {s0}         \n" /* Trigger lazy stacking. */
 1299:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                         " vpop  {s0}         \n" /* Nullify the affect of the above instruction. */
 1300:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                         ::: "memory"
-ARM GAS  /tmp/ccQesb1V.s 			page 32
-
-
 1301:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                     );
 1302:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                 }
 1303:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                 else
@@ -1878,6 +1918,9 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1315:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             /* Make space on the task stack for the stack frame. */
 1316:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pulTaskStack = pulTaskStack - ulStackFrameSize;
 1317:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
+ARM GAS  /tmp/ccsuQooq.s 			page 33
+
+
 1318:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             /* Copy the stack frame. */
 1319:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             for( i = 0; i < ulStackFrameSize; i++ )
 1320:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             {
@@ -1918,9 +1961,6 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1355:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                 " mrs r0, control     \n" /* Obtain current control value. */
 1356:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                 " movs r1, #1         \n" /* r1 = 1. */
 1357:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                 " orrs r0, r1         \n" /* Set nPRIV bit. */
-ARM GAS  /tmp/ccQesb1V.s 			page 33
-
-
 1358:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                 " msr control, r0     \n" /* Write back new control value. */
 1359:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                 ::: "r0", "r1", "memory"
 1360:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             );
@@ -1938,6 +1978,9 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1372:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         const xMPU_SETTINGS * xTaskMpuSettings = xTaskGetMPUSettings( NULL ); /* Calling task's MPU
 1373:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1374:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         if( ( xTaskMpuSettings->ulTaskFlags & portTASK_IS_PRIVILEGED_FLAG ) == portTASK_IS_PRIVILEG
+ARM GAS  /tmp/ccsuQooq.s 			page 34
+
+
 1375:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         {
 1376:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             xTaskIsPrivileged = pdTRUE;
 1377:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         }
@@ -1978,9 +2021,6 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1412:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1413:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         xMPUSettings->ulContext[ ulIndex ] = ( uint32_t ) pvParameters; /* r0. */
 1414:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         ulIndex++;
-ARM GAS  /tmp/ccQesb1V.s 			page 34
-
-
 1415:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         xMPUSettings->ulContext[ ulIndex ] = 0x01010101; /* r1. */
 1416:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         ulIndex++;
 1417:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         xMPUSettings->ulContext[ ulIndex ] = 0x02020202; /* r2. */
@@ -1998,6 +2038,9 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1429:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1430:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         #if ( configENABLE_TRUSTZONE == 1 )
 1431:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         {
+ARM GAS  /tmp/ccsuQooq.s 			page 35
+
+
 1432:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             xMPUSettings->ulContext[ ulIndex ] = portNO_SECURE_CONTEXT; /* xSecureContext. */
 1433:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             ulIndex++;
 1434:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         }
@@ -2038,9 +2081,6 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1469:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         }
 1470:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         #endif /* configUSE_MPU_WRAPPERS_V1 == 0 */
 1471:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
-ARM GAS  /tmp/ccQesb1V.s 			page 35
-
-
 1472:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         return &( xMPUSettings->ulContext[ ulIndex ] );
 1473:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     }
 1474:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
@@ -2051,10 +2091,25 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1479:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                                          TaskFunction_t pxCode,
 1480:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                                          void * pvParameters ) /* PRIVILEGED_FUNCTION */
 1481:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     {
- 442              		.loc 1 1481 5 view -0
- 443              		.cfi_startproc
- 444              		@ args = 0, pretend = 0, frame = 0
- 445              		@ frame_needed = 0, uses_anonymous_args = 0
+ 526              		.loc 1 1481 5
+ 527              		.cfi_startproc
+ 528              		@ args = 0, pretend = 0, frame = 16
+ 529              		@ frame_needed = 1, uses_anonymous_args = 0
+ 530              		@ link register save eliminated.
+ 531 0000 80B4     		push	{r7}
+ 532              		.cfi_def_cfa_offset 4
+ARM GAS  /tmp/ccsuQooq.s 			page 36
+
+
+ 533              		.cfi_offset 7, -4
+ 534 0002 85B0     		sub	sp, sp, #20
+ 535              		.cfi_def_cfa_offset 24
+ 536 0004 00AF     		add	r7, sp, #0
+ 537              		.cfi_def_cfa_register 7
+ 538 0006 F860     		str	r0, [r7, #12]
+ 539 0008 B960     		str	r1, [r7, #8]
+ 540 000a 7A60     		str	r2, [r7, #4]
+ 541 000c 3B60     		str	r3, [r7]
 1482:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         /* Simulate the stack frame as it would be created by a context switch
 1483:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * interrupt. */
 1484:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         #if ( portPRELOAD_REGISTERS == 0 )
@@ -2082,157 +2137,198 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1506:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         #else /* portPRELOAD_REGISTERS */
 1507:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         {
 1508:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--; /* Offset added to account for the way the MCU uses the stack on entry/
- 446              		.loc 1 1508 13 view .LVU96
+ 542              		.loc 1 1508 25
+ 543 000e FB68     		ldr	r3, [r7, #12]
+ 544 0010 043B     		subs	r3, r3, #4
+ 545 0012 FB60     		str	r3, [r7, #12]
 1509:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             *pxTopOfStack = portINITIAL_XPSR;                        /* xPSR. */
- 447              		.loc 1 1509 13 view .LVU97
-1481:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         /* Simulate the stack frame as it would be created by a context switch
- 448              		.loc 1 1481 5 is_stmt 0 view .LVU98
- 449 0000 10B5     		push	{r4, lr}
- 450              		.cfi_def_cfa_offset 8
- 451              		.cfi_offset 4, -8
- 452              		.cfi_offset 14, -4
- 453              		.loc 1 1509 27 view .LVU99
- 454 0002 4FF08074 		mov	r4, #16777216
+ 546              		.loc 1 1509 27
+ 547 0014 FB68     		ldr	r3, [r7, #12]
+ 548 0016 4FF08072 		mov	r2, #16777216
+ 549 001a 1A60     		str	r2, [r3]
 1510:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
+ 550              		.loc 1 1510 25
+ 551 001c FB68     		ldr	r3, [r7, #12]
+ 552 001e 043B     		subs	r3, r3, #4
+ 553 0020 FB60     		str	r3, [r7, #12]
 1511:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             *pxTopOfStack = ( StackType_t ) pxCode;                  /* PC. */
- 455              		.loc 1 1511 27 view .LVU100
- 456 0006 40E90224 		strd	r2, r4, [r0, #-8]
+ 554              		.loc 1 1511 29
+ 555 0022 7A68     		ldr	r2, [r7, #4]
+ 556              		.loc 1 1511 27
+ 557 0024 FB68     		ldr	r3, [r7, #12]
+ 558 0026 1A60     		str	r2, [r3]
 1512:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
-ARM GAS  /tmp/ccQesb1V.s 			page 36
+ARM GAS  /tmp/ccsuQooq.s 			page 37
 
 
- 457              		.loc 1 1512 13 is_stmt 1 view .LVU101
- 458              	.LVL18:
+ 559              		.loc 1 1512 25
+ 560 0028 FB68     		ldr	r3, [r7, #12]
+ 561 002a 043B     		subs	r3, r3, #4
+ 562 002c FB60     		str	r3, [r7, #12]
 1513:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             *pxTopOfStack = ( StackType_t ) portTASK_RETURN_ADDRESS; /* LR. */
- 459              		.loc 1 1513 13 view .LVU102
- 460              		.loc 1 1513 27 is_stmt 0 view .LVU103
- 461 000a 184A     		ldr	r2, .L30
- 462              	.LVL19:
+ 563              		.loc 1 1513 29
+ 564 002e 384A     		ldr	r2, .L37
+ 565              		.loc 1 1513 27
+ 566 0030 FB68     		ldr	r3, [r7, #12]
+ 567 0032 1A60     		str	r2, [r3]
 1514:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
+ 568              		.loc 1 1514 25
+ 569 0034 FB68     		ldr	r3, [r7, #12]
+ 570 0036 043B     		subs	r3, r3, #4
+ 571 0038 FB60     		str	r3, [r7, #12]
 1515:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             *pxTopOfStack = ( StackType_t ) 0x12121212UL;            /* R12. */
+ 572              		.loc 1 1515 27
+ 573 003a FB68     		ldr	r3, [r7, #12]
+ 574 003c 4FF01232 		mov	r2, #303174162
+ 575 0040 1A60     		str	r2, [r3]
 1516:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
+ 576              		.loc 1 1516 25
+ 577 0042 FB68     		ldr	r3, [r7, #12]
+ 578 0044 043B     		subs	r3, r3, #4
+ 579 0046 FB60     		str	r3, [r7, #12]
 1517:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             *pxTopOfStack = ( StackType_t ) 0x03030303UL;            /* R3. */
- 463              		.loc 1 1517 27 view .LVU104
- 464 000c 4FF01234 		mov	r4, #303174162
-1513:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             *pxTopOfStack = ( StackType_t ) portTASK_RETURN_ADDRESS; /* LR. */
- 465              		.loc 1 1513 27 view .LVU105
- 466 0010 40F80C2C 		str	r2, [r0, #-12]
-1514:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
- 467              		.loc 1 1514 13 is_stmt 1 view .LVU106
- 468              	.LVL20:
-1515:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
- 469              		.loc 1 1515 13 view .LVU107
- 470              		.loc 1 1517 27 is_stmt 0 view .LVU108
- 471 0014 4FF00332 		mov	r2, #50529027
+ 580              		.loc 1 1517 27
+ 581 0048 FB68     		ldr	r3, [r7, #12]
+ 582 004a 4FF00332 		mov	r2, #50529027
+ 583 004e 1A60     		str	r2, [r3]
 1518:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
+ 584              		.loc 1 1518 25
+ 585 0050 FB68     		ldr	r3, [r7, #12]
+ 586 0052 043B     		subs	r3, r3, #4
+ 587 0054 FB60     		str	r3, [r7, #12]
 1519:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             *pxTopOfStack = ( StackType_t ) 0x02020202UL;            /* R2. */
+ 588              		.loc 1 1519 27
+ 589 0056 FB68     		ldr	r3, [r7, #12]
+ 590 0058 4FF00232 		mov	r2, #33686018
+ 591 005c 1A60     		str	r2, [r3]
 1520:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
+ 592              		.loc 1 1520 25
+ 593 005e FB68     		ldr	r3, [r7, #12]
+ 594 0060 043B     		subs	r3, r3, #4
+ 595 0062 FB60     		str	r3, [r7, #12]
 1521:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             *pxTopOfStack = ( StackType_t ) 0x01010101UL;            /* R1. */
- 472              		.loc 1 1521 27 view .LVU109
- 473 0018 4FF0023C 		mov	ip, #33686018
-1517:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
- 474              		.loc 1 1517 27 view .LVU110
- 475 001c 40E90524 		strd	r2, r4, [r0, #-20]
-1518:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
- 476              		.loc 1 1518 13 is_stmt 1 view .LVU111
- 477              	.LVL21:
-1519:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
- 478              		.loc 1 1519 13 view .LVU112
- 479              		.loc 1 1521 27 is_stmt 0 view .LVU113
- 480 0020 4FF00132 		mov	r2, #16843009
+ 596              		.loc 1 1521 27
+ 597 0064 FB68     		ldr	r3, [r7, #12]
+ 598 0066 4FF00132 		mov	r2, #16843009
+ 599 006a 1A60     		str	r2, [r3]
 1522:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
+ 600              		.loc 1 1522 25
+ 601 006c FB68     		ldr	r3, [r7, #12]
+ 602 006e 043B     		subs	r3, r3, #4
+ 603 0070 FB60     		str	r3, [r7, #12]
 1523:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             *pxTopOfStack = ( StackType_t ) pvParameters;            /* R0. */
- 481              		.loc 1 1523 27 view .LVU114
- 482 0024 40F8203C 		str	r3, [r0, #-32]
-1521:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
- 483              		.loc 1 1521 27 view .LVU115
- 484 0028 40E9072C 		strd	r2, ip, [r0, #-28]
-1522:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
- 485              		.loc 1 1522 13 is_stmt 1 view .LVU116
- 486              	.LVL22:
- 487              		.loc 1 1523 13 view .LVU117
+ 604              		.loc 1 1523 29
+ARM GAS  /tmp/ccsuQooq.s 			page 38
+
+
+ 605 0072 3A68     		ldr	r2, [r7]
+ 606              		.loc 1 1523 27
+ 607 0074 FB68     		ldr	r3, [r7, #12]
+ 608 0076 1A60     		str	r2, [r3]
 1524:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
- 488              		.loc 1 1524 13 view .LVU118
+ 609              		.loc 1 1524 25
+ 610 0078 FB68     		ldr	r3, [r7, #12]
+ 611 007a 043B     		subs	r3, r3, #4
+ 612 007c FB60     		str	r3, [r7, #12]
 1525:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             *pxTopOfStack = ( StackType_t ) 0x11111111UL;            /* R11. */
- 489              		.loc 1 1525 13 view .LVU119
+ 613              		.loc 1 1525 27
+ 614 007e FB68     		ldr	r3, [r7, #12]
+ 615 0080 4FF01132 		mov	r2, #286331153
+ 616 0084 1A60     		str	r2, [r3]
 1526:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
+ 617              		.loc 1 1526 25
+ 618 0086 FB68     		ldr	r3, [r7, #12]
+ 619 0088 043B     		subs	r3, r3, #4
+ 620 008a FB60     		str	r3, [r7, #12]
 1527:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             *pxTopOfStack = ( StackType_t ) 0x10101010UL;            /* R10. */
- 490              		.loc 1 1527 27 is_stmt 0 view .LVU120
-ARM GAS  /tmp/ccQesb1V.s 			page 37
-
-
- 491 002c 4FF01033 		mov	r3, #269488144
- 492              	.LVL23:
- 493              		.loc 1 1527 27 view .LVU121
- 494 0030 4FF01132 		mov	r2, #286331153
+ 621              		.loc 1 1527 27
+ 622 008c FB68     		ldr	r3, [r7, #12]
+ 623 008e 4FF01032 		mov	r2, #269488144
+ 624 0092 1A60     		str	r2, [r3]
 1528:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
+ 625              		.loc 1 1528 25
+ 626 0094 FB68     		ldr	r3, [r7, #12]
+ 627 0096 043B     		subs	r3, r3, #4
+ 628 0098 FB60     		str	r3, [r7, #12]
 1529:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             *pxTopOfStack = ( StackType_t ) 0x09090909UL;            /* R09. */
+ 629              		.loc 1 1529 27
+ 630 009a FB68     		ldr	r3, [r7, #12]
+ 631 009c 4FF00932 		mov	r2, #151587081
+ 632 00a0 1A60     		str	r2, [r3]
 1530:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
+ 633              		.loc 1 1530 25
+ 634 00a2 FB68     		ldr	r3, [r7, #12]
+ 635 00a4 043B     		subs	r3, r3, #4
+ 636 00a6 FB60     		str	r3, [r7, #12]
 1531:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             *pxTopOfStack = ( StackType_t ) 0x08080808UL;            /* R08. */
- 495              		.loc 1 1531 27 view .LVU122
- 496 0034 4FF00934 		mov	r4, #151587081
-1527:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
- 497              		.loc 1 1527 27 view .LVU123
- 498 0038 40E90A32 		strd	r3, r2, [r0, #-40]
-1528:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
- 499              		.loc 1 1528 13 is_stmt 1 view .LVU124
- 500              	.LVL24:
-1529:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
- 501              		.loc 1 1529 13 view .LVU125
- 502              		.loc 1 1531 27 is_stmt 0 view .LVU126
- 503 003c 4FF00833 		mov	r3, #134744072
+ 637              		.loc 1 1531 27
+ 638 00a8 FB68     		ldr	r3, [r7, #12]
+ 639 00aa 4FF00832 		mov	r2, #134744072
+ 640 00ae 1A60     		str	r2, [r3]
 1532:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
+ 641              		.loc 1 1532 25
+ 642 00b0 FB68     		ldr	r3, [r7, #12]
+ 643 00b2 043B     		subs	r3, r3, #4
+ 644 00b4 FB60     		str	r3, [r7, #12]
 1533:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             *pxTopOfStack = ( StackType_t ) 0x07070707UL;            /* R07. */
+ 645              		.loc 1 1533 27
+ 646 00b6 FB68     		ldr	r3, [r7, #12]
+ 647 00b8 4FF00732 		mov	r2, #117901063
+ 648 00bc 1A60     		str	r2, [r3]
 1534:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
+ 649              		.loc 1 1534 25
+ 650 00be FB68     		ldr	r3, [r7, #12]
+ARM GAS  /tmp/ccsuQooq.s 			page 39
+
+
+ 651 00c0 043B     		subs	r3, r3, #4
+ 652 00c2 FB60     		str	r3, [r7, #12]
 1535:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             *pxTopOfStack = ( StackType_t ) 0x06060606UL;            /* R06. */
- 504              		.loc 1 1535 27 view .LVU127
- 505 0040 4FF0073C 		mov	ip, #117901063
-1531:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
- 506              		.loc 1 1531 27 view .LVU128
- 507 0044 40E90C34 		strd	r3, r4, [r0, #-48]
-1532:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
- 508              		.loc 1 1532 13 is_stmt 1 view .LVU129
- 509              	.LVL25:
-1533:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
- 510              		.loc 1 1533 13 view .LVU130
- 511              		.loc 1 1535 27 is_stmt 0 view .LVU131
- 512 0048 4FF00633 		mov	r3, #101058054
+ 653              		.loc 1 1535 27
+ 654 00c4 FB68     		ldr	r3, [r7, #12]
+ 655 00c6 4FF00632 		mov	r2, #101058054
+ 656 00ca 1A60     		str	r2, [r3]
 1536:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
+ 657              		.loc 1 1536 25
+ 658 00cc FB68     		ldr	r3, [r7, #12]
+ 659 00ce 043B     		subs	r3, r3, #4
+ 660 00d0 FB60     		str	r3, [r7, #12]
 1537:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             *pxTopOfStack = ( StackType_t ) 0x05050505UL;            /* R05. */
+ 661              		.loc 1 1537 27
+ 662 00d2 FB68     		ldr	r3, [r7, #12]
+ 663 00d4 4FF00532 		mov	r2, #84215045
+ 664 00d8 1A60     		str	r2, [r3]
 1538:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
+ 665              		.loc 1 1538 25
+ 666 00da FB68     		ldr	r3, [r7, #12]
+ 667 00dc 043B     		subs	r3, r3, #4
+ 668 00de FB60     		str	r3, [r7, #12]
 1539:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             *pxTopOfStack = ( StackType_t ) 0x04040404UL;            /* R04. */
- 513              		.loc 1 1539 27 view .LVU132
- 514 004c 4FF00532 		mov	r2, #84215045
-1535:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
- 515              		.loc 1 1535 27 view .LVU133
- 516 0050 40E90E3C 		strd	r3, ip, [r0, #-56]
-1536:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
- 517              		.loc 1 1536 13 is_stmt 1 view .LVU134
- 518              	.LVL26:
-1537:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
- 519              		.loc 1 1537 13 view .LVU135
- 520              		.loc 1 1539 27 is_stmt 0 view .LVU136
- 521 0054 4FF00433 		mov	r3, #67372036
- 522 0058 40E91032 		strd	r3, r2, [r0, #-64]
+ 669              		.loc 1 1539 27
+ 670 00e0 FB68     		ldr	r3, [r7, #12]
+ 671 00e2 4FF00432 		mov	r2, #67372036
+ 672 00e6 1A60     		str	r2, [r3]
 1540:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
- 523              		.loc 1 1540 13 is_stmt 1 view .LVU137
- 524              	.LVL27:
+ 673              		.loc 1 1540 25
+ 674 00e8 FB68     		ldr	r3, [r7, #12]
+ 675 00ea 043B     		subs	r3, r3, #4
+ 676 00ec FB60     		str	r3, [r7, #12]
 1541:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             *pxTopOfStack = portINITIAL_EXC_RETURN;                  /* EXC_RETURN. */
-ARM GAS  /tmp/ccQesb1V.s 			page 38
-
-
- 525              		.loc 1 1541 13 view .LVU138
- 526              		.loc 1 1541 27 is_stmt 0 view .LVU139
- 527 005c 6FF00203 		mvn	r3, #2
- 528 0060 40F8443C 		str	r3, [r0, #-68]
+ 677              		.loc 1 1541 27
+ 678 00ee FB68     		ldr	r3, [r7, #12]
+ 679 00f0 6FF00202 		mvn	r2, #2
+ 680 00f4 1A60     		str	r2, [r3]
 1542:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             pxTopOfStack--;
- 529              		.loc 1 1542 13 is_stmt 1 view .LVU140
- 530              	.LVL28:
+ 681              		.loc 1 1542 25
+ 682 00f6 FB68     		ldr	r3, [r7, #12]
+ 683 00f8 043B     		subs	r3, r3, #4
+ 684 00fa FB60     		str	r3, [r7, #12]
 1543:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             *pxTopOfStack = ( StackType_t ) pxEndOfStack; /* Slot used to hold this task's PSPLIM v
- 531              		.loc 1 1543 13 view .LVU141
- 532              		.loc 1 1543 27 is_stmt 0 view .LVU142
- 533 0064 40F8481D 		str	r1, [r0, #-72]!
- 534              	.LVL29:
+ 685              		.loc 1 1543 29
+ 686 00fc BA68     		ldr	r2, [r7, #8]
+ 687              		.loc 1 1543 27
+ 688 00fe FB68     		ldr	r3, [r7, #12]
+ 689 0100 1A60     		str	r2, [r3]
 1544:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1545:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             #if ( configENABLE_TRUSTZONE == 1 )
 1546:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             {
@@ -2242,59 +2338,69 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1550:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             #endif /* configENABLE_TRUSTZONE */
 1551:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         }
 1552:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         #endif /* portPRELOAD_REGISTERS */
+ARM GAS  /tmp/ccsuQooq.s 			page 40
+
+
 1553:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1554:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         return pxTopOfStack;
- 535              		.loc 1 1554 9 is_stmt 1 view .LVU143
+ 690              		.loc 1 1554 16
+ 691 0102 FB68     		ldr	r3, [r7, #12]
 1555:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     }
- 536              		.loc 1 1555 5 is_stmt 0 view .LVU144
- 537 0068 10BD     		pop	{r4, pc}
- 538              	.L31:
- 539 006a 00BF     		.align	2
- 540              	.L30:
- 541 006c 00000000 		.word	prvTaskExitError
- 542              		.cfi_endproc
- 543              	.LFE8:
- 545              		.section	.text.xPortStartScheduler,"ax",%progbits
- 546              		.align	1
- 547              		.global	xPortStartScheduler
- 548              		.syntax unified
- 549              		.thumb
- 550              		.thumb_func
- 552              	xPortStartScheduler:
- 553              	.LFB9:
+ 692              		.loc 1 1555 5
+ 693 0104 1846     		mov	r0, r3
+ 694 0106 1437     		adds	r7, r7, #20
+ 695              		.cfi_def_cfa_offset 4
+ 696 0108 BD46     		mov	sp, r7
+ 697              		.cfi_def_cfa_register 13
+ 698              		@ sp needed
+ 699 010a 5DF8047B 		ldr	r7, [sp], #4
+ 700              		.cfi_restore 7
+ 701              		.cfi_def_cfa_offset 0
+ 702 010e 7047     		bx	lr
+ 703              	.L38:
+ 704              		.align	2
+ 705              	.L37:
+ 706 0110 00000000 		.word	prvTaskExitError
+ 707              		.cfi_endproc
+ 708              	.LFE8:
+ 710              		.section	.text.xPortStartScheduler,"ax",%progbits
+ 711              		.align	1
+ 712              		.global	xPortStartScheduler
+ 713              		.syntax unified
+ 714              		.thumb
+ 715              		.thumb_func
+ 717              	xPortStartScheduler:
+ 718              	.LFB9:
 1556:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1557:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #endif /* configENABLE_MPU */
 1558:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** /*-----------------------------------------------------------*/
 1559:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1560:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** BaseType_t xPortStartScheduler( void ) /* PRIVILEGED_FUNCTION */
 1561:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** {
- 554              		.loc 1 1561 1 is_stmt 1 view -0
- 555              		.cfi_startproc
- 556              		@ args = 0, pretend = 0, frame = 16
- 557              		@ frame_needed = 0, uses_anonymous_args = 0
- 558              	.LBB10:
+ 719              		.loc 1 1561 1
+ 720              		.cfi_startproc
+ 721              		@ args = 0, pretend = 0, frame = 16
+ 722              		@ frame_needed = 1, uses_anonymous_args = 0
+ 723 0000 80B5     		push	{r7, lr}
+ 724              		.cfi_def_cfa_offset 8
+ 725              		.cfi_offset 7, -8
+ 726              		.cfi_offset 14, -4
+ 727 0002 84B0     		sub	sp, sp, #16
+ 728              		.cfi_def_cfa_offset 24
+ 729 0004 00AF     		add	r7, sp, #0
+ 730              		.cfi_def_cfa_register 7
+ 731              	.LBB2:
 1562:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     #if ( ( configASSERT_DEFINED == 1 ) && ( portHAS_BASEPRI == 1 ) )
 1563:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     {
 1564:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         volatile uint32_t ulOriginalPriority;
- 559              		.loc 1 1564 9 view .LVU146
 1565:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         volatile uint32_t ulImplementedPrioBits = 0;
-ARM GAS  /tmp/ccQesb1V.s 			page 39
-
-
- 560              		.loc 1 1565 9 view .LVU147
- 561              	.LBE10:
-1561:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     #if ( ( configASSERT_DEFINED == 1 ) && ( portHAS_BASEPRI == 1 ) )
- 562              		.loc 1 1561 1 is_stmt 0 view .LVU148
- 563 0000 1FB5     		push	{r0, r1, r2, r3, r4, lr}
- 564              		.cfi_def_cfa_offset 24
- 565              		.cfi_offset 4, -8
- 566              		.cfi_offset 14, -4
- 567              	.LBB11:
- 568              		.loc 1 1565 27 view .LVU149
- 569 0002 0023     		movs	r3, #0
- 570 0004 0393     		str	r3, [sp, #12]
+ 732              		.loc 1 1565 27
+ 733 0006 0023     		movs	r3, #0
+ 734 0008 BB60     		str	r3, [r7, #8]
 1566:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         volatile uint8_t ucMaxPriorityValue;
- 571              		.loc 1 1566 9 is_stmt 1 view .LVU150
+ARM GAS  /tmp/ccsuQooq.s 			page 41
+
+
 1567:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1568:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         /* Determine the maximum priority from which ISR safe FreeRTOS API
 1569:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * functions can be called.  ISR safe functions are those that end in
@@ -2303,46 +2409,43 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1572:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          *
 1573:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * Save the interrupt priority value that is about to be clobbered. */
 1574:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         ulOriginalPriority = portNVIC_SHPR2_REG;
- 572              		.loc 1 1574 9 view .LVU151
- 573              		.loc 1 1574 30 is_stmt 0 view .LVU152
- 574 0006 4FF0E023 		mov	r3, #-536813568
- 575 000a D3F81C2D 		ldr	r2, [r3, #3356]
- 576              		.loc 1 1574 28 view .LVU153
- 577 000e 0292     		str	r2, [sp, #8]
+ 735              		.loc 1 1574 30
+ 736 000a 3A4B     		ldr	r3, .L47
+ 737 000c 1B68     		ldr	r3, [r3]
+ 738              		.loc 1 1574 28
+ 739 000e FB60     		str	r3, [r7, #12]
 1575:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1576:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         /* Determine the number of priority bits available.  First write to all
 1577:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * possible bits. */
 1578:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         portNVIC_SHPR2_REG = 0xFF000000;
- 578              		.loc 1 1578 9 is_stmt 1 view .LVU154
- 579              		.loc 1 1578 28 is_stmt 0 view .LVU155
- 580 0010 4FF07F42 		mov	r2, #-16777216
- 581 0014 C3F81C2D 		str	r2, [r3, #3356]
+ 740              		.loc 1 1578 9
+ 741 0010 384B     		ldr	r3, .L47
+ 742              		.loc 1 1578 28
+ 743 0012 4FF07F42 		mov	r2, #-16777216
+ 744 0016 1A60     		str	r2, [r3]
 1579:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1580:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         /* Read the value back to see how many bits stuck. */
 1581:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         ucMaxPriorityValue = ( uint8_t ) ( ( portNVIC_SHPR2_REG & 0xFF000000 ) >> 24 );
- 582              		.loc 1 1581 9 is_stmt 1 view .LVU156
- 583              		.loc 1 1581 46 is_stmt 0 view .LVU157
- 584 0018 D3F81C3D 		ldr	r3, [r3, #3356]
+ 745              		.loc 1 1581 46
+ 746 0018 364B     		ldr	r3, .L47
+ 747 001a 1B68     		ldr	r3, [r3]
+ 748              		.loc 1 1581 80
+ 749 001c 1B0E     		lsrs	r3, r3, #24
+ 750              		.loc 1 1581 30
+ 751 001e DBB2     		uxtb	r3, r3
+ 752              		.loc 1 1581 28
+ 753 0020 FB71     		strb	r3, [r7, #7]
 1582:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1583:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         /* Use the same mask on the maximum system call priority. */
 1584:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         ucMaxSysCallPriority = configMAX_SYSCALL_INTERRUPT_PRIORITY & ucMaxPriorityValue;
- 585              		.loc 1 1584 30 view .LVU158
- 586 001c 2C4A     		ldr	r2, .L42
-1581:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
- 587              		.loc 1 1581 30 view .LVU159
- 588 001e 1B0E     		lsrs	r3, r3, #24
-1581:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
- 589              		.loc 1 1581 28 view .LVU160
- 590 0020 8DF80730 		strb	r3, [sp, #7]
- 591              		.loc 1 1584 9 is_stmt 1 view .LVU161
- 592              		.loc 1 1584 69 is_stmt 0 view .LVU162
- 593 0024 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
- 594 0028 03F05003 		and	r3, r3, #80
-ARM GAS  /tmp/ccQesb1V.s 			page 40
-
-
- 595              		.loc 1 1584 30 view .LVU163
- 596 002c 1370     		strb	r3, [r2]
+ 754              		.loc 1 1584 69
+ 755 0022 FB79     		ldrb	r3, [r7, #7]
+ 756 0024 DBB2     		uxtb	r3, r3
+ 757 0026 03F05003 		and	r3, r3, #80
+ 758 002a DAB2     		uxtb	r2, r3
+ 759              		.loc 1 1584 30
+ 760 002c 324B     		ldr	r3, .L47+4
+ 761 002e 1A70     		strb	r2, [r3]
 1585:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1586:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         /* Check that the maximum system call priority is nonzero after
 1587:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * accounting for the number of priority bits supported by the
@@ -2351,41 +2454,41 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1590:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * cannot be masked using BASEPRI.
 1591:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * See https://www.FreeRTOS.org/RTOS-Cortex-M3-M4.html */
 1592:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         configASSERT( ucMaxSysCallPriority );
- 597              		.loc 1 1592 9 is_stmt 1 view .LVU164
- 598 002e 43B9     		cbnz	r3, .L33
- 599              		.loc 1 1592 9 discriminator 1 view .LVU165
- 600 0030 FFF7FEFF 		bl	ulSetInterruptMask
- 601              	.LVL30:
- 602              		.loc 1 1592 9 discriminator 1 view .LVU166
- 603 0034 4FF4C761 		mov	r1, #1592
- 604 0038 264B     		ldr	r3, .L42+4
- 605 003a 274A     		ldr	r2, .L42+8
- 606              	.L41:
+ 762              		.loc 1 1592 9
+ 763 0030 314B     		ldr	r3, .L47+4
+ 764 0032 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 765 0034 002B     		cmp	r3, #0
+ARM GAS  /tmp/ccsuQooq.s 			page 42
+
+
+ 766 0036 08D1     		bne	.L40
+ 767              		.loc 1 1592 9 is_stmt 0 discriminator 1
+ 768 0038 FFF7FEFF 		bl	ulSetInterruptMask
+ 769 003c 2F4B     		ldr	r3, .L47+8
+ 770 003e 304A     		ldr	r2, .L47+12
+ 771 0040 4FF4C761 		mov	r1, #1592
+ 772 0044 2F48     		ldr	r0, .L47+16
+ 773 0046 FFF7FEFF 		bl	__assert_func
+ 774              	.L40:
 1593:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1594:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         /* Check that the bits not implemented in hardware are zero in
 1595:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * configMAX_SYSCALL_INTERRUPT_PRIORITY. */
 1596:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         configASSERT( ( configMAX_SYSCALL_INTERRUPT_PRIORITY & ( ~ucMaxPriorityValue ) ) == 0U );
- 607              		.loc 1 1596 9 is_stmt 0 discriminator 1 view .LVU167
- 608 003c 2748     		ldr	r0, .L42+12
- 609 003e FFF7FEFF 		bl	__assert_func
- 610              	.LVL31:
- 611              	.L33:
-1592:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
- 612              		.loc 1 1592 45 is_stmt 1 discriminator 2 view .LVU168
- 613              		.loc 1 1596 9 view .LVU169
- 614 0042 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
- 615 0046 DB43     		mvns	r3, r3
- 616 0048 13F0500F 		tst	r3, #80
- 617 004c 0ED0     		beq	.L34
- 618              		.loc 1 1596 9 discriminator 1 view .LVU170
- 619 004e FFF7FEFF 		bl	ulSetInterruptMask
- 620              	.LVL32:
- 621              		.loc 1 1596 9 discriminator 1 view .LVU171
- 622 0052 40F23C61 		movw	r1, #1596
- 623 0056 1F4B     		ldr	r3, .L42+4
- 624 0058 1F4A     		ldr	r2, .L42+8
- 625 005a EFE7     		b	.L41
- 626              	.L35:
+ 775              		.loc 1 1596 9 is_stmt 1
+ 776 004a FB79     		ldrb	r3, [r7, #7]
+ 777 004c DBB2     		uxtb	r3, r3
+ 778 004e DB43     		mvns	r3, r3
+ 779 0050 03F05003 		and	r3, r3, #80
+ 780 0054 002B     		cmp	r3, #0
+ 781 0056 10D0     		beq	.L42
+ 782              		.loc 1 1596 9 is_stmt 0 discriminator 1
+ 783 0058 FFF7FEFF 		bl	ulSetInterruptMask
+ 784 005c 274B     		ldr	r3, .L47+8
+ 785 005e 284A     		ldr	r2, .L47+12
+ 786 0060 40F23C61 		movw	r1, #1596
+ 787 0064 2748     		ldr	r0, .L47+16
+ 788 0066 FFF7FEFF 		bl	__assert_func
+ 789              	.L43:
 1597:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1598:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         /* Calculate the maximum acceptable priority group value for the number
 1599:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * of bits read back. */
@@ -2393,41 +2496,38 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1601:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         while( ( ucMaxPriorityValue & portTOP_BIT_OF_BYTE ) == portTOP_BIT_OF_BYTE )
 1602:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         {
 1603:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             ulImplementedPrioBits++;
- 627              		.loc 1 1603 13 view .LVU172
- 628              		.loc 1 1603 34 is_stmt 0 view .LVU173
- 629 005c 0133     		adds	r3, r3, #1
- 630 005e 0393     		str	r3, [sp, #12]
+ 790              		.loc 1 1603 34 is_stmt 1
+ 791 006a BB68     		ldr	r3, [r7, #8]
+ 792 006c 0133     		adds	r3, r3, #1
+ 793 006e BB60     		str	r3, [r7, #8]
 1604:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             ucMaxPriorityValue <<= ( uint8_t ) 0x01;
-ARM GAS  /tmp/ccQesb1V.s 			page 41
-
-
- 631              		.loc 1 1604 13 is_stmt 1 view .LVU174
- 632              		.loc 1 1604 32 is_stmt 0 view .LVU175
- 633 0060 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
- 634 0064 5B00     		lsls	r3, r3, #1
- 635 0066 DBB2     		uxtb	r3, r3
- 636 0068 8DF80730 		strb	r3, [sp, #7]
- 637              	.L34:
+ 794              		.loc 1 1604 32
+ 795 0070 FB79     		ldrb	r3, [r7, #7]
+ 796 0072 DBB2     		uxtb	r3, r3
+ 797 0074 5B00     		lsls	r3, r3, #1
+ 798 0076 DBB2     		uxtb	r3, r3
+ 799 0078 FB71     		strb	r3, [r7, #7]
+ 800              	.L42:
 1601:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         {
- 638              		.loc 1 1601 61 is_stmt 1 view .LVU176
+ 801              		.loc 1 1601 37
+ 802 007a FB79     		ldrb	r3, [r7, #7]
+ 803 007c DBB2     		uxtb	r3, r3
+ 804 007e 03F08003 		and	r3, r3, #128
 1601:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         {
- 639              		.loc 1 1601 37 is_stmt 0 view .LVU177
- 640 006c 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
-1601:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         {
- 641              		.loc 1 1601 61 view .LVU178
- 642 0070 13F0800F 		tst	r3, #128
-1603:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             ucMaxPriorityValue <<= ( uint8_t ) 0x01;
- 643              		.loc 1 1603 34 view .LVU179
- 644 0074 039B     		ldr	r3, [sp, #12]
-1601:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         {
- 645              		.loc 1 1601 61 view .LVU180
- 646 0076 F1D1     		bne	.L35
+ 805              		.loc 1 1601 61
+ 806 0082 802B     		cmp	r3, #128
+ 807 0084 F1D0     		beq	.L43
 1605:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         }
+ARM GAS  /tmp/ccsuQooq.s 			page 43
+
+
 1606:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1607:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         if( ulImplementedPrioBits == 8 )
- 647              		.loc 1 1607 9 is_stmt 1 view .LVU181
- 648              		.loc 1 1607 11 is_stmt 0 view .LVU182
- 649 0078 082B     		cmp	r3, #8
+ 808              		.loc 1 1607 35
+ 809 0086 BB68     		ldr	r3, [r7, #8]
+ 810              		.loc 1 1607 11
+ 811 0088 082B     		cmp	r3, #8
+ 812 008a 03D1     		bne	.L44
 1608:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         {
 1609:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             /* When the hardware implements 8 priority bits, there is no way for
 1610:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****              * the software to configure PRIGROUP to not have sub-priorities. As
@@ -2448,55 +2548,74 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1625:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****              * confusion. */
 1626:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             configASSERT( ( configMAX_SYSCALL_INTERRUPT_PRIORITY & 0x1U ) == 0U );
 1627:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             ulMaxPRIGROUPValue = 0;
+ 813              		.loc 1 1627 32
+ 814 008c 1E4B     		ldr	r3, .L47+20
+ 815 008e 0022     		movs	r2, #0
+ 816 0090 1A60     		str	r2, [r3]
+ 817 0092 04E0     		b	.L45
+ 818              	.L44:
 1628:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         }
 1629:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         else
 1630:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         {
 1631:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             ulMaxPRIGROUPValue = portMAX_PRIGROUP_BITS - ulImplementedPrioBits;
- 650              		.loc 1 1631 13 is_stmt 1 view .LVU183
-1627:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         }
- 651              		.loc 1 1627 32 is_stmt 0 view .LVU184
- 652 007a 0CBF     		ite	eq
- 653 007c 0023     		moveq	r3, #0
+ 819              		.loc 1 1631 56
+ 820 0094 BB68     		ldr	r3, [r7, #8]
+ 821 0096 C3F10703 		rsb	r3, r3, #7
+ 822              		.loc 1 1631 32
+ 823 009a 1B4A     		ldr	r2, .L47+20
+ 824 009c 1360     		str	r3, [r2]
+ 825              	.L45:
 1632:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         }
-ARM GAS  /tmp/ccQesb1V.s 			page 42
-
-
 1633:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1634:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         /* Shift the priority group value back to its position within the AIRCR
 1635:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * register. */
 1636:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         ulMaxPRIGROUPValue <<= portPRIGROUP_SHIFT;
- 654              		.loc 1 1636 9 is_stmt 1 view .LVU185
+ 826              		.loc 1 1636 28
+ 827 009e 1A4B     		ldr	r3, .L47+20
+ 828 00a0 1B68     		ldr	r3, [r3]
+ 829 00a2 1B02     		lsls	r3, r3, #8
+ 830 00a4 184A     		ldr	r2, .L47+20
+ 831 00a6 1360     		str	r3, [r2]
 1637:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         ulMaxPRIGROUPValue &= portPRIORITY_GROUP_MASK;
- 655              		.loc 1 1637 9 view .LVU186
-1631:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         }
- 656              		.loc 1 1631 56 is_stmt 0 view .LVU187
- 657 007e 039B     		ldrne	r3, [sp, #12]
- 658              		.loc 1 1637 28 view .LVU188
- 659 0080 174A     		ldr	r2, .L42+16
-1631:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         }
- 660              		.loc 1 1631 56 view .LVU189
- 661 0082 18BF     		it	ne
- 662 0084 C3F10703 		rsbne	r3, r3, #7
-1636:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         ulMaxPRIGROUPValue &= portPRIORITY_GROUP_MASK;
- 663              		.loc 1 1636 28 view .LVU190
- 664 0088 1B02     		lsls	r3, r3, #8
- 665              		.loc 1 1637 28 view .LVU191
- 666 008a 03F4E063 		and	r3, r3, #1792
- 667 008e 1360     		str	r3, [r2]
+ 832              		.loc 1 1637 28
+ARM GAS  /tmp/ccsuQooq.s 			page 44
+
+
+ 833 00a8 174B     		ldr	r3, .L47+20
+ 834 00aa 1B68     		ldr	r3, [r3]
+ 835 00ac 03F4E063 		and	r3, r3, #1792
+ 836 00b0 154A     		ldr	r2, .L47+20
+ 837 00b2 1360     		str	r3, [r2]
 1638:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1639:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         /* Restore the clobbered interrupt priority register to its original
 1640:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * value. */
 1641:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         portNVIC_SHPR2_REG = ulOriginalPriority;
- 668              		.loc 1 1641 9 is_stmt 1 view .LVU192
- 669              		.loc 1 1641 28 is_stmt 0 view .LVU193
- 670 0090 4FF0E023 		mov	r3, #-536813568
- 671              	.LBE11:
+ 838              		.loc 1 1641 9
+ 839 00b4 0F4A     		ldr	r2, .L47
+ 840              		.loc 1 1641 28
+ 841 00b6 FB68     		ldr	r3, [r7, #12]
+ 842 00b8 1360     		str	r3, [r2]
+ 843              	.LBE2:
 1642:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     }
 1643:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     #endif /* #if ( ( configASSERT_DEFINED == 1 ) && ( portHAS_BASEPRI == 1 ) ) */
 1644:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1645:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     /* Make PendSV, CallSV and SysTick the same priority as the kernel. */
 1646:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     portNVIC_SHPR3_REG |= portNVIC_PENDSV_PRI;
+ 844              		.loc 1 1646 5
+ 845 00ba 144B     		ldr	r3, .L47+24
+ 846 00bc 1B68     		ldr	r3, [r3]
+ 847 00be 134A     		ldr	r2, .L47+24
+ 848              		.loc 1 1646 24
+ 849 00c0 43F47F03 		orr	r3, r3, #16711680
+ 850 00c4 1360     		str	r3, [r2]
 1647:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     portNVIC_SHPR3_REG |= portNVIC_SYSTICK_PRI;
+ 851              		.loc 1 1647 5
+ 852 00c6 114B     		ldr	r3, .L47+24
+ 853 00c8 1B68     		ldr	r3, [r3]
+ 854 00ca 104A     		ldr	r2, .L47+24
+ 855              		.loc 1 1647 24
+ 856 00cc 43F07F43 		orr	r3, r3, #-16777216
+ 857 00d0 1360     		str	r3, [r2]
 1648:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1649:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     #if ( configENABLE_MPU == 1 )
 1650:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     {
@@ -2508,44 +2627,20 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1656:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     /* Start the timer that generates the tick ISR. Interrupts are disabled
 1657:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****      * here already. */
 1658:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     vPortSetupTimerInterrupt();
+ 858              		.loc 1 1658 5
+ 859 00d2 FFF7FEFF 		bl	vPortSetupTimerInterrupt
 1659:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1660:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     /* Initialize the critical nesting count ready for the first task. */
 1661:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     ulCriticalNesting = 0;
- 672              		.loc 1 1661 23 view .LVU194
- 673 0094 0024     		movs	r4, #0
- 674              	.LBB12:
-1641:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     }
- 675              		.loc 1 1641 28 view .LVU195
- 676 0096 029A     		ldr	r2, [sp, #8]
- 677 0098 C3F81C2D 		str	r2, [r3, #3356]
-ARM GAS  /tmp/ccQesb1V.s 			page 43
-
-
- 678              	.LBE12:
-1646:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     portNVIC_SHPR3_REG |= portNVIC_SYSTICK_PRI;
- 679              		.loc 1 1646 5 is_stmt 1 view .LVU196
- 680 009c D3F8202D 		ldr	r2, [r3, #3360]
-1646:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     portNVIC_SHPR3_REG |= portNVIC_SYSTICK_PRI;
- 681              		.loc 1 1646 24 is_stmt 0 view .LVU197
- 682 00a0 42F47F02 		orr	r2, r2, #16711680
- 683 00a4 C3F8202D 		str	r2, [r3, #3360]
-1647:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
- 684              		.loc 1 1647 5 is_stmt 1 view .LVU198
- 685 00a8 D3F8202D 		ldr	r2, [r3, #3360]
-1647:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
- 686              		.loc 1 1647 24 is_stmt 0 view .LVU199
- 687 00ac 42F07F42 		orr	r2, r2, #-16777216
- 688 00b0 C3F8202D 		str	r2, [r3, #3360]
-1658:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
- 689              		.loc 1 1658 5 is_stmt 1 view .LVU200
- 690 00b4 FFF7FEFF 		bl	vPortSetupTimerInterrupt
- 691              	.LVL33:
- 692              		.loc 1 1661 5 view .LVU201
- 693              		.loc 1 1661 23 is_stmt 0 view .LVU202
- 694 00b8 0A4B     		ldr	r3, .L42+20
- 695 00ba 1C60     		str	r4, [r3]
+ 860              		.loc 1 1661 23
+ 861 00d6 0E4B     		ldr	r3, .L47+28
+ 862 00d8 0022     		movs	r2, #0
+ 863 00da 1A60     		str	r2, [r3]
 1662:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1663:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     #if ( ( configENABLE_MPU == 1 ) && ( configUSE_MPU_WRAPPERS_V1 == 0 ) && ( configENABLE_ACCESS_
+ARM GAS  /tmp/ccsuQooq.s 			page 45
+
+
 1664:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     {
 1665:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         xSchedulerRunning = pdTRUE;
 1666:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     }
@@ -2553,9 +2648,8 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1668:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1669:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     /* Start the first task. */
 1670:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     vStartFirstTask();
- 696              		.loc 1 1670 5 is_stmt 1 view .LVU203
- 697 00bc FFF7FEFF 		bl	vStartFirstTask
- 698              	.LVL34:
+ 864              		.loc 1 1670 5
+ 865 00dc FFF7FEFF 		bl	vStartFirstTask
 1671:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1672:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     /* Should never get here as the tasks will now be executing. Call the task
 1673:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****      * exit error function to prevent compiler warnings about a static function
@@ -2564,109 +2658,109 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1676:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****      * vTaskSwitchContext() so link time optimization does not remove the
 1677:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****      * symbol. */
 1678:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     vTaskSwitchContext();
- 699              		.loc 1 1678 5 view .LVU204
- 700 00c0 FFF7FEFF 		bl	vTaskSwitchContext
- 701              	.LVL35:
+ 866              		.loc 1 1678 5
+ 867 00e0 FFF7FEFF 		bl	vTaskSwitchContext
 1679:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     prvTaskExitError();
- 702              		.loc 1 1679 5 view .LVU205
- 703 00c4 FFF7FEFF 		bl	prvTaskExitError
- 704              	.LVL36:
+ 868              		.loc 1 1679 5
+ 869 00e4 FFF7FEFF 		bl	prvTaskExitError
 1680:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1681:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     /* Should not get here. */
 1682:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     return 0;
- 705              		.loc 1 1682 5 view .LVU206
+ 870              		.loc 1 1682 12
+ 871 00e8 0023     		movs	r3, #0
 1683:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** }
- 706              		.loc 1 1683 1 is_stmt 0 view .LVU207
- 707 00c8 2046     		mov	r0, r4
-ARM GAS  /tmp/ccQesb1V.s 			page 44
+ 872              		.loc 1 1683 1
+ 873 00ea 1846     		mov	r0, r3
+ 874 00ec 1037     		adds	r7, r7, #16
+ 875              		.cfi_def_cfa_offset 8
+ 876 00ee BD46     		mov	sp, r7
+ 877              		.cfi_def_cfa_register 13
+ 878              		@ sp needed
+ 879 00f0 80BD     		pop	{r7, pc}
+ 880              	.L48:
+ 881 00f2 00BF     		.align	2
+ 882              	.L47:
+ 883 00f4 1CED00E0 		.word	-536810212
+ 884 00f8 00000000 		.word	ucMaxSysCallPriority
+ 885 00fc 00000000 		.word	.LC0
+ 886 0100 00000000 		.word	__func__.2
+ 887 0104 04000000 		.word	.LC1
+ 888 0108 00000000 		.word	ulMaxPRIGROUPValue
+ 889 010c 20ED00E0 		.word	-536810208
+ 890 0110 00000000 		.word	ulCriticalNesting
+ 891              		.cfi_endproc
+ 892              	.LFE9:
+ 894              		.section	.text.vPortEndScheduler,"ax",%progbits
+ 895              		.align	1
+ 896              		.global	vPortEndScheduler
+ 897              		.syntax unified
+ 898              		.thumb
+ 899              		.thumb_func
+ 901              	vPortEndScheduler:
+ 902              	.LFB10:
+ARM GAS  /tmp/ccsuQooq.s 			page 46
 
 
- 708 00ca 04B0     		add	sp, sp, #16
- 709              		.cfi_def_cfa_offset 8
- 710              		@ sp needed
- 711 00cc 10BD     		pop	{r4, pc}
- 712              	.L43:
- 713 00ce 00BF     		.align	2
- 714              	.L42:
- 715 00d0 00000000 		.word	ucMaxSysCallPriority
- 716 00d4 00000000 		.word	.LC0
- 717 00d8 00000000 		.word	__func__.2
- 718 00dc 02000000 		.word	.LC1
- 719 00e0 00000000 		.word	ulMaxPRIGROUPValue
- 720 00e4 00000000 		.word	ulCriticalNesting
- 721              		.cfi_endproc
- 722              	.LFE9:
- 724              		.section	.text.vPortEndScheduler,"ax",%progbits
- 725              		.align	1
- 726              		.global	vPortEndScheduler
- 727              		.syntax unified
- 728              		.thumb
- 729              		.thumb_func
- 731              	vPortEndScheduler:
- 732              	.LFB10:
 1684:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** /*-----------------------------------------------------------*/
 1685:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1686:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** void vPortEndScheduler( void ) /* PRIVILEGED_FUNCTION */
 1687:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** {
- 733              		.loc 1 1687 1 is_stmt 1 view -0
- 734              		.cfi_startproc
- 735              		@ args = 0, pretend = 0, frame = 0
- 736              		@ frame_needed = 0, uses_anonymous_args = 0
+ 903              		.loc 1 1687 1
+ 904              		.cfi_startproc
+ 905              		@ args = 0, pretend = 0, frame = 0
+ 906              		@ frame_needed = 1, uses_anonymous_args = 0
+ 907 0000 80B5     		push	{r7, lr}
+ 908              		.cfi_def_cfa_offset 8
+ 909              		.cfi_offset 7, -8
+ 910              		.cfi_offset 14, -4
+ 911 0002 00AF     		add	r7, sp, #0
+ 912              		.cfi_def_cfa_register 7
 1688:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     /* Not implemented in ports where there is nothing to return to.
 1689:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****      * Artificially force an assert. */
 1690:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     configASSERT( ulCriticalNesting == 1000UL );
- 737              		.loc 1 1690 5 view .LVU209
-1687:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     /* Not implemented in ports where there is nothing to return to.
- 738              		.loc 1 1687 1 is_stmt 0 view .LVU210
- 739 0000 08B5     		push	{r3, lr}
- 740              		.cfi_def_cfa_offset 8
- 741              		.cfi_offset 3, -8
- 742              		.cfi_offset 14, -4
- 743              		.loc 1 1690 5 view .LVU211
- 744 0002 074B     		ldr	r3, .L46
- 745 0004 1B68     		ldr	r3, [r3]
- 746 0006 B3F57A7F 		cmp	r3, #1000
- 747 000a 08D0     		beq	.L44
- 748              		.loc 1 1690 5 is_stmt 1 discriminator 1 view .LVU212
- 749 000c FFF7FEFF 		bl	ulSetInterruptMask
- 750              	.LVL37:
- 751              		.loc 1 1690 5 discriminator 1 view .LVU213
- 752 0010 40F29A61 		movw	r1, #1690
- 753 0014 034B     		ldr	r3, .L46+4
- 754 0016 044A     		ldr	r2, .L46+8
- 755 0018 0448     		ldr	r0, .L46+12
- 756 001a FFF7FEFF 		bl	__assert_func
- 757              	.LVL38:
- 758              	.L44:
-ARM GAS  /tmp/ccQesb1V.s 			page 45
-
-
+ 913              		.loc 1 1690 5
+ 914 0004 074B     		ldr	r3, .L52
+ 915 0006 1B68     		ldr	r3, [r3]
+ 916 0008 B3F57A7F 		cmp	r3, #1000
+ 917 000c 08D0     		beq	.L51
+ 918              		.loc 1 1690 5 is_stmt 0 discriminator 1
+ 919 000e FFF7FEFF 		bl	ulSetInterruptMask
+ 920 0012 054B     		ldr	r3, .L52+4
+ 921 0014 054A     		ldr	r2, .L52+8
+ 922 0016 40F29A61 		movw	r1, #1690
+ 923 001a 0548     		ldr	r0, .L52+12
+ 924 001c FFF7FEFF 		bl	__assert_func
+ 925              	.L51:
 1691:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** }
- 759              		.loc 1 1691 1 is_stmt 0 view .LVU214
- 760 001e 08BD     		pop	{r3, pc}
- 761              	.L47:
- 762              		.align	2
- 763              	.L46:
- 764 0020 00000000 		.word	ulCriticalNesting
- 765 0024 00000000 		.word	.LC0
- 766 0028 00000000 		.word	__func__.1
- 767 002c 02000000 		.word	.LC1
- 768              		.cfi_endproc
- 769              	.LFE10:
- 771              		.section	.text.xPortIsInsideInterrupt,"ax",%progbits
- 772              		.align	1
- 773              		.global	xPortIsInsideInterrupt
- 774              		.syntax unified
- 775              		.thumb
- 776              		.thumb_func
- 778              	xPortIsInsideInterrupt:
- 779              	.LFB11:
+ 926              		.loc 1 1691 1 is_stmt 1
+ 927 0020 00BF     		nop
+ 928 0022 80BD     		pop	{r7, pc}
+ 929              	.L53:
+ 930              		.align	2
+ 931              	.L52:
+ 932 0024 00000000 		.word	ulCriticalNesting
+ 933 0028 00000000 		.word	.LC0
+ 934 002c 00000000 		.word	__func__.1
+ 935 0030 04000000 		.word	.LC1
+ 936              		.cfi_endproc
+ 937              	.LFE10:
+ 939              		.section	.text.xPortIsInsideInterrupt,"ax",%progbits
+ 940              		.align	1
+ 941              		.global	xPortIsInsideInterrupt
+ 942              		.syntax unified
+ 943              		.thumb
+ 944              		.thumb_func
+ 946              	xPortIsInsideInterrupt:
+ 947              	.LFB11:
 1692:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** /*-----------------------------------------------------------*/
 1693:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1694:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #if ( configENABLE_MPU == 1 )
 1695:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     void vPortStoreTaskMPUSettings( xMPU_SETTINGS * xMPUSettings,
 1696:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                                     const struct xMEMORY_REGION * const xRegions,
 1697:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                                     StackType_t * pxBottomOfStack,
+ARM GAS  /tmp/ccsuQooq.s 			page 47
+
+
 1698:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                                     uint32_t ulStackDepth )
 1699:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     {
 1700:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         uint32_t ulRegionStartAddress, ulRegionEndAddress, ulRegionNumber;
@@ -2698,9 +2792,6 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1726:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1727:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             /* If the stack is within the privileged SRAM, do not protect it
 1728:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****              * using a separate MPU region. This is needed because privileged
-ARM GAS  /tmp/ccQesb1V.s 			page 46
-
-
 1729:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****              * SRAM is already protected using an MPU region and ARMv8-M does
 1730:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****              * not allow overlapping MPU regions. */
 1731:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             if( ( ulRegionStartAddress >= ( uint32_t ) __privileged_sram_start__ ) &&
@@ -2727,6 +2818,9 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1752:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         }
 1753:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1754:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         /* User supplied configurable regions. */
+ARM GAS  /tmp/ccsuQooq.s 			page 48
+
+
 1755:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         for( ulRegionNumber = 1; ulRegionNumber <= portNUM_CONFIGURABLE_REGIONS; ulRegionNumber++ )
 1756:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         {
 1757:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             /* If xRegions is NULL i.e. the task has not specified any MPU
@@ -2758,9 +2852,6 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1783:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                 /* XN. */
 1784:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                 if( ( xRegions[ lIndex ].ulParameters & tskMPU_REGION_EXECUTE_NEVER ) != 0 )
 1785:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                 {
-ARM GAS  /tmp/ccQesb1V.s 			page 47
-
-
 1786:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                     xMPUSettings->xRegionsSettings[ ulRegionNumber ].ulRBAR |= ( portMPU_REGION_EXE
 1787:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                 }
 1788:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
@@ -2787,6 +2878,9 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1809:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                 xMPUSettings->xRegionsSettings[ ulRegionNumber ].ulRLAR = 0UL;
 1810:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             }
 1811:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
+ARM GAS  /tmp/ccsuQooq.s 			page 49
+
+
 1812:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             lIndex++;
 1813:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         }
 1814:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     }
@@ -2818,9 +2912,6 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1840:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                 {
 1841:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                     /* Is the MPU region enabled? */
 1842:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                     if( ( xTaskMpuSettings->xRegionsSettings[ i ].ulRLAR & portMPU_RLAR_REGION_ENAB
-ARM GAS  /tmp/ccQesb1V.s 			page 48
-
-
 1843:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                     {
 1844:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                         if( portIS_ADDRESS_WITHIN_RANGE( ulBufferStartAddress,
 1845:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****                                                          portEXTRACT_FIRST_ADDRESS_FROM_RBAR( xTask
@@ -2846,114 +2937,138 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1865:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1866:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** BaseType_t xPortIsInsideInterrupt( void )
 1867:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** {
- 780              		.loc 1 1867 1 is_stmt 1 view -0
- 781              		.cfi_startproc
- 782              		@ args = 0, pretend = 0, frame = 0
- 783              		@ frame_needed = 0, uses_anonymous_args = 0
- 784              		@ link register save eliminated.
+ 948              		.loc 1 1867 1
+ARM GAS  /tmp/ccsuQooq.s 			page 50
+
+
+ 949              		.cfi_startproc
+ 950              		@ args = 0, pretend = 0, frame = 8
+ 951              		@ frame_needed = 1, uses_anonymous_args = 0
+ 952              		@ link register save eliminated.
+ 953 0000 80B4     		push	{r7}
+ 954              		.cfi_def_cfa_offset 4
+ 955              		.cfi_offset 7, -4
+ 956 0002 83B0     		sub	sp, sp, #12
+ 957              		.cfi_def_cfa_offset 16
+ 958 0004 00AF     		add	r7, sp, #0
+ 959              		.cfi_def_cfa_register 7
 1868:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     uint32_t ulCurrentInterrupt;
- 785              		.loc 1 1868 5 view .LVU216
 1869:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     BaseType_t xReturn;
- 786              		.loc 1 1869 5 view .LVU217
 1870:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1871:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     /* Obtain the number of the currently executing interrupt. Interrupt Program
 1872:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****      * Status Register (IPSR) holds the exception number of the currently-executing
 1873:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****      * exception or zero for Thread mode.*/
 1874:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     __asm volatile ( "mrs %0, ipsr" : "=r" ( ulCurrentInterrupt )::"memory" );
- 787              		.loc 1 1874 5 view .LVU218
- 788              		.syntax unified
- 789              	@ 1874 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c" 1
- 790 0000 EFF30580 		mrs r0, ipsr
- 791              	@ 0 "" 2
- 792              	.LVL39:
+ 960              		.loc 1 1874 5
+ 961              		.syntax unified
+ 962              	@ 1874 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c" 1
+ 963 0006 EFF30583 		mrs r3, ipsr
+ 964              	@ 0 "" 2
+ 965              		.thumb
+ 966              		.syntax unified
+ 967 000a 3B60     		str	r3, [r7]
 1875:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1876:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     if( ulCurrentInterrupt == 0 )
- 793              		.loc 1 1876 5 view .LVU219
+ 968              		.loc 1 1876 7
+ 969 000c 3B68     		ldr	r3, [r7]
+ 970 000e 002B     		cmp	r3, #0
+ 971 0010 02D1     		bne	.L55
 1877:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     {
 1878:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         xReturn = pdFALSE;
+ 972              		.loc 1 1878 17
+ 973 0012 0023     		movs	r3, #0
+ 974 0014 7B60     		str	r3, [r7, #4]
+ 975 0016 01E0     		b	.L56
+ 976              	.L55:
 1879:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     }
 1880:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     else
 1881:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     {
 1882:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         xReturn = pdTRUE;
+ 977              		.loc 1 1882 17
+ 978 0018 0123     		movs	r3, #1
+ 979 001a 7B60     		str	r3, [r7, #4]
+ 980              	.L56:
 1883:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     }
 1884:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1885:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     return xReturn;
-ARM GAS  /tmp/ccQesb1V.s 			page 49
-
-
- 794              		.loc 1 1885 5 view .LVU220
+ 981              		.loc 1 1885 12
+ 982 001c 7B68     		ldr	r3, [r7, #4]
 1886:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** }
- 795              		.loc 1 1886 1 is_stmt 0 view .LVU221
- 796              		.thumb
- 797              		.syntax unified
- 798 0004 0038     		subs	r0, r0, #0
- 799              		.loc 1 1886 1 view .LVU222
- 800 0006 18BF     		it	ne
- 801 0008 0120     		movne	r0, #1
- 802              	.LVL40:
- 803              		.loc 1 1886 1 view .LVU223
- 804 000a 7047     		bx	lr
- 805              		.cfi_endproc
- 806              	.LFE11:
- 808              		.section	.text.vPortValidateInterruptPriority,"ax",%progbits
- 809              		.align	1
- 810              		.global	vPortValidateInterruptPriority
- 811              		.syntax unified
- 812              		.thumb
- 813              		.thumb_func
- 815              	vPortValidateInterruptPriority:
- 816              	.LFB12:
+ 983              		.loc 1 1886 1
+ 984 001e 1846     		mov	r0, r3
+ 985 0020 0C37     		adds	r7, r7, #12
+ 986              		.cfi_def_cfa_offset 4
+ARM GAS  /tmp/ccsuQooq.s 			page 51
+
+
+ 987 0022 BD46     		mov	sp, r7
+ 988              		.cfi_def_cfa_register 13
+ 989              		@ sp needed
+ 990 0024 5DF8047B 		ldr	r7, [sp], #4
+ 991              		.cfi_restore 7
+ 992              		.cfi_def_cfa_offset 0
+ 993 0028 7047     		bx	lr
+ 994              		.cfi_endproc
+ 995              	.LFE11:
+ 997              		.section	.text.vPortValidateInterruptPriority,"ax",%progbits
+ 998              		.align	1
+ 999              		.global	vPortValidateInterruptPriority
+ 1000              		.syntax unified
+ 1001              		.thumb
+ 1002              		.thumb_func
+ 1004              	vPortValidateInterruptPriority:
+ 1005              	.LFB12:
 1887:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** /*-----------------------------------------------------------*/
 1888:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1889:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** #if ( ( configASSERT_DEFINED == 1 ) && ( portHAS_BASEPRI == 1 ) )
 1890:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1891:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     void vPortValidateInterruptPriority( void )
 1892:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     {
- 817              		.loc 1 1892 5 is_stmt 1 view -0
- 818              		.cfi_startproc
- 819              		@ args = 0, pretend = 0, frame = 0
- 820              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1006              		.loc 1 1892 5
+ 1007              		.cfi_startproc
+ 1008              		@ args = 0, pretend = 0, frame = 8
+ 1009              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1010 0000 80B5     		push	{r7, lr}
+ 1011              		.cfi_def_cfa_offset 8
+ 1012              		.cfi_offset 7, -8
+ 1013              		.cfi_offset 14, -4
+ 1014 0002 82B0     		sub	sp, sp, #8
+ 1015              		.cfi_def_cfa_offset 16
+ 1016 0004 00AF     		add	r7, sp, #0
+ 1017              		.cfi_def_cfa_register 7
 1893:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         uint32_t ulCurrentInterrupt;
- 821              		.loc 1 1893 9 view .LVU225
 1894:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         uint8_t ucCurrentPriority;
- 822              		.loc 1 1894 9 view .LVU226
 1895:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1896:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         /* Obtain the number of the currently executing interrupt. */
 1897:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         __asm volatile ( "mrs %0, ipsr" : "=r" ( ulCurrentInterrupt )::"memory" );
- 823              		.loc 1 1897 9 view .LVU227
-1892:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         uint32_t ulCurrentInterrupt;
- 824              		.loc 1 1892 5 is_stmt 0 view .LVU228
- 825 0000 08B5     		push	{r3, lr}
- 826              		.cfi_def_cfa_offset 8
- 827              		.cfi_offset 3, -8
- 828              		.cfi_offset 14, -4
- 829              		.loc 1 1897 9 view .LVU229
- 830              		.syntax unified
- 831              	@ 1897 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c" 1
- 832 0002 EFF30583 		mrs r3, ipsr
- 833              	@ 0 "" 2
- 834              	.LVL41:
+ 1018              		.loc 1 1897 9
+ 1019              		.syntax unified
+ 1020              	@ 1897 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c" 1
+ 1021 0006 EFF30583 		mrs r3, ipsr
+ 1022              	@ 0 "" 2
+ 1023              		.thumb
+ 1024              		.syntax unified
+ 1025 000a 7B60     		str	r3, [r7, #4]
 1898:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1899:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         /* Is the interrupt number a user defined interrupt? */
 1900:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         if( ulCurrentInterrupt >= portFIRST_USER_INTERRUPT_NUMBER )
- 835              		.loc 1 1900 9 is_stmt 1 view .LVU230
- 836              		.loc 1 1900 11 is_stmt 0 view .LVU231
-ARM GAS  /tmp/ccQesb1V.s 			page 50
-
-
- 837              		.thumb
- 838              		.syntax unified
- 839 0006 0F2B     		cmp	r3, #15
- 840 0008 0ED9     		bls	.L50
+ 1026              		.loc 1 1900 11
+ 1027 000c 7B68     		ldr	r3, [r7, #4]
+ 1028 000e 0F2B     		cmp	r3, #15
+ 1029 0010 12D9     		bls	.L59
 1901:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         {
 1902:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             /* Look up the interrupt's priority. */
+ARM GAS  /tmp/ccsuQooq.s 			page 52
+
+
 1903:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             ucCurrentPriority = pcInterruptPriorityRegisters[ ulCurrentInterrupt ];
- 841              		.loc 1 1903 13 is_stmt 1 view .LVU232
- 842              		.loc 1 1903 61 is_stmt 0 view .LVU233
- 843 000a 104A     		ldr	r2, .L53
- 844              		.loc 1 1903 31 view .LVU234
- 845 000c 9B5C     		ldrb	r3, [r3, r2]	@ zero_extendqisi2
- 846              	.LVL42:
+ 1030              		.loc 1 1903 61
+ 1031 0012 144A     		ldr	r2, .L62
+ 1032 0014 7B68     		ldr	r3, [r7, #4]
+ 1033 0016 1344     		add	r3, r3, r2
+ 1034              		.loc 1 1903 31
+ 1035 0018 1B78     		ldrb	r3, [r3]
+ 1036 001a FB70     		strb	r3, [r7, #3]
 1904:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1905:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             /* The following assertion will fail if a service routine (ISR) for
 1906:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****              * an interrupt that has been assigned a priority above
@@ -2979,194 +3094,205 @@ ARM GAS  /tmp/ccQesb1V.s 			page 1
 1926:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****              * https://www.FreeRTOS.org/RTOS-Cortex-M3-M4.html
 1927:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****              * https://www.FreeRTOS.org/FAQHelp.html */
 1928:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****             configASSERT( ucCurrentPriority >= ucMaxSysCallPriority );
- 847              		.loc 1 1928 13 is_stmt 1 view .LVU235
- 848 000e 104A     		ldr	r2, .L53+4
- 849 0010 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
- 850 0012 9A42     		cmp	r2, r3
- 851 0014 08D9     		bls	.L50
- 852              		.loc 1 1928 13 discriminator 1 view .LVU236
- 853 0016 FFF7FEFF 		bl	ulSetInterruptMask
- 854              	.LVL43:
- 855              		.loc 1 1928 13 discriminator 1 view .LVU237
- 856 001a 4FF4F161 		mov	r1, #1928
- 857 001e 0D4B     		ldr	r3, .L53+8
- 858 0020 0D4A     		ldr	r2, .L53+12
- 859              	.LVL44:
- 860              	.L52:
+ 1037              		.loc 1 1928 13
+ 1038 001c 124B     		ldr	r3, .L62+4
+ 1039 001e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1040 0020 FA78     		ldrb	r2, [r7, #3]	@ zero_extendqisi2
+ 1041 0022 9A42     		cmp	r2, r3
+ 1042 0024 08D2     		bcs	.L59
+ 1043              		.loc 1 1928 13 is_stmt 0 discriminator 1
+ 1044 0026 FFF7FEFF 		bl	ulSetInterruptMask
+ 1045 002a 104B     		ldr	r3, .L62+8
+ 1046 002c 104A     		ldr	r2, .L62+12
+ 1047 002e 4FF4F161 		mov	r1, #1928
+ 1048 0032 1048     		ldr	r0, .L62+16
+ 1049 0034 FFF7FEFF 		bl	__assert_func
+ 1050              	.L59:
 1929:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         }
 1930:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c **** 
 1931:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         /* Priority grouping:  The interrupt controller (NVIC) allows the bits
 1932:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * that define each interrupt's priority to be split between bits that
 1933:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * define the interrupt's pre-emption priority bits and bits that define
-ARM GAS  /tmp/ccQesb1V.s 			page 51
-
-
 1934:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * the interrupt's sub-priority.  For simplicity all bits must be defined
 1935:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * to be pre-emption priority bits.  The following assertion will fail if
 1936:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * this is not the case (if some bits represent a sub-priority).
 1937:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          *
 1938:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * If the application only uses CMSIS libraries for interrupt
+ARM GAS  /tmp/ccsuQooq.s 			page 53
+
+
 1939:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * configuration then the correct setting can be achieved on all Cortex-M
 1940:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * devices by calling NVIC_SetPriorityGrouping( 0 ); before starting the
 1941:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * scheduler.  Note however that some vendor specific peripheral libraries
 1942:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * assume a non-zero priority group setting, in which cases using a value
 1943:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****          * of zero will result in unpredictable behaviour. */
 1944:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         configASSERT( ( portAIRCR_REG & portPRIORITY_GROUP_MASK ) <= ulMaxPRIGROUPValue );
- 861              		.loc 1 1944 9 is_stmt 0 discriminator 1 view .LVU238
- 862 0022 0E48     		ldr	r0, .L53+16
- 863 0024 FFF7FEFF 		bl	__assert_func
- 864              	.LVL45:
- 865              	.L50:
-1928:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****         }
- 866              		.loc 1 1928 70 is_stmt 1 discriminator 2 view .LVU239
- 867              		.loc 1 1944 9 view .LVU240
- 868 0028 4FF0E023 		mov	r3, #-536813568
- 869 002c 0C4A     		ldr	r2, .L53+20
- 870 002e D3F80C3D 		ldr	r3, [r3, #3340]
- 871 0032 1268     		ldr	r2, [r2]
- 872 0034 03F4E063 		and	r3, r3, #1792
- 873 0038 9342     		cmp	r3, r2
- 874 003a 06D9     		bls	.L49
- 875              		.loc 1 1944 9 discriminator 1 view .LVU241
- 876 003c FFF7FEFF 		bl	ulSetInterruptMask
- 877              	.LVL46:
- 878              		.loc 1 1944 9 discriminator 1 view .LVU242
- 879 0040 4FF4F361 		mov	r1, #1944
- 880 0044 034B     		ldr	r3, .L53+8
- 881 0046 044A     		ldr	r2, .L53+12
- 882 0048 EBE7     		b	.L52
- 883              	.L49:
+ 1051              		.loc 1 1944 9 is_stmt 1
+ 1052 0038 0F4B     		ldr	r3, .L62+20
+ 1053 003a 1B68     		ldr	r3, [r3]
+ 1054 003c 03F4E062 		and	r2, r3, #1792
+ 1055 0040 0E4B     		ldr	r3, .L62+24
+ 1056 0042 1B68     		ldr	r3, [r3]
+ 1057 0044 9A42     		cmp	r2, r3
+ 1058 0046 08D9     		bls	.L61
+ 1059              		.loc 1 1944 9 is_stmt 0 discriminator 1
+ 1060 0048 FFF7FEFF 		bl	ulSetInterruptMask
+ 1061 004c 074B     		ldr	r3, .L62+8
+ 1062 004e 084A     		ldr	r2, .L62+12
+ 1063 0050 4FF4F361 		mov	r1, #1944
+ 1064 0054 0748     		ldr	r0, .L62+16
+ 1065 0056 FFF7FEFF 		bl	__assert_func
+ 1066              	.L61:
 1945:Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/port.c ****     }
- 884              		.loc 1 1945 5 is_stmt 0 view .LVU243
- 885 004a 08BD     		pop	{r3, pc}
- 886              	.L54:
- 887              		.align	2
- 888              	.L53:
- 889 004c F0E300E0 		.word	-536812560
- 890 0050 00000000 		.word	ucMaxSysCallPriority
- 891 0054 00000000 		.word	.LC0
- 892 0058 00000000 		.word	__func__.0
- 893 005c 02000000 		.word	.LC1
- 894 0060 00000000 		.word	ulMaxPRIGROUPValue
- 895              		.cfi_endproc
- 896              	.LFE12:
- 898              		.section	.rodata.__func__.0,"a"
- 901              	__func__.0:
- 902 0000 76506F72 		.ascii	"vPortValidateInterruptPriority\000"
- 902      7456616C 
- 902      69646174 
- 902      65496E74 
- 902      65727275 
- 903              		.section	.rodata.__func__.1,"a"
-ARM GAS  /tmp/ccQesb1V.s 			page 52
+ 1067              		.loc 1 1945 5 is_stmt 1
+ 1068 005a 00BF     		nop
+ 1069 005c 0837     		adds	r7, r7, #8
+ 1070              		.cfi_def_cfa_offset 8
+ 1071 005e BD46     		mov	sp, r7
+ 1072              		.cfi_def_cfa_register 13
+ 1073              		@ sp needed
+ 1074 0060 80BD     		pop	{r7, pc}
+ 1075              	.L63:
+ 1076 0062 00BF     		.align	2
+ 1077              	.L62:
+ 1078 0064 F0E300E0 		.word	-536812560
+ 1079 0068 00000000 		.word	ucMaxSysCallPriority
+ 1080 006c 00000000 		.word	.LC0
+ 1081 0070 00000000 		.word	__func__.0
+ 1082 0074 04000000 		.word	.LC1
+ 1083 0078 0CED00E0 		.word	-536810228
+ 1084 007c 00000000 		.word	ulMaxPRIGROUPValue
+ 1085              		.cfi_endproc
+ 1086              	.LFE12:
+ 1088              		.section	.rodata.__func__.5,"a"
+ 1089              		.align	2
+ 1092              	__func__.5:
+ 1093 0000 70727654 		.ascii	"prvTaskExitError\000"
+ 1093      61736B45 
+ 1093      78697445 
+ 1093      72726F72 
+ 1093      00
+ 1094              		.section	.rodata.__func__.4,"a"
+ 1095              		.align	2
+ 1098              	__func__.4:
+ 1099 0000 76506F72 		.ascii	"vPortExitCritical\000"
+ 1099      74457869 
+ 1099      74437269 
+ARM GAS  /tmp/ccsuQooq.s 			page 54
 
 
- 906              	__func__.1:
- 907 0000 76506F72 		.ascii	"vPortEndScheduler\000"
- 907      74456E64 
- 907      53636865 
- 907      64756C65 
- 907      7200
- 908              		.section	.rodata.__func__.2,"a"
- 911              	__func__.2:
- 912 0000 78506F72 		.ascii	"xPortStartScheduler\000"
- 912      74537461 
- 912      72745363 
- 912      68656475 
- 912      6C657200 
- 913              		.section	.rodata.__func__.3,"a"
- 916              	__func__.3:
- 917 0000 70727654 		.ascii	"prvTaskExitError\000"
- 917      61736B45 
- 917      78697445 
- 917      72726F72 
- 917      00
- 918              		.section	.rodata.__func__.4,"a"
- 921              	__func__.4:
- 922 0000 76506F72 		.ascii	"vPortSVCHandler_C\000"
- 922      74535643 
- 922      48616E64 
- 922      6C65725F 
- 922      4300
- 923              		.section	.rodata.__func__.5,"a"
- 926              	__func__.5:
- 927 0000 76506F72 		.ascii	"vPortExitCritical\000"
- 927      74457869 
- 927      74437269 
- 927      74696361 
- 927      6C00
- 928              		.section	.bss.ulMaxPRIGROUPValue,"aw",%nobits
- 929              		.align	2
- 932              	ulMaxPRIGROUPValue:
- 933 0000 00000000 		.space	4
- 934              		.section	.bss.ucMaxSysCallPriority,"aw",%nobits
- 937              	ucMaxSysCallPriority:
- 938 0000 00       		.space	1
- 939              		.section	.data.ulCriticalNesting,"aw"
- 940              		.align	2
- 943              	ulCriticalNesting:
- 944 0000 AAAAAAAA 		.word	-1431655766
- 945              		.text
- 946              	.Letext0:
- 947              		.file 2 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 948              		.file 3 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 949              		.file 4 "Lib/FreeRTOS/Source/include/projdefs.h"
- 950              		.file 5 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portmacrocommon.h"
- 951              		.file 6 "Lib/FreeRTOS/Source/include/task.h"
- 952              		.file 7 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.h"
- 953              		.file 8 "Inc/FreeRTOSConfig.h"
- 954              		.file 9 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
-ARM GAS  /tmp/ccQesb1V.s 			page 53
+ 1099      74696361 
+ 1099      6C00
+ 1100              		.section	.rodata.__func__.3,"a"
+ 1101              		.align	2
+ 1104              	__func__.3:
+ 1105 0000 76506F72 		.ascii	"vPortSVCHandler_C\000"
+ 1105      74535643 
+ 1105      48616E64 
+ 1105      6C65725F 
+ 1105      4300
+ 1106              		.section	.rodata.__func__.2,"a"
+ 1107              		.align	2
+ 1110              	__func__.2:
+ 1111 0000 78506F72 		.ascii	"xPortStartScheduler\000"
+ 1111      74537461 
+ 1111      72745363 
+ 1111      68656475 
+ 1111      6C657200 
+ 1112              		.section	.rodata.__func__.1,"a"
+ 1113              		.align	2
+ 1116              	__func__.1:
+ 1117 0000 76506F72 		.ascii	"vPortEndScheduler\000"
+ 1117      74456E64 
+ 1117      53636865 
+ 1117      64756C65 
+ 1117      7200
+ 1118              		.section	.rodata.__func__.0,"a"
+ 1119              		.align	2
+ 1122              	__func__.0:
+ 1123 0000 76506F72 		.ascii	"vPortValidateInterruptPriority\000"
+ 1123      7456616C 
+ 1123      69646174 
+ 1123      65496E74 
+ 1123      65727275 
+ 1124              		.text
+ 1125              	.Letext0:
+ 1126              		.file 2 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 1127              		.file 3 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 1128              		.file 4 "Lib/FreeRTOS/Source/include/projdefs.h"
+ 1129              		.file 5 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portmacrocommon.h"
+ 1130              		.file 6 "Lib/FreeRTOS/Source/include/task.h"
+ 1131              		.file 7 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.h"
+ 1132              		.file 8 "Inc/FreeRTOSConfig.h"
+ 1133              		.file 9 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ARM GAS  /tmp/ccsuQooq.s 			page 55
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 port.c
-     /tmp/ccQesb1V.s:32     .text.prvTaskExitError:00000000 $t
-     /tmp/ccQesb1V.s:37     .text.prvTaskExitError:00000000 prvTaskExitError
-     /tmp/ccQesb1V.s:93     .text.prvTaskExitError:00000030 $d
-     /tmp/ccQesb1V.s:943    .data.ulCriticalNesting:00000000 ulCriticalNesting
-     /tmp/ccQesb1V.s:916    .rodata.__func__.3:00000000 __func__.3
-     /tmp/ccQesb1V.s:101    .text.vPortSetupTimerInterrupt:00000000 $t
-     /tmp/ccQesb1V.s:107    .text.vPortSetupTimerInterrupt:00000000 vPortSetupTimerInterrupt
-     /tmp/ccQesb1V.s:143    .text.vPortSetupTimerInterrupt:00000020 $d
-     /tmp/ccQesb1V.s:148    .text.vPortYield:00000000 $t
-     /tmp/ccQesb1V.s:154    .text.vPortYield:00000000 vPortYield
-     /tmp/ccQesb1V.s:183    .text.vPortEnterCritical:00000000 $t
-     /tmp/ccQesb1V.s:189    .text.vPortEnterCritical:00000000 vPortEnterCritical
-     /tmp/ccQesb1V.s:226    .text.vPortEnterCritical:00000018 $d
-     /tmp/ccQesb1V.s:231    .text.vPortExitCritical:00000000 $t
-     /tmp/ccQesb1V.s:237    .text.vPortExitCritical:00000000 vPortExitCritical
-     /tmp/ccQesb1V.s:292    .text.vPortExitCritical:00000030 $d
-     /tmp/ccQesb1V.s:926    .rodata.__func__.5:00000000 __func__.5
-     /tmp/ccQesb1V.s:300    .text.SysTick_Handler:00000000 $t
-     /tmp/ccQesb1V.s:306    .text.SysTick_Handler:00000000 SysTick_Handler
-     /tmp/ccQesb1V.s:352    .text.vPortSVCHandler_C:00000000 $t
-     /tmp/ccQesb1V.s:358    .text.vPortSVCHandler_C:00000000 vPortSVCHandler_C
-     /tmp/ccQesb1V.s:426    .text.vPortSVCHandler_C:00000044 $d
-     /tmp/ccQesb1V.s:921    .rodata.__func__.4:00000000 __func__.4
-     /tmp/ccQesb1V.s:433    .text.pxPortInitialiseStack:00000000 $t
-     /tmp/ccQesb1V.s:439    .text.pxPortInitialiseStack:00000000 pxPortInitialiseStack
-     /tmp/ccQesb1V.s:541    .text.pxPortInitialiseStack:0000006c $d
-     /tmp/ccQesb1V.s:546    .text.xPortStartScheduler:00000000 $t
-     /tmp/ccQesb1V.s:552    .text.xPortStartScheduler:00000000 xPortStartScheduler
-     /tmp/ccQesb1V.s:715    .text.xPortStartScheduler:000000d0 $d
-     /tmp/ccQesb1V.s:937    .bss.ucMaxSysCallPriority:00000000 ucMaxSysCallPriority
-     /tmp/ccQesb1V.s:911    .rodata.__func__.2:00000000 __func__.2
-     /tmp/ccQesb1V.s:932    .bss.ulMaxPRIGROUPValue:00000000 ulMaxPRIGROUPValue
-     /tmp/ccQesb1V.s:725    .text.vPortEndScheduler:00000000 $t
-     /tmp/ccQesb1V.s:731    .text.vPortEndScheduler:00000000 vPortEndScheduler
-     /tmp/ccQesb1V.s:764    .text.vPortEndScheduler:00000020 $d
-     /tmp/ccQesb1V.s:906    .rodata.__func__.1:00000000 __func__.1
-     /tmp/ccQesb1V.s:772    .text.xPortIsInsideInterrupt:00000000 $t
-     /tmp/ccQesb1V.s:778    .text.xPortIsInsideInterrupt:00000000 xPortIsInsideInterrupt
-     /tmp/ccQesb1V.s:809    .text.vPortValidateInterruptPriority:00000000 $t
-     /tmp/ccQesb1V.s:815    .text.vPortValidateInterruptPriority:00000000 vPortValidateInterruptPriority
-     /tmp/ccQesb1V.s:889    .text.vPortValidateInterruptPriority:0000004c $d
-     /tmp/ccQesb1V.s:901    .rodata.__func__.0:00000000 __func__.0
-     /tmp/ccQesb1V.s:929    .bss.ulMaxPRIGROUPValue:00000000 $d
-     /tmp/ccQesb1V.s:938    .bss.ucMaxSysCallPriority:00000000 $d
-     /tmp/ccQesb1V.s:940    .data.ulCriticalNesting:00000000 $d
-                           .group:00000000 wm4.0.c552ae9005b0f2cca11872fae5d4b7f2
+     /tmp/ccsuQooq.s:26     .data.ulCriticalNesting:00000000 $d
+     /tmp/ccsuQooq.s:29     .data.ulCriticalNesting:00000000 ulCriticalNesting
+     /tmp/ccsuQooq.s:34     .bss.ucMaxSysCallPriority:00000000 ucMaxSysCallPriority
+     /tmp/ccsuQooq.s:35     .bss.ucMaxSysCallPriority:00000000 $d
+     /tmp/ccsuQooq.s:37     .bss.ulMaxPRIGROUPValue:00000000 $d
+     /tmp/ccsuQooq.s:40     .bss.ulMaxPRIGROUPValue:00000000 ulMaxPRIGROUPValue
+     /tmp/ccsuQooq.s:43     .rodata.pcInterruptPriorityRegisters:00000000 $d
+     /tmp/ccsuQooq.s:46     .rodata.pcInterruptPriorityRegisters:00000000 pcInterruptPriorityRegisters
+     /tmp/ccsuQooq.s:49     .text.vPortSetupTimerInterrupt:00000000 $t
+     /tmp/ccsuQooq.s:55     .text.vPortSetupTimerInterrupt:00000000 vPortSetupTimerInterrupt
+     /tmp/ccsuQooq.s:106    .text.vPortSetupTimerInterrupt:00000034 $d
+     /tmp/ccsuQooq.s:115    .rodata:00000000 $d
+     /tmp/ccsuQooq.s:123    .text.prvTaskExitError:00000000 $t
+     /tmp/ccsuQooq.s:128    .text.prvTaskExitError:00000000 prvTaskExitError
+     /tmp/ccsuQooq.s:179    .text.prvTaskExitError:0000003c $d
+     /tmp/ccsuQooq.s:1092   .rodata.__func__.5:00000000 __func__.5
+     /tmp/ccsuQooq.s:187    .text.prvSetupFPU:00000000 $t
+     /tmp/ccsuQooq.s:192    .text.prvSetupFPU:00000000 prvSetupFPU
+     /tmp/ccsuQooq.s:230    .text.prvSetupFPU:00000028 $d
+     /tmp/ccsuQooq.s:236    .text.vPortYield:00000000 $t
+     /tmp/ccsuQooq.s:242    .text.vPortYield:00000000 vPortYield
+     /tmp/ccsuQooq.s:282    .text.vPortYield:00000020 $d
+     /tmp/ccsuQooq.s:287    .text.vPortEnterCritical:00000000 $t
+     /tmp/ccsuQooq.s:293    .text.vPortEnterCritical:00000000 vPortEnterCritical
+     /tmp/ccsuQooq.s:330    .text.vPortEnterCritical:00000020 $d
+     /tmp/ccsuQooq.s:335    .text.vPortExitCritical:00000000 $t
+     /tmp/ccsuQooq.s:341    .text.vPortExitCritical:00000000 vPortExitCritical
+     /tmp/ccsuQooq.s:388    .text.vPortExitCritical:0000003c $d
+     /tmp/ccsuQooq.s:1098   .rodata.__func__.4:00000000 __func__.4
+     /tmp/ccsuQooq.s:396    .text.SysTick_Handler:00000000 $t
+     /tmp/ccsuQooq.s:402    .text.SysTick_Handler:00000000 SysTick_Handler
+     /tmp/ccsuQooq.s:445    .text.SysTick_Handler:0000002c $d
+     /tmp/ccsuQooq.s:450    .text.vPortSVCHandler_C:00000000 $t
+     /tmp/ccsuQooq.s:456    .text.vPortSVCHandler_C:00000000 vPortSVCHandler_C
+     /tmp/ccsuQooq.s:511    .text.vPortSVCHandler_C:00000040 $d
+     /tmp/ccsuQooq.s:1104   .rodata.__func__.3:00000000 __func__.3
+     /tmp/ccsuQooq.s:518    .text.pxPortInitialiseStack:00000000 $t
+     /tmp/ccsuQooq.s:524    .text.pxPortInitialiseStack:00000000 pxPortInitialiseStack
+     /tmp/ccsuQooq.s:706    .text.pxPortInitialiseStack:00000110 $d
+     /tmp/ccsuQooq.s:711    .text.xPortStartScheduler:00000000 $t
+     /tmp/ccsuQooq.s:717    .text.xPortStartScheduler:00000000 xPortStartScheduler
+     /tmp/ccsuQooq.s:883    .text.xPortStartScheduler:000000f4 $d
+     /tmp/ccsuQooq.s:1110   .rodata.__func__.2:00000000 __func__.2
+     /tmp/ccsuQooq.s:895    .text.vPortEndScheduler:00000000 $t
+     /tmp/ccsuQooq.s:901    .text.vPortEndScheduler:00000000 vPortEndScheduler
+     /tmp/ccsuQooq.s:932    .text.vPortEndScheduler:00000024 $d
+     /tmp/ccsuQooq.s:1116   .rodata.__func__.1:00000000 __func__.1
+     /tmp/ccsuQooq.s:940    .text.xPortIsInsideInterrupt:00000000 $t
+     /tmp/ccsuQooq.s:946    .text.xPortIsInsideInterrupt:00000000 xPortIsInsideInterrupt
+     /tmp/ccsuQooq.s:998    .text.vPortValidateInterruptPriority:00000000 $t
+     /tmp/ccsuQooq.s:1004   .text.vPortValidateInterruptPriority:00000000 vPortValidateInterruptPriority
+     /tmp/ccsuQooq.s:1078   .text.vPortValidateInterruptPriority:00000064 $d
+     /tmp/ccsuQooq.s:1122   .rodata.__func__.0:00000000 __func__.0
+     /tmp/ccsuQooq.s:1089   .rodata.__func__.5:00000000 $d
+     /tmp/ccsuQooq.s:1095   .rodata.__func__.4:00000000 $d
+ARM GAS  /tmp/ccsuQooq.s 			page 56
+
+
+     /tmp/ccsuQooq.s:1101   .rodata.__func__.3:00000000 $d
+     /tmp/ccsuQooq.s:1107   .rodata.__func__.2:00000000 $d
+     /tmp/ccsuQooq.s:1113   .rodata.__func__.1:00000000 $d
+     /tmp/ccsuQooq.s:1119   .rodata.__func__.0:00000000 $d
+                           .group:00000000 wm4.0.2a10773746a5c5ebb5552f50e466f80b
                            .group:00000000 wm4.stddef.h.39.0dc9006b34572d4d9cae4c8b422c4971
                            .group:00000000 wm4._newlib_version.h.4.411db44ea2338a62eca2f0777f81481b
                            .group:00000000 wm4.features.h.33.e0c9f337c65cb9f22ed5f23d082bc78b
@@ -3176,9 +3302,6 @@ DEFINED SYMBOLS
                            .group:00000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
                            .group:00000000 wm4.FreeRTOS.h.59.647b1b0da38e4e98108aae13c8abe9ee
                            .group:00000000 wm4.newlib.h.7.591ac1bd65c1f5b34864757667a05252
-ARM GAS  /tmp/ccQesb1V.s 			page 54
-
-
                            .group:00000000 wm4.ieeefp.h.77.bd5feb87d9990dd328793ced294f6a87
                            .group:00000000 wm4.config.h.224.10ee1ad185d877c6e334e6581faab44d
                            .group:00000000 wm4._ansi.h.31.de524f58584151836e90d8620a16f8e8
@@ -3198,9 +3321,9 @@ DEFINED SYMBOLS
                            .group:00000000 wm4.mpu_syscall_numbers.h.30.0a27a9934a6f5d596ea064151c3c3bfa
 
 UNDEFINED SYMBOLS
+SystemCoreClock
 ulSetInterruptMask
 __assert_func
-SystemCoreClock
 vClearInterruptMask
 xTaskIncrementTick
 vRestoreContextOfFirstTask

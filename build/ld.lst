@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccTZGjaN.s 			page 1
+ARM GAS  /tmp/ccIlBKJn.s 			page 1
 
 
    1              		.arch armv8.1-m.main
@@ -16,7 +16,7 @@ ARM GAS  /tmp/ccTZGjaN.s 			page 1
   13              		.eabi_attribute 24, 1
   14              		.eabi_attribute 25, 1
   15              		.eabi_attribute 26, 1
-  16              		.eabi_attribute 30, 4
+  16              		.eabi_attribute 30, 6
   17              		.eabi_attribute 34, 1
   18              		.eabi_attribute 38, 1
   19              		.eabi_attribute 18, 4
@@ -32,8 +32,7 @@ ARM GAS  /tmp/ccTZGjaN.s 			page 1
   29              		.thumb
   30              		.thumb_func
   32              	ld_post_process:
-  33              	.LVL0:
-  34              	.LFB3:
+  33              	.LFB3:
    1:Src/ld.c      **** /**
    2:Src/ld.c      ****   ******************************************************************************
    3:Src/ld.c      ****   * @file    ld.c
@@ -57,87 +56,127 @@ ARM GAS  /tmp/ccTZGjaN.s 			page 1
   21:Src/ld.c      **** 
   22:Src/ld.c      **** int ld_post_process(float *probs, float *raw_landmarks, ld_point_t landmarks[LD_LANDMARK_NB])
   23:Src/ld.c      **** {
-  35              		.loc 1 23 1 view -0
-ARM GAS  /tmp/ccTZGjaN.s 			page 2
+  34              		.loc 1 23 1
+  35              		.cfi_startproc
+ARM GAS  /tmp/ccIlBKJn.s 			page 2
 
 
-  36              		.cfi_startproc
-  37              		@ args = 0, pretend = 0, frame = 0
-  38              		@ frame_needed = 0, uses_anonymous_args = 0
+  36              		@ args = 0, pretend = 0, frame = 24
+  37              		@ frame_needed = 1, uses_anonymous_args = 0
+  38              		@ link register save eliminated.
+  39 0000 80B4     		push	{r7}
+  40              		.cfi_def_cfa_offset 4
+  41              		.cfi_offset 7, -4
+  42 0002 87B0     		sub	sp, sp, #28
+  43              		.cfi_def_cfa_offset 32
+  44 0004 00AF     		add	r7, sp, #0
+  45              		.cfi_def_cfa_register 7
+  46 0006 F860     		str	r0, [r7, #12]
+  47 0008 B960     		str	r1, [r7, #8]
+  48 000a 7A60     		str	r2, [r7, #4]
   24:Src/ld.c      ****   int i;
-  39              		.loc 1 24 3 view .LVU1
   25:Src/ld.c      **** 
   26:Src/ld.c      ****   if (*probs < LD_PROB_THRESHOLD)
-  40              		.loc 1 26 3 view .LVU2
-  41              		.loc 1 26 6 is_stmt 0 view .LVU3
-  42 0000 90ED007A 		vldr.32	s14, [r0]
-  43 0004 F5EE007A 		vmov.f32	s15, #2.5e-1
-  44 0008 B4EEE77A 		vcmpe.f32	s14, s15
-  45 000c F1EE10FA 		vmrs	APSR_nzcv, FPSCR
-  23:Src/ld.c      ****   int i;
-  46              		.loc 1 23 1 view .LVU4
-  47 0010 00B5     		push	{lr}
-  48              		.cfi_def_cfa_offset 4
-  49              		.cfi_offset 14, -4
-  50              		.loc 1 26 6 view .LVU5
-  51 0012 0DD5     		bpl	.L2
-  52 0014 4FF4EA7E 		mov	lr, #468
-  53 0018 4EF001E0 		dls	lr, lr
-  54              	.LVL1:
-  55              	.L4:
+  49              		.loc 1 26 7
+  50 000c FB68     		ldr	r3, [r7, #12]
+  51 000e D3ED007A 		vldr.32	s15, [r3]
+  52              		.loc 1 26 6
+  53 0012 B5EE007A 		vmov.f32	s14, #2.5e-1
+  54 0016 F4EEC77A 		vcmpe.f32	s15, s14
+  55 001a F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+  56 001e 25D5     		bpl	.L2
   27:Src/ld.c      ****     //return 0;
   28:Src/ld.c      **** 
   29:Src/ld.c      ****   for (i = 0; i < LD_LANDMARK_NB; i++) {
+  57              		.loc 1 29 10
+  58 0020 0023     		movs	r3, #0
+  59 0022 7B61     		str	r3, [r7, #20]
+  60              		.loc 1 29 3
+  61 0024 1EE0     		b	.L4
+  62              	.L5:
   30:Src/ld.c      ****     landmarks[i].x = raw_landmarks[i * 3 + 0];
-  56              		.loc 1 30 5 is_stmt 1 view .LVU6
-  57              		.loc 1 30 35 is_stmt 0 view .LVU7
-  58 001c 0B68     		ldr	r3, [r1]	@ float
-  29:Src/ld.c      ****     landmarks[i].x = raw_landmarks[i * 3 + 0];
-  59              		.loc 1 29 17 discriminator 1 view .LVU8
-  60 001e 0832     		adds	r2, r2, #8
-  61              		.loc 1 30 20 view .LVU9
-  62 0020 42F8083C 		str	r3, [r2, #-8]	@ float
+  63              		.loc 1 30 35
+  64 0026 7A69     		ldr	r2, [r7, #20]
+  65 0028 1346     		mov	r3, r2
+  66 002a 5B00     		lsls	r3, r3, #1
+  67 002c 1344     		add	r3, r3, r2
+  68 002e 9B00     		lsls	r3, r3, #2
+  69 0030 1A46     		mov	r2, r3
+  70 0032 BB68     		ldr	r3, [r7, #8]
+  71 0034 1A44     		add	r2, r2, r3
+  72              		.loc 1 30 14
+  73 0036 7B69     		ldr	r3, [r7, #20]
+  74 0038 DB00     		lsls	r3, r3, #3
+  75 003a 7968     		ldr	r1, [r7, #4]
+  76 003c 0B44     		add	r3, r3, r1
+  77              		.loc 1 30 35
+  78 003e 1268     		ldr	r2, [r2]	@ float
+  79              		.loc 1 30 20
+  80 0040 1A60     		str	r2, [r3]	@ float
   31:Src/ld.c      ****     landmarks[i].y = raw_landmarks[i * 3 + 1];
-  63              		.loc 1 31 5 is_stmt 1 view .LVU10
-  64              		.loc 1 31 35 is_stmt 0 view .LVU11
-  65 0024 4B68     		ldr	r3, [r1, #4]	@ float
+  81              		.loc 1 31 35
+  82 0042 7A69     		ldr	r2, [r7, #20]
+  83 0044 1346     		mov	r3, r2
+  84 0046 5B00     		lsls	r3, r3, #1
+ARM GAS  /tmp/ccIlBKJn.s 			page 3
+
+
+  85 0048 1344     		add	r3, r3, r2
+  86 004a 9B00     		lsls	r3, r3, #2
+  87 004c 0433     		adds	r3, r3, #4
+  88 004e BA68     		ldr	r2, [r7, #8]
+  89 0050 1A44     		add	r2, r2, r3
+  90              		.loc 1 31 14
+  91 0052 7B69     		ldr	r3, [r7, #20]
+  92 0054 DB00     		lsls	r3, r3, #3
+  93 0056 7968     		ldr	r1, [r7, #4]
+  94 0058 0B44     		add	r3, r3, r1
+  95              		.loc 1 31 35
+  96 005a 1268     		ldr	r2, [r2]	@ float
+  97              		.loc 1 31 20
+  98 005c 5A60     		str	r2, [r3, #4]	@ float
   29:Src/ld.c      ****     landmarks[i].x = raw_landmarks[i * 3 + 0];
-  66              		.loc 1 29 17 discriminator 1 view .LVU12
-  67 0026 0C31     		adds	r1, r1, #12
-  68              		.loc 1 31 20 view .LVU13
-  69 0028 42F8043C 		str	r3, [r2, #-4]	@ float
+  99              		.loc 1 29 36 discriminator 3
+ 100 005e 7B69     		ldr	r3, [r7, #20]
+ 101 0060 0133     		adds	r3, r3, #1
+ 102 0062 7B61     		str	r3, [r7, #20]
+ 103              	.L4:
   29:Src/ld.c      ****     landmarks[i].x = raw_landmarks[i * 3 + 0];
-  70              		.loc 1 29 36 is_stmt 1 discriminator 3 view .LVU14
-  29:Src/ld.c      ****     landmarks[i].x = raw_landmarks[i * 3 + 0];
-  71              		.loc 1 29 17 discriminator 1 view .LVU15
-  72 002c 0FF00BC0 		le	lr, .L4
-  73              	.L2:
+ 104              		.loc 1 29 17 discriminator 1
+ 105 0064 7B69     		ldr	r3, [r7, #20]
+ 106 0066 B3F5EA7F 		cmp	r3, #468
+ 107 006a DCDB     		blt	.L5
+ 108              	.L2:
   32:Src/ld.c      ****   }
   33:Src/ld.c      **** 
   34:Src/ld.c      ****   return 1;
-  74              		.loc 1 34 3 view .LVU16
+ 109              		.loc 1 34 10
+ 110 006c 0123     		movs	r3, #1
   35:Src/ld.c      **** }
-  75              		.loc 1 35 1 is_stmt 0 view .LVU17
-ARM GAS  /tmp/ccTZGjaN.s 			page 3
-
-
-  76 0030 0120     		movs	r0, #1
-  77              	.LVL2:
-  78              		.loc 1 35 1 view .LVU18
-  79 0032 5DF804FB 		ldr	pc, [sp], #4
-  80              		.cfi_endproc
-  81              	.LFE3:
-  83              		.text
-  84              	.Letext0:
-  85              		.file 2 "Inc/ld.h"
-ARM GAS  /tmp/ccTZGjaN.s 			page 4
+ 111              		.loc 1 35 1
+ 112 006e 1846     		mov	r0, r3
+ 113 0070 1C37     		adds	r7, r7, #28
+ 114              		.cfi_def_cfa_offset 4
+ 115 0072 BD46     		mov	sp, r7
+ 116              		.cfi_def_cfa_register 13
+ 117              		@ sp needed
+ 118 0074 5DF8047B 		ldr	r7, [sp], #4
+ 119              		.cfi_restore 7
+ 120              		.cfi_def_cfa_offset 0
+ 121 0078 7047     		bx	lr
+ 122              		.cfi_endproc
+ 123              	.LFE3:
+ 125              		.text
+ 126              	.Letext0:
+ 127              		.file 2 "Inc/ld.h"
+ARM GAS  /tmp/ccIlBKJn.s 			page 4
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 ld.c
-     /tmp/ccTZGjaN.s:26     .text.ld_post_process:00000000 $t
-     /tmp/ccTZGjaN.s:32     .text.ld_post_process:00000000 ld_post_process
-                           .group:00000000 wm4.0.c552ae9005b0f2cca11872fae5d4b7f2
+     /tmp/ccIlBKJn.s:26     .text.ld_post_process:00000000 $t
+     /tmp/ccIlBKJn.s:32     .text.ld_post_process:00000000 ld_post_process
+                           .group:00000000 wm4.0.2a10773746a5c5ebb5552f50e466f80b
                            .group:00000000 wm4.ld.h.19.137dbadf938c8a0cfe15d7982e5e13e2
                            .group:00000000 wm4._newlib_version.h.4.411db44ea2338a62eca2f0777f81481b
                            .group:00000000 wm4.newlib.h.27.4b972ceed5d01f491020c20f1e546cab

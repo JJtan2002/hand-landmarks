@@ -1,5 +1,7 @@
-Src/app_cam.c:26:13:CAM_InitCropConfig	8	static
-Src/app_cam.c:83:6:CAM_Init	88	static
-Src/app_cam.c:103:6:CAM_DisplayPipe_Start	8	static
-Src/app_cam.c:111:6:CAM_NNPipe_Start	8	static
-Src/app_cam.c:119:6:CAM_IspUpdate	8	static
+Src/app_cam.c:26:13:CAM_InitCropConfig	40	static
+Src/app_cam.c:41:13:DCMIPP_PipeInitDisplay	72	static
+Src/app_cam.c:62:13:DCMIPP_PipeInitNn	72	static
+Src/app_cam.c:83:6:CAM_Init	40	static
+Src/app_cam.c:103:6:CAM_DisplayPipe_Start	24	static
+Src/app_cam.c:111:6:CAM_NNPipe_Start	24	static
+Src/app_cam.c:119:6:CAM_IspUpdate	16	static

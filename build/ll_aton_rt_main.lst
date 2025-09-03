@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc1PWpTX.s 			page 1
+ARM GAS  /tmp/ccJ9aqtT.s 			page 1
 
 
    1              		.arch armv8.1-m.main
@@ -16,7 +16,7 @@ ARM GAS  /tmp/cc1PWpTX.s 			page 1
   13              		.eabi_attribute 24, 1
   14              		.eabi_attribute 25, 1
   15              		.eabi_attribute 26, 1
-  16              		.eabi_attribute 30, 4
+  16              		.eabi_attribute 30, 6
   17              		.eabi_attribute 34, 1
   18              		.eabi_attribute 38, 1
   19              		.eabi_attribute 18, 4
@@ -25,42 +25,44 @@ ARM GAS  /tmp/cc1PWpTX.s 			page 1
   22              	.Ltext0:
   23              		.cfi_sections	.debug_frame
   24              		.file 1 "Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c"
-  25              		.section	.rodata.LL_ATON_RT_Main.str1.1,"aMS",%progbits,1
-  26              	.LC0:
-  27 0000 6E657477 		.ascii	"network_instance != ((void *)0)\000"
-  27      6F726B5F 
-  27      696E7374 
-  27      616E6365 
-  27      20213D20 
-  28              	.LC1:
-  29 0020 4C69622F 		.ascii	"Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c\000"
-  29      41495F52 
-  29      756E7469 
-  29      6D652F4E 
-  29      70752F6C 
-  30              	.LC2:
-  31 004d 6E657477 		.ascii	"network_instance->network != ((void *)0)\000"
-  31      6F726B5F 
-  31      696E7374 
-  31      616E6365 
-  31      2D3E6E65 
-  32              		.section	.text.LL_ATON_RT_Main,"ax",%progbits
-  33              		.align	1
-  34              		.global	LL_ATON_RT_Main
-  35              		.syntax unified
-  36              		.thumb
-  37              		.thumb_func
-  39              	LL_ATON_RT_Main:
-  40              	.LVL0:
-  41              	.LFB4839:
+  25              		.section	.rodata
+  26              		.align	2
+  27              	.LC0:
+  28 0000 6E657477 		.ascii	"network_instance != ((void *)0)\000"
+  28      6F726B5F 
+  28      696E7374 
+  28      616E6365 
+  28      20213D20 
+  29              		.align	2
+  30              	.LC1:
+  31 0020 4C69622F 		.ascii	"Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c\000"
+  31      41495F52 
+  31      756E7469 
+  31      6D652F4E 
+  31      70752F6C 
+  32 004d 000000   		.align	2
+  33              	.LC2:
+  34 0050 6E657477 		.ascii	"network_instance->network != ((void *)0)\000"
+  34      6F726B5F 
+  34      696E7374 
+  34      616E6365 
+  34      2D3E6E65 
+  35              		.section	.text.LL_ATON_RT_Main,"ax",%progbits
+  36              		.align	1
+  37              		.global	LL_ATON_RT_Main
+  38              		.syntax unified
+  39              		.thumb
+  40              		.thumb_func
+  42              	LL_ATON_RT_Main:
+  43              	.LFB4839:
    1:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c **** /**
    2:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****  ******************************************************************************
    3:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****  * @file    ll_aton_rt_main.c
+ARM GAS  /tmp/ccJ9aqtT.s 			page 2
+
+
    4:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****  * @author  SRA Artificial Intelligence & Embedded Architectures
    5:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****  * @brief   Template `main()` function (named `LL_ATON_RT_Main()`) for
-ARM GAS  /tmp/cc1PWpTX.s 			page 2
-
-
    6:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****  *          Cube.AI/ATON integration in a RTOS-less application.
    7:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****  * @note    This file is intended to be just a template and is limited to run the
    8:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****  *          ATON LL runtime with a single network instance for a single inference!
@@ -95,74 +97,71 @@ ARM GAS  /tmp/cc1PWpTX.s 			page 1
   37:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****  */
   38:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c **** void LL_ATON_RT_Main(NN_Instance_TypeDef *network_instance)
   39:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c **** {
-  42              		.loc 1 39 1 view -0
-  43              		.cfi_startproc
-  44              		@ args = 0, pretend = 0, frame = 0
-  45              		@ frame_needed = 0, uses_anonymous_args = 0
+  44              		.loc 1 39 1
+  45              		.cfi_startproc
+  46              		@ args = 0, pretend = 0, frame = 16
+  47              		@ frame_needed = 1, uses_anonymous_args = 0
+  48 0000 80B5     		push	{r7, lr}
+  49              		.cfi_def_cfa_offset 8
+  50              		.cfi_offset 7, -8
+  51              		.cfi_offset 14, -4
+  52 0002 84B0     		sub	sp, sp, #16
+  53              		.cfi_def_cfa_offset 24
+  54 0004 00AF     		add	r7, sp, #0
+  55              		.cfi_def_cfa_register 7
+  56 0006 7860     		str	r0, [r7, #4]
   40:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****   LL_ATON_RT_RetValues_t ll_aton_rt_ret;
-  46              		.loc 1 40 3 view .LVU1
   41:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c **** 
   42:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****   /*** Start of user initialization code ***/
   43:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c **** 
   44:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****   /*** End of user initialization code ***/
   45:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c **** 
   46:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****   LL_ATON_ASSERT(network_instance != NULL);
-  47              		.loc 1 46 3 view .LVU2
-  39:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****   LL_ATON_RT_RetValues_t ll_aton_rt_ret;
-  48              		.loc 1 39 1 is_stmt 0 view .LVU3
-  49 0000 10B5     		push	{r4, lr}
-  50              		.cfi_def_cfa_offset 8
-  51              		.cfi_offset 4, -8
-  52              		.cfi_offset 14, -4
-  53              		.loc 1 46 3 view .LVU4
-  54 0002 0446     		mov	r4, r0
-  55 0004 28B9     		cbnz	r0, .L2
-  56              		.loc 1 46 3 discriminator 1 view .LVU5
-ARM GAS  /tmp/cc1PWpTX.s 			page 3
+  57              		.loc 1 46 3
+ARM GAS  /tmp/ccJ9aqtT.s 			page 3
 
 
-  57 0006 2E21     		movs	r1, #46
-  58 0008 104B     		ldr	r3, .L9
-  59 000a 114A     		ldr	r2, .L9+4
-  60              	.L8:
-  47:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****   LL_ATON_ASSERT(network_instance->network != NULL);
-  61              		.loc 1 47 3 discriminator 1 view .LVU6
-  62 000c 1148     		ldr	r0, .L9+8
-  63              	.LVL1:
-  64              		.loc 1 47 3 discriminator 1 view .LVU7
-  65 000e FFF7FEFF 		bl	__assert_func
-  66              	.LVL2:
+  58 0008 7B68     		ldr	r3, [r7, #4]
+  59 000a 002B     		cmp	r3, #0
+  60 000c 05D1     		bne	.L2
+  61              		.loc 1 46 3 is_stmt 0 discriminator 1
+  62 000e 154B     		ldr	r3, .L6
+  63 0010 154A     		ldr	r2, .L6+4
+  64 0012 2E21     		movs	r1, #46
+  65 0014 1548     		ldr	r0, .L6+8
+  66 0016 FFF7FEFF 		bl	__assert_func
   67              	.L2:
-  68              		.loc 1 47 3 is_stmt 1 view .LVU8
-  69 0012 0368     		ldr	r3, [r0]
-  70 0014 1BB9     		cbnz	r3, .L3
-  71              		.loc 1 47 3 is_stmt 0 discriminator 1 view .LVU9
-  72 0016 2F21     		movs	r1, #47
-  73 0018 0F4B     		ldr	r3, .L9+12
-  74 001a 0D4A     		ldr	r2, .L9+4
-  75 001c F6E7     		b	.L8
-  76              	.L3:
+  47:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****   LL_ATON_ASSERT(network_instance->network != NULL);
+  68              		.loc 1 47 3 is_stmt 1
+  69 001a 7B68     		ldr	r3, [r7, #4]
+  70 001c 1B68     		ldr	r3, [r3]
+  71 001e 002B     		cmp	r3, #0
+  72 0020 05D1     		bne	.L3
+  73              		.loc 1 47 3 is_stmt 0 discriminator 1
+  74 0022 134B     		ldr	r3, .L6+12
+  75 0024 104A     		ldr	r2, .L6+4
+  76 0026 2F21     		movs	r1, #47
+  77 0028 1048     		ldr	r0, .L6+8
+  78 002a FFF7FEFF 		bl	__assert_func
+  79              	.L3:
   48:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****   LL_ATON_RT_RuntimeInit();                  // Initialize runtime
-  77              		.loc 1 48 3 is_stmt 1 view .LVU10
-  78 001e FFF7FEFF 		bl	LL_ATON_RT_RuntimeInit
-  79              	.LVL3:
+  80              		.loc 1 48 3 is_stmt 1
+  81 002e FFF7FEFF 		bl	LL_ATON_RT_RuntimeInit
   49:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****   LL_ATON_RT_Init_Network(network_instance); // Initialize passed network instance object
-  80              		.loc 1 49 3 view .LVU11
-  81 0022 2046     		mov	r0, r4
-  82 0024 FFF7FEFF 		bl	LL_ATON_RT_Init_Network
-  83              	.LVL4:
-  84              	.L7:
+  82              		.loc 1 49 3
+  83 0032 7868     		ldr	r0, [r7, #4]
+  84 0034 FFF7FEFF 		bl	LL_ATON_RT_Init_Network
+  85              	.L5:
   50:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c **** 
   51:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****   do
-  85              		.loc 1 51 3 view .LVU12
   52:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****   {
   53:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****     /* Execute first/next step of Cube.AI/ATON runtime */
   54:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****     ll_aton_rt_ret = LL_ATON_RT_RunEpochBlock(network_instance);
-  86              		.loc 1 54 5 view .LVU13
-  87              		.loc 1 54 22 is_stmt 0 view .LVU14
-  88 0028 2046     		mov	r0, r4
-  89 002a FFF7FEFF 		bl	LL_ATON_RT_RunEpochBlock
-  90              	.LVL5:
+  86              		.loc 1 54 22
+  87 0038 7868     		ldr	r0, [r7, #4]
+  88 003a FFF7FEFF 		bl	LL_ATON_RT_RunEpochBlock
+  89 003e 0346     		mov	r3, r0
+  90 0040 FB73     		strb	r3, [r7, #15]
   55:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c **** 
   56:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****     /*** Start of user event handling code ***/
   57:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c **** 
@@ -170,88 +169,81 @@ ARM GAS  /tmp/cc1PWpTX.s 			page 1
   59:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c **** 
   60:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****     /* Wait for next event */
   61:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****     if (ll_aton_rt_ret == LL_ATON_RT_WFE)
-  91              		.loc 1 61 5 is_stmt 1 view .LVU15
-  92              		.loc 1 61 8 is_stmt 0 view .LVU16
-  93 002e 0128     		cmp	r0, #1
-  94 0030 02D1     		bne	.L4
+  91              		.loc 1 61 8
+  92 0042 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+  93 0044 012B     		cmp	r3, #1
+  94 0046 01D1     		bne	.L4
   62:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****     { /*** subject to change to fit also user code requirements ***/
   63:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****       LL_ATON_OSAL_WFE();
-  95              		.loc 1 63 7 is_stmt 1 view .LVU17
-  96 0032 FFF7FEFF 		bl	aton_osal_freertos_wfe
-ARM GAS  /tmp/cc1PWpTX.s 			page 4
+  95              		.loc 1 63 7
+  96 0048 FFF7FEFF 		bl	aton_osal_freertos_wfe
+  97              	.L4:
+ARM GAS  /tmp/ccJ9aqtT.s 			page 4
 
 
-  97              	.LVL6:
   64:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****     }
   65:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****   } while (ll_aton_rt_ret != LL_ATON_RT_DONE); /*** subject to change to fit also user code require
-  98              		.loc 1 65 27 view .LVU18
-  99 0036 F7E7     		b	.L7
- 100              	.LVL7:
- 101              	.L4:
- 102              		.loc 1 65 27 view .LVU19
- 103 0038 0228     		cmp	r0, #2
- 104 003a F5D1     		bne	.L7
+  98              		.loc 1 65 27
+  99 004c FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 100 004e 022B     		cmp	r3, #2
+ 101 0050 F2D1     		bne	.L5
   66:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c **** 
   67:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****   LL_ATON_RT_DeInit_Network(network_instance); // De-initialize the network instance object
- 105              		.loc 1 67 3 view .LVU20
- 106 003c 2046     		mov	r0, r4
- 107              	.LVL8:
- 108              		.loc 1 67 3 is_stmt 0 view .LVU21
- 109 003e FFF7FEFF 		bl	LL_ATON_RT_DeInit_Network
- 110              	.LVL9:
+ 102              		.loc 1 67 3
+ 103 0052 7868     		ldr	r0, [r7, #4]
+ 104 0054 FFF7FEFF 		bl	LL_ATON_RT_DeInit_Network
   68:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****   LL_ATON_RT_RuntimeDeInit();                  // De-initialize runtime
- 111              		.loc 1 68 3 is_stmt 1 view .LVU22
+ 105              		.loc 1 68 3
+ 106 0058 FFF7FEFF 		bl	LL_ATON_RT_RuntimeDeInit
   69:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c **** 
   70:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****   /*** Start of user de-initialization code ***/
   71:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c **** 
   72:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****   /*** End of user de-initialization code ***/
   73:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c **** }
- 112              		.loc 1 73 1 is_stmt 0 view .LVU23
- 113 0042 BDE81040 		pop	{r4, lr}
- 114              		.cfi_restore 14
- 115              		.cfi_restore 4
- 116              		.cfi_def_cfa_offset 0
- 117              	.LVL10:
-  68:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_main.c ****   LL_ATON_RT_RuntimeDeInit();                  // De-initialize runtime
- 118              		.loc 1 68 3 view .LVU24
- 119 0046 FFF7FEBF 		b	LL_ATON_RT_RuntimeDeInit
- 120              	.LVL11:
- 121              	.L10:
- 122 004a 00BF     		.align	2
- 123              	.L9:
- 124 004c 00000000 		.word	.LC0
- 125 0050 00000000 		.word	__func__.0
- 126 0054 20000000 		.word	.LC1
- 127 0058 4D000000 		.word	.LC2
- 128              		.cfi_endproc
- 129              	.LFE4839:
- 131              		.section	.rodata.__func__.0,"a"
- 134              	__func__.0:
- 135 0000 4C4C5F41 		.ascii	"LL_ATON_RT_Main\000"
- 135      544F4E5F 
- 135      52545F4D 
- 135      61696E00 
- 136              		.text
- 137              	.Letext0:
- 138              		.file 2 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 139              		.file 3 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 140              		.file 4 "Lib/AI_Runtime/Npu/ll_aton/ll_aton_NN_interface.h"
- 141              		.file 5 "Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h"
- 142              		.file 6 "Lib/AI_Runtime/Npu/ll_aton/ll_aton_osal_freertos.h"
-ARM GAS  /tmp/cc1PWpTX.s 			page 5
-
-
- 143              		.file 7 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
-ARM GAS  /tmp/cc1PWpTX.s 			page 6
+ 107              		.loc 1 73 1
+ 108 005c 00BF     		nop
+ 109 005e 1037     		adds	r7, r7, #16
+ 110              		.cfi_def_cfa_offset 8
+ 111 0060 BD46     		mov	sp, r7
+ 112              		.cfi_def_cfa_register 13
+ 113              		@ sp needed
+ 114 0062 80BD     		pop	{r7, pc}
+ 115              	.L7:
+ 116              		.align	2
+ 117              	.L6:
+ 118 0064 00000000 		.word	.LC0
+ 119 0068 00000000 		.word	__func__.0
+ 120 006c 20000000 		.word	.LC1
+ 121 0070 50000000 		.word	.LC2
+ 122              		.cfi_endproc
+ 123              	.LFE4839:
+ 125              		.section	.rodata.__func__.0,"a"
+ 126              		.align	2
+ 129              	__func__.0:
+ 130 0000 4C4C5F41 		.ascii	"LL_ATON_RT_Main\000"
+ 130      544F4E5F 
+ 130      52545F4D 
+ 130      61696E00 
+ 131              		.text
+ 132              	.Letext0:
+ 133              		.file 2 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 134              		.file 3 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 135              		.file 4 "Lib/AI_Runtime/Npu/ll_aton/ll_aton_NN_interface.h"
+ 136              		.file 5 "Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h"
+ 137              		.file 6 "Lib/AI_Runtime/Npu/ll_aton/ll_aton_osal_freertos.h"
+ 138              		.file 7 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ARM GAS  /tmp/ccJ9aqtT.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 ll_aton_rt_main.c
-     /tmp/cc1PWpTX.s:33     .text.LL_ATON_RT_Main:00000000 $t
-     /tmp/cc1PWpTX.s:39     .text.LL_ATON_RT_Main:00000000 LL_ATON_RT_Main
-     /tmp/cc1PWpTX.s:124    .text.LL_ATON_RT_Main:0000004c $d
-     /tmp/cc1PWpTX.s:134    .rodata.__func__.0:00000000 __func__.0
-                           .group:00000000 wm4.0.c552ae9005b0f2cca11872fae5d4b7f2
+     /tmp/ccJ9aqtT.s:26     .rodata:00000000 $d
+     /tmp/ccJ9aqtT.s:36     .text.LL_ATON_RT_Main:00000000 $t
+     /tmp/ccJ9aqtT.s:42     .text.LL_ATON_RT_Main:00000000 LL_ATON_RT_Main
+     /tmp/ccJ9aqtT.s:118    .text.LL_ATON_RT_Main:00000064 $d
+     /tmp/ccJ9aqtT.s:129    .rodata.__func__.0:00000000 __func__.0
+     /tmp/ccJ9aqtT.s:126    .rodata.__func__.0:00000000 $d
+                           .group:00000000 wm4.0.2a10773746a5c5ebb5552f50e466f80b
                            .group:00000000 wm4._newlib_version.h.4.411db44ea2338a62eca2f0777f81481b
                            .group:00000000 wm4.newlib.h.27.4b972ceed5d01f491020c20f1e546cab
                            .group:00000000 wm4.ieeefp.h.77.bd5feb87d9990dd328793ced294f6a87
@@ -300,11 +292,11 @@ DEFINED SYMBOLS
                            .group:00000000 wm4.queue.h.68.219f47fba8b59640449b84d04c5bd6d8
                            .group:00000000 wm4.semphr.h.40.c1a9c6f5bf0feb4da0b6a45d234a79d0
                            .group:00000000 wm4.ll_aton_platform.h.20.06ded592ee586a6abb6019a90ebd54df
+ARM GAS  /tmp/ccJ9aqtT.s 			page 6
+
+
                            .group:00000000 wm4.stm32n6xx_hal_conf.h.21.004a06df6e15ac197e03f723792da58a
                            .group:00000000 wm4.arm_cmse.h.103.a0d15a79c4c9a67da8d5831704d7248e
-ARM GAS  /tmp/cc1PWpTX.s 			page 7
-
-
                            .group:00000000 wm4.stm32n6xx.h.34.80585dd08aa426c932f6311fdb7386da
                            .group:00000000 wm4.stm32n657xx.h.26.acd272cb67318cc1a4791ce2f0720ca6
                            .group:00000000 wm4.cmsis_version.h.32.0ac195c83bb4537824e6ad1c47474b79
@@ -360,11 +352,11 @@ DEFINED SYMBOLS
                            .group:00000000 wm4.stm32n6xx_hal.h.81.5e59143eba07faca3e9aeaa5470826c8
                            .group:00000000 wm4.ll_aton_platform.h.288.664a74b8c5792a861b3d52bd39f4a693
                            .group:00000000 wm4.string.h.8.c4b8571ce60dff2817f43fec8b86aecd
+ARM GAS  /tmp/ccJ9aqtT.s 			page 7
+
+
                            .group:00000000 wm4.ATON.h.37.dcee5f05b79f32d0e17b499095b5b6b7
                            .group:00000000 wm4.ll_aton_rcompat.h.22.b2bd0d777466a5ac720f3b2429c5fea7
-ARM GAS  /tmp/cc1PWpTX.s 			page 8
-
-
                            .group:00000000 wm4.ll_aton_platform.h.383.f09ccd502bb682b863f991d963ee7462
                            .group:00000000 wm4.ll_aton_osal_freertos.h.62.85a065f77def7f6fef26149f92fe1378
                            .group:00000000 wm4.ll_aton_osal.h.116.bc018513feb9b28713cf2afc78ec679b

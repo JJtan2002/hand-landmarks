@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccvUIr3j.s 			page 1
+ARM GAS  /tmp/ccwTPwve.s 			page 1
 
 
    1              		.arch armv8.1-m.main
@@ -16,7 +16,7 @@ ARM GAS  /tmp/ccvUIr3j.s 			page 1
   13              		.eabi_attribute 24, 1
   14              		.eabi_attribute 25, 1
   15              		.eabi_attribute 26, 1
-  16              		.eabi_attribute 30, 4
+  16              		.eabi_attribute 30, 6
   17              		.eabi_attribute 34, 1
   18              		.eabi_attribute 38, 1
   19              		.eabi_attribute 18, 4
@@ -32,8 +32,7 @@ ARM GAS  /tmp/ccvUIr3j.s 			page 1
   29              		.thumb
   30              		.thumb_func
   32              	LL_ATON_getbits:
-  33              	.LVL0:
-  34              	.LFB3:
+  33              	.LFB3:
    1:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c **** /**
    2:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****  ******************************************************************************
    3:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****  * @file    ll_aton_util.c
@@ -58,10 +57,10 @@ ARM GAS  /tmp/ccvUIr3j.s 			page 1
   22:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c **** 
   23:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c **** #include "ll_aton_util.h"
   24:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c **** 
-ARM GAS  /tmp/ccvUIr3j.s 			page 2
-
-
   25:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c **** /**
+ARM GAS  /tmp/ccwTPwve.s 			page 2
+
+
   26:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****  * @brief  Helper function. Extracts bitfield from a buffer
   27:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****  * @param  bits Pointer of the buffer to extract bits from
   28:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****  * @param  pos Global bit position of the bitfield to extract
@@ -70,186 +69,241 @@ ARM GAS  /tmp/ccvUIr3j.s 			page 1
   31:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****  */
   32:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c **** uint32_t LL_ATON_getbits(uint32_t *bits, unsigned int pos, int nbits)
   33:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c **** {
-  35              		.loc 1 33 1 view -0
-  36              		.cfi_startproc
-  37              		@ args = 0, pretend = 0, frame = 0
-  38              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 1 33 1
+  35              		.cfi_startproc
+  36              		@ args = 0, pretend = 0, frame = 48
+  37              		@ frame_needed = 1, uses_anonymous_args = 0
+  38              		@ link register save eliminated.
+  39 0000 2DE9B00F 		push	{r4, r5, r7, r8, r9, r10, fp}
+  40              		.cfi_def_cfa_offset 28
+  41              		.cfi_offset 4, -28
+  42              		.cfi_offset 5, -24
+  43              		.cfi_offset 7, -20
+  44              		.cfi_offset 8, -16
+  45              		.cfi_offset 9, -12
+  46              		.cfi_offset 10, -8
+  47              		.cfi_offset 11, -4
+  48 0004 8DB0     		sub	sp, sp, #52
+  49              		.cfi_def_cfa_offset 80
+  50 0006 00AF     		add	r7, sp, #0
+  51              		.cfi_def_cfa_register 7
+  52 0008 F860     		str	r0, [r7, #12]
+  53 000a B960     		str	r1, [r7, #8]
+  54 000c 7A60     		str	r2, [r7, #4]
   34:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   unsigned int mask = (1ULL << nbits) - 1;
-  39              		.loc 1 34 3 view .LVU1
-  33:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   unsigned int mask = (1ULL << nbits) - 1;
-  40              		.loc 1 33 1 is_stmt 0 view .LVU2
-  41 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
-  42              		.cfi_def_cfa_offset 28
-  43              		.cfi_offset 4, -28
-  44              		.cfi_offset 5, -24
-  45              		.cfi_offset 6, -20
-  46              		.cfi_offset 7, -16
-  47              		.cfi_offset 8, -12
-  48              		.cfi_offset 9, -8
-  49              		.cfi_offset 14, -4
-  50              		.loc 1 34 29 view .LVU3
-  51 0004 4FF00108 		mov	r8, #1
-  52 0008 4FF00009 		mov	r9, #0
-  53 000c 58EA0D29 		lsll	r8, r9, r2
+  55              		.loc 1 34 29
+  56 000e 4FF00102 		mov	r2, #1
+  57 0012 4FF00003 		mov	r3, #0
+  58 0016 7968     		ldr	r1, [r7, #4]
+  59 0018 52EA0D13 		lsll	r2, r3, r1
+  60              		.loc 1 34 39
+  61 001c 1346     		mov	r3, r2
+  62              		.loc 1 34 16
+  63 001e 013B     		subs	r3, r3, #1
+  64 0020 BB62     		str	r3, [r7, #40]
   35:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   uint32_t value;
   36:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   const int bitsperint = (sizeof(unsigned) * 8);
+  65              		.loc 1 36 13
+  66 0022 2023     		movs	r3, #32
+  67 0024 7B62     		str	r3, [r7, #36]
   37:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   int index0 = pos / bitsperint;
-  54              		.loc 1 37 20 view .LVU4
-  55 0010 4F09     		lsrs	r7, r1, #5
-  33:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   unsigned int mask = (1ULL << nbits) - 1;
-  56              		.loc 1 33 1 view .LVU5
-  57 0012 0646     		mov	r6, r0
+  68              		.loc 1 37 20
+  69 0026 7B6A     		ldr	r3, [r7, #36]
+  70 0028 BA68     		ldr	r2, [r7, #8]
+  71 002a B2FBF3F3 		udiv	r3, r2, r3
+  72              		.loc 1 37 7
+  73 002e 3B62     		str	r3, [r7, #32]
   38:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   int index1 = (pos + nbits) / bitsperint;
+  74              		.loc 1 38 21
+  75 0030 7A68     		ldr	r2, [r7, #4]
+  76 0032 BB68     		ldr	r3, [r7, #8]
+  77 0034 1A44     		add	r2, r2, r3
+ARM GAS  /tmp/ccwTPwve.s 			page 3
+
+
+  78              		.loc 1 38 30
+  79 0036 7B6A     		ldr	r3, [r7, #36]
+  80 0038 B2FBF3F3 		udiv	r3, r2, r3
+  81              		.loc 1 38 7
+  82 003c FB61     		str	r3, [r7, #28]
   39:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   // Do the bits to extract cross a boundary?
   40:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   if (index0 == index1)
+  83              		.loc 1 40 6
+  84 003e 3A6A     		ldr	r2, [r7, #32]
+  85 0040 FB69     		ldr	r3, [r7, #28]
+  86 0042 9A42     		cmp	r2, r3
+  87 0044 11D1     		bne	.L2
   41:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   {
   42:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     value = (bits[index0] >> (pos % bitsperint)) & mask;
-  58              		.loc 1 42 27 view .LVU6
-  59 0014 50F82700 		ldr	r0, [r0, r7, lsl #2]
-  60              	.LVL1:
-  38:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   int index1 = (pos + nbits) / bitsperint;
-  61              		.loc 1 38 21 view .LVU7
-  62 0018 5318     		adds	r3, r2, r1
-  63              		.loc 1 42 35 view .LVU8
-  64 001a 01F01F01 		and	r1, r1, #31
-  65              	.LVL2:
-  66              		.loc 1 42 27 view .LVU9
-  67 001e C840     		lsrs	r0, r0, r1
-  34:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   uint32_t value;
-  68              		.loc 1 34 16 view .LVU10
-  69 0020 08F1FF34 		add	r4, r8, #-1
-ARM GAS  /tmp/ccvUIr3j.s 			page 3
-
-
-  40:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   {
-  70              		.loc 1 40 6 view .LVU11
-  71 0024 B7EB531F 		cmp	r7, r3, lsr #5
-  34:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   uint32_t value;
-  72              		.loc 1 34 39 view .LVU12
-  73 0028 4546     		mov	r5, r8
-  74              	.LVL3:
-  35:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   const int bitsperint = (sizeof(unsigned) * 8);
-  75              		.loc 1 35 3 is_stmt 1 view .LVU13
-  36:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   int index0 = pos / bitsperint;
-  76              		.loc 1 36 3 view .LVU14
-  37:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   int index1 = (pos + nbits) / bitsperint;
-  77              		.loc 1 37 3 view .LVU15
-  38:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   // Do the bits to extract cross a boundary?
-  78              		.loc 1 38 3 view .LVU16
-  38:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   // Do the bits to extract cross a boundary?
-  79              		.loc 1 38 30 is_stmt 0 view .LVU17
-  80 002a 4FEA531C 		lsr	ip, r3, #5
-  81              	.LVL4:
-  40:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   {
-  82              		.loc 1 40 3 is_stmt 1 view .LVU18
-  83              		.loc 1 42 11 is_stmt 0 view .LVU19
-  84 002e 00EA0400 		and	r0, r0, r4
-  40:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   {
-  85              		.loc 1 40 6 view .LVU20
-  86 0032 10D0     		beq	.L2
-  87              	.LBB2:
+  88              		.loc 1 42 18
+  89 0046 3B6A     		ldr	r3, [r7, #32]
+  90 0048 9B00     		lsls	r3, r3, #2
+  91 004a FA68     		ldr	r2, [r7, #12]
+  92 004c 1344     		add	r3, r3, r2
+  93 004e 1968     		ldr	r1, [r3]
+  94              		.loc 1 42 35
+  95 0050 7A6A     		ldr	r2, [r7, #36]
+  96 0052 BB68     		ldr	r3, [r7, #8]
+  97 0054 B3FBF2F0 		udiv	r0, r3, r2
+  98 0058 00FB02F2 		mul	r2, r0, r2
+  99 005c 9B1A     		subs	r3, r3, r2
+ 100              		.loc 1 42 27
+ 101 005e 21FA03F3 		lsr	r3, r1, r3
+ 102              		.loc 1 42 11
+ 103 0062 BA6A     		ldr	r2, [r7, #40]
+ 104 0064 1340     		ands	r3, r3, r2
+ 105 0066 FB62     		str	r3, [r7, #44]
+ 106 0068 39E0     		b	.L3
+ 107              	.L2:
+ 108              	.LBB2:
   43:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   }
   44:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   else
   45:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   {
   46:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     unsigned int lshift = ((pos + nbits) % bitsperint);
-  88              		.loc 1 46 5 is_stmt 1 view .LVU21
+ 109              		.loc 1 46 33
+ 110 006a 7A68     		ldr	r2, [r7, #4]
+ 111 006c BB68     		ldr	r3, [r7, #8]
+ 112 006e 1344     		add	r3, r3, r2
+ 113              		.loc 1 46 42
+ 114 0070 7A6A     		ldr	r2, [r7, #36]
+ 115              		.loc 1 46 18
+ 116 0072 B3FBF2F1 		udiv	r1, r3, r2
+ 117 0076 01FB02F2 		mul	r2, r1, r2
+ 118 007a 9B1A     		subs	r3, r3, r2
+ 119 007c BB61     		str	r3, [r7, #24]
   47:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     value =
   48:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****         (((bits[index0] >> (pos % bitsperint)) & mask) | ((bits[index1] & ((1ULL << lshift) - 1)) <
-  89              		.loc 1 48 73 is_stmt 0 view .LVU22
-  90 0034 4FF0FF38 		mov	r8, #-1
-  91 0038 4FF0FF39 		mov	r9, #-1
-  46:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     value =
-  92              		.loc 1 46 18 view .LVU23
-  93 003c 03F01F03 		and	r3, r3, #31
-  94              	.LVL5:
-  47:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     value =
-  95              		.loc 1 47 5 is_stmt 1 view .LVU24
-  96              		.loc 1 48 73 is_stmt 0 view .LVU25
-  97 0040 58EA0D39 		lsll	r8, r9, r3
-  98              		.loc 1 48 99 view .LVU26
-  99 0044 0027     		movs	r7, #0
- 100              	.LVL6:
- 101              		.loc 1 48 64 view .LVU27
- 102 0046 56F82C10 		ldr	r1, [r6, ip, lsl #2]
- 103              		.loc 1 48 109 view .LVU28
- 104 004a D31A     		subs	r3, r2, r3
- 105              	.LVL7:
- 106              		.loc 1 48 99 view .LVU29
- 107 004c 21EA0806 		bic	r6, r1, r8
- 108              	.LVL8:
- 109              		.loc 1 48 99 view .LVU30
-ARM GAS  /tmp/ccvUIr3j.s 			page 4
+ 120              		.loc 1 48 16
+ 121 007e 3B6A     		ldr	r3, [r7, #32]
+ 122 0080 9B00     		lsls	r3, r3, #2
+ 123 0082 FA68     		ldr	r2, [r7, #12]
+ 124 0084 1344     		add	r3, r3, r2
+ARM GAS  /tmp/ccwTPwve.s 			page 4
 
 
- 110 0050 56EA0D37 		lsll	r6, r7, r3
+ 125 0086 1968     		ldr	r1, [r3]
+ 126              		.loc 1 48 33
+ 127 0088 7A6A     		ldr	r2, [r7, #36]
+ 128 008a BB68     		ldr	r3, [r7, #8]
+ 129 008c B3FBF2F0 		udiv	r0, r3, r2
+ 130 0090 00FB02F2 		mul	r2, r0, r2
+ 131 0094 9B1A     		subs	r3, r3, r2
+ 132              		.loc 1 48 25
+ 133 0096 21FA03F2 		lsr	r2, r1, r3
+ 134              		.loc 1 48 48
+ 135 009a BB6A     		ldr	r3, [r7, #40]
+ 136 009c 02EA0301 		and	r1, r2, r3
+ 137              		.loc 1 48 64
+ 138 00a0 FB69     		ldr	r3, [r7, #28]
+ 139 00a2 9B00     		lsls	r3, r3, #2
+ 140 00a4 FA68     		ldr	r2, [r7, #12]
+ 141 00a6 1344     		add	r3, r3, r2
+ 142 00a8 1B68     		ldr	r3, [r3]
+ 143 00aa 0022     		movs	r2, #0
+ 144 00ac 9846     		mov	r8, r3
+ 145 00ae 9146     		mov	r9, r2
+ 146              		.loc 1 48 73
+ 147 00b0 4FF0FF32 		mov	r2, #-1
+ 148 00b4 4FF0FF33 		mov	r3, #-1
+ 149 00b8 B869     		ldr	r0, [r7, #24]
+ 150 00ba 52EA0D03 		lsll	r2, r3, r0
+ 151 00be D443     		mvns	r4, r2
+ 152 00c0 DD43     		mvns	r5, r3
+ 153 00c2 08EA040A 		and	r10, r8, r4
+ 154 00c6 09EA050B 		and	fp, r9, r5
+ 155              		.loc 1 48 109
+ 156 00ca 7A68     		ldr	r2, [r7, #4]
+ 157 00cc BB69     		ldr	r3, [r7, #24]
+ 158 00ce D01A     		subs	r0, r2, r3
+ 159              		.loc 1 48 99
+ 160 00d0 5246     		mov	r2, r10
+ 161 00d2 5B46     		mov	r3, fp
+ 162 00d4 52EA0D03 		lsll	r2, r3, r0
+ 163              		.loc 1 48 56
+ 164 00d8 1346     		mov	r3, r2
   47:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     value =
- 111              		.loc 1 47 11 view .LVU31
- 112 0054 3043     		orrs	r0, r0, r6
- 113              	.LVL9:
- 114              	.L2:
-  47:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     value =
- 115              		.loc 1 47 11 view .LVU32
- 116              	.LBE2:
+ 165              		.loc 1 47 11
+ 166 00da 0B43     		orrs	r3, r3, r1
+ 167 00dc FB62     		str	r3, [r7, #44]
+ 168              	.L3:
+ 169              	.LBE2:
   49:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   }
   50:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c **** 
   51:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   // handle sign extension (not sure if this must be done in every use case)
   52:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   if (nbits > 0)
- 117              		.loc 1 52 3 is_stmt 1 view .LVU33
- 118              		.loc 1 52 6 is_stmt 0 view .LVU34
- 119 0056 002A     		cmp	r2, #0
- 120 0058 08DD     		ble	.L1
- 121              	.LBB3:
+ 170              		.loc 1 52 6
+ 171 00de 7B68     		ldr	r3, [r7, #4]
+ 172 00e0 002B     		cmp	r3, #0
+ 173 00e2 0FDD     		ble	.L4
+ 174              	.LBB3:
   53:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   {
   54:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     unsigned int signed_mask = (1UL << (nbits - 1));
- 122              		.loc 1 54 5 is_stmt 1 view .LVU35
- 123              	.LVL10:
+ARM GAS  /tmp/ccwTPwve.s 			page 5
+
+
+ 175              		.loc 1 54 47
+ 176 00e4 7B68     		ldr	r3, [r7, #4]
+ 177 00e6 013B     		subs	r3, r3, #1
+ 178              		.loc 1 54 18
+ 179 00e8 0122     		movs	r2, #1
+ 180 00ea 02FA03F3 		lsl	r3, r2, r3
+ 181 00ee 7B61     		str	r3, [r7, #20]
   55:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     if (value & signed_mask)
- 124              		.loc 1 55 5 view .LVU36
-  54:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     if (value & signed_mask)
- 125              		.loc 1 54 18 is_stmt 0 view .LVU37
- 126 005a 0123     		movs	r3, #1
-  54:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     if (value & signed_mask)
- 127              		.loc 1 54 47 view .LVU38
- 128 005c 013A     		subs	r2, r2, #1
- 129              	.LVL11:
-  54:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     if (value & signed_mask)
- 130              		.loc 1 54 18 view .LVU39
- 131 005e 03FA02F2 		lsl	r2, r3, r2
- 132              	.LVL12:
+ 182              		.loc 1 55 15
+ 183 00f0 FA6A     		ldr	r2, [r7, #44]
+ 184 00f2 7B69     		ldr	r3, [r7, #20]
+ 185 00f4 1340     		ands	r3, r3, r2
+ 186              		.loc 1 55 8
+ 187 00f6 002B     		cmp	r3, #0
+ 188 00f8 04D0     		beq	.L4
   56:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     {
   57:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****       value = value | ~mask;
- 133              		.loc 1 57 13 view .LVU40
- 134 0062 6B42     		rsbs	r3, r5, #0
- 135 0064 0343     		orrs	r3, r3, r0
- 136 0066 0242     		tst	r2, r0
- 137 0068 18BF     		it	ne
- 138 006a 1846     		movne	r0, r3
- 139              	.LVL13:
- 140              	.L1:
- 141              		.loc 1 57 13 view .LVU41
- 142              	.LBE3:
+ 189              		.loc 1 57 23
+ 190 00fa BB6A     		ldr	r3, [r7, #40]
+ 191 00fc DB43     		mvns	r3, r3
+ 192              		.loc 1 57 13
+ 193 00fe FA6A     		ldr	r2, [r7, #44]
+ 194 0100 1343     		orrs	r3, r3, r2
+ 195 0102 FB62     		str	r3, [r7, #44]
+ 196              	.L4:
+ 197              	.LBE3:
   58:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     }
   59:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   }
   60:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c **** 
   61:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   return value;
+ 198              		.loc 1 61 10
+ 199 0104 FB6A     		ldr	r3, [r7, #44]
   62:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c **** }
- 143              		.loc 1 62 1 view .LVU42
- 144 006c BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
- 145              		.loc 1 62 1 view .LVU43
- 146              		.cfi_endproc
- 147              	.LFE3:
-ARM GAS  /tmp/ccvUIr3j.s 			page 5
+ 200              		.loc 1 62 1
+ 201 0106 1846     		mov	r0, r3
+ 202 0108 3437     		adds	r7, r7, #52
+ 203              		.cfi_def_cfa_offset 28
+ 204 010a BD46     		mov	sp, r7
+ 205              		.cfi_def_cfa_register 13
+ 206              		@ sp needed
+ 207 010c BDE8B00F 		pop	{r4, r5, r7, r8, r9, r10, fp}
+ 208              		.cfi_restore 11
+ 209              		.cfi_restore 10
+ 210              		.cfi_restore 9
+ 211              		.cfi_restore 8
+ 212              		.cfi_restore 7
+ 213              		.cfi_restore 5
+ 214              		.cfi_restore 4
+ 215              		.cfi_def_cfa_offset 0
+ 216 0110 7047     		bx	lr
+ 217              		.cfi_endproc
+ 218              	.LFE3:
+ 220              		.section	.text.LL_ATON_setbits,"ax",%progbits
+ 221              		.align	1
+ 222              		.global	LL_ATON_setbits
+ 223              		.syntax unified
+ 224              		.thumb
+ARM GAS  /tmp/ccwTPwve.s 			page 6
 
 
- 149              		.section	.text.LL_ATON_setbits,"ax",%progbits
- 150              		.align	1
- 151              		.global	LL_ATON_setbits
- 152              		.syntax unified
- 153              		.thumb
- 154              		.thumb_func
- 156              	LL_ATON_setbits:
- 157              	.LVL14:
- 158              	.LFB4:
+ 225              		.thumb_func
+ 227              	LL_ATON_setbits:
+ 228              	.LFB4:
   63:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c **** 
   64:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c **** /**
   65:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****  * @brief  Helper function. Packs bitfield into a buffer
@@ -259,121 +313,131 @@ ARM GAS  /tmp/ccvUIr3j.s 			page 1
   69:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****  */
   70:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c **** void LL_ATON_setbits(uint32_t *bits, unsigned int pos, int nbits, unsigned int val)
   71:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c **** {
- 159              		.loc 1 71 1 is_stmt 1 view -0
- 160              		.cfi_startproc
- 161              		@ args = 0, pretend = 0, frame = 8
- 162              		@ frame_needed = 0, uses_anonymous_args = 0
+ 229              		.loc 1 71 1
+ 230              		.cfi_startproc
+ 231              		@ args = 0, pretend = 0, frame = 48
+ 232              		@ frame_needed = 1, uses_anonymous_args = 0
+ 233              		@ link register save eliminated.
+ 234 0000 B0B4     		push	{r4, r5, r7}
+ 235              		.cfi_def_cfa_offset 12
+ 236              		.cfi_offset 4, -12
+ 237              		.cfi_offset 5, -8
+ 238              		.cfi_offset 7, -4
+ 239 0002 8DB0     		sub	sp, sp, #52
+ 240              		.cfi_def_cfa_offset 64
+ 241 0004 00AF     		add	r7, sp, #0
+ 242              		.cfi_def_cfa_register 7
+ 243 0006 F860     		str	r0, [r7, #12]
+ 244 0008 B960     		str	r1, [r7, #8]
+ 245 000a 7A60     		str	r2, [r7, #4]
+ 246 000c 3B60     		str	r3, [r7]
   72:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   const int bitsperint = sizeof(unsigned int) * 8;
- 163              		.loc 1 72 3 view .LVU45
+ 247              		.loc 1 72 13
+ 248 000e 2023     		movs	r3, #32
+ 249 0010 FB62     		str	r3, [r7, #44]
   73:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   unsigned int smask = ((1ULL << nbits) - 1) << (pos % bitsperint);
- 164              		.loc 1 73 3 view .LVU46
-  71:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   const int bitsperint = sizeof(unsigned int) * 8;
- 165              		.loc 1 71 1 is_stmt 0 view .LVU47
- 166 0000 2DE9F347 		push	{r0, r1, r4, r5, r6, r7, r8, r9, r10, lr}
- 167              		.cfi_def_cfa_offset 40
- 168              		.cfi_offset 4, -32
- 169              		.cfi_offset 5, -28
- 170              		.cfi_offset 6, -24
- 171              		.cfi_offset 7, -20
- 172              		.cfi_offset 8, -16
- 173              		.cfi_offset 9, -12
- 174              		.cfi_offset 10, -8
- 175              		.cfi_offset 14, -4
- 176              		.loc 1 73 31 view .LVU48
- 177 0004 0124     		movs	r4, #1
- 178 0006 0025     		movs	r5, #0
- 179 0008 54EA0D25 		lsll	r4, r5, r2
- 180 000c CDE90045 		strd	r4, [sp]
+ 250              		.loc 1 73 31
+ 251 0012 4FF00102 		mov	r2, #1
+ 252 0016 4FF00003 		mov	r3, #0
+ 253 001a 7968     		ldr	r1, [r7, #4]
+ 254 001c 52EA0D13 		lsll	r2, r3, r1
+ 255              		.loc 1 73 41
+ 256 0020 541E     		subs	r4, r2, #1
+ 257 0022 43F1FF35 		adc	r5, r3, #-1
+ 258              		.loc 1 73 54
+ 259 0026 FA6A     		ldr	r2, [r7, #44]
+ 260 0028 BB68     		ldr	r3, [r7, #8]
+ 261 002a B3FBF2F1 		udiv	r1, r3, r2
+ 262 002e 01FB02F2 		mul	r2, r1, r2
+ 263 0032 991A     		subs	r1, r3, r2
+ 264              		.loc 1 73 46
+ 265 0034 2246     		mov	r2, r4
+ 266 0036 2B46     		mov	r3, r5
+ 267 0038 52EA0D13 		lsll	r2, r3, r1
+ 268              		.loc 1 73 16
+ 269 003c 1346     		mov	r3, r2
+ 270 003e BB62     		str	r3, [r7, #40]
   74:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   unsigned int mask = ((1ULL << nbits) - 1);
- 181              		.loc 1 74 16 view .LVU49
- 182 0010 009C     		ldr	r4, [sp]
-  73:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   unsigned int smask = ((1ULL << nbits) - 1) << (pos % bitsperint);
- 183              		.loc 1 73 54 view .LVU50
- 184 0012 01F01F0E 		and	lr, r1, #31
- 185              	.LVL15:
- 186              		.loc 1 74 3 is_stmt 1 view .LVU51
+ARM GAS  /tmp/ccwTPwve.s 			page 7
+
+
+ 271              		.loc 1 74 30
+ 272 0040 4FF00102 		mov	r2, #1
+ 273 0044 4FF00003 		mov	r3, #0
+ 274 0048 7968     		ldr	r1, [r7, #4]
+ 275 004a 52EA0D13 		lsll	r2, r3, r1
+ 276              		.loc 1 74 40
+ 277 004e 1346     		mov	r3, r2
+ 278              		.loc 1 74 16
+ 279 0050 013B     		subs	r3, r3, #1
+ 280 0052 7B62     		str	r3, [r7, #36]
   75:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   int index0 = pos / bitsperint;
- 187              		.loc 1 75 3 view .LVU52
-  74:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   unsigned int mask = ((1ULL << nbits) - 1);
- 188              		.loc 1 74 16 is_stmt 0 view .LVU53
- 189 0016 04F1FF3A 		add	r10, r4, #-1
- 190              	.LVL16:
-ARM GAS  /tmp/ccvUIr3j.s 			page 6
-
-
-  73:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   unsigned int mask = ((1ULL << nbits) - 1);
- 191              		.loc 1 73 46 view .LVU54
- 192 001a D046     		mov	r8, r10
-  73:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   unsigned int mask = ((1ULL << nbits) - 1);
- 193              		.loc 1 73 41 view .LVU55
- 194 001c 013C     		subs	r4, r4, #1
-  73:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   unsigned int mask = ((1ULL << nbits) - 1);
- 195              		.loc 1 73 46 view .LVU56
- 196 001e 019C     		ldr	r4, [sp, #4]
- 197              		.loc 1 75 20 view .LVU57
- 198 0020 4FEA5117 		lsr	r7, r1, #5
- 199              	.LVL17:
+ 281              		.loc 1 75 20
+ 282 0054 FB6A     		ldr	r3, [r7, #44]
+ 283 0056 BA68     		ldr	r2, [r7, #8]
+ 284 0058 B2FBF3F3 		udiv	r3, r2, r3
+ 285              		.loc 1 75 7
+ 286 005c 3B62     		str	r3, [r7, #32]
   76:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   int index1 = (pos + nbits - 1) / bitsperint;
- 200              		.loc 1 76 3 is_stmt 1 view .LVU58
-  73:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   unsigned int mask = ((1ULL << nbits) - 1);
- 201              		.loc 1 73 46 is_stmt 0 view .LVU59
- 202 0024 64F10009 		sbc	r9, r4, #0
- 203 0028 58EA0DE9 		lsll	r8, r9, lr
- 204              	.LBB4:
+ 287              		.loc 1 76 21
+ 288 005e 7A68     		ldr	r2, [r7, #4]
+ 289 0060 BB68     		ldr	r3, [r7, #8]
+ 290 0062 1344     		add	r3, r3, r2
+ 291              		.loc 1 76 29
+ 292 0064 5A1E     		subs	r2, r3, #1
+ 293              		.loc 1 76 34
+ 294 0066 FB6A     		ldr	r3, [r7, #44]
+ 295 0068 B2FBF3F3 		udiv	r3, r2, r3
+ 296              		.loc 1 76 7
+ 297 006c FB61     		str	r3, [r7, #28]
   77:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   if (index0 == index1)
+ 298              		.loc 1 77 6
+ 299 006e 3A6A     		ldr	r2, [r7, #32]
+ 300 0070 FB69     		ldr	r3, [r7, #28]
+ 301 0072 9A42     		cmp	r2, r3
+ 302 0074 1ED1     		bne	.L7
+ 303              	.LBB4:
   78:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   {
   79:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     uint32_t tmp = (bits[index0] & ~smask) | ((val & mask) << (pos % bitsperint));
- 205              		.loc 1 79 34 view .LVU60
- 206 002c 50F82740 		ldr	r4, [r0, r7, lsl #2]
- 207              	.LBE4:
-  76:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   int index1 = (pos + nbits - 1) / bitsperint;
- 208              		.loc 1 76 21 view .LVU61
- 209 0030 1144     		add	r1, r1, r2
- 210              	.LVL18:
-  76:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   int index1 = (pos + nbits - 1) / bitsperint;
- 211              		.loc 1 76 29 view .LVU62
- 212 0032 01F1FF3C 		add	ip, r1, #-1
- 213              	.LBB5:
- 214              		.loc 1 79 52 view .LVU63
- 215 0036 0AEA0303 		and	r3, r10, r3
- 216              	.LVL19:
- 217              		.loc 1 79 34 view .LVU64
- 218 003a 24EA0804 		bic	r4, r4, r8
- 219              		.loc 1 79 60 view .LVU65
- 220 003e 03FA0EFE 		lsl	lr, r3, lr
- 221              	.LVL20:
- 222              		.loc 1 79 60 view .LVU66
- 223              	.LBE5:
-  77:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   if (index0 == index1)
- 224              		.loc 1 77 6 view .LVU67
- 225 0042 B7EB5C1F 		cmp	r7, ip, lsr #5
-  76:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   int index1 = (pos + nbits - 1) / bitsperint;
- 226              		.loc 1 76 34 view .LVU68
- 227 0046 4FEA5C16 		lsr	r6, ip, #5
- 228              	.LVL21:
-  77:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   if (index0 == index1)
- 229              		.loc 1 77 3 is_stmt 1 view .LVU69
- 230              	.LBB6:
- 231              		.loc 1 79 14 is_stmt 0 view .LVU70
- 232 004a 44EA0E04 		orr	r4, r4, lr
- 233              	.LBE6:
-  77:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   if (index0 == index1)
-ARM GAS  /tmp/ccvUIr3j.s 			page 7
+ 304              		.loc 1 79 25
+ 305 0076 3B6A     		ldr	r3, [r7, #32]
+ 306 0078 9B00     		lsls	r3, r3, #2
+ 307 007a FA68     		ldr	r2, [r7, #12]
+ 308 007c 1344     		add	r3, r3, r2
+ 309 007e 1A68     		ldr	r2, [r3]
+ 310              		.loc 1 79 36
+ 311 0080 BB6A     		ldr	r3, [r7, #40]
+ 312 0082 DB43     		mvns	r3, r3
+ 313              		.loc 1 79 34
+ 314 0084 02EA0301 		and	r1, r2, r3
+ 315              		.loc 1 79 52
+ 316 0088 3A68     		ldr	r2, [r7]
+ 317 008a 7B6A     		ldr	r3, [r7, #36]
+ 318 008c 02EA0300 		and	r0, r2, r3
+ 319              		.loc 1 79 68
+ 320 0090 FA6A     		ldr	r2, [r7, #44]
+ 321 0092 BB68     		ldr	r3, [r7, #8]
+ 322 0094 B3FBF2F4 		udiv	r4, r3, r2
+ARM GAS  /tmp/ccwTPwve.s 			page 8
 
 
- 234              		.loc 1 77 6 view .LVU71
- 235 004e 04D1     		bne	.L7
- 236              	.LBB7:
- 237              		.loc 1 79 5 is_stmt 1 view .LVU72
- 238              	.LVL22:
+ 323 0098 04FB02F2 		mul	r2, r4, r2
+ 324 009c 9B1A     		subs	r3, r3, r2
+ 325              		.loc 1 79 60
+ 326 009e 00FA03F3 		lsl	r3, r0, r3
+ 327              		.loc 1 79 14
+ 328 00a2 0B43     		orrs	r3, r3, r1
+ 329 00a4 3B61     		str	r3, [r7, #16]
   80:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     bits[index0] = tmp;
- 239              		.loc 1 80 5 view .LVU73
- 240              		.loc 1 80 18 is_stmt 0 view .LVU74
- 241 0050 40F82740 		str	r4, [r0, r7, lsl #2]
- 242              	.LVL23:
- 243              	.L6:
- 244              		.loc 1 80 18 view .LVU75
- 245              	.LBE7:
+ 330              		.loc 1 80 9
+ 331 00a6 3B6A     		ldr	r3, [r7, #32]
+ 332 00a8 9B00     		lsls	r3, r3, #2
+ 333 00aa FA68     		ldr	r2, [r7, #12]
+ 334 00ac 1344     		add	r3, r3, r2
+ 335              		.loc 1 80 18
+ 336 00ae 3A69     		ldr	r2, [r7, #16]
+ 337 00b0 1A60     		str	r2, [r3]
+ 338              	.LBE4:
   81:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   }
   82:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   else
   83:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   {
@@ -384,88 +448,147 @@ ARM GAS  /tmp/ccvUIr3j.s 			page 1
   88:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     bits[index1] = tmp;
   89:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   }
   90:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c **** }
- 246              		.loc 1 90 1 view .LVU76
- 247 0054 02B0     		add	sp, sp, #8
- 248              		.cfi_remember_state
- 249              		.cfi_def_cfa_offset 32
- 250              	.LVL24:
- 251              		.loc 1 90 1 view .LVU77
- 252              		@ sp needed
- 253 0056 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
- 254              	.LVL25:
- 255              	.L7:
- 256              		.cfi_restore_state
- 257              	.LBB8:
+ 339              		.loc 1 90 1
+ 340 00b2 47E0     		b	.L9
+ 341              	.L7:
+ 342              	.LBB5:
   84:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     uint32_t tmp = (bits[index0] & ~smask) | ((val & mask) << (pos % bitsperint));
- 258              		.loc 1 84 5 is_stmt 1 view .LVU78
-  87:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     bits[index1] = tmp;
- 259              		.loc 1 87 25 is_stmt 0 view .LVU79
- 260 005a 4FF0FF38 		mov	r8, #-1
- 261 005e 4FF0FF39 		mov	r9, #-1
+ 343              		.loc 1 84 33
+ 344 00b4 7A68     		ldr	r2, [r7, #4]
+ 345 00b6 BB68     		ldr	r3, [r7, #8]
+ 346 00b8 1344     		add	r3, r3, r2
   84:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     uint32_t tmp = (bits[index0] & ~smask) | ((val & mask) << (pos % bitsperint));
- 262              		.loc 1 84 18 view .LVU80
- 263 0062 01F01F05 		and	r5, r1, #31
- 264              	.LVL26:
+ 347              		.loc 1 84 42
+ 348 00ba FA6A     		ldr	r2, [r7, #44]
+  84:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     uint32_t tmp = (bits[index0] & ~smask) | ((val & mask) << (pos % bitsperint));
+ 349              		.loc 1 84 18
+ 350 00bc B3FBF2F1 		udiv	r1, r3, r2
+ 351 00c0 01FB02F2 		mul	r2, r1, r2
+ 352 00c4 9B1A     		subs	r3, r3, r2
+ 353 00c6 BB61     		str	r3, [r7, #24]
   85:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     bits[index0] = tmp;
- 265              		.loc 1 85 5 is_stmt 1 view .LVU81
-  86:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     tmp = (bits[index1] & ((1ULL << lshift) - 1)) | ((val & mask) >> (nbits - lshift));
- 266              		.loc 1 86 5 view .LVU82
-  87:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     bits[index1] = tmp;
- 267              		.loc 1 87 25 is_stmt 0 view .LVU83
- 268 0066 58EA0D59 		lsll	r8, r9, r5
-  86:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     tmp = (bits[index1] & ((1ULL << lshift) - 1)) | ((val & mask) >> (nbits - lshift));
- 269              		.loc 1 86 18 view .LVU84
- 270 006a 40F82740 		str	r4, [r0, r7, lsl #2]
- 271              	.LVL27:
-  87:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     bits[index1] = tmp;
-ARM GAS  /tmp/ccvUIr3j.s 			page 8
+ 354              		.loc 1 85 25
+ 355 00c8 3B6A     		ldr	r3, [r7, #32]
+ 356 00ca 9B00     		lsls	r3, r3, #2
+ 357 00cc FA68     		ldr	r2, [r7, #12]
+ 358 00ce 1344     		add	r3, r3, r2
+ 359 00d0 1A68     		ldr	r2, [r3]
+  85:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     bits[index0] = tmp;
+ 360              		.loc 1 85 36
+ 361 00d2 BB6A     		ldr	r3, [r7, #40]
+ 362 00d4 DB43     		mvns	r3, r3
+  85:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     bits[index0] = tmp;
+ARM GAS  /tmp/ccwTPwve.s 			page 9
 
 
- 272              		.loc 1 87 5 is_stmt 1 view .LVU85
+ 363              		.loc 1 85 34
+ 364 00d6 02EA0301 		and	r1, r2, r3
+  85:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     bits[index0] = tmp;
+ 365              		.loc 1 85 52
+ 366 00da 3A68     		ldr	r2, [r7]
+ 367 00dc 7B6A     		ldr	r3, [r7, #36]
+ 368 00de 02EA0300 		and	r0, r2, r3
+  85:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     bits[index0] = tmp;
+ 369              		.loc 1 85 68
+ 370 00e2 FA6A     		ldr	r2, [r7, #44]
+ 371 00e4 BB68     		ldr	r3, [r7, #8]
+ 372 00e6 B3FBF2F4 		udiv	r4, r3, r2
+ 373 00ea 04FB02F2 		mul	r2, r4, r2
+ 374 00ee 9B1A     		subs	r3, r3, r2
+  85:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     bits[index0] = tmp;
+ 375              		.loc 1 85 60
+ 376 00f0 00FA03F3 		lsl	r3, r0, r3
+  85:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     bits[index0] = tmp;
+ 377              		.loc 1 85 14
+ 378 00f4 0B43     		orrs	r3, r3, r1
+ 379 00f6 7B61     		str	r3, [r7, #20]
+  86:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     tmp = (bits[index1] & ((1ULL << lshift) - 1)) | ((val & mask) >> (nbits - lshift));
+ 380              		.loc 1 86 9
+ 381 00f8 3B6A     		ldr	r3, [r7, #32]
+ 382 00fa 9B00     		lsls	r3, r3, #2
+ 383 00fc FA68     		ldr	r2, [r7, #12]
+ 384 00fe 1344     		add	r3, r3, r2
+  86:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     tmp = (bits[index1] & ((1ULL << lshift) - 1)) | ((val & mask) >> (nbits - lshift));
+ 385              		.loc 1 86 18
+ 386 0100 7A69     		ldr	r2, [r7, #20]
+ 387 0102 1A60     		str	r2, [r3]
+  87:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     bits[index1] = tmp;
+ 388              		.loc 1 87 16
+ 389 0104 FB69     		ldr	r3, [r7, #28]
+ 390 0106 9B00     		lsls	r3, r3, #2
+ 391 0108 FA68     		ldr	r2, [r7, #12]
+ 392 010a 1344     		add	r3, r3, r2
+ 393 010c 1968     		ldr	r1, [r3]
+  87:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     bits[index1] = tmp;
+ 394              		.loc 1 87 25
+ 395 010e 4FF0FF32 		mov	r2, #-1
+ 396 0112 4FF0FF33 		mov	r3, #-1
+ 397 0116 B869     		ldr	r0, [r7, #24]
+ 398 0118 52EA0D03 		lsll	r2, r3, r0
+ 399 011c 1346     		mov	r3, r2
+ 400 011e DB43     		mvns	r3, r3
+ 401 0120 01EA0302 		and	r2, r1, r3
+  87:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     bits[index1] = tmp;
+ 402              		.loc 1 87 59
+ 403 0124 3968     		ldr	r1, [r7]
+ 404 0126 7B6A     		ldr	r3, [r7, #36]
+ 405 0128 1940     		ands	r1, r1, r3
+  87:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     bits[index1] = tmp;
+ 406              		.loc 1 87 77
+ 407 012a 7868     		ldr	r0, [r7, #4]
+ 408 012c BB69     		ldr	r3, [r7, #24]
+ 409 012e C31A     		subs	r3, r0, r3
+ARM GAS  /tmp/ccwTPwve.s 			page 10
+
+
+  87:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     bits[index1] = tmp;
+ 410              		.loc 1 87 67
+ 411 0130 21FA03F3 		lsr	r3, r1, r3
+  87:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     bits[index1] = tmp;
+ 412              		.loc 1 87 9
+ 413 0134 1343     		orrs	r3, r3, r2
+ 414 0136 7B61     		str	r3, [r7, #20]
   88:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   }
- 273              		.loc 1 88 5 view .LVU86
-  87:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     bits[index1] = tmp;
- 274              		.loc 1 87 25 is_stmt 0 view .LVU87
- 275 006e 50F82610 		ldr	r1, [r0, r6, lsl #2]
-  87:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     bits[index1] = tmp;
- 276              		.loc 1 87 77 view .LVU88
- 277 0072 521B     		subs	r2, r2, r5
- 278              	.LVL28:
-  87:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     bits[index1] = tmp;
- 279              		.loc 1 87 25 view .LVU89
- 280 0074 21EA0801 		bic	r1, r1, r8
-  87:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     bits[index1] = tmp;
- 281              		.loc 1 87 67 view .LVU90
- 282 0078 D340     		lsrs	r3, r3, r2
- 283              	.LVL29:
-  87:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****     bits[index1] = tmp;
- 284              		.loc 1 87 9 view .LVU91
- 285 007a 1943     		orrs	r1, r1, r3
+ 415              		.loc 1 88 9
+ 416 0138 FB69     		ldr	r3, [r7, #28]
+ 417 013a 9B00     		lsls	r3, r3, #2
+ 418 013c FA68     		ldr	r2, [r7, #12]
+ 419 013e 1344     		add	r3, r3, r2
   88:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   }
- 286              		.loc 1 88 18 view .LVU92
- 287 007c 40F82610 		str	r1, [r0, r6, lsl #2]
- 288              	.LVL30:
-  88:Lib/AI_Runtime/Npu/ll_aton/ll_aton_util.c ****   }
- 289              		.loc 1 88 18 view .LVU93
- 290              	.LBE8:
- 291              		.loc 1 90 1 view .LVU94
- 292 0080 E8E7     		b	.L6
- 293              		.cfi_endproc
- 294              	.LFE4:
- 296              		.text
- 297              	.Letext0:
- 298              		.file 2 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 299              		.file 3 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
-ARM GAS  /tmp/ccvUIr3j.s 			page 9
+ 420              		.loc 1 88 18
+ 421 0140 7A69     		ldr	r2, [r7, #20]
+ 422 0142 1A60     		str	r2, [r3]
+ 423              	.L9:
+ 424              	.LBE5:
+ 425              		.loc 1 90 1
+ 426 0144 00BF     		nop
+ 427 0146 3437     		adds	r7, r7, #52
+ 428              		.cfi_def_cfa_offset 12
+ 429 0148 BD46     		mov	sp, r7
+ 430              		.cfi_def_cfa_register 13
+ 431              		@ sp needed
+ 432 014a B0BC     		pop	{r4, r5, r7}
+ 433              		.cfi_restore 7
+ 434              		.cfi_restore 5
+ 435              		.cfi_restore 4
+ 436              		.cfi_def_cfa_offset 0
+ 437 014c 7047     		bx	lr
+ 438              		.cfi_endproc
+ 439              	.LFE4:
+ 441              		.text
+ 442              	.Letext0:
+ 443              		.file 2 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 444              		.file 3 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ARM GAS  /tmp/ccwTPwve.s 			page 11
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 ll_aton_util.c
-     /tmp/ccvUIr3j.s:26     .text.LL_ATON_getbits:00000000 $t
-     /tmp/ccvUIr3j.s:32     .text.LL_ATON_getbits:00000000 LL_ATON_getbits
-     /tmp/ccvUIr3j.s:150    .text.LL_ATON_setbits:00000000 $t
-     /tmp/ccvUIr3j.s:156    .text.LL_ATON_setbits:00000000 LL_ATON_setbits
-                           .group:00000000 wm4.0.c552ae9005b0f2cca11872fae5d4b7f2
+     /tmp/ccwTPwve.s:26     .text.LL_ATON_getbits:00000000 $t
+     /tmp/ccwTPwve.s:32     .text.LL_ATON_getbits:00000000 LL_ATON_getbits
+     /tmp/ccwTPwve.s:221    .text.LL_ATON_setbits:00000000 $t
+     /tmp/ccwTPwve.s:227    .text.LL_ATON_setbits:00000000 LL_ATON_setbits
+                           .group:00000000 wm4.0.2a10773746a5c5ebb5552f50e466f80b
                            .group:00000000 wm4.stddef.h.39.0dc9006b34572d4d9cae4c8b422c4971
                            .group:00000000 wm4._newlib_version.h.4.411db44ea2338a62eca2f0777f81481b
                            .group:00000000 wm4.features.h.33.e0c9f337c65cb9f22ed5f23d082bc78b

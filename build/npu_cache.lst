@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cckCBij7.s 			page 1
+ARM GAS  /tmp/cctg4n5L.s 			page 1
 
 
    1              		.arch armv8.1-m.main
@@ -16,7 +16,7 @@ ARM GAS  /tmp/cckCBij7.s 			page 1
   13              		.eabi_attribute 24, 1
   14              		.eabi_attribute 25, 1
   15              		.eabi_attribute 26, 1
-  16              		.eabi_attribute 30, 4
+  16              		.eabi_attribute 30, 6
   17              		.eabi_attribute 34, 1
   18              		.eabi_attribute 38, 1
   19              		.eabi_attribute 18, 4
@@ -25,14 +25,20 @@ ARM GAS  /tmp/cckCBij7.s 			page 1
   22              	.Ltext0:
   23              		.cfi_sections	.debug_frame
   24              		.file 1 "Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c"
-  25              		.section	.text.npu_cache_init,"ax",%progbits
-  26              		.align	1
-  27              		.global	npu_cache_init
-  28              		.syntax unified
-  29              		.thumb
-  30              		.thumb_func
-  32              	npu_cache_init:
-  33              	.LFB835:
+  25              		.section	.bss.hcacheaxi_s,"aw",%nobits
+  26              		.align	2
+  29              	hcacheaxi_s:
+  30 0000 00000000 		.space	12
+  30      00000000 
+  30      00000000 
+  31              		.section	.text.npu_cache_init,"ax",%progbits
+  32              		.align	1
+  33              		.global	npu_cache_init
+  34              		.syntax unified
+  35              		.thumb
+  36              		.thumb_func
+  38              	npu_cache_init:
+  39              	.LFB835:
    1:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** /**
    2:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c ****   ******************************************************************************
    3:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c ****   * @file    npu_cache.c
@@ -52,317 +58,378 @@ ARM GAS  /tmp/cckCBij7.s 			page 1
   17:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** 
   18:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** #include "npu_cache.h"
   19:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** #include "stm32n6xx_hal_cacheaxi.h"
+ARM GAS  /tmp/cctg4n5L.s 			page 2
+
+
   20:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** 
   21:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** static CACHEAXI_HandleTypeDef hcacheaxi_s;
   22:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** 
   23:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** void npu_cache_init(void)
   24:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** {
-  34              		.loc 1 24 1 view -0
-ARM GAS  /tmp/cckCBij7.s 			page 2
-
-
-  35              		.cfi_startproc
-  36              		@ args = 0, pretend = 0, frame = 0
-  37              		@ frame_needed = 0, uses_anonymous_args = 0
-  38              		@ link register save eliminated.
+  40              		.loc 1 24 1
+  41              		.cfi_startproc
+  42              		@ args = 0, pretend = 0, frame = 0
+  43              		@ frame_needed = 1, uses_anonymous_args = 0
+  44 0000 80B5     		push	{r7, lr}
+  45              		.cfi_def_cfa_offset 8
+  46              		.cfi_offset 7, -8
+  47              		.cfi_offset 14, -4
+  48 0002 00AF     		add	r7, sp, #0
+  49              		.cfi_def_cfa_register 7
   25:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c ****   hcacheaxi_s.Instance = CACHEAXI;
-  39              		.loc 1 25 3 view .LVU1
-  40              		.loc 1 25 24 is_stmt 0 view .LVU2
-  41 0000 0248     		ldr	r0, .L2
-  42 0002 034B     		ldr	r3, .L2+4
-  43 0004 0360     		str	r3, [r0]
+  50              		.loc 1 25 24
+  51 0004 034B     		ldr	r3, .L2
+  52 0006 044A     		ldr	r2, .L2+4
+  53 0008 1A60     		str	r2, [r3]
   26:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c ****   HAL_CACHEAXI_Init(&hcacheaxi_s);      // Side effect: cacheaxi should be enabled (but one should 
-  44              		.loc 1 26 3 is_stmt 1 view .LVU3
-  45 0006 FFF7FEBF 		b	HAL_CACHEAXI_Init
-  46              	.LVL0:
-  47              	.L3:
-  48 000a 00BF     		.align	2
-  49              	.L2:
-  50 000c 00000000 		.word	hcacheaxi_s
-  51 0010 00FC0D58 		.word	1477311488
-  52              		.cfi_endproc
-  53              	.LFE835:
-  55              		.section	.text.npu_cache_enable,"ax",%progbits
-  56              		.align	1
-  57              		.global	npu_cache_enable
-  58              		.syntax unified
-  59              		.thumb
-  60              		.thumb_func
-  62              	npu_cache_enable:
-  63              	.LFB836:
+  54              		.loc 1 26 3
+  55 000a 0248     		ldr	r0, .L2
+  56 000c FFF7FEFF 		bl	HAL_CACHEAXI_Init
   27:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** }
+  57              		.loc 1 27 1
+  58 0010 00BF     		nop
+  59 0012 80BD     		pop	{r7, pc}
+  60              	.L3:
+  61              		.align	2
+  62              	.L2:
+  63 0014 00000000 		.word	hcacheaxi_s
+  64 0018 00FC0D58 		.word	1477311488
+  65              		.cfi_endproc
+  66              	.LFE835:
+  68              		.section	.text.npu_cache_enable,"ax",%progbits
+  69              		.align	1
+  70              		.global	npu_cache_enable
+  71              		.syntax unified
+  72              		.thumb
+  73              		.thumb_func
+  75              	npu_cache_enable:
+  76              	.LFB836:
   28:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** 
   29:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** void npu_cache_enable(void)
   30:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** {
-  64              		.loc 1 30 1 view -0
-  65              		.cfi_startproc
-  66              		@ args = 0, pretend = 0, frame = 0
-  67              		@ frame_needed = 0, uses_anonymous_args = 0
-  68 0000 10B5     		push	{r4, lr}
-  69              		.cfi_def_cfa_offset 8
-  70              		.cfi_offset 4, -8
-  71              		.cfi_offset 14, -4
+  77              		.loc 1 30 1
+  78              		.cfi_startproc
+  79              		@ args = 0, pretend = 0, frame = 8
+  80              		@ frame_needed = 1, uses_anonymous_args = 0
+  81 0000 80B5     		push	{r7, lr}
+  82              		.cfi_def_cfa_offset 8
+  83              		.cfi_offset 7, -8
+  84              		.cfi_offset 14, -4
+  85 0002 82B0     		sub	sp, sp, #8
+  86              		.cfi_def_cfa_offset 16
+  87 0004 00AF     		add	r7, sp, #0
+ARM GAS  /tmp/cctg4n5L.s 			page 3
+
+
+  88              		.cfi_def_cfa_register 7
+  89              	.L5:
   31:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c ****   HAL_StatusTypeDef status;
   32:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c ****   // Enable is wrapped in a loop because most of times, the first call returns
   33:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c ****   //    HAL_BUSY, resulting in a cache not enabled.
   34:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c ****   do
   35:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c ****   {
   36:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c ****     status = HAL_CACHEAXI_Enable(&hcacheaxi_s);
-  72              		.loc 1 36 14 is_stmt 0 view .LVU5
-  73 0002 034C     		ldr	r4, .L8
-  74              	.L5:
-  31:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c ****   HAL_StatusTypeDef status;
-  75              		.loc 1 31 3 is_stmt 1 view .LVU6
-  34:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c ****   {
-  76              		.loc 1 34 3 view .LVU7
-  77              		.loc 1 36 5 view .LVU8
-  78              		.loc 1 36 14 is_stmt 0 view .LVU9
-  79 0004 2046     		mov	r0, r4
-ARM GAS  /tmp/cckCBij7.s 			page 3
-
-
-  80 0006 FFF7FEFF 		bl	HAL_CACHEAXI_Enable
-  81              	.LVL1:
+  90              		.loc 1 36 14
+  91 0006 0648     		ldr	r0, .L6
+  92 0008 FFF7FEFF 		bl	HAL_CACHEAXI_Enable
+  93 000c 0346     		mov	r3, r0
+  94 000e FB71     		strb	r3, [r7, #7]
   37:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c ****   } while (status == HAL_BUSY);
-  82              		.loc 1 37 19 is_stmt 1 discriminator 1 view .LVU10
-  83 000a 0228     		cmp	r0, #2
-  84 000c FAD0     		beq	.L5
+  95              		.loc 1 37 19 discriminator 1
+  96 0010 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+  97 0012 022B     		cmp	r3, #2
+  98 0014 F7D0     		beq	.L5
   38:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** }
-  85              		.loc 1 38 1 is_stmt 0 view .LVU11
-  86 000e 10BD     		pop	{r4, pc}
-  87              	.L9:
-  88              		.align	2
-  89              	.L8:
-  90 0010 00000000 		.word	hcacheaxi_s
-  91              		.cfi_endproc
-  92              	.LFE836:
-  94              		.section	.text.npu_cache_disable,"ax",%progbits
-  95              		.align	1
-  96              		.global	npu_cache_disable
-  97              		.syntax unified
-  98              		.thumb
-  99              		.thumb_func
- 101              	npu_cache_disable:
- 102              	.LFB837:
+  99              		.loc 1 38 1
+ 100 0016 00BF     		nop
+ 101 0018 00BF     		nop
+ 102 001a 0837     		adds	r7, r7, #8
+ 103              		.cfi_def_cfa_offset 8
+ 104 001c BD46     		mov	sp, r7
+ 105              		.cfi_def_cfa_register 13
+ 106              		@ sp needed
+ 107 001e 80BD     		pop	{r7, pc}
+ 108              	.L7:
+ 109              		.align	2
+ 110              	.L6:
+ 111 0020 00000000 		.word	hcacheaxi_s
+ 112              		.cfi_endproc
+ 113              	.LFE836:
+ 115              		.section	.text.npu_cache_disable,"ax",%progbits
+ 116              		.align	1
+ 117              		.global	npu_cache_disable
+ 118              		.syntax unified
+ 119              		.thumb
+ 120              		.thumb_func
+ 122              	npu_cache_disable:
+ 123              	.LFB837:
   39:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** 
   40:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** void npu_cache_disable(void)
   41:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** {
- 103              		.loc 1 41 1 is_stmt 1 view -0
- 104              		.cfi_startproc
- 105              		@ args = 0, pretend = 0, frame = 0
- 106              		@ frame_needed = 0, uses_anonymous_args = 0
- 107 0000 10B5     		push	{r4, lr}
- 108              		.cfi_def_cfa_offset 8
- 109              		.cfi_offset 4, -8
- 110              		.cfi_offset 14, -4
+ 124              		.loc 1 41 1
+ 125              		.cfi_startproc
+ 126              		@ args = 0, pretend = 0, frame = 8
+ 127              		@ frame_needed = 1, uses_anonymous_args = 0
+ 128 0000 80B5     		push	{r7, lr}
+ 129              		.cfi_def_cfa_offset 8
+ 130              		.cfi_offset 7, -8
+ 131              		.cfi_offset 14, -4
+ 132 0002 82B0     		sub	sp, sp, #8
+ 133              		.cfi_def_cfa_offset 16
+ 134 0004 00AF     		add	r7, sp, #0
+ 135              		.cfi_def_cfa_register 7
+ARM GAS  /tmp/cctg4n5L.s 			page 4
+
+
+ 136              	.L9:
   42:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c ****   HAL_StatusTypeDef status;
   43:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c ****   do
   44:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c ****   {
   45:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c ****     status = HAL_CACHEAXI_Disable(&hcacheaxi_s);
- 111              		.loc 1 45 14 is_stmt 0 view .LVU13
- 112 0002 034C     		ldr	r4, .L14
- 113              	.L11:
-  42:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c ****   HAL_StatusTypeDef status;
- 114              		.loc 1 42 3 is_stmt 1 view .LVU14
-  43:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c ****   {
- 115              		.loc 1 43 3 view .LVU15
- 116              		.loc 1 45 5 view .LVU16
- 117              		.loc 1 45 14 is_stmt 0 view .LVU17
- 118 0004 2046     		mov	r0, r4
- 119 0006 FFF7FEFF 		bl	HAL_CACHEAXI_Disable
- 120              	.LVL2:
+ 137              		.loc 1 45 14
+ 138 0006 0648     		ldr	r0, .L10
+ 139 0008 FFF7FEFF 		bl	HAL_CACHEAXI_Disable
+ 140 000c 0346     		mov	r3, r0
+ 141 000e FB71     		strb	r3, [r7, #7]
   46:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c ****   } while (status == HAL_BUSY);
- 121              		.loc 1 46 19 is_stmt 1 discriminator 1 view .LVU18
- 122 000a 0228     		cmp	r0, #2
- 123 000c FAD0     		beq	.L11
+ 142              		.loc 1 46 19 discriminator 1
+ 143 0010 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 144 0012 022B     		cmp	r3, #2
+ 145 0014 F7D0     		beq	.L9
   47:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** }
- 124              		.loc 1 47 1 is_stmt 0 view .LVU19
- 125 000e 10BD     		pop	{r4, pc}
-ARM GAS  /tmp/cckCBij7.s 			page 4
-
-
- 126              	.L15:
- 127              		.align	2
- 128              	.L14:
- 129 0010 00000000 		.word	hcacheaxi_s
- 130              		.cfi_endproc
- 131              	.LFE837:
- 133              		.section	.text.npu_cache_invalidate,"ax",%progbits
- 134              		.align	1
- 135              		.global	npu_cache_invalidate
- 136              		.syntax unified
- 137              		.thumb
- 138              		.thumb_func
- 140              	npu_cache_invalidate:
- 141              	.LFB838:
+ 146              		.loc 1 47 1
+ 147 0016 00BF     		nop
+ 148 0018 00BF     		nop
+ 149 001a 0837     		adds	r7, r7, #8
+ 150              		.cfi_def_cfa_offset 8
+ 151 001c BD46     		mov	sp, r7
+ 152              		.cfi_def_cfa_register 13
+ 153              		@ sp needed
+ 154 001e 80BD     		pop	{r7, pc}
+ 155              	.L11:
+ 156              		.align	2
+ 157              	.L10:
+ 158 0020 00000000 		.word	hcacheaxi_s
+ 159              		.cfi_endproc
+ 160              	.LFE837:
+ 162              		.section	.text.npu_cache_invalidate,"ax",%progbits
+ 163              		.align	1
+ 164              		.global	npu_cache_invalidate
+ 165              		.syntax unified
+ 166              		.thumb
+ 167              		.thumb_func
+ 169              	npu_cache_invalidate:
+ 170              	.LFB838:
   48:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** 
   49:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** void npu_cache_invalidate(void)
   50:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** {
- 142              		.loc 1 50 1 is_stmt 1 view -0
- 143              		.cfi_startproc
- 144              		@ args = 0, pretend = 0, frame = 0
- 145              		@ frame_needed = 0, uses_anonymous_args = 0
- 146              		@ link register save eliminated.
+ 171              		.loc 1 50 1
+ 172              		.cfi_startproc
+ 173              		@ args = 0, pretend = 0, frame = 0
+ 174              		@ frame_needed = 1, uses_anonymous_args = 0
+ 175 0000 80B5     		push	{r7, lr}
+ 176              		.cfi_def_cfa_offset 8
+ 177              		.cfi_offset 7, -8
+ 178              		.cfi_offset 14, -4
+ 179 0002 00AF     		add	r7, sp, #0
+ 180              		.cfi_def_cfa_register 7
   51:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c ****   HAL_CACHEAXI_Invalidate(&hcacheaxi_s);
- 147              		.loc 1 51 3 view .LVU21
- 148 0000 0148     		ldr	r0, .L17
- 149 0002 FFF7FEBF 		b	HAL_CACHEAXI_Invalidate
- 150              	.LVL3:
- 151              	.L18:
- 152 0006 00BF     		.align	2
- 153              	.L17:
- 154 0008 00000000 		.word	hcacheaxi_s
- 155              		.cfi_endproc
- 156              	.LFE838:
- 158              		.section	.text.npu_cache_clean_range,"ax",%progbits
- 159              		.align	1
- 160              		.global	npu_cache_clean_range
- 161              		.syntax unified
- 162              		.thumb
- 163              		.thumb_func
- 165              	npu_cache_clean_range:
- 166              	.LVL4:
- 167              	.LFB839:
+ 181              		.loc 1 51 3
+ 182 0004 0248     		ldr	r0, .L13
+ 183 0006 FFF7FEFF 		bl	HAL_CACHEAXI_Invalidate
   52:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** }
+ARM GAS  /tmp/cctg4n5L.s 			page 5
+
+
+ 184              		.loc 1 52 1
+ 185 000a 00BF     		nop
+ 186 000c 80BD     		pop	{r7, pc}
+ 187              	.L14:
+ 188 000e 00BF     		.align	2
+ 189              	.L13:
+ 190 0010 00000000 		.word	hcacheaxi_s
+ 191              		.cfi_endproc
+ 192              	.LFE838:
+ 194              		.section	.text.npu_cache_clean_range,"ax",%progbits
+ 195              		.align	1
+ 196              		.global	npu_cache_clean_range
+ 197              		.syntax unified
+ 198              		.thumb
+ 199              		.thumb_func
+ 201              	npu_cache_clean_range:
+ 202              	.LFB839:
   53:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** 
   54:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** void npu_cache_clean_range(uint32_t start_addr, uint32_t end_addr)
   55:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** {
- 168              		.loc 1 55 1 view -0
- 169              		.cfi_startproc
- 170              		@ args = 0, pretend = 0, frame = 0
- 171              		@ frame_needed = 0, uses_anonymous_args = 0
- 172              		@ link register save eliminated.
+ 203              		.loc 1 55 1
+ 204              		.cfi_startproc
+ 205              		@ args = 0, pretend = 0, frame = 8
+ 206              		@ frame_needed = 1, uses_anonymous_args = 0
+ 207 0000 80B5     		push	{r7, lr}
+ 208              		.cfi_def_cfa_offset 8
+ 209              		.cfi_offset 7, -8
+ 210              		.cfi_offset 14, -4
+ 211 0002 82B0     		sub	sp, sp, #8
+ 212              		.cfi_def_cfa_offset 16
+ 213 0004 00AF     		add	r7, sp, #0
+ 214              		.cfi_def_cfa_register 7
+ 215 0006 7860     		str	r0, [r7, #4]
+ 216 0008 3960     		str	r1, [r7]
   56:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c ****   HAL_CACHEAXI_CleanByAddr(&hcacheaxi_s, (uint32_t*)start_addr, end_addr-start_addr);
- 173              		.loc 1 56 3 view .LVU23
- 174 0000 0A1A     		subs	r2, r1, r0
- 175 0002 0146     		mov	r1, r0
- 176              	.LVL5:
- 177              		.loc 1 56 3 is_stmt 0 view .LVU24
-ARM GAS  /tmp/cckCBij7.s 			page 5
-
-
- 178 0004 0148     		ldr	r0, .L20
- 179              	.LVL6:
- 180              		.loc 1 56 3 view .LVU25
- 181 0006 FFF7FEBF 		b	HAL_CACHEAXI_CleanByAddr
- 182              	.LVL7:
- 183              	.L21:
- 184              		.loc 1 56 3 view .LVU26
- 185 000a 00BF     		.align	2
- 186              	.L20:
- 187 000c 00000000 		.word	hcacheaxi_s
- 188              		.cfi_endproc
- 189              	.LFE839:
- 191              		.section	.text.npu_cache_clean_invalidate_range,"ax",%progbits
- 192              		.align	1
- 193              		.global	npu_cache_clean_invalidate_range
- 194              		.syntax unified
- 195              		.thumb
- 196              		.thumb_func
- 198              	npu_cache_clean_invalidate_range:
- 199              	.LVL8:
- 200              	.LFB840:
+ 217              		.loc 1 56 3
+ 218 000a 7968     		ldr	r1, [r7, #4]
+ 219 000c 3A68     		ldr	r2, [r7]
+ 220 000e 7B68     		ldr	r3, [r7, #4]
+ 221 0010 D31A     		subs	r3, r2, r3
+ 222 0012 1A46     		mov	r2, r3
+ 223 0014 0348     		ldr	r0, .L16
+ 224 0016 FFF7FEFF 		bl	HAL_CACHEAXI_CleanByAddr
   57:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** }
+ 225              		.loc 1 57 1
+ 226 001a 00BF     		nop
+ 227 001c 0837     		adds	r7, r7, #8
+ 228              		.cfi_def_cfa_offset 8
+ 229 001e BD46     		mov	sp, r7
+ 230              		.cfi_def_cfa_register 13
+ 231              		@ sp needed
+ 232 0020 80BD     		pop	{r7, pc}
+ 233              	.L17:
+ 234 0022 00BF     		.align	2
+ 235              	.L16:
+ 236 0024 00000000 		.word	hcacheaxi_s
+ 237              		.cfi_endproc
+ARM GAS  /tmp/cctg4n5L.s 			page 6
+
+
+ 238              	.LFE839:
+ 240              		.section	.text.npu_cache_clean_invalidate_range,"ax",%progbits
+ 241              		.align	1
+ 242              		.global	npu_cache_clean_invalidate_range
+ 243              		.syntax unified
+ 244              		.thumb
+ 245              		.thumb_func
+ 247              	npu_cache_clean_invalidate_range:
+ 248              	.LFB840:
   58:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** 
   59:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** void npu_cache_clean_invalidate_range(uint32_t start_addr, uint32_t end_addr)
   60:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** {
- 201              		.loc 1 60 1 is_stmt 1 view -0
- 202              		.cfi_startproc
- 203              		@ args = 0, pretend = 0, frame = 0
- 204              		@ frame_needed = 0, uses_anonymous_args = 0
- 205              		@ link register save eliminated.
+ 249              		.loc 1 60 1
+ 250              		.cfi_startproc
+ 251              		@ args = 0, pretend = 0, frame = 8
+ 252              		@ frame_needed = 1, uses_anonymous_args = 0
+ 253 0000 80B5     		push	{r7, lr}
+ 254              		.cfi_def_cfa_offset 8
+ 255              		.cfi_offset 7, -8
+ 256              		.cfi_offset 14, -4
+ 257 0002 82B0     		sub	sp, sp, #8
+ 258              		.cfi_def_cfa_offset 16
+ 259 0004 00AF     		add	r7, sp, #0
+ 260              		.cfi_def_cfa_register 7
+ 261 0006 7860     		str	r0, [r7, #4]
+ 262 0008 3960     		str	r1, [r7]
   61:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c ****   HAL_CACHEAXI_CleanInvalidByAddr(&hcacheaxi_s, (uint32_t*)start_addr, end_addr-start_addr);
- 206              		.loc 1 61 3 view .LVU28
- 207 0000 0A1A     		subs	r2, r1, r0
- 208 0002 0146     		mov	r1, r0
- 209              	.LVL9:
- 210              		.loc 1 61 3 is_stmt 0 view .LVU29
- 211 0004 0148     		ldr	r0, .L23
- 212              	.LVL10:
- 213              		.loc 1 61 3 view .LVU30
- 214 0006 FFF7FEBF 		b	HAL_CACHEAXI_CleanInvalidByAddr
- 215              	.LVL11:
- 216              	.L24:
- 217              		.loc 1 61 3 view .LVU31
- 218 000a 00BF     		.align	2
- 219              	.L23:
- 220 000c 00000000 		.word	hcacheaxi_s
- 221              		.cfi_endproc
- 222              	.LFE840:
- 224              		.section	.text.NPU_CACHE_IRQHandler,"ax",%progbits
- 225              		.align	1
- 226              		.global	NPU_CACHE_IRQHandler
- 227              		.syntax unified
- 228              		.thumb
- 229              		.thumb_func
- 231              	NPU_CACHE_IRQHandler:
- 232              	.LFB841:
+ 263              		.loc 1 61 3
+ 264 000a 7968     		ldr	r1, [r7, #4]
+ 265 000c 3A68     		ldr	r2, [r7]
+ 266 000e 7B68     		ldr	r3, [r7, #4]
+ 267 0010 D31A     		subs	r3, r2, r3
+ 268 0012 1A46     		mov	r2, r3
+ 269 0014 0348     		ldr	r0, .L19
+ 270 0016 FFF7FEFF 		bl	HAL_CACHEAXI_CleanInvalidByAddr
   62:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** }
-ARM GAS  /tmp/cckCBij7.s 			page 6
+ 271              		.loc 1 62 1
+ 272 001a 00BF     		nop
+ 273 001c 0837     		adds	r7, r7, #8
+ 274              		.cfi_def_cfa_offset 8
+ 275 001e BD46     		mov	sp, r7
+ 276              		.cfi_def_cfa_register 13
+ 277              		@ sp needed
+ 278 0020 80BD     		pop	{r7, pc}
+ 279              	.L20:
+ 280 0022 00BF     		.align	2
+ 281              	.L19:
+ 282 0024 00000000 		.word	hcacheaxi_s
+ 283              		.cfi_endproc
+ 284              	.LFE840:
+ 286              		.section	.text.NPU_CACHE_IRQHandler,"ax",%progbits
+ 287              		.align	1
+ 288              		.global	NPU_CACHE_IRQHandler
+ 289              		.syntax unified
+ 290              		.thumb
+ 291              		.thumb_func
+ 293              	NPU_CACHE_IRQHandler:
+ARM GAS  /tmp/cctg4n5L.s 			page 7
 
 
+ 294              	.LFB841:
   63:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** 
   64:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** void NPU_CACHE_IRQHandler(void)
   65:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** {
- 233              		.loc 1 65 1 is_stmt 1 view -0
- 234              		.cfi_startproc
- 235              		@ args = 0, pretend = 0, frame = 0
- 236              		@ frame_needed = 0, uses_anonymous_args = 0
- 237              		@ link register save eliminated.
+ 295              		.loc 1 65 1
+ 296              		.cfi_startproc
+ 297              		@ args = 0, pretend = 0, frame = 0
+ 298              		@ frame_needed = 1, uses_anonymous_args = 0
+ 299              		@ link register save eliminated.
+ 300 0000 80B4     		push	{r7}
+ 301              		.cfi_def_cfa_offset 4
+ 302              		.cfi_offset 7, -4
+ 303 0002 00AF     		add	r7, sp, #0
+ 304              		.cfi_def_cfa_register 7
   66:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c ****   __NOP();
- 238              		.loc 1 66 3 view .LVU33
- 239              		.syntax unified
- 240              	@ 66 "Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c" 1
- 241 0000 00BF     		nop
- 242              	@ 0 "" 2
+ 305              		.loc 1 66 3
+ 306              		.syntax unified
+ 307              	@ 66 "Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c" 1
+ 308 0004 00BF     		nop
+ 309              	@ 0 "" 2
   67:Lib/AI_Runtime/Npu/Devices/STM32N6XX/npu_cache.c **** }
- 243              		.loc 1 67 1 is_stmt 0 view .LVU34
- 244              		.thumb
- 245              		.syntax unified
- 246 0002 7047     		bx	lr
- 247              		.cfi_endproc
- 248              	.LFE841:
- 250              		.section	.bss.hcacheaxi_s,"aw",%nobits
- 251              		.align	2
- 254              	hcacheaxi_s:
- 255 0000 00000000 		.space	12
- 255      00000000 
- 255      00000000 
- 256              		.text
- 257              	.Letext0:
- 258              		.file 2 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 259              		.file 3 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 260              		.file 4 "STM32Cube_FW_N6/Drivers/CMSIS/Device/ST/STM32N6xx/Include/stm32n657xx.h"
- 261              		.file 5 "STM32Cube_FW_N6/Drivers/STM32N6xx_HAL_Driver/Inc/stm32n6xx_hal_def.h"
- 262              		.file 6 "STM32Cube_FW_N6/Drivers/STM32N6xx_HAL_Driver/Inc/stm32n6xx_hal_cacheaxi.h"
-ARM GAS  /tmp/cckCBij7.s 			page 7
+ 310              		.loc 1 67 1
+ 311              		.thumb
+ 312              		.syntax unified
+ 313 0006 00BF     		nop
+ 314 0008 BD46     		mov	sp, r7
+ 315              		.cfi_def_cfa_register 13
+ 316              		@ sp needed
+ 317 000a 5DF8047B 		ldr	r7, [sp], #4
+ 318              		.cfi_restore 7
+ 319              		.cfi_def_cfa_offset 0
+ 320 000e 7047     		bx	lr
+ 321              		.cfi_endproc
+ 322              	.LFE841:
+ 324              		.text
+ 325              	.Letext0:
+ 326              		.file 2 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 327              		.file 3 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 328              		.file 4 "STM32Cube_FW_N6/Drivers/CMSIS/Device/ST/STM32N6xx/Include/stm32n657xx.h"
+ 329              		.file 5 "STM32Cube_FW_N6/Drivers/STM32N6xx_HAL_Driver/Inc/stm32n6xx_hal_def.h"
+ 330              		.file 6 "STM32Cube_FW_N6/Drivers/STM32N6xx_HAL_Driver/Inc/stm32n6xx_hal_cacheaxi.h"
+ARM GAS  /tmp/cctg4n5L.s 			page 8
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 npu_cache.c
-     /tmp/cckCBij7.s:26     .text.npu_cache_init:00000000 $t
-     /tmp/cckCBij7.s:32     .text.npu_cache_init:00000000 npu_cache_init
-     /tmp/cckCBij7.s:50     .text.npu_cache_init:0000000c $d
-     /tmp/cckCBij7.s:254    .bss.hcacheaxi_s:00000000 hcacheaxi_s
-     /tmp/cckCBij7.s:56     .text.npu_cache_enable:00000000 $t
-     /tmp/cckCBij7.s:62     .text.npu_cache_enable:00000000 npu_cache_enable
-     /tmp/cckCBij7.s:90     .text.npu_cache_enable:00000010 $d
-     /tmp/cckCBij7.s:95     .text.npu_cache_disable:00000000 $t
-     /tmp/cckCBij7.s:101    .text.npu_cache_disable:00000000 npu_cache_disable
-     /tmp/cckCBij7.s:129    .text.npu_cache_disable:00000010 $d
-     /tmp/cckCBij7.s:134    .text.npu_cache_invalidate:00000000 $t
-     /tmp/cckCBij7.s:140    .text.npu_cache_invalidate:00000000 npu_cache_invalidate
-     /tmp/cckCBij7.s:154    .text.npu_cache_invalidate:00000008 $d
-     /tmp/cckCBij7.s:159    .text.npu_cache_clean_range:00000000 $t
-     /tmp/cckCBij7.s:165    .text.npu_cache_clean_range:00000000 npu_cache_clean_range
-     /tmp/cckCBij7.s:187    .text.npu_cache_clean_range:0000000c $d
-     /tmp/cckCBij7.s:192    .text.npu_cache_clean_invalidate_range:00000000 $t
-     /tmp/cckCBij7.s:198    .text.npu_cache_clean_invalidate_range:00000000 npu_cache_clean_invalidate_range
-     /tmp/cckCBij7.s:220    .text.npu_cache_clean_invalidate_range:0000000c $d
-     /tmp/cckCBij7.s:225    .text.NPU_CACHE_IRQHandler:00000000 $t
-     /tmp/cckCBij7.s:231    .text.NPU_CACHE_IRQHandler:00000000 NPU_CACHE_IRQHandler
-     /tmp/cckCBij7.s:251    .bss.hcacheaxi_s:00000000 $d
-                           .group:00000000 wm4.0.c552ae9005b0f2cca11872fae5d4b7f2
+     /tmp/cctg4n5L.s:26     .bss.hcacheaxi_s:00000000 $d
+     /tmp/cctg4n5L.s:29     .bss.hcacheaxi_s:00000000 hcacheaxi_s
+     /tmp/cctg4n5L.s:32     .text.npu_cache_init:00000000 $t
+     /tmp/cctg4n5L.s:38     .text.npu_cache_init:00000000 npu_cache_init
+     /tmp/cctg4n5L.s:63     .text.npu_cache_init:00000014 $d
+     /tmp/cctg4n5L.s:69     .text.npu_cache_enable:00000000 $t
+     /tmp/cctg4n5L.s:75     .text.npu_cache_enable:00000000 npu_cache_enable
+     /tmp/cctg4n5L.s:111    .text.npu_cache_enable:00000020 $d
+     /tmp/cctg4n5L.s:116    .text.npu_cache_disable:00000000 $t
+     /tmp/cctg4n5L.s:122    .text.npu_cache_disable:00000000 npu_cache_disable
+     /tmp/cctg4n5L.s:158    .text.npu_cache_disable:00000020 $d
+     /tmp/cctg4n5L.s:163    .text.npu_cache_invalidate:00000000 $t
+     /tmp/cctg4n5L.s:169    .text.npu_cache_invalidate:00000000 npu_cache_invalidate
+     /tmp/cctg4n5L.s:190    .text.npu_cache_invalidate:00000010 $d
+     /tmp/cctg4n5L.s:195    .text.npu_cache_clean_range:00000000 $t
+     /tmp/cctg4n5L.s:201    .text.npu_cache_clean_range:00000000 npu_cache_clean_range
+     /tmp/cctg4n5L.s:236    .text.npu_cache_clean_range:00000024 $d
+     /tmp/cctg4n5L.s:241    .text.npu_cache_clean_invalidate_range:00000000 $t
+     /tmp/cctg4n5L.s:247    .text.npu_cache_clean_invalidate_range:00000000 npu_cache_clean_invalidate_range
+     /tmp/cctg4n5L.s:282    .text.npu_cache_clean_invalidate_range:00000024 $d
+     /tmp/cctg4n5L.s:287    .text.NPU_CACHE_IRQHandler:00000000 $t
+     /tmp/cctg4n5L.s:293    .text.NPU_CACHE_IRQHandler:00000000 NPU_CACHE_IRQHandler
+                           .group:00000000 wm4.0.2a10773746a5c5ebb5552f50e466f80b
                            .group:00000000 wm4.stm32n6xx_hal_conf.h.21.004a06df6e15ac197e03f723792da58a
                            .group:00000000 wm4.stddef.h.39.0dc9006b34572d4d9cae4c8b422c4971
                            .group:00000000 wm4.arm_cmse.h.103.a0d15a79c4c9a67da8d5831704d7248e
@@ -395,7 +462,7 @@ DEFINED SYMBOLS
                            .group:00000000 wm4._types.h.127.3bdfe3ff8ea2d0985b03d9cbe93480e3
                            .group:00000000 wm4.reent.h.18.25503cdc8b7e55dd0d6ea7b3e5af7a03
                            .group:00000000 wm4.lock.h.2.1461d1fff82dffe8bfddc23307f6484f
-ARM GAS  /tmp/cckCBij7.s 			page 8
+ARM GAS  /tmp/cctg4n5L.s 			page 9
 
 
                            .group:00000000 wm4.reent.h.78.6b87466b04591b1f1cb88c14fdf2ba9e

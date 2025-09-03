@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccycsPNH.s 			page 1
+ARM GAS  /tmp/ccDLW83P.s 			page 1
 
 
    1              		.arch armv8.1-m.main
@@ -16,7 +16,7 @@ ARM GAS  /tmp/ccycsPNH.s 			page 1
   13              		.eabi_attribute 24, 1
   14              		.eabi_attribute 25, 1
   15              		.eabi_attribute 26, 1
-  16              		.eabi_attribute 30, 4
+  16              		.eabi_attribute 30, 6
   17              		.eabi_attribute 34, 1
   18              		.eabi_attribute 38, 1
   19              		.eabi_attribute 18, 4
@@ -25,23 +25,14 @@ ARM GAS  /tmp/ccycsPNH.s 			page 1
   22              	.Ltext0:
   23              		.cfi_sections	.debug_frame
   24              		.file 1 "Lib/Camera_Middleware/cmw_utils.c"
-  25              		.section	.rodata.CMW_UTILS_get_dec_ratio_and_update.str1.1,"aMS",%progbits,1
-  26              	.LC0:
-  27 0000 3000     		.ascii	"0\000"
-  28              	.LC1:
-  29 0002 4C69622F 		.ascii	"Lib/Camera_Middleware/cmw_utils.c\000"
-  29      43616D65 
-  29      72615F4D 
-  29      6964646C 
-  29      65776172 
-  30              		.section	.text.CMW_UTILS_get_dec_ratio_and_update,"ax",%progbits
-  31              		.align	1
-  32              		.syntax unified
-  33              		.thumb
-  34              		.thumb_func
-  36              	CMW_UTILS_get_dec_ratio_and_update:
-  37              	.LVL0:
-  38              	.LFB843:
+  25              		.section	.text.CMW_UTILS_GetPipeConfig,"ax",%progbits
+  26              		.align	1
+  27              		.global	CMW_UTILS_GetPipeConfig
+  28              		.syntax unified
+  29              		.thumb
+  30              		.thumb_func
+  32              	CMW_UTILS_GetPipeConfig:
+  33              	.LFB838:
    1:Lib/Camera_Middleware/cmw_utils.c ****  /**
    2:Lib/Camera_Middleware/cmw_utils.c ****  ******************************************************************************
    3:Lib/Camera_Middleware/cmw_utils.c ****  * @file    cmw_utils.c
@@ -58,9 +49,6 @@ ARM GAS  /tmp/ccycsPNH.s 			page 1
   14:Lib/Camera_Middleware/cmw_utils.c ****  * If no LICENSE file comes with this software, it is provided AS-IS.
   15:Lib/Camera_Middleware/cmw_utils.c ****  *
   16:Lib/Camera_Middleware/cmw_utils.c ****  ******************************************************************************
-ARM GAS  /tmp/ccycsPNH.s 			page 2
-
-
   17:Lib/Camera_Middleware/cmw_utils.c ****  */
   18:Lib/Camera_Middleware/cmw_utils.c **** 
   19:Lib/Camera_Middleware/cmw_utils.c **** #include "cmw_utils.h"
@@ -70,6 +58,9 @@ ARM GAS  /tmp/ccycsPNH.s 			page 1
   23:Lib/Camera_Middleware/cmw_utils.c **** #ifndef MIN
   24:Lib/Camera_Middleware/cmw_utils.c **** #define MIN(a,b) ((a)<(b)?(a):(b))
   25:Lib/Camera_Middleware/cmw_utils.c **** #endif
+ARM GAS  /tmp/ccDLW83P.s 			page 2
+
+
   26:Lib/Camera_Middleware/cmw_utils.c **** 
   27:Lib/Camera_Middleware/cmw_utils.c **** #ifndef MAX
   28:Lib/Camera_Middleware/cmw_utils.c **** #define MAX(a,b) ((a)>(b)?(a):(b))
@@ -88,909 +79,999 @@ ARM GAS  /tmp/ccycsPNH.s 			page 1
   41:Lib/Camera_Middleware/cmw_utils.c ****                              DCMIPP_CropConfTypeDef *crop, DCMIPP_DecimationConfTypeDef *dec,
   42:Lib/Camera_Middleware/cmw_utils.c ****                              DCMIPP_DownsizeTypeDef *down)
   43:Lib/Camera_Middleware/cmw_utils.c **** {
+  34              		.loc 1 43 1
+  35              		.cfi_startproc
+  36              		@ args = 8, pretend = 0, frame = 24
+  37              		@ frame_needed = 1, uses_anonymous_args = 0
+  38 0000 80B5     		push	{r7, lr}
+  39              		.cfi_def_cfa_offset 8
+  40              		.cfi_offset 7, -8
+  41              		.cfi_offset 14, -4
+  42 0002 88B0     		sub	sp, sp, #32
+  43              		.cfi_def_cfa_offset 40
+  44 0004 02AF     		add	r7, sp, #8
+  45              		.cfi_def_cfa 7, 32
+  46 0006 F860     		str	r0, [r7, #12]
+  47 0008 B960     		str	r1, [r7, #8]
+  48 000a 7A60     		str	r2, [r7, #4]
+  49 000c 3B60     		str	r3, [r7]
   44:Lib/Camera_Middleware/cmw_utils.c ****   float ratio_height = 0;
+  50              		.loc 1 44 9
+  51 000e 4FF00003 		mov	r3, #0
+  52 0012 7B61     		str	r3, [r7, #20]	@ float
   45:Lib/Camera_Middleware/cmw_utils.c ****   float ratio_width = 0;
+  53              		.loc 1 45 9
+  54 0014 4FF00003 		mov	r3, #0
+  55 0018 3B61     		str	r3, [r7, #16]	@ float
   46:Lib/Camera_Middleware/cmw_utils.c **** 
   47:Lib/Camera_Middleware/cmw_utils.c ****   if (p_conf->mode == CMW_Aspect_ratio_crop)
+  56              		.loc 1 47 13
+  57 001a 7B68     		ldr	r3, [r7, #4]
+  58 001c 9B69     		ldr	r3, [r3, #24]
+  59              		.loc 1 47 6
+  60 001e 002B     		cmp	r3, #0
+  61 0020 2BD1     		bne	.L2
   48:Lib/Camera_Middleware/cmw_utils.c ****   {
   49:Lib/Camera_Middleware/cmw_utils.c ****     CMW_UTILS_get_crop_config(cam_width, cam_height, p_conf->output_width, p_conf->output_height, c
+  62              		.loc 1 49 5
+  63 0022 7B68     		ldr	r3, [r7, #4]
+  64 0024 1A68     		ldr	r2, [r3]
+  65 0026 7B68     		ldr	r3, [r7, #4]
+  66 0028 5968     		ldr	r1, [r3, #4]
+ARM GAS  /tmp/ccDLW83P.s 			page 3
+
+
+  67 002a 3B68     		ldr	r3, [r7]
+  68 002c 0093     		str	r3, [sp]
+  69 002e 0B46     		mov	r3, r1
+  70 0030 B968     		ldr	r1, [r7, #8]
+  71 0032 F868     		ldr	r0, [r7, #12]
+  72 0034 FFF7FEFF 		bl	CMW_UTILS_get_crop_config
   50:Lib/Camera_Middleware/cmw_utils.c ****     ratio_width = (float)crop->HSize / p_conf->output_width;
+  73              		.loc 1 50 30
+  74 0038 3B68     		ldr	r3, [r7]
+  75 003a DB68     		ldr	r3, [r3, #12]
+  76              		.loc 1 50 19
+  77 003c 07EE903A 		vmov	s15, r3	@ int
+  78 0040 F8EE676A 		vcvt.f32.u32	s13, s15
+  79              		.loc 1 50 46
+  80 0044 7B68     		ldr	r3, [r7, #4]
+  81 0046 1B68     		ldr	r3, [r3]
+  82              		.loc 1 50 38
+  83 0048 07EE903A 		vmov	s15, r3	@ int
+  84 004c B8EE677A 		vcvt.f32.u32	s14, s15
+  85              		.loc 1 50 17
+  86 0050 C6EE877A 		vdiv.f32	s15, s13, s14
+  87 0054 C7ED047A 		vstr.32	s15, [r7, #16]
   51:Lib/Camera_Middleware/cmw_utils.c ****     ratio_height = (float)crop->VSize / p_conf->output_height;
+  88              		.loc 1 51 31
+  89 0058 3B68     		ldr	r3, [r7]
+  90 005a 9B68     		ldr	r3, [r3, #8]
+  91              		.loc 1 51 20
+  92 005c 07EE903A 		vmov	s15, r3	@ int
+  93 0060 F8EE676A 		vcvt.f32.u32	s13, s15
+  94              		.loc 1 51 47
+  95 0064 7B68     		ldr	r3, [r7, #4]
+  96 0066 5B68     		ldr	r3, [r3, #4]
+  97              		.loc 1 51 39
+  98 0068 07EE903A 		vmov	s15, r3	@ int
+  99 006c B8EE677A 		vcvt.f32.u32	s14, s15
+ 100              		.loc 1 51 18
+ 101 0070 C6EE877A 		vdiv.f32	s15, s13, s14
+ 102 0074 C7ED057A 		vstr.32	s15, [r7, #20]
+ 103 0078 5EE0     		b	.L3
+ 104              	.L2:
   52:Lib/Camera_Middleware/cmw_utils.c ****   }
   53:Lib/Camera_Middleware/cmw_utils.c ****   else if (p_conf->mode == CMW_Aspect_ratio_fit)
+ 105              		.loc 1 53 18
+ 106 007a 7B68     		ldr	r3, [r7, #4]
+ 107 007c 9B69     		ldr	r3, [r3, #24]
+ 108              		.loc 1 53 11
+ 109 007e 012B     		cmp	r3, #1
+ 110 0080 1ED1     		bne	.L4
   54:Lib/Camera_Middleware/cmw_utils.c ****   {
   55:Lib/Camera_Middleware/cmw_utils.c ****     ratio_width = (float)cam_width / p_conf->output_width;
+ 111              		.loc 1 55 19
+ 112 0082 FB68     		ldr	r3, [r7, #12]
+ 113 0084 07EE903A 		vmov	s15, r3	@ int
+ 114 0088 F8EE676A 		vcvt.f32.u32	s13, s15
+ 115              		.loc 1 55 44
+ 116 008c 7B68     		ldr	r3, [r7, #4]
+ 117 008e 1B68     		ldr	r3, [r3]
+ARM GAS  /tmp/ccDLW83P.s 			page 4
+
+
+ 118              		.loc 1 55 36
+ 119 0090 07EE903A 		vmov	s15, r3	@ int
+ 120 0094 B8EE677A 		vcvt.f32.u32	s14, s15
+ 121              		.loc 1 55 17
+ 122 0098 C6EE877A 		vdiv.f32	s15, s13, s14
+ 123 009c C7ED047A 		vstr.32	s15, [r7, #16]
   56:Lib/Camera_Middleware/cmw_utils.c ****     ratio_height = (float)cam_height / p_conf->output_height;
+ 124              		.loc 1 56 20
+ 125 00a0 BB68     		ldr	r3, [r7, #8]
+ 126 00a2 07EE903A 		vmov	s15, r3	@ int
+ 127 00a6 F8EE676A 		vcvt.f32.u32	s13, s15
+ 128              		.loc 1 56 46
+ 129 00aa 7B68     		ldr	r3, [r7, #4]
+ 130 00ac 5B68     		ldr	r3, [r3, #4]
+ 131              		.loc 1 56 38
+ 132 00ae 07EE903A 		vmov	s15, r3	@ int
+ 133 00b2 B8EE677A 		vcvt.f32.u32	s14, s15
+ 134              		.loc 1 56 18
+ 135 00b6 C6EE877A 		vdiv.f32	s15, s13, s14
+ 136 00ba C7ED057A 		vstr.32	s15, [r7, #20]
+ 137 00be 3BE0     		b	.L3
+ 138              	.L4:
   57:Lib/Camera_Middleware/cmw_utils.c ****   }
   58:Lib/Camera_Middleware/cmw_utils.c ****   else if (p_conf->mode == CMW_Aspect_ratio_fullscreen)
+ 139              		.loc 1 58 18
+ 140 00c0 7B68     		ldr	r3, [r7, #4]
+ 141 00c2 9B69     		ldr	r3, [r3, #24]
+ 142              		.loc 1 58 11
+ 143 00c4 022B     		cmp	r3, #2
+ 144 00c6 11D1     		bne	.L5
   59:Lib/Camera_Middleware/cmw_utils.c ****   {
   60:Lib/Camera_Middleware/cmw_utils.c ****     ratio_height = (float) cam_height / p_conf->output_height;
+ 145              		.loc 1 60 20
+ 146 00c8 BB68     		ldr	r3, [r7, #8]
+ 147 00ca 07EE903A 		vmov	s15, r3	@ int
+ 148 00ce F8EE676A 		vcvt.f32.u32	s13, s15
+ 149              		.loc 1 60 47
+ 150 00d2 7B68     		ldr	r3, [r7, #4]
+ 151 00d4 5B68     		ldr	r3, [r3, #4]
+ 152              		.loc 1 60 39
+ 153 00d6 07EE903A 		vmov	s15, r3	@ int
+ 154 00da B8EE677A 		vcvt.f32.u32	s14, s15
+ 155              		.loc 1 60 18
+ 156 00de C6EE877A 		vdiv.f32	s15, s13, s14
+ 157 00e2 C7ED057A 		vstr.32	s15, [r7, #20]
   61:Lib/Camera_Middleware/cmw_utils.c ****     ratio_width = (float) ratio_height;
+ 158              		.loc 1 61 17
+ 159 00e6 7B69     		ldr	r3, [r7, #20]	@ float
+ 160 00e8 3B61     		str	r3, [r7, #16]	@ float
+ 161 00ea 25E0     		b	.L3
+ 162              	.L5:
   62:Lib/Camera_Middleware/cmw_utils.c ****   }
   63:Lib/Camera_Middleware/cmw_utils.c ****   else
   64:Lib/Camera_Middleware/cmw_utils.c ****   {
   65:Lib/Camera_Middleware/cmw_utils.c ****     CMW_UTILS_get_crop_config_from_manual(&p_conf->manual_conf, crop);
+ 163              		.loc 1 65 5
+ 164 00ec 7B68     		ldr	r3, [r7, #4]
+ARM GAS  /tmp/ccDLW83P.s 			page 5
+
+
+ 165 00ee 1C33     		adds	r3, r3, #28
+ 166 00f0 3968     		ldr	r1, [r7]
+ 167 00f2 1846     		mov	r0, r3
+ 168 00f4 FFF7FEFF 		bl	CMW_UTILS_get_crop_config_from_manual
   66:Lib/Camera_Middleware/cmw_utils.c ****     ratio_width = (float)crop->HSize / p_conf->output_width;
+ 169              		.loc 1 66 30
+ 170 00f8 3B68     		ldr	r3, [r7]
+ 171 00fa DB68     		ldr	r3, [r3, #12]
+ 172              		.loc 1 66 19
+ 173 00fc 07EE903A 		vmov	s15, r3	@ int
+ 174 0100 F8EE676A 		vcvt.f32.u32	s13, s15
+ 175              		.loc 1 66 46
+ 176 0104 7B68     		ldr	r3, [r7, #4]
+ 177 0106 1B68     		ldr	r3, [r3]
+ 178              		.loc 1 66 38
+ 179 0108 07EE903A 		vmov	s15, r3	@ int
+ 180 010c B8EE677A 		vcvt.f32.u32	s14, s15
+ 181              		.loc 1 66 17
+ 182 0110 C6EE877A 		vdiv.f32	s15, s13, s14
+ 183 0114 C7ED047A 		vstr.32	s15, [r7, #16]
   67:Lib/Camera_Middleware/cmw_utils.c ****     ratio_height = (float)crop->VSize / p_conf->output_height;
+ 184              		.loc 1 67 31
+ 185 0118 3B68     		ldr	r3, [r7]
+ 186 011a 9B68     		ldr	r3, [r3, #8]
+ 187              		.loc 1 67 20
+ 188 011c 07EE903A 		vmov	s15, r3	@ int
+ 189 0120 F8EE676A 		vcvt.f32.u32	s13, s15
+ 190              		.loc 1 67 47
+ 191 0124 7B68     		ldr	r3, [r7, #4]
+ 192 0126 5B68     		ldr	r3, [r3, #4]
+ 193              		.loc 1 67 39
+ 194 0128 07EE903A 		vmov	s15, r3	@ int
+ 195 012c B8EE677A 		vcvt.f32.u32	s14, s15
+ 196              		.loc 1 67 18
+ 197 0130 C6EE877A 		vdiv.f32	s15, s13, s14
+ 198 0134 C7ED057A 		vstr.32	s15, [r7, #20]
+ 199              	.L3:
   68:Lib/Camera_Middleware/cmw_utils.c ****   }
   69:Lib/Camera_Middleware/cmw_utils.c **** 
   70:Lib/Camera_Middleware/cmw_utils.c ****   CMW_UTILS_get_scale_configs(p_conf, ratio_width, ratio_height, dec, down);
+ 200              		.loc 1 70 3
+ 201 0138 7A6A     		ldr	r2, [r7, #36]
+ 202 013a 396A     		ldr	r1, [r7, #32]
+ 203 013c D7ED050A 		vldr.32	s1, [r7, #20]
+ 204 0140 97ED040A 		vldr.32	s0, [r7, #16]
+ 205 0144 7868     		ldr	r0, [r7, #4]
+ 206 0146 FFF7FEFF 		bl	CMW_UTILS_get_scale_configs
   71:Lib/Camera_Middleware/cmw_utils.c **** }
+ 207              		.loc 1 71 1
+ 208 014a 00BF     		nop
+ 209 014c 1837     		adds	r7, r7, #24
+ 210              		.cfi_def_cfa_offset 8
+ 211 014e BD46     		mov	sp, r7
+ 212              		.cfi_def_cfa_register 13
+ 213              		@ sp needed
+ 214 0150 80BD     		pop	{r7, pc}
+ 215              		.cfi_endproc
+ARM GAS  /tmp/ccDLW83P.s 			page 6
+
+
+ 216              	.LFE838:
+ 218              		.section	.rodata
+ 219              		.align	2
+ 220              	.LC0:
+ 221 0000 72617469 		.ascii	"ratio >= 1\000"
+ 221      6F203E3D 
+ 221      203100
+ 222 000b 00       		.align	2
+ 223              	.LC1:
+ 224 000c 4C69622F 		.ascii	"Lib/Camera_Middleware/cmw_utils.c\000"
+ 224      43616D65 
+ 224      72615F4D 
+ 224      6964646C 
+ 224      65776172 
+ 225 002e 0000     		.align	2
+ 226              	.LC2:
+ 227 0030 72617469 		.ascii	"ratio < 64\000"
+ 227      6F203C20 
+ 227      363400
+ 228              		.section	.text.CMW_UTILS_get_crop_config,"ax",%progbits
+ 229              		.align	1
+ 230              		.syntax unified
+ 231              		.thumb
+ 232              		.thumb_func
+ 234              	CMW_UTILS_get_crop_config:
+ 235              	.LFB839:
   72:Lib/Camera_Middleware/cmw_utils.c **** 
   73:Lib/Camera_Middleware/cmw_utils.c **** static void CMW_UTILS_get_crop_config(uint32_t cam_width, uint32_t cam_height, uint32_t pipe_width,
-ARM GAS  /tmp/ccycsPNH.s 			page 3
-
-
   74:Lib/Camera_Middleware/cmw_utils.c **** {
+ 236              		.loc 1 74 1
+ 237              		.cfi_startproc
+ 238              		@ args = 4, pretend = 0, frame = 32
+ 239              		@ frame_needed = 1, uses_anonymous_args = 0
+ 240 0000 80B5     		push	{r7, lr}
+ 241              		.cfi_def_cfa_offset 8
+ 242              		.cfi_offset 7, -8
+ 243              		.cfi_offset 14, -4
+ 244 0002 88B0     		sub	sp, sp, #32
+ 245              		.cfi_def_cfa_offset 40
+ 246 0004 00AF     		add	r7, sp, #0
+ 247              		.cfi_def_cfa_register 7
+ 248 0006 F860     		str	r0, [r7, #12]
+ 249 0008 B960     		str	r1, [r7, #8]
+ 250 000a 7A60     		str	r2, [r7, #4]
+ 251 000c 3B60     		str	r3, [r7]
   75:Lib/Camera_Middleware/cmw_utils.c ****   const float ratio_width = (float)cam_width / pipe_width ;
+ 252              		.loc 1 75 29
+ 253 000e FB68     		ldr	r3, [r7, #12]
+ 254 0010 07EE903A 		vmov	s15, r3	@ int
+ 255 0014 F8EE676A 		vcvt.f32.u32	s13, s15
+ 256              		.loc 1 75 46
+ 257 0018 7B68     		ldr	r3, [r7, #4]
+ 258 001a 07EE903A 		vmov	s15, r3	@ int
+ 259 001e B8EE677A 		vcvt.f32.u32	s14, s15
+ 260              		.loc 1 75 15
+ 261 0022 C6EE877A 		vdiv.f32	s15, s13, s14
+ 262 0026 C7ED077A 		vstr.32	s15, [r7, #28]
+ARM GAS  /tmp/ccDLW83P.s 			page 7
+
+
   76:Lib/Camera_Middleware/cmw_utils.c ****   const float ratio_height = (float)cam_height / pipe_height;
+ 263              		.loc 1 76 30
+ 264 002a BB68     		ldr	r3, [r7, #8]
+ 265 002c 07EE903A 		vmov	s15, r3	@ int
+ 266 0030 F8EE676A 		vcvt.f32.u32	s13, s15
+ 267              		.loc 1 76 48
+ 268 0034 3B68     		ldr	r3, [r7]
+ 269 0036 07EE903A 		vmov	s15, r3	@ int
+ 270 003a B8EE677A 		vcvt.f32.u32	s14, s15
+ 271              		.loc 1 76 15
+ 272 003e C6EE877A 		vdiv.f32	s15, s13, s14
+ 273 0042 C7ED067A 		vstr.32	s15, [r7, #24]
   77:Lib/Camera_Middleware/cmw_utils.c ****   const float ratio = MIN(ratio_width, ratio_height);
+ 274              		.loc 1 77 23
+ 275 0046 97ED077A 		vldr.32	s14, [r7, #28]
+ 276 004a D7ED067A 		vldr.32	s15, [r7, #24]
+ 277 004e B4EEE77A 		vcmpe.f32	s14, s15
+ 278 0052 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 279 0056 01D5     		bpl	.L21
+ 280              		.loc 1 77 23 is_stmt 0 discriminator 1
+ 281 0058 FB69     		ldr	r3, [r7, #28]	@ float
+ 282 005a 00E0     		b	.L9
+ 283              	.L21:
+ 284              		.loc 1 77 23 discriminator 2
+ 285 005c BB69     		ldr	r3, [r7, #24]	@ float
+ 286              	.L9:
+ 287              		.loc 1 77 15 is_stmt 1 discriminator 4
+ 288 005e 7B61     		str	r3, [r7, #20]	@ float
   78:Lib/Camera_Middleware/cmw_utils.c **** 
   79:Lib/Camera_Middleware/cmw_utils.c ****   assert(ratio >= 1);
+ 289              		.loc 1 79 3
+ 290 0060 D7ED057A 		vldr.32	s15, [r7, #20]
+ 291 0064 B7EE007A 		vmov.f32	s14, #1.0e+0
+ 292 0068 F4EEC77A 		vcmpe.f32	s15, s14
+ 293 006c F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 294 0070 05DA     		bge	.L10
+ 295              		.loc 1 79 3 is_stmt 0 discriminator 1
+ 296 0072 3F4B     		ldr	r3, .L24
+ 297 0074 3F4A     		ldr	r2, .L24+4
+ 298 0076 4F21     		movs	r1, #79
+ 299 0078 3F48     		ldr	r0, .L24+8
+ 300 007a FFF7FEFF 		bl	__assert_func
+ 301              	.L10:
   80:Lib/Camera_Middleware/cmw_utils.c ****   assert(ratio < 64);
+ 302              		.loc 1 80 3 is_stmt 1
+ 303 007e D7ED057A 		vldr.32	s15, [r7, #20]
+ 304 0082 9FED3E7A 		vldr.32	s14, .L24+12
+ 305 0086 F4EEC77A 		vcmpe.f32	s15, s14
+ 306 008a F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 307 008e 05D4     		bmi	.L11
+ 308              		.loc 1 80 3 is_stmt 0 discriminator 1
+ 309 0090 3B4B     		ldr	r3, .L24+16
+ 310 0092 384A     		ldr	r2, .L24+4
+ 311 0094 5021     		movs	r1, #80
+ 312 0096 3848     		ldr	r0, .L24+8
+ 313 0098 FFF7FEFF 		bl	__assert_func
+ 314              	.L11:
+ARM GAS  /tmp/ccDLW83P.s 			page 8
+
+
   81:Lib/Camera_Middleware/cmw_utils.c **** 
   82:Lib/Camera_Middleware/cmw_utils.c ****   crop->HSize = (uint32_t) MIN(pipe_width * ratio, cam_width);
+ 315              		.loc 1 82 28 is_stmt 1
+ 316 009c 7B68     		ldr	r3, [r7, #4]
+ 317 009e 07EE903A 		vmov	s15, r3	@ int
+ 318 00a2 B8EE677A 		vcvt.f32.u32	s14, s15
+ 319 00a6 D7ED057A 		vldr.32	s15, [r7, #20]
+ 320 00aa 27EE277A 		vmul.f32	s14, s14, s15
+ 321 00ae FB68     		ldr	r3, [r7, #12]
+ 322 00b0 07EE903A 		vmov	s15, r3	@ int
+ 323 00b4 F8EE677A 		vcvt.f32.u32	s15, s15
+ 324              		.loc 1 82 17
+ 325 00b8 B4EEE77A 		vcmpe.f32	s14, s15
+ 326 00bc F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 327 00c0 0BD5     		bpl	.L22
+ 328              		.loc 1 82 28 discriminator 1
+ 329 00c2 7B68     		ldr	r3, [r7, #4]
+ 330 00c4 07EE903A 		vmov	s15, r3	@ int
+ 331 00c8 B8EE677A 		vcvt.f32.u32	s14, s15
+ 332 00cc D7ED057A 		vldr.32	s15, [r7, #20]
+ 333 00d0 67EE277A 		vmul.f32	s15, s14, s15
+ 334              		.loc 1 82 17 discriminator 1
+ 335 00d4 FCEEE77A 		vcvt.u32.f32	s15, s15
+ 336 00d8 06E0     		b	.L14
+ 337              	.L22:
+ 338              		.loc 1 82 17 is_stmt 0 discriminator 2
+ 339 00da FB68     		ldr	r3, [r7, #12]
+ 340 00dc 07EE903A 		vmov	s15, r3	@ int
+ 341 00e0 F8EE677A 		vcvt.f32.u32	s15, s15
+ 342 00e4 FCEEE77A 		vcvt.u32.f32	s15, s15
+ 343              	.L14:
+ 344              		.loc 1 82 15 is_stmt 1 discriminator 4
+ 345 00e8 BB6A     		ldr	r3, [r7, #40]
+ 346 00ea C3ED037A 		vstr.32	s15, [r3, #12]	@ int
   83:Lib/Camera_Middleware/cmw_utils.c ****   crop->VSize = (uint32_t) MIN(pipe_height * ratio, cam_height);
+ 347              		.loc 1 83 28
+ 348 00ee 3B68     		ldr	r3, [r7]
+ 349 00f0 07EE903A 		vmov	s15, r3	@ int
+ 350 00f4 B8EE677A 		vcvt.f32.u32	s14, s15
+ 351 00f8 D7ED057A 		vldr.32	s15, [r7, #20]
+ 352 00fc 27EE277A 		vmul.f32	s14, s14, s15
+ 353 0100 BB68     		ldr	r3, [r7, #8]
+ 354 0102 07EE903A 		vmov	s15, r3	@ int
+ 355 0106 F8EE677A 		vcvt.f32.u32	s15, s15
+ 356              		.loc 1 83 17
+ 357 010a B4EEE77A 		vcmpe.f32	s14, s15
+ 358 010e F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 359 0112 0BD5     		bpl	.L23
+ 360              		.loc 1 83 28 discriminator 1
+ 361 0114 3B68     		ldr	r3, [r7]
+ 362 0116 07EE903A 		vmov	s15, r3	@ int
+ 363 011a B8EE677A 		vcvt.f32.u32	s14, s15
+ 364 011e D7ED057A 		vldr.32	s15, [r7, #20]
+ 365 0122 67EE277A 		vmul.f32	s15, s14, s15
+ 366              		.loc 1 83 17 discriminator 1
+ 367 0126 FCEEE77A 		vcvt.u32.f32	s15, s15
+ 368 012a 06E0     		b	.L17
+ARM GAS  /tmp/ccDLW83P.s 			page 9
+
+
+ 369              	.L23:
+ 370              		.loc 1 83 17 is_stmt 0 discriminator 2
+ 371 012c BB68     		ldr	r3, [r7, #8]
+ 372 012e 07EE903A 		vmov	s15, r3	@ int
+ 373 0132 F8EE677A 		vcvt.f32.u32	s15, s15
+ 374 0136 FCEEE77A 		vcvt.u32.f32	s15, s15
+ 375              	.L17:
+ 376              		.loc 1 83 15 is_stmt 1 discriminator 4
+ 377 013a BB6A     		ldr	r3, [r7, #40]
+ 378 013c C3ED027A 		vstr.32	s15, [r3, #8]	@ int
   84:Lib/Camera_Middleware/cmw_utils.c ****   crop->HStart = (cam_width - crop->HSize + 1) / 2;
+ 379              		.loc 1 84 35
+ 380 0140 BB6A     		ldr	r3, [r7, #40]
+ 381 0142 DB68     		ldr	r3, [r3, #12]
+ 382              		.loc 1 84 29
+ 383 0144 FA68     		ldr	r2, [r7, #12]
+ 384 0146 D31A     		subs	r3, r2, r3
+ 385              		.loc 1 84 43
+ 386 0148 0133     		adds	r3, r3, #1
+ 387              		.loc 1 84 48
+ 388 014a 5A08     		lsrs	r2, r3, #1
+ 389              		.loc 1 84 16
+ 390 014c BB6A     		ldr	r3, [r7, #40]
+ 391 014e 5A60     		str	r2, [r3, #4]
   85:Lib/Camera_Middleware/cmw_utils.c ****   crop->VStart = (cam_height - crop->VSize + 1) / 2;
+ 392              		.loc 1 85 36
+ 393 0150 BB6A     		ldr	r3, [r7, #40]
+ 394 0152 9B68     		ldr	r3, [r3, #8]
+ 395              		.loc 1 85 30
+ 396 0154 BA68     		ldr	r2, [r7, #8]
+ 397 0156 D31A     		subs	r3, r2, r3
+ 398              		.loc 1 85 44
+ 399 0158 0133     		adds	r3, r3, #1
+ 400              		.loc 1 85 49
+ 401 015a 5A08     		lsrs	r2, r3, #1
+ 402              		.loc 1 85 16
+ 403 015c BB6A     		ldr	r3, [r7, #40]
+ 404 015e 1A60     		str	r2, [r3]
   86:Lib/Camera_Middleware/cmw_utils.c ****   crop->PipeArea = DCMIPP_POSITIVE_AREA;
+ 405              		.loc 1 86 18
+ 406 0160 BB6A     		ldr	r3, [r7, #40]
+ 407 0162 0022     		movs	r2, #0
+ 408 0164 1A61     		str	r2, [r3, #16]
   87:Lib/Camera_Middleware/cmw_utils.c **** }
+ 409              		.loc 1 87 1
+ 410 0166 00BF     		nop
+ 411 0168 2037     		adds	r7, r7, #32
+ 412              		.cfi_def_cfa_offset 8
+ 413 016a BD46     		mov	sp, r7
+ 414              		.cfi_def_cfa_register 13
+ 415              		@ sp needed
+ 416 016c 80BD     		pop	{r7, pc}
+ 417              	.L25:
+ 418 016e 00BF     		.align	2
+ 419              	.L24:
+ 420 0170 00000000 		.word	.LC0
+ 421 0174 00000000 		.word	__func__.1
+ARM GAS  /tmp/ccDLW83P.s 			page 10
+
+
+ 422 0178 0C000000 		.word	.LC1
+ 423 017c 00008042 		.word	1115684864
+ 424 0180 30000000 		.word	.LC2
+ 425              		.cfi_endproc
+ 426              	.LFE839:
+ 428              		.section	.text.CMW_UTILS_get_crop_config_from_manual,"ax",%progbits
+ 429              		.align	1
+ 430              		.syntax unified
+ 431              		.thumb
+ 432              		.thumb_func
+ 434              	CMW_UTILS_get_crop_config_from_manual:
+ 435              	.LFB840:
   88:Lib/Camera_Middleware/cmw_utils.c **** 
   89:Lib/Camera_Middleware/cmw_utils.c **** static void CMW_UTILS_get_crop_config_from_manual(CMW_Manual_roi_area_t *roi, DCMIPP_CropConfTypeDe
   90:Lib/Camera_Middleware/cmw_utils.c **** {
+ 436              		.loc 1 90 1
+ 437              		.cfi_startproc
+ 438              		@ args = 0, pretend = 0, frame = 8
+ 439              		@ frame_needed = 1, uses_anonymous_args = 0
+ 440              		@ link register save eliminated.
+ 441 0000 80B4     		push	{r7}
+ 442              		.cfi_def_cfa_offset 4
+ 443              		.cfi_offset 7, -4
+ 444 0002 83B0     		sub	sp, sp, #12
+ 445              		.cfi_def_cfa_offset 16
+ 446 0004 00AF     		add	r7, sp, #0
+ 447              		.cfi_def_cfa_register 7
+ 448 0006 7860     		str	r0, [r7, #4]
+ 449 0008 3960     		str	r1, [r7]
   91:Lib/Camera_Middleware/cmw_utils.c ****   crop->HSize = roi->width;
+ 450              		.loc 1 91 20
+ 451 000a 7B68     		ldr	r3, [r7, #4]
+ 452 000c 1A68     		ldr	r2, [r3]
+ 453              		.loc 1 91 15
+ 454 000e 3B68     		ldr	r3, [r7]
+ 455 0010 DA60     		str	r2, [r3, #12]
   92:Lib/Camera_Middleware/cmw_utils.c ****   crop->VSize = roi->height;
+ 456              		.loc 1 92 20
+ 457 0012 7B68     		ldr	r3, [r7, #4]
+ 458 0014 5A68     		ldr	r2, [r3, #4]
+ 459              		.loc 1 92 15
+ 460 0016 3B68     		ldr	r3, [r7]
+ 461 0018 9A60     		str	r2, [r3, #8]
   93:Lib/Camera_Middleware/cmw_utils.c ****   crop->HStart = roi->offset_x;
+ 462              		.loc 1 93 21
+ 463 001a 7B68     		ldr	r3, [r7, #4]
+ 464 001c 9A68     		ldr	r2, [r3, #8]
+ 465              		.loc 1 93 16
+ 466 001e 3B68     		ldr	r3, [r7]
+ 467 0020 5A60     		str	r2, [r3, #4]
   94:Lib/Camera_Middleware/cmw_utils.c ****   crop->VStart = roi->offset_y;
+ 468              		.loc 1 94 21
+ 469 0022 7B68     		ldr	r3, [r7, #4]
+ 470 0024 DA68     		ldr	r2, [r3, #12]
+ 471              		.loc 1 94 16
+ 472 0026 3B68     		ldr	r3, [r7]
+ 473 0028 1A60     		str	r2, [r3]
+ARM GAS  /tmp/ccDLW83P.s 			page 11
+
+
   95:Lib/Camera_Middleware/cmw_utils.c **** }
+ 474              		.loc 1 95 1
+ 475 002a 00BF     		nop
+ 476 002c 0C37     		adds	r7, r7, #12
+ 477              		.cfi_def_cfa_offset 4
+ 478 002e BD46     		mov	sp, r7
+ 479              		.cfi_def_cfa_register 13
+ 480              		@ sp needed
+ 481 0030 5DF8047B 		ldr	r7, [sp], #4
+ 482              		.cfi_restore 7
+ 483              		.cfi_def_cfa_offset 0
+ 484 0034 7047     		bx	lr
+ 485              		.cfi_endproc
+ 486              	.LFE840:
+ 488              		.section	.text.CMW_UTILS_get_down_config,"ax",%progbits
+ 489              		.align	1
+ 490              		.syntax unified
+ 491              		.thumb
+ 492              		.thumb_func
+ 494              	CMW_UTILS_get_down_config:
+ 495              	.LFB841:
   96:Lib/Camera_Middleware/cmw_utils.c **** 
   97:Lib/Camera_Middleware/cmw_utils.c **** static void CMW_UTILS_get_down_config(float ratio_width, float ratio_height, int width, int height,
   98:Lib/Camera_Middleware/cmw_utils.c **** {
+ 496              		.loc 1 98 1
+ 497              		.cfi_startproc
+ 498              		@ args = 0, pretend = 0, frame = 24
+ 499              		@ frame_needed = 1, uses_anonymous_args = 0
+ 500              		@ link register save eliminated.
+ 501 0000 80B4     		push	{r7}
+ 502              		.cfi_def_cfa_offset 4
+ 503              		.cfi_offset 7, -4
+ 504 0002 87B0     		sub	sp, sp, #28
+ 505              		.cfi_def_cfa_offset 32
+ 506 0004 00AF     		add	r7, sp, #0
+ 507              		.cfi_def_cfa_register 7
+ 508 0006 87ED050A 		vstr.32	s0, [r7, #20]
+ 509 000a C7ED040A 		vstr.32	s1, [r7, #16]
+ 510 000e F860     		str	r0, [r7, #12]
+ 511 0010 B960     		str	r1, [r7, #8]
+ 512 0012 7A60     		str	r2, [r7, #4]
   99:Lib/Camera_Middleware/cmw_utils.c ****   down->HRatio = (uint32_t) (8192 * ratio_width);
+ 513              		.loc 1 99 35
+ 514 0014 D7ED057A 		vldr.32	s15, [r7, #20]
+ 515 0018 9FED177A 		vldr.32	s14, .L28
+ 516 001c 67EE877A 		vmul.f32	s15, s15, s14
+ 517              		.loc 1 99 18
+ 518 0020 FCEEE77A 		vcvt.u32.f32	s15, s15
+ 519 0024 17EE902A 		vmov	r2, s15	@ int
+ 520              		.loc 1 99 16
+ 521 0028 7B68     		ldr	r3, [r7, #4]
+ 522 002a DA60     		str	r2, [r3, #12]
  100:Lib/Camera_Middleware/cmw_utils.c ****   down->VRatio = (uint32_t) (8192 * ratio_height);
+ 523              		.loc 1 100 35
+ 524 002c D7ED047A 		vldr.32	s15, [r7, #16]
+ 525 0030 9FED117A 		vldr.32	s14, .L28
+ 526 0034 67EE877A 		vmul.f32	s15, s15, s14
+ARM GAS  /tmp/ccDLW83P.s 			page 12
+
+
+ 527              		.loc 1 100 18
+ 528 0038 FCEEE77A 		vcvt.u32.f32	s15, s15
+ 529 003c 17EE902A 		vmov	r2, s15	@ int
+ 530              		.loc 1 100 16
+ 531 0040 7B68     		ldr	r3, [r7, #4]
+ 532 0042 9A60     		str	r2, [r3, #8]
  101:Lib/Camera_Middleware/cmw_utils.c ****   down->HDivFactor = (1024 * 8192 - 1) / down->HRatio;
+ 533              		.loc 1 101 46
+ 534 0044 7B68     		ldr	r3, [r7, #4]
+ 535 0046 DB68     		ldr	r3, [r3, #12]
+ 536              		.loc 1 101 40
+ 537 0048 0C4A     		ldr	r2, .L28+4
+ 538 004a B2FBF3F2 		udiv	r2, r2, r3
+ 539              		.loc 1 101 20
+ 540 004e 7B68     		ldr	r3, [r7, #4]
+ 541 0050 5A61     		str	r2, [r3, #20]
  102:Lib/Camera_Middleware/cmw_utils.c ****   down->VDivFactor = (1024 * 8192 - 1) / down->VRatio;
+ 542              		.loc 1 102 46
+ 543 0052 7B68     		ldr	r3, [r7, #4]
+ 544 0054 9B68     		ldr	r3, [r3, #8]
+ 545              		.loc 1 102 40
+ 546 0056 094A     		ldr	r2, .L28+4
+ 547 0058 B2FBF3F2 		udiv	r2, r2, r3
+ 548              		.loc 1 102 20
+ 549 005c 7B68     		ldr	r3, [r7, #4]
+ 550 005e 1A61     		str	r2, [r3, #16]
  103:Lib/Camera_Middleware/cmw_utils.c ****   down->HSize = width;
+ 551              		.loc 1 103 15
+ 552 0060 FA68     		ldr	r2, [r7, #12]
+ 553 0062 7B68     		ldr	r3, [r7, #4]
+ 554 0064 5A60     		str	r2, [r3, #4]
  104:Lib/Camera_Middleware/cmw_utils.c ****   down->VSize = height;
+ 555              		.loc 1 104 15
+ 556 0066 BA68     		ldr	r2, [r7, #8]
+ 557 0068 7B68     		ldr	r3, [r7, #4]
+ 558 006a 1A60     		str	r2, [r3]
  105:Lib/Camera_Middleware/cmw_utils.c **** }
+ 559              		.loc 1 105 1
+ 560 006c 00BF     		nop
+ 561 006e 1C37     		adds	r7, r7, #28
+ 562              		.cfi_def_cfa_offset 4
+ 563 0070 BD46     		mov	sp, r7
+ 564              		.cfi_def_cfa_register 13
+ 565              		@ sp needed
+ 566 0072 5DF8047B 		ldr	r7, [sp], #4
+ 567              		.cfi_restore 7
+ 568              		.cfi_def_cfa_offset 0
+ 569 0076 7047     		bx	lr
+ 570              	.L29:
+ 571              		.align	2
+ 572              	.L28:
+ 573 0078 00000046 		.word	1174405120
+ 574 007c FFFF7F00 		.word	8388607
+ 575              		.cfi_endproc
+ 576              	.LFE841:
+ 578              		.section	.rodata
+ 579 003b 00       		.align	2
+ARM GAS  /tmp/ccDLW83P.s 			page 13
+
+
+ 580              	.LC3:
+ 581 003c 3000     		.ascii	"0\000"
+ 582              		.section	.text.CMW_UTILS_get_dec_ratio_from_decimal_ratio,"ax",%progbits
+ 583              		.align	1
+ 584              		.syntax unified
+ 585              		.thumb
+ 586              		.thumb_func
+ 588              	CMW_UTILS_get_dec_ratio_from_decimal_ratio:
+ 589              	.LFB842:
  106:Lib/Camera_Middleware/cmw_utils.c **** 
  107:Lib/Camera_Middleware/cmw_utils.c **** static uint32_t CMW_UTILS_get_dec_ratio_from_decimal_ratio(int dec_ratio, int is_vertical)
  108:Lib/Camera_Middleware/cmw_utils.c **** {
+ 590              		.loc 1 108 1
+ 591              		.cfi_startproc
+ 592              		@ args = 0, pretend = 0, frame = 8
+ 593              		@ frame_needed = 1, uses_anonymous_args = 0
+ 594 0000 80B5     		push	{r7, lr}
+ 595              		.cfi_def_cfa_offset 8
+ 596              		.cfi_offset 7, -8
+ 597              		.cfi_offset 14, -4
+ 598 0002 82B0     		sub	sp, sp, #8
+ 599              		.cfi_def_cfa_offset 16
+ 600 0004 00AF     		add	r7, sp, #0
+ 601              		.cfi_def_cfa_register 7
+ 602 0006 7860     		str	r0, [r7, #4]
+ 603 0008 3960     		str	r1, [r7]
  109:Lib/Camera_Middleware/cmw_utils.c ****   switch (dec_ratio) {
+ 604              		.loc 1 109 3
+ 605 000a 7B68     		ldr	r3, [r7, #4]
+ 606 000c 013B     		subs	r3, r3, #1
+ 607 000e 072B     		cmp	r3, #7
+ 608 0010 29D8     		bhi	.L31
+ 609 0012 01A2     		adr	r2, .L33
+ 610 0014 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 611              		.p2align 2
+ 612              	.L33:
+ 613 0018 39000000 		.word	.L36+1
+ 614 001c 3D000000 		.word	.L35+1
+ 615 0020 67000000 		.word	.L31+1
+ 616 0024 4B000000 		.word	.L34+1
+ 617 0028 67000000 		.word	.L31+1
+ 618 002c 67000000 		.word	.L31+1
+ 619 0030 67000000 		.word	.L31+1
+ 620 0034 59000000 		.word	.L32+1
+ 621              		.p2align 1
+ 622              	.L36:
  110:Lib/Camera_Middleware/cmw_utils.c ****   case 1:
  111:Lib/Camera_Middleware/cmw_utils.c ****     return is_vertical ? DCMIPP_VDEC_ALL : DCMIPP_HDEC_ALL;
+ 623              		.loc 1 111 42
+ 624 0038 0023     		movs	r3, #0
+ 625 003a 1AE0     		b	.L37
+ 626              	.L35:
  112:Lib/Camera_Middleware/cmw_utils.c ****   case 2:
  113:Lib/Camera_Middleware/cmw_utils.c ****     return is_vertical ? DCMIPP_VDEC_1_OUT_2 : DCMIPP_HDEC_1_OUT_2;
+ 627              		.loc 1 113 46
+ 628 003c 3B68     		ldr	r3, [r7]
+ 629 003e 002B     		cmp	r3, #0
+ARM GAS  /tmp/ccDLW83P.s 			page 14
+
+
+ 630 0040 01D0     		beq	.L38
+ 631              		.loc 1 113 46 is_stmt 0 discriminator 1
+ 632 0042 0823     		movs	r3, #8
+ 633              		.loc 1 113 46
+ 634 0044 15E0     		b	.L37
+ 635              	.L38:
+ 636              		.loc 1 113 46 discriminator 2
+ 637 0046 0223     		movs	r3, #2
+ 638              		.loc 1 113 46
+ 639 0048 13E0     		b	.L37
+ 640              	.L34:
  114:Lib/Camera_Middleware/cmw_utils.c ****   case 4:
  115:Lib/Camera_Middleware/cmw_utils.c ****     return is_vertical ? DCMIPP_VDEC_1_OUT_4 : DCMIPP_HDEC_1_OUT_4;
+ 641              		.loc 1 115 46 is_stmt 1
+ 642 004a 3B68     		ldr	r3, [r7]
+ 643 004c 002B     		cmp	r3, #0
+ 644 004e 01D0     		beq	.L40
+ 645              		.loc 1 115 46 is_stmt 0 discriminator 1
+ 646 0050 1023     		movs	r3, #16
+ 647              		.loc 1 115 46
+ 648 0052 0EE0     		b	.L37
+ 649              	.L40:
+ 650              		.loc 1 115 46 discriminator 2
+ 651 0054 0423     		movs	r3, #4
+ 652              		.loc 1 115 46
+ 653 0056 0CE0     		b	.L37
+ 654              	.L32:
  116:Lib/Camera_Middleware/cmw_utils.c ****   case 8:
  117:Lib/Camera_Middleware/cmw_utils.c ****     return is_vertical ? DCMIPP_VDEC_1_OUT_8 : DCMIPP_HDEC_1_OUT_8;
+ 655              		.loc 1 117 46 is_stmt 1
+ 656 0058 3B68     		ldr	r3, [r7]
+ 657 005a 002B     		cmp	r3, #0
+ 658 005c 01D0     		beq	.L42
+ 659              		.loc 1 117 46 is_stmt 0 discriminator 1
+ 660 005e 1823     		movs	r3, #24
+ 661              		.loc 1 117 46
+ 662 0060 07E0     		b	.L37
+ 663              	.L42:
+ 664              		.loc 1 117 46 discriminator 2
+ 665 0062 0623     		movs	r3, #6
+ 666              		.loc 1 117 46
+ 667 0064 05E0     		b	.L37
+ 668              	.L31:
  118:Lib/Camera_Middleware/cmw_utils.c ****   default:
  119:Lib/Camera_Middleware/cmw_utils.c ****     assert(0);
+ 669              		.loc 1 119 5 is_stmt 1
+ 670 0066 054B     		ldr	r3, .L44
+ 671 0068 054A     		ldr	r2, .L44+4
+ 672 006a 7721     		movs	r1, #119
+ 673 006c 0548     		ldr	r0, .L44+8
+ 674 006e FFF7FEFF 		bl	__assert_func
+ 675              	.L37:
  120:Lib/Camera_Middleware/cmw_utils.c ****   }
  121:Lib/Camera_Middleware/cmw_utils.c **** 
  122:Lib/Camera_Middleware/cmw_utils.c ****   return is_vertical ? DCMIPP_VDEC_ALL : DCMIPP_HDEC_ALL;
  123:Lib/Camera_Middleware/cmw_utils.c **** }
+ 676              		.loc 1 123 1
+ARM GAS  /tmp/ccDLW83P.s 			page 15
+
+
+ 677 0072 1846     		mov	r0, r3
+ 678 0074 0837     		adds	r7, r7, #8
+ 679              		.cfi_def_cfa_offset 8
+ 680 0076 BD46     		mov	sp, r7
+ 681              		.cfi_def_cfa_register 13
+ 682              		@ sp needed
+ 683 0078 80BD     		pop	{r7, pc}
+ 684              	.L45:
+ 685 007a 00BF     		.align	2
+ 686              	.L44:
+ 687 007c 3C000000 		.word	.LC3
+ 688 0080 00000000 		.word	__func__.0
+ 689 0084 0C000000 		.word	.LC1
+ 690              		.cfi_endproc
+ 691              	.LFE842:
+ 693              		.section	.text.CMW_UTILS_get_dec_ratio_and_update,"ax",%progbits
+ 694              		.align	1
+ 695              		.syntax unified
+ 696              		.thumb
+ 697              		.thumb_func
+ 699              	CMW_UTILS_get_dec_ratio_and_update:
+ 700              	.LFB843:
  124:Lib/Camera_Middleware/cmw_utils.c **** 
  125:Lib/Camera_Middleware/cmw_utils.c **** static uint32_t CMW_UTILS_get_dec_ratio_and_update(float *ratio, int is_vertical)
  126:Lib/Camera_Middleware/cmw_utils.c **** {
-  39              		.loc 1 126 1 view -0
-  40              		.cfi_startproc
-  41              		@ args = 0, pretend = 0, frame = 0
-  42              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /tmp/ccycsPNH.s 			page 4
-
-
+ 701              		.loc 1 126 1
+ 702              		.cfi_startproc
+ 703              		@ args = 0, pretend = 0, frame = 16
+ 704              		@ frame_needed = 1, uses_anonymous_args = 0
+ 705 0000 80B5     		push	{r7, lr}
+ 706              		.cfi_def_cfa_offset 8
+ 707              		.cfi_offset 7, -8
+ 708              		.cfi_offset 14, -4
+ 709 0002 84B0     		sub	sp, sp, #16
+ 710              		.cfi_def_cfa_offset 24
+ 711 0004 00AF     		add	r7, sp, #0
+ 712              		.cfi_def_cfa_register 7
+ 713 0006 7860     		str	r0, [r7, #4]
+ 714 0008 3960     		str	r1, [r7]
  127:Lib/Camera_Middleware/cmw_utils.c ****   int dec_ratio = 1;
-  43              		.loc 1 127 3 view .LVU1
+ 715              		.loc 1 127 7
+ 716 000a 0123     		movs	r3, #1
+ 717 000c FB60     		str	r3, [r7, #12]
  128:Lib/Camera_Middleware/cmw_utils.c **** 
  129:Lib/Camera_Middleware/cmw_utils.c ****   while (*ratio >= 8) {
-  44              		.loc 1 129 3 view .LVU2
- 126:Lib/Camera_Middleware/cmw_utils.c ****   int dec_ratio = 1;
-  45              		.loc 1 126 1 is_stmt 0 view .LVU3
-  46 0000 08B5     		push	{r3, lr}
-  47              		.cfi_def_cfa_offset 8
-  48              		.cfi_offset 3, -8
-  49              		.cfi_offset 14, -4
-  50              		.loc 1 129 17 view .LVU4
-  51 0002 B2EE007A 		vmov.f32	s14, #8.0e+0
- 127:Lib/Camera_Middleware/cmw_utils.c ****   int dec_ratio = 1;
-  52              		.loc 1 127 7 view .LVU5
-  53 0006 0123     		movs	r3, #1
+ 718              		.loc 1 129 9
+ 719 000e 0CE0     		b	.L47
+ 720              	.L48:
  130:Lib/Camera_Middleware/cmw_utils.c ****     dec_ratio *= 2;
+ 721              		.loc 1 130 15
+ 722 0010 FB68     		ldr	r3, [r7, #12]
+ 723 0012 5B00     		lsls	r3, r3, #1
+ 724 0014 FB60     		str	r3, [r7, #12]
  131:Lib/Camera_Middleware/cmw_utils.c ****     *ratio /= 2;
-  54              		.loc 1 131 12 view .LVU6
-  55 0008 F6EE006A 		vmov.f32	s13, #5.0e-1
-  56              	.LVL1:
-  57              	.L2:
+ 725              		.loc 1 131 5
+ 726 0016 7B68     		ldr	r3, [r7, #4]
+ 727 0018 93ED007A 		vldr.32	s14, [r3]
+ARM GAS  /tmp/ccDLW83P.s 			page 16
+
+
+ 728              		.loc 1 131 12
+ 729 001c F0EE006A 		vmov.f32	s13, #2.0e+0
+ 730 0020 C7EE267A 		vdiv.f32	s15, s14, s13
+ 731 0024 7B68     		ldr	r3, [r7, #4]
+ 732 0026 C3ED007A 		vstr.32	s15, [r3]
+ 733              	.L47:
  129:Lib/Camera_Middleware/cmw_utils.c ****     dec_ratio *= 2;
-  58              		.loc 1 129 17 is_stmt 1 view .LVU7
+ 734              		.loc 1 129 10
+ 735 002a 7B68     		ldr	r3, [r7, #4]
+ 736 002c D3ED007A 		vldr.32	s15, [r3]
  129:Lib/Camera_Middleware/cmw_utils.c ****     dec_ratio *= 2;
-  59              		.loc 1 129 10 is_stmt 0 view .LVU8
-  60 000c D0ED007A 		vldr.32	s15, [r0]
- 129:Lib/Camera_Middleware/cmw_utils.c ****     dec_ratio *= 2;
-  61              		.loc 1 129 17 view .LVU9
-  62 0010 F4EEC77A 		vcmpe.f32	s15, s14
-  63 0014 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
-  64 0018 08DA     		bge	.L3
+ 737              		.loc 1 129 17
+ 738 0030 B2EE007A 		vmov.f32	s14, #8.0e+0
+ 739 0034 F4EEC77A 		vcmpe.f32	s15, s14
+ 740 0038 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 741 003c E8DA     		bge	.L48
  132:Lib/Camera_Middleware/cmw_utils.c ****   }
  133:Lib/Camera_Middleware/cmw_utils.c **** 
  134:Lib/Camera_Middleware/cmw_utils.c ****   return CMW_UTILS_get_dec_ratio_from_decimal_ratio(dec_ratio, is_vertical);
-  65              		.loc 1 134 3 is_stmt 1 view .LVU10
-  66              	.LVL2:
-  67              	.LBB4:
-  68              	.LBI4:
- 107:Lib/Camera_Middleware/cmw_utils.c **** {
-  69              		.loc 1 107 17 view .LVU11
-  70              	.LBB5:
- 109:Lib/Camera_Middleware/cmw_utils.c ****   case 1:
-  71              		.loc 1 109 3 view .LVU12
-  72 001a 013B     		subs	r3, r3, #1
-  73              	.LVL3:
- 109:Lib/Camera_Middleware/cmw_utils.c ****   case 1:
-  74              		.loc 1 109 3 is_stmt 0 view .LVU13
-  75 001c 072B     		cmp	r3, #7
-  76 001e 1AD8     		bhi	.L4
-  77 0020 DFE803F0 		tbb	[pc, r3]
-  78              	.L6:
-  79 0024 1F       		.byte	(.L10-.L6)/2
-  80 0025 0A       		.byte	(.L8-.L6)/2
-  81 0026 19       		.byte	(.L4-.L6)/2
-  82 0027 0F       		.byte	(.L7-.L6)/2
-  83 0028 19       		.byte	(.L4-.L6)/2
-ARM GAS  /tmp/ccycsPNH.s 			page 5
-
-
-  84 0029 19       		.byte	(.L4-.L6)/2
-  85 002a 19       		.byte	(.L4-.L6)/2
-  86 002b 14       		.byte	(.L5-.L6)/2
-  87              	.LVL4:
-  88              		.p2align 1
-  89              	.L3:
- 109:Lib/Camera_Middleware/cmw_utils.c ****   case 1:
-  90              		.loc 1 109 3 view .LVU14
-  91              	.LBE5:
-  92              	.LBE4:
- 130:Lib/Camera_Middleware/cmw_utils.c ****     *ratio /= 2;
-  93              		.loc 1 130 5 is_stmt 1 view .LVU15
- 131:Lib/Camera_Middleware/cmw_utils.c ****   }
-  94              		.loc 1 131 12 is_stmt 0 view .LVU16
-  95 002c 67EEA67A 		vmul.f32	s15, s15, s13
- 130:Lib/Camera_Middleware/cmw_utils.c ****     *ratio /= 2;
-  96              		.loc 1 130 15 view .LVU17
-  97 0030 5B00     		lsls	r3, r3, #1
-  98              	.LVL5:
- 131:Lib/Camera_Middleware/cmw_utils.c ****   }
-  99              		.loc 1 131 5 is_stmt 1 view .LVU18
- 131:Lib/Camera_Middleware/cmw_utils.c ****   }
- 100              		.loc 1 131 12 is_stmt 0 view .LVU19
- 101 0032 C0ED007A 		vstr.32	s15, [r0]
- 102 0036 E9E7     		b	.L2
- 103              	.LVL6:
- 104              	.L8:
- 105              	.LBB8:
- 106              	.LBB6:
- 113:Lib/Camera_Middleware/cmw_utils.c ****   case 4:
- 107              		.loc 1 113 5 is_stmt 1 view .LVU20
- 113:Lib/Camera_Middleware/cmw_utils.c ****   case 4:
- 108              		.loc 1 113 46 is_stmt 0 discriminator 1 view .LVU21
- 109 0038 0029     		cmp	r1, #0
- 110 003a 0CBF     		ite	eq
- 111 003c 0220     		moveq	r0, #2
- 112              	.LVL7:
- 113:Lib/Camera_Middleware/cmw_utils.c ****   case 4:
- 113              		.loc 1 113 46 discriminator 1 view .LVU22
- 114 003e 0820     		movne	r0, #8
- 115              	.L1:
- 113:Lib/Camera_Middleware/cmw_utils.c ****   case 4:
- 116              		.loc 1 113 46 discriminator 1 view .LVU23
- 117              	.LBE6:
- 118              	.LBE8:
+ 742              		.loc 1 134 10
+ 743 003e 3968     		ldr	r1, [r7]
+ 744 0040 F868     		ldr	r0, [r7, #12]
+ 745 0042 FFF7FEFF 		bl	CMW_UTILS_get_dec_ratio_from_decimal_ratio
+ 746 0046 0346     		mov	r3, r0
  135:Lib/Camera_Middleware/cmw_utils.c **** }
- 119              		.loc 1 135 1 view .LVU24
- 120 0040 08BD     		pop	{r3, pc}
- 121              	.LVL8:
- 122              	.L7:
- 123              	.LBB9:
- 124              	.LBB7:
- 115:Lib/Camera_Middleware/cmw_utils.c ****   case 8:
- 125              		.loc 1 115 5 is_stmt 1 view .LVU25
- 115:Lib/Camera_Middleware/cmw_utils.c ****   case 8:
- 126              		.loc 1 115 46 is_stmt 0 discriminator 1 view .LVU26
- 127 0042 0029     		cmp	r1, #0
-ARM GAS  /tmp/ccycsPNH.s 			page 6
-
-
- 128 0044 0CBF     		ite	eq
- 129 0046 0420     		moveq	r0, #4
- 130              	.LVL9:
- 115:Lib/Camera_Middleware/cmw_utils.c ****   case 8:
- 131              		.loc 1 115 46 discriminator 1 view .LVU27
- 132 0048 1020     		movne	r0, #16
- 133 004a F9E7     		b	.L1
- 134              	.LVL10:
- 135              	.L5:
- 117:Lib/Camera_Middleware/cmw_utils.c ****   default:
- 136              		.loc 1 117 5 is_stmt 1 view .LVU28
- 117:Lib/Camera_Middleware/cmw_utils.c ****   default:
- 137              		.loc 1 117 46 is_stmt 0 discriminator 1 view .LVU29
- 138 004c 0029     		cmp	r1, #0
- 139 004e 0CBF     		ite	eq
- 140 0050 0620     		moveq	r0, #6
- 141              	.LVL11:
- 117:Lib/Camera_Middleware/cmw_utils.c ****   default:
- 142              		.loc 1 117 46 discriminator 1 view .LVU30
- 143 0052 1820     		movne	r0, #24
- 144 0054 F4E7     		b	.L1
- 145              	.LVL12:
- 146              	.L4:
- 119:Lib/Camera_Middleware/cmw_utils.c ****   }
- 147              		.loc 1 119 5 is_stmt 1 view .LVU31
- 148 0056 7721     		movs	r1, #119
- 149              	.LVL13:
- 119:Lib/Camera_Middleware/cmw_utils.c ****   }
- 150              		.loc 1 119 5 is_stmt 0 view .LVU32
- 151 0058 034B     		ldr	r3, .L14
- 152              	.LVL14:
- 119:Lib/Camera_Middleware/cmw_utils.c ****   }
- 153              		.loc 1 119 5 view .LVU33
- 154 005a 044A     		ldr	r2, .L14+4
- 155 005c 0448     		ldr	r0, .L14+8
- 156              	.LVL15:
- 119:Lib/Camera_Middleware/cmw_utils.c ****   }
- 157              		.loc 1 119 5 view .LVU34
- 158 005e FFF7FEFF 		bl	__assert_func
- 159              	.LVL16:
- 160              	.L10:
- 109:Lib/Camera_Middleware/cmw_utils.c ****   case 1:
- 161              		.loc 1 109 3 view .LVU35
- 162 0062 0020     		movs	r0, #0
- 163              	.LVL17:
- 109:Lib/Camera_Middleware/cmw_utils.c ****   case 1:
- 164              		.loc 1 109 3 view .LVU36
- 165 0064 ECE7     		b	.L1
- 166              	.L15:
- 167 0066 00BF     		.align	2
- 168              	.L14:
- 169 0068 00000000 		.word	.LC0
- 170 006c 00000000 		.word	__func__.0
- 171 0070 02000000 		.word	.LC1
- 172              	.LBE7:
- 173              	.LBE9:
- 174              		.cfi_endproc
-ARM GAS  /tmp/ccycsPNH.s 			page 7
-
-
- 175              	.LFE843:
- 177              		.section	.rodata.CMW_UTILS_GetPipeConfig.str1.1,"aMS",%progbits,1
- 178              	.LC2:
- 179 0000 72617469 		.ascii	"ratio >= 1\000"
- 179      6F203E3D 
- 179      203100
- 180              	.LC3:
- 181 000b 72617469 		.ascii	"ratio < 64\000"
- 181      6F203C20 
- 181      363400
- 182              		.section	.text.CMW_UTILS_GetPipeConfig,"ax",%progbits
- 183              		.align	1
- 184              		.global	CMW_UTILS_GetPipeConfig
- 185              		.syntax unified
- 186              		.thumb
- 187              		.thumb_func
- 189              	CMW_UTILS_GetPipeConfig:
- 190              	.LVL18:
- 191              	.LFB838:
-  43:Lib/Camera_Middleware/cmw_utils.c ****   float ratio_height = 0;
- 192              		.loc 1 43 1 is_stmt 1 view -0
- 193              		.cfi_startproc
- 194              		@ args = 8, pretend = 0, frame = 8
- 195              		@ frame_needed = 0, uses_anonymous_args = 0
-  43:Lib/Camera_Middleware/cmw_utils.c ****   float ratio_height = 0;
- 196              		.loc 1 43 1 is_stmt 0 view .LVU38
- 197 0000 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
- 198              		.cfi_def_cfa_offset 32
- 199              		.cfi_offset 4, -20
- 200              		.cfi_offset 5, -16
- 201              		.cfi_offset 6, -12
- 202              		.cfi_offset 7, -8
- 203              		.cfi_offset 14, -4
-  43:Lib/Camera_Middleware/cmw_utils.c ****   float ratio_height = 0;
- 204              		.loc 1 43 1 view .LVU39
- 205 0002 1446     		mov	r4, r2
- 206 0004 DDE90856 		ldrd	r5, r6, [sp, #32]
-  49:Lib/Camera_Middleware/cmw_utils.c ****     ratio_width = (float)crop->HSize / p_conf->output_width;
- 207              		.loc 1 49 5 view .LVU40
- 208 0008 6768     		ldr	r7, [r4, #4]
-  47:Lib/Camera_Middleware/cmw_utils.c ****   {
- 209              		.loc 1 47 13 view .LVU41
- 210 000a 9269     		ldr	r2, [r2, #24]
- 211              	.LVL19:
- 212              	.LBB18:
- 213              	.LBB19:
-  76:Lib/Camera_Middleware/cmw_utils.c ****   const float ratio = MIN(ratio_width, ratio_height);
- 214              		.loc 1 76 48 view .LVU42
- 215 000c 06EE907A 		vmov	s13, r7	@ int
- 216              	.LBE19:
- 217              	.LBE18:
-  43:Lib/Camera_Middleware/cmw_utils.c ****   float ratio_height = 0;
- 218              		.loc 1 43 1 view .LVU43
- 219 0010 07EE100A 		vmov	s14, r0	@ int
- 220 0014 07EE901A 		vmov	s15, r1	@ int
-  44:Lib/Camera_Middleware/cmw_utils.c ****   float ratio_width = 0;
- 221              		.loc 1 44 3 is_stmt 1 view .LVU44
-ARM GAS  /tmp/ccycsPNH.s 			page 8
-
-
- 222              	.LVL20:
-  45:Lib/Camera_Middleware/cmw_utils.c **** 
- 223              		.loc 1 45 3 view .LVU45
-  47:Lib/Camera_Middleware/cmw_utils.c ****   {
- 224              		.loc 1 47 3 view .LVU46
- 225              	.LBB24:
- 226              	.LBB20:
-  76:Lib/Camera_Middleware/cmw_utils.c ****   const float ratio = MIN(ratio_width, ratio_height);
- 227              		.loc 1 76 48 is_stmt 0 view .LVU47
- 228 0018 B8EE665A 		vcvt.f32.u32	s10, s13
- 229              	.LBE20:
- 230              	.LBE24:
-  47:Lib/Camera_Middleware/cmw_utils.c ****   {
- 231              		.loc 1 47 6 view .LVU48
- 232 001c 002A     		cmp	r2, #0
- 233 001e 40F08E80 		bne	.L17
-  49:Lib/Camera_Middleware/cmw_utils.c ****     ratio_width = (float)crop->HSize / p_conf->output_width;
- 234              		.loc 1 49 5 is_stmt 1 view .LVU49
- 235              	.LVL21:
- 236              	.LBB25:
- 237              	.LBI18:
-  73:Lib/Camera_Middleware/cmw_utils.c **** {
- 238              		.loc 1 73 13 view .LVU50
- 239              	.LBB21:
-  75:Lib/Camera_Middleware/cmw_utils.c ****   const float ratio_height = (float)cam_height / pipe_height;
- 240              		.loc 1 75 3 view .LVU51
-  75:Lib/Camera_Middleware/cmw_utils.c ****   const float ratio_height = (float)cam_height / pipe_height;
- 241              		.loc 1 75 46 is_stmt 0 view .LVU52
- 242 0022 D4ED006A 		vldr.32	s13, [r4]	@ int
-  75:Lib/Camera_Middleware/cmw_utils.c ****   const float ratio_height = (float)cam_height / pipe_height;
- 243              		.loc 1 75 29 view .LVU53
- 244 0026 B8EE476A 		vcvt.f32.u32	s12, s14
-  75:Lib/Camera_Middleware/cmw_utils.c ****   const float ratio_height = (float)cam_height / pipe_height;
- 245              		.loc 1 75 46 view .LVU54
- 246 002a F8EE664A 		vcvt.f32.u32	s9, s13
-  76:Lib/Camera_Middleware/cmw_utils.c ****   const float ratio = MIN(ratio_width, ratio_height);
- 247              		.loc 1 76 30 view .LVU55
- 248 002e F8EE676A 		vcvt.f32.u32	s13, s15
-  75:Lib/Camera_Middleware/cmw_utils.c ****   const float ratio_height = (float)cam_height / pipe_height;
- 249              		.loc 1 75 15 view .LVU56
- 250 0032 86EE244A 		vdiv.f32	s8, s12, s9
- 251              	.LVL22:
-  76:Lib/Camera_Middleware/cmw_utils.c ****   const float ratio = MIN(ratio_width, ratio_height);
- 252              		.loc 1 76 3 is_stmt 1 view .LVU57
-  76:Lib/Camera_Middleware/cmw_utils.c ****   const float ratio = MIN(ratio_width, ratio_height);
- 253              		.loc 1 76 15 is_stmt 0 view .LVU58
- 254 0036 C6EE855A 		vdiv.f32	s11, s13, s10
- 255              	.LVL23:
-  77:Lib/Camera_Middleware/cmw_utils.c **** 
- 256              		.loc 1 77 3 is_stmt 1 view .LVU59
-  77:Lib/Camera_Middleware/cmw_utils.c **** 
- 257              		.loc 1 77 23 is_stmt 0 discriminator 1 view .LVU60
- 258 003a B4EE654A 		vcmp.f32	s8, s11
- 259 003e F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 260 0042 48BF     		it	mi
- 261 0044 F0EE445A 		vmovmi.f32	s11, s8
- 262              	.LVL24:
-ARM GAS  /tmp/ccycsPNH.s 			page 9
-
-
-  79:Lib/Camera_Middleware/cmw_utils.c ****   assert(ratio < 64);
- 263              		.loc 1 79 3 is_stmt 1 view .LVU61
- 264 0048 B7EE004A 		vmov.f32	s8, #1.0e+0
- 265              	.LVL25:
-  79:Lib/Camera_Middleware/cmw_utils.c ****   assert(ratio < 64);
- 266              		.loc 1 79 3 is_stmt 0 view .LVU62
- 267 004c F4EEC45A 		vcmpe.f32	s11, s8
- 268 0050 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 269 0054 05DA     		bge	.L20
-  79:Lib/Camera_Middleware/cmw_utils.c ****   assert(ratio < 64);
- 270              		.loc 1 79 3 discriminator 1 view .LVU63
- 271 0056 4F21     		movs	r1, #79
- 272              	.LVL26:
-  79:Lib/Camera_Middleware/cmw_utils.c ****   assert(ratio < 64);
- 273              		.loc 1 79 3 discriminator 1 view .LVU64
- 274 0058 4F4B     		ldr	r3, .L38
- 275              	.LVL27:
-  79:Lib/Camera_Middleware/cmw_utils.c ****   assert(ratio < 64);
- 276              		.loc 1 79 3 discriminator 1 view .LVU65
- 277 005a 504A     		ldr	r2, .L38+4
- 278              	.L37:
-  80:Lib/Camera_Middleware/cmw_utils.c **** 
- 279              		.loc 1 80 3 discriminator 1 view .LVU66
- 280 005c 5048     		ldr	r0, .L38+8
- 281              	.LVL28:
-  80:Lib/Camera_Middleware/cmw_utils.c **** 
- 282              		.loc 1 80 3 discriminator 1 view .LVU67
- 283 005e FFF7FEFF 		bl	__assert_func
- 284              	.LVL29:
- 285              	.L20:
-  80:Lib/Camera_Middleware/cmw_utils.c **** 
- 286              		.loc 1 80 3 is_stmt 1 view .LVU68
- 287 0062 9FED504A 		vldr.32	s8, .L38+12
- 288 0066 F4EEC45A 		vcmpe.f32	s11, s8
- 289 006a F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 290 006e 03D4     		bmi	.L21
-  80:Lib/Camera_Middleware/cmw_utils.c **** 
- 291              		.loc 1 80 3 is_stmt 0 discriminator 1 view .LVU69
- 292 0070 5021     		movs	r1, #80
- 293              	.LVL30:
-  80:Lib/Camera_Middleware/cmw_utils.c **** 
- 294              		.loc 1 80 3 discriminator 1 view .LVU70
- 295 0072 4D4B     		ldr	r3, .L38+16
- 296              	.LVL31:
-  80:Lib/Camera_Middleware/cmw_utils.c **** 
- 297              		.loc 1 80 3 discriminator 1 view .LVU71
- 298 0074 494A     		ldr	r2, .L38+4
- 299 0076 F1E7     		b	.L37
- 300              	.LVL32:
- 301              	.L21:
-  82:Lib/Camera_Middleware/cmw_utils.c ****   crop->VSize = (uint32_t) MIN(pipe_height * ratio, cam_height);
- 302              		.loc 1 82 3 is_stmt 1 view .LVU72
-  82:Lib/Camera_Middleware/cmw_utils.c ****   crop->VSize = (uint32_t) MIN(pipe_height * ratio, cam_height);
- 303              		.loc 1 82 28 is_stmt 0 view .LVU73
- 304 0078 24EEA54A 		vmul.f32	s8, s9, s11
-  82:Lib/Camera_Middleware/cmw_utils.c ****   crop->VSize = (uint32_t) MIN(pipe_height * ratio, cam_height);
- 305              		.loc 1 82 17 view .LVU74
-ARM GAS  /tmp/ccycsPNH.s 			page 10
-
-
- 306 007c B4EEC46A 		vcmpe.f32	s12, s8
-  83:Lib/Camera_Middleware/cmw_utils.c ****   crop->HStart = (cam_width - crop->HSize + 1) / 2;
- 307              		.loc 1 83 28 view .LVU75
- 308 0080 65EE255A 		vmul.f32	s11, s10, s11
- 309              	.LVL33:
-  82:Lib/Camera_Middleware/cmw_utils.c ****   crop->VSize = (uint32_t) MIN(pipe_height * ratio, cam_height);
- 310              		.loc 1 82 17 view .LVU76
- 311 0084 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
-  83:Lib/Camera_Middleware/cmw_utils.c ****   crop->HStart = (cam_width - crop->HSize + 1) / 2;
- 312              		.loc 1 83 17 view .LVU77
- 313 0088 F4EEE56A 		vcmpe.f32	s13, s11
-  82:Lib/Camera_Middleware/cmw_utils.c ****   crop->VSize = (uint32_t) MIN(pipe_height * ratio, cam_height);
- 314              		.loc 1 82 17 discriminator 1 view .LVU78
- 315 008c CCBF     		ite	gt
- 316 008e BCEEC46A 		vcvtgt.u32.f32	s12, s8
- 317              	.LVL34:
-  82:Lib/Camera_Middleware/cmw_utils.c ****   crop->VSize = (uint32_t) MIN(pipe_height * ratio, cam_height);
- 318              		.loc 1 82 17 discriminator 2 view .LVU79
- 319 0092 BCEEC66A 		vcvtle.u32.f32	s12, s12
-  83:Lib/Camera_Middleware/cmw_utils.c ****   crop->HStart = (cam_width - crop->HSize + 1) / 2;
- 320              		.loc 1 83 17 view .LVU80
- 321 0096 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
-  84:Lib/Camera_Middleware/cmw_utils.c ****   crop->VStart = (cam_height - crop->VSize + 1) / 2;
- 322              		.loc 1 84 43 view .LVU81
- 323 009a 0146     		mov	r1, r0
- 324              	.LVL35:
-  84:Lib/Camera_Middleware/cmw_utils.c ****   crop->VStart = (cam_height - crop->VSize + 1) / 2;
- 325              		.loc 1 84 43 view .LVU82
- 326 009c 16EE102A 		vmov	r2, s12	@ int
-  83:Lib/Camera_Middleware/cmw_utils.c ****   crop->HStart = (cam_width - crop->HSize + 1) / 2;
- 327              		.loc 1 83 17 discriminator 1 view .LVU83
- 328 00a0 CCBF     		ite	gt
- 329 00a2 FCEEE56A 		vcvtgt.u32.f32	s13, s11
- 330              	.LVL36:
-  83:Lib/Camera_Middleware/cmw_utils.c ****   crop->HStart = (cam_width - crop->HSize + 1) / 2;
- 331              		.loc 1 83 17 discriminator 2 view .LVU84
- 332 00a6 FCEEE66A 		vcvtle.u32.f32	s13, s13
-  84:Lib/Camera_Middleware/cmw_utils.c ****   crop->VStart = (cam_height - crop->VSize + 1) / 2;
- 333              		.loc 1 84 43 view .LVU85
- 334 00aa 0131     		adds	r1, r1, #1
- 335 00ac 891A     		subs	r1, r1, r2
-  84:Lib/Camera_Middleware/cmw_utils.c ****   crop->VStart = (cam_height - crop->VSize + 1) / 2;
- 336              		.loc 1 84 48 view .LVU86
- 337 00ae 4908     		lsrs	r1, r1, #1
-  84:Lib/Camera_Middleware/cmw_utils.c ****   crop->VStart = (cam_height - crop->VSize + 1) / 2;
- 338              		.loc 1 84 16 view .LVU87
- 339 00b0 5960     		str	r1, [r3, #4]
-  85:Lib/Camera_Middleware/cmw_utils.c ****   crop->PipeArea = DCMIPP_POSITIVE_AREA;
- 340              		.loc 1 85 44 view .LVU88
- 341 00b2 17EE901A 		vmov	r1, s15	@ int
- 342 00b6 16EE902A 		vmov	r2, s13	@ int
-  82:Lib/Camera_Middleware/cmw_utils.c ****   crop->VSize = (uint32_t) MIN(pipe_height * ratio, cam_height);
- 343              		.loc 1 82 15 discriminator 4 view .LVU89
- 344 00ba 83ED036A 		vstr.32	s12, [r3, #12]	@ int
-  83:Lib/Camera_Middleware/cmw_utils.c ****   crop->HStart = (cam_width - crop->HSize + 1) / 2;
- 345              		.loc 1 83 3 is_stmt 1 view .LVU90
-  83:Lib/Camera_Middleware/cmw_utils.c ****   crop->HStart = (cam_width - crop->HSize + 1) / 2;
-ARM GAS  /tmp/ccycsPNH.s 			page 11
-
-
- 346              		.loc 1 83 15 is_stmt 0 discriminator 4 view .LVU91
- 347 00be C3ED026A 		vstr.32	s13, [r3, #8]	@ int
-  84:Lib/Camera_Middleware/cmw_utils.c ****   crop->VStart = (cam_height - crop->VSize + 1) / 2;
- 348              		.loc 1 84 3 is_stmt 1 view .LVU92
-  85:Lib/Camera_Middleware/cmw_utils.c ****   crop->PipeArea = DCMIPP_POSITIVE_AREA;
- 349              		.loc 1 85 3 view .LVU93
- 350              	.LBE21:
- 351              	.LBE25:
-  50:Lib/Camera_Middleware/cmw_utils.c ****     ratio_height = (float)crop->VSize / p_conf->output_height;
- 352              		.loc 1 50 19 is_stmt 0 view .LVU94
- 353 00c2 B8EE466A 		vcvt.f32.u32	s12, s12
-  51:Lib/Camera_Middleware/cmw_utils.c ****   }
- 354              		.loc 1 51 20 view .LVU95
- 355 00c6 F8EE666A 		vcvt.f32.u32	s13, s13
- 356              	.LBB26:
- 357              	.LBB22:
-  85:Lib/Camera_Middleware/cmw_utils.c ****   crop->PipeArea = DCMIPP_POSITIVE_AREA;
- 358              		.loc 1 85 44 view .LVU96
- 359 00ca 0131     		adds	r1, r1, #1
- 360 00cc 891A     		subs	r1, r1, r2
-  86:Lib/Camera_Middleware/cmw_utils.c **** }
- 361              		.loc 1 86 18 view .LVU97
- 362 00ce 0022     		movs	r2, #0
- 363              	.LBE22:
- 364              	.LBE26:
-  50:Lib/Camera_Middleware/cmw_utils.c ****     ratio_height = (float)crop->VSize / p_conf->output_height;
- 365              		.loc 1 50 17 view .LVU98
- 366 00d0 C6EE245A 		vdiv.f32	s11, s12, s9
-  51:Lib/Camera_Middleware/cmw_utils.c ****   }
- 367              		.loc 1 51 18 view .LVU99
- 368 00d4 86EE857A 		vdiv.f32	s14, s13, s10
- 369              	.LBB27:
- 370              	.LBB23:
-  85:Lib/Camera_Middleware/cmw_utils.c ****   crop->PipeArea = DCMIPP_POSITIVE_AREA;
- 371              		.loc 1 85 49 view .LVU100
- 372 00d8 4908     		lsrs	r1, r1, #1
-  85:Lib/Camera_Middleware/cmw_utils.c ****   crop->PipeArea = DCMIPP_POSITIVE_AREA;
- 373              		.loc 1 85 16 view .LVU101
- 374 00da 1960     		str	r1, [r3]
-  86:Lib/Camera_Middleware/cmw_utils.c **** }
- 375              		.loc 1 86 3 is_stmt 1 view .LVU102
-  86:Lib/Camera_Middleware/cmw_utils.c **** }
- 376              		.loc 1 86 18 is_stmt 0 view .LVU103
- 377 00dc 1A61     		str	r2, [r3, #16]
- 378              	.LVL37:
-  86:Lib/Camera_Middleware/cmw_utils.c **** }
- 379              		.loc 1 86 18 view .LVU104
- 380              	.LBE23:
- 381              	.LBE27:
-  50:Lib/Camera_Middleware/cmw_utils.c ****     ratio_height = (float)crop->VSize / p_conf->output_height;
- 382              		.loc 1 50 5 is_stmt 1 view .LVU105
-  51:Lib/Camera_Middleware/cmw_utils.c ****   }
- 383              		.loc 1 51 5 view .LVU106
- 384              	.L28:
-  70:Lib/Camera_Middleware/cmw_utils.c **** }
- 385              		.loc 1 70 3 view .LVU107
- 386              	.LBB28:
-ARM GAS  /tmp/ccycsPNH.s 			page 12
-
-
- 387              	.LBB29:
+ 747              		.loc 1 135 1
+ 748 0048 1846     		mov	r0, r3
+ 749 004a 1037     		adds	r7, r7, #16
+ 750              		.cfi_def_cfa_offset 8
+ 751 004c BD46     		mov	sp, r7
+ 752              		.cfi_def_cfa_register 13
+ 753              		@ sp needed
+ 754 004e 80BD     		pop	{r7, pc}
+ 755              		.cfi_endproc
+ 756              	.LFE843:
+ 758              		.section	.text.CMW_UTILS_get_scale_configs,"ax",%progbits
+ 759              		.align	1
+ 760              		.syntax unified
+ 761              		.thumb
+ 762              		.thumb_func
+ 764              	CMW_UTILS_get_scale_configs:
+ 765              	.LFB844:
  136:Lib/Camera_Middleware/cmw_utils.c **** 
  137:Lib/Camera_Middleware/cmw_utils.c **** static void CMW_UTILS_get_scale_configs(CMW_DCMIPP_Conf_t *p_conf, float ratio_width, float ratio_h
  138:Lib/Camera_Middleware/cmw_utils.c ****                                        DCMIPP_DecimationConfTypeDef *dec, DCMIPP_DownsizeTypeDef *d
  139:Lib/Camera_Middleware/cmw_utils.c **** {
+ 766              		.loc 1 139 1
+ 767              		.cfi_startproc
+ 768              		@ args = 0, pretend = 0, frame = 24
+ 769              		@ frame_needed = 1, uses_anonymous_args = 0
+ 770 0000 80B5     		push	{r7, lr}
+ 771              		.cfi_def_cfa_offset 8
+ 772              		.cfi_offset 7, -8
+ 773              		.cfi_offset 14, -4
+ 774 0002 86B0     		sub	sp, sp, #24
+ 775              		.cfi_def_cfa_offset 32
+ 776 0004 00AF     		add	r7, sp, #0
+ARM GAS  /tmp/ccDLW83P.s 			page 17
+
+
+ 777              		.cfi_def_cfa_register 7
+ 778 0006 7861     		str	r0, [r7, #20]
+ 779 0008 87ED040A 		vstr.32	s0, [r7, #16]
+ 780 000c C7ED030A 		vstr.32	s1, [r7, #12]
+ 781 0010 B960     		str	r1, [r7, #8]
+ 782 0012 7A60     		str	r2, [r7, #4]
  140:Lib/Camera_Middleware/cmw_utils.c ****   dec->HRatio = CMW_UTILS_get_dec_ratio_and_update(&ratio_width, 0);
- 388              		.loc 1 140 17 is_stmt 0 view .LVU108
- 389 00de 0021     		movs	r1, #0
- 390 00e0 6846     		mov	r0, sp
- 391 00e2 8DED017A 		vstr.32	s14, [sp, #4]
- 392 00e6 CDED005A 		vstr.32	s11, [sp]
- 393              	.LVL38:
- 394              		.loc 1 140 17 view .LVU109
- 395              	.LBE29:
- 396              	.LBI28:
- 137:Lib/Camera_Middleware/cmw_utils.c ****                                        DCMIPP_DecimationConfTypeDef *dec, DCMIPP_DownsizeTypeDef *d
- 397              		.loc 1 137 13 is_stmt 1 view .LVU110
- 398              	.LBB36:
- 399              		.loc 1 140 3 view .LVU111
- 400              		.loc 1 140 17 is_stmt 0 view .LVU112
- 401 00ea FFF7FEFF 		bl	CMW_UTILS_get_dec_ratio_and_update
- 402              	.LVL39:
+ 783              		.loc 1 140 17
+ 784 0014 07F11003 		add	r3, r7, #16
+ 785 0018 0021     		movs	r1, #0
+ 786 001a 1846     		mov	r0, r3
+ 787 001c FFF7FEFF 		bl	CMW_UTILS_get_dec_ratio_and_update
+ 788 0020 0246     		mov	r2, r0
+ 789              		.loc 1 140 15 discriminator 1
+ 790 0022 BB68     		ldr	r3, [r7, #8]
+ 791 0024 5A60     		str	r2, [r3, #4]
  141:Lib/Camera_Middleware/cmw_utils.c ****   dec->VRatio = CMW_UTILS_get_dec_ratio_and_update(&ratio_height, 1);
- 403              		.loc 1 141 17 view .LVU113
- 404 00ee 0121     		movs	r1, #1
- 140:Lib/Camera_Middleware/cmw_utils.c ****   dec->VRatio = CMW_UTILS_get_dec_ratio_and_update(&ratio_height, 1);
- 405              		.loc 1 140 15 discriminator 1 view .LVU114
- 406 00f0 6860     		str	r0, [r5, #4]
- 407              		.loc 1 141 3 is_stmt 1 view .LVU115
- 408              		.loc 1 141 17 is_stmt 0 view .LVU116
- 409 00f2 01A8     		add	r0, sp, #4
- 410 00f4 FFF7FEFF 		bl	CMW_UTILS_get_dec_ratio_and_update
- 411              	.LVL40:
- 412              	.LBB30:
- 413              	.LBB31:
-  99:Lib/Camera_Middleware/cmw_utils.c ****   down->VRatio = (uint32_t) (8192 * ratio_height);
- 414              		.loc 1 99 35 view .LVU117
- 415 00f8 9FED2C7A 		vldr.32	s14, .L38+20
- 416 00fc DDED007A 		vldr.32	s15, [sp]
- 417 0100 67EE877A 		vmul.f32	s15, s15, s14
-  99:Lib/Camera_Middleware/cmw_utils.c ****   down->VRatio = (uint32_t) (8192 * ratio_height);
- 418              		.loc 1 99 18 view .LVU118
- 419 0104 FCEEE77A 		vcvt.u32.f32	s15, s15
- 420              	.LBE31:
- 421              	.LBE30:
- 422              		.loc 1 141 15 discriminator 1 view .LVU119
- 423 0108 2860     		str	r0, [r5]
+ 792              		.loc 1 141 17
+ 793 0026 07F10C03 		add	r3, r7, #12
+ 794 002a 0121     		movs	r1, #1
+ 795 002c 1846     		mov	r0, r3
+ 796 002e FFF7FEFF 		bl	CMW_UTILS_get_dec_ratio_and_update
+ 797 0032 0246     		mov	r2, r0
+ 798              		.loc 1 141 15 discriminator 1
+ 799 0034 BB68     		ldr	r3, [r7, #8]
+ 800 0036 1A60     		str	r2, [r3]
  142:Lib/Camera_Middleware/cmw_utils.c ****   CMW_UTILS_get_down_config(ratio_width, ratio_height, p_conf->output_width, p_conf->output_height,
- 424              		.loc 1 142 3 is_stmt 1 view .LVU120
- 425              	.LBB34:
- 426              	.LBB32:
-  99:Lib/Camera_Middleware/cmw_utils.c ****   down->VRatio = (uint32_t) (8192 * ratio_height);
- 427              		.loc 1 99 18 is_stmt 0 view .LVU121
- 428 010a 17EE903A 		vmov	r3, s15	@ int
- 429              	.LBE32:
- 430              	.LBE34:
- 431              		.loc 1 142 62 view .LVU122
-ARM GAS  /tmp/ccycsPNH.s 			page 13
+ 801              		.loc 1 142 3
+ 802 0038 D7ED047A 		vldr.32	s15, [r7, #16]
+ 803 003c 97ED037A 		vldr.32	s14, [r7, #12]
+ 804              		.loc 1 142 62
+ 805 0040 7B69     		ldr	r3, [r7, #20]
+ 806 0042 1B68     		ldr	r3, [r3]
+ 807              		.loc 1 142 3
+ 808 0044 1846     		mov	r0, r3
+ 809              		.loc 1 142 84
+ 810 0046 7B69     		ldr	r3, [r7, #20]
+ 811 0048 5B68     		ldr	r3, [r3, #4]
+ 812              		.loc 1 142 3
+ 813 004a 7A68     		ldr	r2, [r7, #4]
+ 814 004c 1946     		mov	r1, r3
+ 815 004e F0EE470A 		vmov.f32	s1, s14
+ 816 0052 B0EE670A 		vmov.f32	s0, s15
+ 817 0056 FFF7FEFF 		bl	CMW_UTILS_get_down_config
+ 143:Lib/Camera_Middleware/cmw_utils.c **** }
+ 818              		.loc 1 143 1
+ 819 005a 00BF     		nop
+ 820 005c 1837     		adds	r7, r7, #24
+ 821              		.cfi_def_cfa_offset 8
+ 822 005e BD46     		mov	sp, r7
+ 823              		.cfi_def_cfa_register 13
+ 824              		@ sp needed
+ 825 0060 80BD     		pop	{r7, pc}
+ 826              		.cfi_endproc
+ 827              	.LFE844:
+ 829              		.section	.rodata.__func__.1,"a"
+ 830              		.align	2
+ARM GAS  /tmp/ccDLW83P.s 			page 18
 
 
- 432 010e 2068     		ldr	r0, [r4]
- 433              	.LVL41:
- 434              	.LBB35:
- 435              	.LBI30:
-  97:Lib/Camera_Middleware/cmw_utils.c **** {
- 436              		.loc 1 97 13 is_stmt 1 view .LVU123
- 437              	.LBB33:
-  99:Lib/Camera_Middleware/cmw_utils.c ****   down->VRatio = (uint32_t) (8192 * ratio_height);
- 438              		.loc 1 99 3 view .LVU124
-  99:Lib/Camera_Middleware/cmw_utils.c ****   down->VRatio = (uint32_t) (8192 * ratio_height);
- 439              		.loc 1 99 16 is_stmt 0 view .LVU125
- 440 0110 C6ED037A 		vstr.32	s15, [r6, #12]	@ int
- 100:Lib/Camera_Middleware/cmw_utils.c ****   down->HDivFactor = (1024 * 8192 - 1) / down->HRatio;
- 441              		.loc 1 100 3 is_stmt 1 view .LVU126
- 100:Lib/Camera_Middleware/cmw_utils.c ****   down->HDivFactor = (1024 * 8192 - 1) / down->HRatio;
- 442              		.loc 1 100 35 is_stmt 0 view .LVU127
- 443 0114 DDED017A 		vldr.32	s15, [sp, #4]
- 444 0118 67EE877A 		vmul.f32	s15, s15, s14
- 100:Lib/Camera_Middleware/cmw_utils.c ****   down->HDivFactor = (1024 * 8192 - 1) / down->HRatio;
- 445              		.loc 1 100 18 view .LVU128
- 446 011c FCEEE77A 		vcvt.u32.f32	s15, s15
- 447 0120 17EE902A 		vmov	r2, s15	@ int
- 101:Lib/Camera_Middleware/cmw_utils.c ****   down->VDivFactor = (1024 * 8192 - 1) / down->VRatio;
- 448              		.loc 1 101 40 view .LVU129
- 449 0124 2249     		ldr	r1, .L38+24
- 100:Lib/Camera_Middleware/cmw_utils.c ****   down->HDivFactor = (1024 * 8192 - 1) / down->HRatio;
- 450              		.loc 1 100 16 view .LVU130
- 451 0126 C6ED027A 		vstr.32	s15, [r6, #8]	@ int
- 101:Lib/Camera_Middleware/cmw_utils.c ****   down->VDivFactor = (1024 * 8192 - 1) / down->VRatio;
- 452              		.loc 1 101 3 is_stmt 1 view .LVU131
- 101:Lib/Camera_Middleware/cmw_utils.c ****   down->VDivFactor = (1024 * 8192 - 1) / down->VRatio;
- 453              		.loc 1 101 40 is_stmt 0 view .LVU132
- 454 012a B1FBF3F3 		udiv	r3, r1, r3
- 102:Lib/Camera_Middleware/cmw_utils.c ****   down->HSize = width;
- 455              		.loc 1 102 40 view .LVU133
- 456 012e B1FBF2F1 		udiv	r1, r1, r2
- 104:Lib/Camera_Middleware/cmw_utils.c **** }
- 457              		.loc 1 104 15 view .LVU134
- 458 0132 C6E90070 		strd	r7, r0, [r6]
- 101:Lib/Camera_Middleware/cmw_utils.c ****   down->VDivFactor = (1024 * 8192 - 1) / down->VRatio;
- 459              		.loc 1 101 20 view .LVU135
- 460 0136 7361     		str	r3, [r6, #20]
- 102:Lib/Camera_Middleware/cmw_utils.c ****   down->HSize = width;
- 461              		.loc 1 102 3 is_stmt 1 view .LVU136
- 102:Lib/Camera_Middleware/cmw_utils.c ****   down->HSize = width;
- 462              		.loc 1 102 20 is_stmt 0 view .LVU137
- 463 0138 3161     		str	r1, [r6, #16]
- 103:Lib/Camera_Middleware/cmw_utils.c ****   down->VSize = height;
- 464              		.loc 1 103 3 is_stmt 1 view .LVU138
- 465              	.LVL42:
- 103:Lib/Camera_Middleware/cmw_utils.c ****   down->VSize = height;
- 466              		.loc 1 103 3 is_stmt 0 view .LVU139
- 467              	.LBE33:
- 468              	.LBE35:
- 469              	.LBE36:
- 470              	.LBE28:
-  71:Lib/Camera_Middleware/cmw_utils.c **** 
-ARM GAS  /tmp/ccycsPNH.s 			page 14
-
-
- 471              		.loc 1 71 1 view .LVU140
- 472 013a 03B0     		add	sp, sp, #12
- 473              		.cfi_remember_state
- 474              		.cfi_def_cfa_offset 20
- 475              		@ sp needed
- 476 013c F0BD     		pop	{r4, r5, r6, r7, pc}
- 477              	.LVL43:
- 478              	.L17:
- 479              		.cfi_restore_state
-  53:Lib/Camera_Middleware/cmw_utils.c ****   {
- 480              		.loc 1 53 8 is_stmt 1 view .LVU141
-  53:Lib/Camera_Middleware/cmw_utils.c ****   {
- 481              		.loc 1 53 11 is_stmt 0 view .LVU142
- 482 013e 012A     		cmp	r2, #1
- 483 0140 0CD1     		bne	.L29
-  55:Lib/Camera_Middleware/cmw_utils.c ****     ratio_height = (float)cam_height / p_conf->output_height;
- 484              		.loc 1 55 5 is_stmt 1 view .LVU143
-  55:Lib/Camera_Middleware/cmw_utils.c ****     ratio_height = (float)cam_height / p_conf->output_height;
- 485              		.loc 1 55 36 is_stmt 0 view .LVU144
- 486 0142 D4ED006A 		vldr.32	s13, [r4]	@ int
-  55:Lib/Camera_Middleware/cmw_utils.c ****     ratio_height = (float)cam_height / p_conf->output_height;
- 487              		.loc 1 55 19 view .LVU145
- 488 0146 B8EE477A 		vcvt.f32.u32	s14, s14
-  55:Lib/Camera_Middleware/cmw_utils.c ****     ratio_height = (float)cam_height / p_conf->output_height;
- 489              		.loc 1 55 36 view .LVU146
- 490 014a F8EE666A 		vcvt.f32.u32	s13, s13
-  55:Lib/Camera_Middleware/cmw_utils.c ****     ratio_height = (float)cam_height / p_conf->output_height;
- 491              		.loc 1 55 17 view .LVU147
- 492 014e C7EE265A 		vdiv.f32	s11, s14, s13
- 493              	.LVL44:
-  56:Lib/Camera_Middleware/cmw_utils.c ****   }
- 494              		.loc 1 56 5 is_stmt 1 view .LVU148
- 495              	.L36:
-  67:Lib/Camera_Middleware/cmw_utils.c ****   }
- 496              		.loc 1 67 20 is_stmt 0 view .LVU149
- 497 0152 F8EE677A 		vcvt.f32.u32	s15, s15
-  67:Lib/Camera_Middleware/cmw_utils.c ****   }
- 498              		.loc 1 67 18 view .LVU150
- 499 0156 87EE857A 		vdiv.f32	s14, s15, s10
- 500              	.LVL45:
-  67:Lib/Camera_Middleware/cmw_utils.c ****   }
- 501              		.loc 1 67 18 view .LVU151
- 502 015a C0E7     		b	.L28
- 503              	.LVL46:
- 504              	.L29:
-  58:Lib/Camera_Middleware/cmw_utils.c ****   {
- 505              		.loc 1 58 8 is_stmt 1 view .LVU152
-  58:Lib/Camera_Middleware/cmw_utils.c ****   {
- 506              		.loc 1 58 11 is_stmt 0 view .LVU153
- 507 015c 022A     		cmp	r2, #2
- 508 015e 06D1     		bne	.L30
-  60:Lib/Camera_Middleware/cmw_utils.c ****     ratio_width = (float) ratio_height;
- 509              		.loc 1 60 5 is_stmt 1 view .LVU154
-  60:Lib/Camera_Middleware/cmw_utils.c ****     ratio_width = (float) ratio_height;
- 510              		.loc 1 60 20 is_stmt 0 view .LVU155
- 511 0160 F8EE677A 		vcvt.f32.u32	s15, s15
-  60:Lib/Camera_Middleware/cmw_utils.c ****     ratio_width = (float) ratio_height;
-ARM GAS  /tmp/ccycsPNH.s 			page 15
-
-
- 512              		.loc 1 60 18 view .LVU156
- 513 0164 87EE857A 		vdiv.f32	s14, s15, s10
- 514              	.LVL47:
-  61:Lib/Camera_Middleware/cmw_utils.c ****   }
- 515              		.loc 1 61 5 is_stmt 1 view .LVU157
-  61:Lib/Camera_Middleware/cmw_utils.c ****   }
- 516              		.loc 1 61 17 is_stmt 0 view .LVU158
- 517 0168 F0EE475A 		vmov.f32	s11, s14
- 518 016c B7E7     		b	.L28
- 519              	.LVL48:
- 520              	.L30:
-  65:Lib/Camera_Middleware/cmw_utils.c ****     ratio_width = (float)crop->HSize / p_conf->output_width;
- 521              		.loc 1 65 5 is_stmt 1 view .LVU159
- 522              	.LBB37:
- 523              	.LBI37:
-  89:Lib/Camera_Middleware/cmw_utils.c **** {
- 524              		.loc 1 89 13 view .LVU160
- 525              	.LBB38:
-  91:Lib/Camera_Middleware/cmw_utils.c ****   crop->VSize = roi->height;
- 526              		.loc 1 91 3 view .LVU161
-  91:Lib/Camera_Middleware/cmw_utils.c ****   crop->VSize = roi->height;
- 527              		.loc 1 91 20 is_stmt 0 view .LVU162
- 528 016e E169     		ldr	r1, [r4, #28]
- 529              	.LVL49:
-  91:Lib/Camera_Middleware/cmw_utils.c ****   crop->VSize = roi->height;
- 530              		.loc 1 91 20 view .LVU163
- 531              	.LBE38:
- 532              	.LBE37:
-  66:Lib/Camera_Middleware/cmw_utils.c ****     ratio_height = (float)crop->VSize / p_conf->output_height;
- 533              		.loc 1 66 38 view .LVU164
- 534 0170 94ED007A 		vldr.32	s14, [r4]	@ int
-  66:Lib/Camera_Middleware/cmw_utils.c ****     ratio_height = (float)crop->VSize / p_conf->output_height;
- 535              		.loc 1 66 19 view .LVU165
- 536 0174 07EE901A 		vmov	s15, r1	@ int
- 537              	.LVL50:
-  66:Lib/Camera_Middleware/cmw_utils.c ****     ratio_height = (float)crop->VSize / p_conf->output_height;
- 538              		.loc 1 66 38 view .LVU166
- 539 0178 B8EE477A 		vcvt.f32.u32	s14, s14
-  66:Lib/Camera_Middleware/cmw_utils.c ****     ratio_height = (float)crop->VSize / p_conf->output_height;
- 540              		.loc 1 66 19 view .LVU167
- 541 017c F8EE677A 		vcvt.f32.u32	s15, s15
- 542              	.LBB42:
- 543              	.LBB39:
-  93:Lib/Camera_Middleware/cmw_utils.c ****   crop->VStart = roi->offset_y;
- 544              		.loc 1 93 16 view .LVU168
- 545 0180 606A     		ldr	r0, [r4, #36]
- 546              	.LVL51:
-  92:Lib/Camera_Middleware/cmw_utils.c ****   crop->HStart = roi->offset_x;
- 547              		.loc 1 92 20 view .LVU169
- 548 0182 226A     		ldr	r2, [r4, #32]
-  93:Lib/Camera_Middleware/cmw_utils.c ****   crop->VStart = roi->offset_y;
- 549              		.loc 1 93 16 view .LVU170
- 550 0184 5860     		str	r0, [r3, #4]
-  94:Lib/Camera_Middleware/cmw_utils.c **** }
- 551              		.loc 1 94 16 view .LVU171
- 552 0186 A06A     		ldr	r0, [r4, #40]
- 553              	.LBE39:
-ARM GAS  /tmp/ccycsPNH.s 			page 16
-
-
- 554              	.LBE42:
-  66:Lib/Camera_Middleware/cmw_utils.c ****     ratio_height = (float)crop->VSize / p_conf->output_height;
- 555              		.loc 1 66 17 view .LVU172
- 556 0188 C7EE875A 		vdiv.f32	s11, s15, s14
- 557              	.LBB43:
- 558              	.LBB40:
-  91:Lib/Camera_Middleware/cmw_utils.c ****   crop->VSize = roi->height;
- 559              		.loc 1 91 15 view .LVU173
- 560 018c D960     		str	r1, [r3, #12]
-  92:Lib/Camera_Middleware/cmw_utils.c ****   crop->HStart = roi->offset_x;
- 561              		.loc 1 92 3 is_stmt 1 view .LVU174
- 562              	.LBE40:
- 563              	.LBE43:
-  67:Lib/Camera_Middleware/cmw_utils.c ****   }
- 564              		.loc 1 67 20 is_stmt 0 view .LVU175
- 565 018e 07EE902A 		vmov	s15, r2	@ int
- 566              	.LBB44:
- 567              	.LBB41:
-  92:Lib/Camera_Middleware/cmw_utils.c ****   crop->HStart = roi->offset_x;
- 568              		.loc 1 92 15 view .LVU176
- 569 0192 9A60     		str	r2, [r3, #8]
-  93:Lib/Camera_Middleware/cmw_utils.c ****   crop->VStart = roi->offset_y;
- 570              		.loc 1 93 3 is_stmt 1 view .LVU177
-  94:Lib/Camera_Middleware/cmw_utils.c **** }
- 571              		.loc 1 94 3 view .LVU178
-  94:Lib/Camera_Middleware/cmw_utils.c **** }
- 572              		.loc 1 94 16 is_stmt 0 view .LVU179
- 573 0194 1860     		str	r0, [r3]
- 574              	.LVL52:
-  94:Lib/Camera_Middleware/cmw_utils.c **** }
- 575              		.loc 1 94 16 view .LVU180
- 576              	.LBE41:
- 577              	.LBE44:
-  66:Lib/Camera_Middleware/cmw_utils.c ****     ratio_height = (float)crop->VSize / p_conf->output_height;
- 578              		.loc 1 66 5 is_stmt 1 view .LVU181
-  67:Lib/Camera_Middleware/cmw_utils.c ****   }
- 579              		.loc 1 67 5 view .LVU182
- 580 0196 DCE7     		b	.L36
- 581              	.L39:
- 582              		.align	2
- 583              	.L38:
- 584 0198 00000000 		.word	.LC2
- 585 019c 00000000 		.word	__func__.1
- 586 01a0 02000000 		.word	.LC1
- 587 01a4 00008042 		.word	1115684864
- 588 01a8 0B000000 		.word	.LC3
- 589 01ac 00000046 		.word	1174405120
- 590 01b0 FFFF7F00 		.word	8388607
- 591              		.cfi_endproc
- 592              	.LFE838:
- 594              		.section	.rodata.__func__.0,"a"
- 597              	__func__.0:
- 598 0000 434D575F 		.ascii	"CMW_UTILS_get_dec_ratio_from_decimal_ratio\000"
- 598      5554494C 
- 598      535F6765 
- 598      745F6465 
- 598      635F7261 
-ARM GAS  /tmp/ccycsPNH.s 			page 17
-
-
- 599              		.section	.rodata.__func__.1,"a"
- 602              	__func__.1:
- 603 0000 434D575F 		.ascii	"CMW_UTILS_get_crop_config\000"
- 603      5554494C 
- 603      535F6765 
- 603      745F6372 
- 603      6F705F63 
- 604              		.text
- 605              	.Letext0:
- 606              		.file 2 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 607              		.file 3 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 608              		.file 4 "STM32Cube_FW_N6/Drivers/STM32N6xx_HAL_Driver/Inc/stm32n6xx_hal_dcmipp.h"
- 609              		.file 5 "Lib/Camera_Middleware/cmw_camera.h"
- 610              		.file 6 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
-ARM GAS  /tmp/ccycsPNH.s 			page 18
+ 833              	__func__.1:
+ 834 0000 434D575F 		.ascii	"CMW_UTILS_get_crop_config\000"
+ 834      5554494C 
+ 834      535F6765 
+ 834      745F6372 
+ 834      6F705F63 
+ 835              		.section	.rodata.__func__.0,"a"
+ 836              		.align	2
+ 839              	__func__.0:
+ 840 0000 434D575F 		.ascii	"CMW_UTILS_get_dec_ratio_from_decimal_ratio\000"
+ 840      5554494C 
+ 840      535F6765 
+ 840      745F6465 
+ 840      635F7261 
+ 841              		.text
+ 842              	.Letext0:
+ 843              		.file 2 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 844              		.file 3 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 845              		.file 4 "STM32Cube_FW_N6/Drivers/STM32N6xx_HAL_Driver/Inc/stm32n6xx_hal_dcmipp.h"
+ 846              		.file 5 "Lib/Camera_Middleware/cmw_camera.h"
+ 847              		.file 6 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ARM GAS  /tmp/ccDLW83P.s 			page 19
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 cmw_utils.c
-     /tmp/ccycsPNH.s:31     .text.CMW_UTILS_get_dec_ratio_and_update:00000000 $t
-     /tmp/ccycsPNH.s:36     .text.CMW_UTILS_get_dec_ratio_and_update:00000000 CMW_UTILS_get_dec_ratio_and_update
-     /tmp/ccycsPNH.s:79     .text.CMW_UTILS_get_dec_ratio_and_update:00000024 $d
-     /tmp/ccycsPNH.s:88     .text.CMW_UTILS_get_dec_ratio_and_update:0000002c $t
-     /tmp/ccycsPNH.s:169    .text.CMW_UTILS_get_dec_ratio_and_update:00000068 $d
-     /tmp/ccycsPNH.s:597    .rodata.__func__.0:00000000 __func__.0
-     /tmp/ccycsPNH.s:183    .text.CMW_UTILS_GetPipeConfig:00000000 $t
-     /tmp/ccycsPNH.s:189    .text.CMW_UTILS_GetPipeConfig:00000000 CMW_UTILS_GetPipeConfig
-     /tmp/ccycsPNH.s:584    .text.CMW_UTILS_GetPipeConfig:00000198 $d
-     /tmp/ccycsPNH.s:602    .rodata.__func__.1:00000000 __func__.1
-                           .group:00000000 wm4.0.c552ae9005b0f2cca11872fae5d4b7f2
+     /tmp/ccDLW83P.s:26     .text.CMW_UTILS_GetPipeConfig:00000000 $t
+     /tmp/ccDLW83P.s:32     .text.CMW_UTILS_GetPipeConfig:00000000 CMW_UTILS_GetPipeConfig
+     /tmp/ccDLW83P.s:234    .text.CMW_UTILS_get_crop_config:00000000 CMW_UTILS_get_crop_config
+     /tmp/ccDLW83P.s:434    .text.CMW_UTILS_get_crop_config_from_manual:00000000 CMW_UTILS_get_crop_config_from_manual
+     /tmp/ccDLW83P.s:764    .text.CMW_UTILS_get_scale_configs:00000000 CMW_UTILS_get_scale_configs
+     /tmp/ccDLW83P.s:219    .rodata:00000000 $d
+     /tmp/ccDLW83P.s:229    .text.CMW_UTILS_get_crop_config:00000000 $t
+     /tmp/ccDLW83P.s:420    .text.CMW_UTILS_get_crop_config:00000170 $d
+     /tmp/ccDLW83P.s:833    .rodata.__func__.1:00000000 __func__.1
+     /tmp/ccDLW83P.s:429    .text.CMW_UTILS_get_crop_config_from_manual:00000000 $t
+     /tmp/ccDLW83P.s:489    .text.CMW_UTILS_get_down_config:00000000 $t
+     /tmp/ccDLW83P.s:494    .text.CMW_UTILS_get_down_config:00000000 CMW_UTILS_get_down_config
+     /tmp/ccDLW83P.s:573    .text.CMW_UTILS_get_down_config:00000078 $d
+     /tmp/ccDLW83P.s:583    .text.CMW_UTILS_get_dec_ratio_from_decimal_ratio:00000000 $t
+     /tmp/ccDLW83P.s:588    .text.CMW_UTILS_get_dec_ratio_from_decimal_ratio:00000000 CMW_UTILS_get_dec_ratio_from_decimal_ratio
+     /tmp/ccDLW83P.s:613    .text.CMW_UTILS_get_dec_ratio_from_decimal_ratio:00000018 $d
+     /tmp/ccDLW83P.s:621    .text.CMW_UTILS_get_dec_ratio_from_decimal_ratio:00000038 $t
+     /tmp/ccDLW83P.s:687    .text.CMW_UTILS_get_dec_ratio_from_decimal_ratio:0000007c $d
+     /tmp/ccDLW83P.s:839    .rodata.__func__.0:00000000 __func__.0
+     /tmp/ccDLW83P.s:694    .text.CMW_UTILS_get_dec_ratio_and_update:00000000 $t
+     /tmp/ccDLW83P.s:699    .text.CMW_UTILS_get_dec_ratio_and_update:00000000 CMW_UTILS_get_dec_ratio_and_update
+     /tmp/ccDLW83P.s:759    .text.CMW_UTILS_get_scale_configs:00000000 $t
+     /tmp/ccDLW83P.s:830    .rodata.__func__.1:00000000 $d
+     /tmp/ccDLW83P.s:836    .rodata.__func__.0:00000000 $d
+                           .group:00000000 wm4.0.2a10773746a5c5ebb5552f50e466f80b
                            .group:00000000 wm4.stddef.h.39.0dc9006b34572d4d9cae4c8b422c4971
                            .group:00000000 wm4.arm_cmse.h.103.a0d15a79c4c9a67da8d5831704d7248e
                            .group:00000000 wm4.stm32n6xx.h.34.80585dd08aa426c932f6311fdb7386da
@@ -1021,6 +1102,9 @@ DEFINED SYMBOLS
                            .group:00000000 wm4.stddef.h.158.6f8e08a347b1cff664332fa350bfceb3
                            .group:00000000 wm4._types.h.127.3bdfe3ff8ea2d0985b03d9cbe93480e3
                            .group:00000000 wm4.reent.h.18.25503cdc8b7e55dd0d6ea7b3e5af7a03
+ARM GAS  /tmp/ccDLW83P.s 			page 20
+
+
                            .group:00000000 wm4.lock.h.2.1461d1fff82dffe8bfddc23307f6484f
                            .group:00000000 wm4.reent.h.78.6b87466b04591b1f1cb88c14fdf2ba9e
                            .group:00000000 wm4.math.h.13.47cfc34cae8a1153323939c4d32cf7c2
@@ -1035,9 +1119,6 @@ DEFINED SYMBOLS
                            .group:00000000 wm4.stm32n6xx_hal_rcc.h.4359.3f0b7ad33826d95438602c9aebc08af9
                            .group:00000000 wm4.stm32n6xx_hal_gpio.h.21.89d54af663b98eb8fc098192053f7eeb
                            .group:00000000 wm4.stm32n6xx_hal_gpio_ex.h.22.4acb2e3511a98bb48b81cfc8e09fd59e
-ARM GAS  /tmp/ccycsPNH.s 			page 19
-
-
                            .group:00000000 wm4.stm32n6xx_hal_rif.h.21.424d0bafb874a777dee3742a22e13037
                            .group:00000000 wm4.stm32n6xx_hal_dma.h.21.61e48c5c2e8d25d22177834b232fe45c
                            .group:00000000 wm4.stm32n6xx_hal_dma_ex.h.21.66e597beb090a165329d6ccf665e41bc
@@ -1081,6 +1162,9 @@ DEFINED SYMBOLS
                            .group:00000000 wm4.stdlib.h.13.4ed386f5c1a80d71e72172885d946ef2
                            .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
                            .group:00000000 wm4.stdlib.h.56.f4862cfbf4363a1db01842d5bdf72c18
+ARM GAS  /tmp/ccDLW83P.s 			page 21
+
+
                            .group:00000000 wm4.string.h.8.c4b8571ce60dff2817f43fec8b86aecd
                            .group:00000000 wm4.stdbool.h.29.c08aa3eec75cf5b9b5003883f43253f0
                            .group:00000000 wm4.isp_core.h.109.be5387f515355b6edcb70af2607f9a68

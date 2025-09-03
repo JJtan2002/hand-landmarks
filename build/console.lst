@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccmy33WN.s 			page 1
+ARM GAS  /tmp/cc1PClKG.s 			page 1
 
 
    1              		.arch armv8.1-m.main
@@ -16,7 +16,7 @@ ARM GAS  /tmp/ccmy33WN.s 			page 1
   13              		.eabi_attribute 24, 1
   14              		.eabi_attribute 25, 1
   15              		.eabi_attribute 26, 1
-  16              		.eabi_attribute 30, 4
+  16              		.eabi_attribute 30, 6
   17              		.eabi_attribute 34, 1
   18              		.eabi_attribute 38, 1
   19              		.eabi_attribute 18, 4
@@ -32,8 +32,7 @@ ARM GAS  /tmp/ccmy33WN.s 			page 1
   29              		.thumb
   30              		.thumb_func
   32              	_write:
-  33              	.LVL0:
-  34              	.LFB835:
+  33              	.LFB835:
    1:Gcc/Src/console.c ****  /**
    2:Gcc/Src/console.c ****  ******************************************************************************
    3:Gcc/Src/console.c ****  * @file    console.c
@@ -58,114 +57,113 @@ ARM GAS  /tmp/ccmy33WN.s 			page 1
   22:Gcc/Src/console.c **** #include <unistd.h>
   23:Gcc/Src/console.c **** 
   24:Gcc/Src/console.c **** extern UART_HandleTypeDef huart1;
-ARM GAS  /tmp/ccmy33WN.s 			page 2
-
-
   25:Gcc/Src/console.c **** 
+ARM GAS  /tmp/cc1PClKG.s 			page 2
+
+
   26:Gcc/Src/console.c **** int _write(int file, char *ptr, int len)
   27:Gcc/Src/console.c **** {
-  35              		.loc 1 27 1 view -0
-  36              		.cfi_startproc
-  37              		@ args = 0, pretend = 0, frame = 0
-  38              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 1 27 1
+  35              		.cfi_startproc
+  36              		@ args = 0, pretend = 0, frame = 24
+  37              		@ frame_needed = 1, uses_anonymous_args = 0
+  38 0000 80B5     		push	{r7, lr}
+  39              		.cfi_def_cfa_offset 8
+  40              		.cfi_offset 7, -8
+  41              		.cfi_offset 14, -4
+  42 0002 86B0     		sub	sp, sp, #24
+  43              		.cfi_def_cfa_offset 32
+  44 0004 00AF     		add	r7, sp, #0
+  45              		.cfi_def_cfa_register 7
+  46 0006 F860     		str	r0, [r7, #12]
+  47 0008 B960     		str	r1, [r7, #8]
+  48 000a 7A60     		str	r2, [r7, #4]
   28:Gcc/Src/console.c ****   HAL_StatusTypeDef status;
-  39              		.loc 1 28 3 view .LVU1
   29:Gcc/Src/console.c **** 
   30:Gcc/Src/console.c ****   if ((file != STDOUT_FILENO) && (file != STDERR_FILENO)) {
-  40              		.loc 1 30 3 view .LVU2
-  41              		.loc 1 30 31 is_stmt 0 view .LVU3
-  42 0000 0138     		subs	r0, r0, #1
-  43              	.LVL1:
-  44              		.loc 1 30 6 view .LVU4
-  45 0002 0128     		cmp	r0, #1
-  27:Gcc/Src/console.c ****   HAL_StatusTypeDef status;
-  46              		.loc 1 27 1 view .LVU5
-  47 0004 10B5     		push	{r4, lr}
-  48              		.cfi_def_cfa_offset 8
-  49              		.cfi_offset 4, -8
-  50              		.cfi_offset 14, -4
-  27:Gcc/Src/console.c ****   HAL_StatusTypeDef status;
-  51              		.loc 1 27 1 view .LVU6
-  52 0006 1446     		mov	r4, r2
-  53              		.loc 1 30 6 view .LVU7
-  54 0008 07D9     		bls	.L2
+  49              		.loc 1 30 6
+  50 000c FB68     		ldr	r3, [r7, #12]
+  51 000e 012B     		cmp	r3, #1
+  52 0010 0AD0     		beq	.L2
+  53              		.loc 1 30 31 discriminator 1
+  54 0012 FB68     		ldr	r3, [r7, #12]
+  55 0014 022B     		cmp	r3, #2
+  56 0016 07D0     		beq	.L2
   31:Gcc/Src/console.c ****       errno = EBADF;
-  55              		.loc 1 31 7 is_stmt 1 view .LVU8
-  56 000a FFF7FEFF 		bl	__errno
-  57              	.LVL2:
-  58              		.loc 1 31 13 is_stmt 0 discriminator 1 view .LVU9
-  59 000e 0923     		movs	r3, #9
+  57              		.loc 1 31 7
+  58 0018 FFF7FEFF 		bl	__errno
+  59 001c 0346     		mov	r3, r0
+  60              		.loc 1 31 13 discriminator 1
+  61 001e 0922     		movs	r2, #9
+  62 0020 1A60     		str	r2, [r3]
   32:Gcc/Src/console.c ****       return -1;
-  60              		.loc 1 32 14 view .LVU10
-  61 0010 4FF0FF34 		mov	r4, #-1
-  62              	.LVL3:
-  31:Gcc/Src/console.c ****       errno = EBADF;
-  63              		.loc 1 31 13 discriminator 1 view .LVU11
-  64 0014 0360     		str	r3, [r0]
-  65              		.loc 1 32 7 is_stmt 1 view .LVU12
-  66              	.L3:
+  63              		.loc 1 32 14
+  64 0022 4FF0FF33 		mov	r3, #-1
+  65 0026 0FE0     		b	.L3
+  66              	.L2:
   33:Gcc/Src/console.c ****   }
   34:Gcc/Src/console.c **** 
   35:Gcc/Src/console.c ****   status = HAL_UART_Transmit(&huart1, (uint8_t*)ptr, len, ~0);
+  67              		.loc 1 35 12
+  68 0028 7B68     		ldr	r3, [r7, #4]
+  69 002a 9AB2     		uxth	r2, r3
+  70 002c 4FF0FF33 		mov	r3, #-1
+  71 0030 B968     		ldr	r1, [r7, #8]
+  72 0032 0748     		ldr	r0, .L6
+  73 0034 FFF7FEFF 		bl	HAL_UART_Transmit
+  74 0038 0346     		mov	r3, r0
+  75 003a FB75     		strb	r3, [r7, #23]
   36:Gcc/Src/console.c **** 
   37:Gcc/Src/console.c ****   return (status == HAL_OK ? len : 0);
+  76              		.loc 1 37 34
+  77 003c FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+  78 003e 002B     		cmp	r3, #0
+ARM GAS  /tmp/cc1PClKG.s 			page 3
+
+
+  79 0040 01D1     		bne	.L4
+  80              		.loc 1 37 34 is_stmt 0 discriminator 1
+  81 0042 7B68     		ldr	r3, [r7, #4]
+  82              		.loc 1 37 34
+  83 0044 00E0     		b	.L3
+  84              	.L4:
+  85              		.loc 1 37 34 discriminator 2
+  86 0046 0023     		movs	r3, #0
+  87              	.L3:
   38:Gcc/Src/console.c **** }
-  67              		.loc 1 38 1 is_stmt 0 view .LVU13
-  68 0016 2046     		mov	r0, r4
-  69 0018 10BD     		pop	{r4, pc}
-  70              	.LVL4:
-  71              	.L2:
-  35:Gcc/Src/console.c **** 
-  72              		.loc 1 35 3 is_stmt 1 view .LVU14
-  35:Gcc/Src/console.c **** 
-ARM GAS  /tmp/ccmy33WN.s 			page 3
-
-
-  73              		.loc 1 35 12 is_stmt 0 view .LVU15
-  74 001a 4FF0FF33 		mov	r3, #-1
-  75 001e 0448     		ldr	r0, .L5
-  76 0020 92B2     		uxth	r2, r2
-  77              	.LVL5:
-  35:Gcc/Src/console.c **** 
-  78              		.loc 1 35 12 view .LVU16
-  79 0022 FFF7FEFF 		bl	HAL_UART_Transmit
-  80              	.LVL6:
-  37:Gcc/Src/console.c **** }
-  81              		.loc 1 37 3 is_stmt 1 view .LVU17
-  37:Gcc/Src/console.c **** }
-  82              		.loc 1 37 34 is_stmt 0 discriminator 2 view .LVU18
-  83 0026 0028     		cmp	r0, #0
-  84 0028 18BF     		it	ne
-  85 002a 0024     		movne	r4, #0
-  86              	.LVL7:
-  37:Gcc/Src/console.c **** }
-  87              		.loc 1 37 34 discriminator 2 view .LVU19
-  88 002c F3E7     		b	.L3
-  89              	.L6:
-  90 002e 00BF     		.align	2
-  91              	.L5:
-  92 0030 00000000 		.word	huart1
-  93              		.cfi_endproc
-  94              	.LFE835:
-  96              		.text
-  97              	.Letext0:
-  98              		.file 2 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
-  99              		.file 3 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 100              		.file 4 "STM32Cube_FW_N6/Drivers/CMSIS/Device/ST/STM32N6xx/Include/stm32n657xx.h"
- 101              		.file 5 "STM32Cube_FW_N6/Drivers/STM32N6xx_HAL_Driver/Inc/stm32n6xx_hal_def.h"
- 102              		.file 6 "STM32Cube_FW_N6/Drivers/STM32N6xx_HAL_Driver/Inc/stm32n6xx_hal_dma.h"
- 103              		.file 7 "STM32Cube_FW_N6/Drivers/STM32N6xx_HAL_Driver/Inc/stm32n6xx_hal_dma_ex.h"
- 104              		.file 8 "STM32Cube_FW_N6/Drivers/STM32N6xx_HAL_Driver/Inc/stm32n6xx_hal_uart.h"
- 105              		.file 9 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
-ARM GAS  /tmp/ccmy33WN.s 			page 4
+  88              		.loc 1 38 1 is_stmt 1
+  89 0048 1846     		mov	r0, r3
+  90 004a 1837     		adds	r7, r7, #24
+  91              		.cfi_def_cfa_offset 8
+  92 004c BD46     		mov	sp, r7
+  93              		.cfi_def_cfa_register 13
+  94              		@ sp needed
+  95 004e 80BD     		pop	{r7, pc}
+  96              	.L7:
+  97              		.align	2
+  98              	.L6:
+  99 0050 00000000 		.word	huart1
+ 100              		.cfi_endproc
+ 101              	.LFE835:
+ 103              		.text
+ 104              	.Letext0:
+ 105              		.file 2 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 106              		.file 3 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 107              		.file 4 "STM32Cube_FW_N6/Drivers/CMSIS/Device/ST/STM32N6xx/Include/stm32n657xx.h"
+ 108              		.file 5 "STM32Cube_FW_N6/Drivers/STM32N6xx_HAL_Driver/Inc/stm32n6xx_hal_def.h"
+ 109              		.file 6 "STM32Cube_FW_N6/Drivers/STM32N6xx_HAL_Driver/Inc/stm32n6xx_hal_dma.h"
+ 110              		.file 7 "STM32Cube_FW_N6/Drivers/STM32N6xx_HAL_Driver/Inc/stm32n6xx_hal_dma_ex.h"
+ 111              		.file 8 "STM32Cube_FW_N6/Drivers/STM32N6xx_HAL_Driver/Inc/stm32n6xx_hal_uart.h"
+ 112              		.file 9 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ARM GAS  /tmp/cc1PClKG.s 			page 4
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 console.c
-     /tmp/ccmy33WN.s:26     .text._write:00000000 $t
-     /tmp/ccmy33WN.s:32     .text._write:00000000 _write
-     /tmp/ccmy33WN.s:92     .text._write:00000030 $d
-                           .group:00000000 wm4.0.c552ae9005b0f2cca11872fae5d4b7f2
+     /tmp/cc1PClKG.s:26     .text._write:00000000 $t
+     /tmp/cc1PClKG.s:32     .text._write:00000000 _write
+     /tmp/cc1PClKG.s:99     .text._write:00000050 $d
+                           .group:00000000 wm4.0.2a10773746a5c5ebb5552f50e466f80b
                            .group:00000000 wm4.stm32n6xx_hal_conf.h.21.004a06df6e15ac197e03f723792da58a
                            .group:00000000 wm4.stddef.h.39.0dc9006b34572d4d9cae4c8b422c4971
                            .group:00000000 wm4.arm_cmse.h.103.a0d15a79c4c9a67da8d5831704d7248e
@@ -217,7 +215,7 @@ DEFINED SYMBOLS
                            .group:00000000 wm4.stm32n6xx_hal_dcmipp.h.21.f538bfd785c6469670251ac9bc7af55d
                            .group:00000000 wm4.stm32n6xx_hal_dma2d.h.21.75c8d46cdbb72970123b3f34ae2043d7
                            .group:00000000 wm4.stm32n6xx_hal_exti.h.21.fda87e715ea6b98239ec30171d1df594
-ARM GAS  /tmp/ccmy33WN.s 			page 5
+ARM GAS  /tmp/cc1PClKG.s 			page 5
 
 
                            .group:00000000 wm4.stm32n6xx_hal_gfxmmu.h.21.9784a9103143d48bd3c37389d0e0b8e6

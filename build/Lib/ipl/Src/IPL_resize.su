@@ -1,6 +1,8 @@
-Lib/ipl/Src/IPL_resize.c:29:6:IPL_resize_bilinear_iu8ou8	112	static
-Lib/ipl/Src/IPL_resize.c:86:6:IPL_resize_bilinear_iu8ou8_with_strides_RGB	80	static
-Lib/ipl/Src/IPL_resize.c:68:6:IPL_resize_bilinear_iu8ou8_RGB	32	static
-Lib/ipl/Src/IPL_resize.c:148:6:IPL_resize_nearest_iu8ou8_with_strides_RGB	32	static
-Lib/ipl/Src/IPL_resize.c:131:6:IPL_resize_nearest_iu8ou8_RGB	32	static
-Lib/ipl/Src/IPL_resize.c:190:6:IPL_resize_nearest_iu8ou8	96	static
+Lib/ipl/Src/IPL_resize_bilinear_private.h:62:6:IPL_bilinear_iu8ou8_kernel_RGB	424	static
+Lib/ipl/Src/IPL_resize_bilinear_private.h:171:6:IPL_bilinear_iu8ou8_kernel	432	static
+Lib/ipl/Src/IPL_resize.c:29:6:IPL_resize_bilinear_iu8ou8	120	static
+Lib/ipl/Src/IPL_resize.c:68:6:IPL_resize_bilinear_iu8ou8_RGB	40	static
+Lib/ipl/Src/IPL_resize.c:86:6:IPL_resize_bilinear_iu8ou8_with_strides_RGB	128	static
+Lib/ipl/Src/IPL_resize.c:131:6:IPL_resize_nearest_iu8ou8_RGB	40	static
+Lib/ipl/Src/IPL_resize.c:148:6:IPL_resize_nearest_iu8ou8_with_strides_RGB	80	static
+Lib/ipl/Src/IPL_resize.c:190:6:IPL_resize_nearest_iu8ou8	72	static

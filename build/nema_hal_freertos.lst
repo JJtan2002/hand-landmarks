@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cck4dqzt.s 			page 1
+ARM GAS  /tmp/ccKMUTYx.s 			page 1
 
 
    1              		.arch armv8.1-m.main
@@ -16,7 +16,7 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
   13              		.eabi_attribute 24, 1
   14              		.eabi_attribute 25, 1
   15              		.eabi_attribute 26, 1
-  16              		.eabi_attribute 30, 4
+  16              		.eabi_attribute 30, 6
   17              		.eabi_attribute 34, 1
   18              		.eabi_attribute 38, 1
   19              		.eabi_attribute 18, 4
@@ -25,27 +25,81 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
   22              	.Ltext0:
   23              		.cfi_sections	.debug_frame
   24              		.file 1 "Src/nema_hal_freertos.c"
-  25              		.section	.rodata.HAL_GPU2D_CommandListCpltCallback.str1.1,"aMS",%progbits,1
-  26              	.LC0:
-  27 0000 72657420 		.ascii	"ret == pdTRUE\000"
-  27      3D3D2070 
-  27      64545255 
-  27      4500
-  28              	.LC1:
-  29 000e 5372632F 		.ascii	"Src/nema_hal_freertos.c\000"
-  29      6E656D61 
-  29      5F68616C 
-  29      5F667265 
-  29      6572746F 
-  30              		.section	.text.HAL_GPU2D_CommandListCpltCallback,"ax",%progbits
-  31              		.align	1
-  32              		.global	HAL_GPU2D_CommandListCpltCallback
-  33              		.syntax unified
-  34              		.thumb
-  35              		.thumb_func
-  37              	HAL_GPU2D_CommandListCpltCallback:
-  38              	.LVL0:
-  39              	.LFB843:
+  25              		.section	.data.memPools,"aw"
+  26              		.align	2
+  29              	memPools:
+  30 0000 00001834 		.word	873988096
+  31 0004 00000800 		.word	524288
+  32 0008 00000000 		.word	0
+  33 000c 00000090 		.word	-1879048192
+  34 0010 00E22E00 		.word	3072512
+  35 0014 00000000 		.word	0
+  36 0018 00E22E90 		.word	-1875975680
+  37 001c 00DD0500 		.word	384256
+  38 0020 00000000 		.word	0
+  39              		.section	.bss.ring_buffer_str,"aw",%nobits
+  40              		.align	2
+  43              	ring_buffer_str:
+  44 0000 00000000 		.space	24
+  44      00000000 
+  44      00000000 
+  44      00000000 
+  44      00000000 
+  45              		.section	.data.last_cl_id,"aw"
+  46              		.align	2
+  49              	last_cl_id:
+  50 0000 FFFFFFFF 		.word	-1
+  51              		.section	.bss.nema_mutexes_buffers,"aw",%nobits
+  52              		.align	2
+  55              	nema_mutexes_buffers:
+  56 0000 00000000 		.space	240
+  56      00000000 
+  56      00000000 
+  56      00000000 
+  56      00000000 
+  57              		.section	.bss.nema_mutexes_ids,"aw",%nobits
+ARM GAS  /tmp/ccKMUTYx.s 			page 2
+
+
+  58              		.align	2
+  61              	nema_mutexes_ids:
+  62 0000 00000000 		.space	12
+  62      00000000 
+  62      00000000 
+  63              		.section	.bss.nema_irq_sem_buffer,"aw",%nobits
+  64              		.align	2
+  67              	nema_irq_sem_buffer:
+  68 0000 00000000 		.space	80
+  68      00000000 
+  68      00000000 
+  68      00000000 
+  68      00000000 
+  69              		.section	.bss.nema_irq_sem,"aw",%nobits
+  70              		.align	2
+  73              	nema_irq_sem:
+  74 0000 00000000 		.space	4
+  75              		.section	.rodata
+  76              		.align	2
+  77              	.LC0:
+  78 0000 72657420 		.ascii	"ret == pdTRUE\000"
+  78      3D3D2070 
+  78      64545255 
+  78      4500
+  79 000e 0000     		.align	2
+  80              	.LC1:
+  81 0010 5372632F 		.ascii	"Src/nema_hal_freertos.c\000"
+  81      6E656D61 
+  81      5F68616C 
+  81      5F667265 
+  81      6572746F 
+  82              		.section	.text.HAL_GPU2D_CommandListCpltCallback,"ax",%progbits
+  83              		.align	1
+  84              		.global	HAL_GPU2D_CommandListCpltCallback
+  85              		.syntax unified
+  86              		.thumb
+  87              		.thumb_func
+  89              	HAL_GPU2D_CommandListCpltCallback:
+  90              	.LFB843:
    1:Src/nema_hal_freertos.c **** 
    2:Src/nema_hal_freertos.c **** /**
    3:Src/nema_hal_freertos.c ****   ******************************************************************************
@@ -58,15 +112,15 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
   10:Src/nema_hal_freertos.c ****   *           + Initialization and de-initialization functions
   11:Src/nema_hal_freertos.c ****   *           + GPU2D Registers access operation functions
   12:Src/nema_hal_freertos.c ****   *           + Buffer Creation, Destruction, MMAP and Flusing functions
-ARM GAS  /tmp/cck4dqzt.s 			page 2
-
-
   13:Src/nema_hal_freertos.c ****   *           + Interrupt management functions
   14:Src/nema_hal_freertos.c ****   *           + Memory management functions
   15:Src/nema_hal_freertos.c ****   *           + Locking/Unlocking resources functions
   16:Src/nema_hal_freertos.c ****   ******************************************************************************
   17:Src/nema_hal_freertos.c ****   * @attention
   18:Src/nema_hal_freertos.c ****   *
+ARM GAS  /tmp/ccKMUTYx.s 			page 3
+
+
   19:Src/nema_hal_freertos.c ****   * <h2><center>&copy; Copyright (c) 2020-2023 STMicroelectronics.
   20:Src/nema_hal_freertos.c ****   * All rights reserved.</center></h2>
   21:Src/nema_hal_freertos.c ****   *
@@ -118,15 +172,15 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
   67:Src/nema_hal_freertos.c **** volatile static int last_cl_id = -1;
   68:Src/nema_hal_freertos.c **** extern GPU2D_HandleTypeDef hgpu2d;
   69:Src/nema_hal_freertos.c **** 
-ARM GAS  /tmp/cck4dqzt.s 			page 3
-
-
   70:Src/nema_hal_freertos.c **** #if (defined(NEMA_MULTI_PROCESS) || defined(NEMA_MULTI_THREAD))
   71:Src/nema_hal_freertos.c **** static StaticSemaphore_t nema_mutexes_buffers[MUTEX_MAX+1];
   72:Src/nema_hal_freertos.c **** static SemaphoreHandle_t nema_mutexes_ids[MUTEX_MAX+1];
   73:Src/nema_hal_freertos.c **** #endif /* NEMA_MULTI_PROCESS | NEMA_MULTI_THREAD */
   74:Src/nema_hal_freertos.c **** 
   75:Src/nema_hal_freertos.c **** #if defined(NEMA_WAIT_IRQ_BINARY_SEMAPHORE)
+ARM GAS  /tmp/ccKMUTYx.s 			page 4
+
+
   76:Src/nema_hal_freertos.c **** static StaticSemaphore_t nema_irq_sem_buffer;
   77:Src/nema_hal_freertos.c **** static SemaphoreHandle_t nema_irq_sem;  // Semaphore struct
   78:Src/nema_hal_freertos.c **** #endif /* NEMA_WAIT_IRQ_BINARY_SEMAPHORE */
@@ -137,1476 +191,1170 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
   83:Src/nema_hal_freertos.c **** void HAL_GPU2D_CommandListCpltCallback(GPU2D_HandleTypeDef *hgpu2d, uint32_t CmdListID)
   84:Src/nema_hal_freertos.c **** #endif /* USE_HAL_GPU2D_REGISTER_CALLBACKS = 1 */
   85:Src/nema_hal_freertos.c **** {
-  40              		.loc 1 85 1 view -0
-  41              		.cfi_startproc
-  42              		@ args = 0, pretend = 0, frame = 8
-  43              		@ frame_needed = 0, uses_anonymous_args = 0
+  91              		.loc 1 85 1
+  92              		.cfi_startproc
+  93              		@ args = 0, pretend = 0, frame = 16
+  94              		@ frame_needed = 1, uses_anonymous_args = 0
+  95 0000 80B5     		push	{r7, lr}
+  96              		.cfi_def_cfa_offset 8
+  97              		.cfi_offset 7, -8
+  98              		.cfi_offset 14, -4
+  99 0002 84B0     		sub	sp, sp, #16
+ 100              		.cfi_def_cfa_offset 24
+ 101 0004 00AF     		add	r7, sp, #0
+ 102              		.cfi_def_cfa_register 7
+ 103 0006 7860     		str	r0, [r7, #4]
+ 104 0008 3960     		str	r1, [r7]
   86:Src/nema_hal_freertos.c ****     BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-  44              		.loc 1 86 5 view .LVU1
-  45              		.loc 1 86 16 is_stmt 0 view .LVU2
-  46 0000 0023     		movs	r3, #0
-  85:Src/nema_hal_freertos.c ****     BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-  47              		.loc 1 85 1 view .LVU3
-  48 0002 07B5     		push	{r0, r1, r2, lr}
-  49              		.cfi_def_cfa_offset 16
-  50              		.cfi_offset 14, -4
-  51              		.loc 1 86 16 view .LVU4
-  52 0004 0193     		str	r3, [sp, #4]
+ 105              		.loc 1 86 16
+ 106 000a 0023     		movs	r3, #0
+ 107 000c BB60     		str	r3, [r7, #8]
   87:Src/nema_hal_freertos.c ****     int ret;
-  53              		.loc 1 87 5 is_stmt 1 view .LVU5
   88:Src/nema_hal_freertos.c **** 
   89:Src/nema_hal_freertos.c ****     /* Prevent unused argument(s) compilation warning */
   90:Src/nema_hal_freertos.c ****     UNUSED(hgpu2d);
-  54              		.loc 1 90 5 view .LVU6
   91:Src/nema_hal_freertos.c **** 
   92:Src/nema_hal_freertos.c ****     last_cl_id = CmdListID;
-  55              		.loc 1 92 5 view .LVU7
-  56              		.loc 1 92 16 is_stmt 0 view .LVU8
-  57 0006 0D4B     		ldr	r3, .L7
-  58 0008 1960     		str	r1, [r3]
+ 108              		.loc 1 92 16
+ 109 000e 3B68     		ldr	r3, [r7]
+ 110 0010 0F4A     		ldr	r2, .L5
+ 111 0012 1360     		str	r3, [r2]
   93:Src/nema_hal_freertos.c **** #if defined(NEMA_WAIT_IRQ_BINARY_SEMAPHORE)
   94:Src/nema_hal_freertos.c ****     ret = xSemaphoreGiveFromISR(nema_irq_sem, &xHigherPriorityTaskWoken);
-  59              		.loc 1 94 5 is_stmt 1 view .LVU9
-  60              		.loc 1 94 11 is_stmt 0 view .LVU10
-  61 000a 0D4B     		ldr	r3, .L7+4
-  62 000c 01A9     		add	r1, sp, #4
-  63              	.LVL1:
-  64              		.loc 1 94 11 view .LVU11
-  65 000e 1868     		ldr	r0, [r3]
-  66              	.LVL2:
-  67              		.loc 1 94 11 view .LVU12
-  68 0010 FFF7FEFF 		bl	xQueueGiveFromISR
-  69              	.LVL3:
+ 112              		.loc 1 94 11
+ 113 0014 0F4B     		ldr	r3, .L5+4
+ 114 0016 1B68     		ldr	r3, [r3]
+ 115 0018 07F10802 		add	r2, r7, #8
+ 116 001c 1146     		mov	r1, r2
+ 117 001e 1846     		mov	r0, r3
+ 118 0020 FFF7FEFF 		bl	xQueueGiveFromISR
+ 119 0024 F860     		str	r0, [r7, #12]
   95:Src/nema_hal_freertos.c ****     assert(ret == pdTRUE);
-ARM GAS  /tmp/cck4dqzt.s 			page 4
+ 120              		.loc 1 95 5
+ 121 0026 FB68     		ldr	r3, [r7, #12]
+ 122 0028 012B     		cmp	r3, #1
+ 123 002a 05D0     		beq	.L2
+ 124              		.loc 1 95 5 is_stmt 0 discriminator 1
+ 125 002c 0A4B     		ldr	r3, .L5+8
+ 126 002e 0B4A     		ldr	r2, .L5+12
+ 127 0030 5F21     		movs	r1, #95
+ARM GAS  /tmp/ccKMUTYx.s 			page 5
 
 
-  70              		.loc 1 95 5 is_stmt 1 view .LVU13
-  71 0014 0128     		cmp	r0, #1
-  72 0016 05D0     		beq	.L2
-  73              		.loc 1 95 5 is_stmt 0 discriminator 1 view .LVU14
-  74 0018 5F21     		movs	r1, #95
-  75 001a 0A4B     		ldr	r3, .L7+8
-  76 001c 0A4A     		ldr	r2, .L7+12
-  77 001e 0B48     		ldr	r0, .L7+16
-  78              	.LVL4:
-  79              		.loc 1 95 5 discriminator 1 view .LVU15
-  80 0020 FFF7FEFF 		bl	__assert_func
-  81              	.LVL5:
-  82              	.L2:
+ 128 0032 0B48     		ldr	r0, .L5+16
+ 129 0034 FFF7FEFF 		bl	__assert_func
+ 130              	.L2:
   96:Src/nema_hal_freertos.c ****     portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
-  83              		.loc 1 96 5 is_stmt 1 view .LVU16
-  84              		.loc 1 96 5 view .LVU17
-  85 0024 019B     		ldr	r3, [sp, #4]
-  86 0026 2BB1     		cbz	r3, .L1
-  87              		.loc 1 96 5 discriminator 1 view .LVU18
-  88 0028 4FF0E023 		mov	r3, #-536813568
-  89 002c 4FF08052 		mov	r2, #268435456
-  90 0030 C3F8042D 		str	r2, [r3, #3332]
-  91              		.loc 1 96 5 discriminator 3 view .LVU19
-  92              	.L1:
+ 131              		.loc 1 96 5 is_stmt 1
+ 132 0038 BB68     		ldr	r3, [r7, #8]
+ 133 003a 002B     		cmp	r3, #0
+ 134 003c 03D0     		beq	.L4
+ 135              		.loc 1 96 5 is_stmt 0 discriminator 1
+ 136 003e 094B     		ldr	r3, .L5+20
+ 137 0040 4FF08052 		mov	r2, #268435456
+ 138 0044 1A60     		str	r2, [r3]
+ 139              	.L4:
   97:Src/nema_hal_freertos.c **** #endif /* NEMA_WAIT_IRQ_BINARY_SEMAPHORE */
   98:Src/nema_hal_freertos.c **** }
-  93              		.loc 1 98 1 is_stmt 0 view .LVU20
-  94 0034 03B0     		add	sp, sp, #12
-  95              		.cfi_def_cfa_offset 4
-  96              		@ sp needed
-  97 0036 5DF804FB 		ldr	pc, [sp], #4
-  98              	.L8:
-  99 003a 00BF     		.align	2
- 100              	.L7:
- 101 003c 00000000 		.word	last_cl_id
- 102 0040 00000000 		.word	nema_irq_sem
- 103 0044 00000000 		.word	.LC0
- 104 0048 00000000 		.word	__func__.4
- 105 004c 0E000000 		.word	.LC1
- 106              		.cfi_endproc
- 107              	.LFE843:
- 109              		.section	.text.nema_wait_irq,"ax",%progbits
- 110              		.align	1
- 111              		.global	nema_wait_irq
- 112              		.syntax unified
- 113              		.thumb
- 114              		.thumb_func
- 116              	nema_wait_irq:
- 117              	.LFB845:
+ 140              		.loc 1 98 1 is_stmt 1
+ 141 0046 00BF     		nop
+ 142 0048 1037     		adds	r7, r7, #16
+ 143              		.cfi_def_cfa_offset 8
+ 144 004a BD46     		mov	sp, r7
+ 145              		.cfi_def_cfa_register 13
+ 146              		@ sp needed
+ 147 004c 80BD     		pop	{r7, pc}
+ 148              	.L6:
+ 149 004e 00BF     		.align	2
+ 150              	.L5:
+ 151 0050 00000000 		.word	last_cl_id
+ 152 0054 00000000 		.word	nema_irq_sem
+ 153 0058 00000000 		.word	.LC0
+ 154 005c 00000000 		.word	__func__.4
+ 155 0060 10000000 		.word	.LC1
+ 156 0064 04ED00E0 		.word	-536810236
+ 157              		.cfi_endproc
+ 158              	.LFE843:
+ 160              		.section	.rodata
+ 161              		.align	2
+ 162              	.LC2:
+ 163 0028 6E656D61 		.ascii	"nema_mutexes_ids[MUTEX_RB]\000"
+ 163      5F6D7574 
+ 163      65786573 
+ 163      5F696473 
+ 163      5B4D5554 
+ 164 0043 00       		.align	2
+ 165              	.LC3:
+ 166 0044 6E656D61 		.ascii	"nema_mutexes_ids[MUTEX_MALLOC]\000"
+ 166      5F6D7574 
+ 166      65786573 
+ 166      5F696473 
+ 166      5B4D5554 
+ 167 0063 00       		.align	2
+ 168              	.LC4:
+ 169 0064 6E656D61 		.ascii	"nema_mutexes_ids[MUTEX_FLUSH]\000"
+ 169      5F6D7574 
+ 169      65786573 
+ 169      5F696473 
+ 169      5B4D5554 
+ 170 0082 0000     		.align	2
+ARM GAS  /tmp/ccKMUTYx.s 			page 6
+
+
+ 171              	.LC5:
+ 172 0084 6E656D61 		.ascii	"nema_irq_sem\000"
+ 172      5F697271 
+ 172      5F73656D 
+ 172      00
+ 173 0091 000000   		.align	2
+ 174              	.LC6:
+ 175 0094 72696E67 		.ascii	"ring_buffer_str.bo.base_virt\000"
+ 175      5F627566 
+ 175      6665725F 
+ 175      7374722E 
+ 175      626F2E62 
+ 176              		.section	.text.nema_sys_init,"ax",%progbits
+ 177              		.align	1
+ 178              		.global	nema_sys_init
+ 179              		.syntax unified
+ 180              		.thumb
+ 181              		.thumb_func
+ 183              	nema_sys_init:
+ 184              	.LFB844:
   99:Src/nema_hal_freertos.c **** 
  100:Src/nema_hal_freertos.c **** int32_t nema_sys_init(void)
  101:Src/nema_hal_freertos.c **** {
+ 185              		.loc 1 101 1
+ 186              		.cfi_startproc
+ 187              		@ args = 0, pretend = 0, frame = 24
+ 188              		@ frame_needed = 1, uses_anonymous_args = 0
+ 189 0000 90B5     		push	{r4, r7, lr}
+ 190              		.cfi_def_cfa_offset 12
+ 191              		.cfi_offset 4, -12
+ 192              		.cfi_offset 7, -8
+ 193              		.cfi_offset 14, -4
+ 194 0002 89B0     		sub	sp, sp, #36
+ 195              		.cfi_def_cfa_offset 48
+ 196 0004 02AF     		add	r7, sp, #8
+ 197              		.cfi_def_cfa 7, 40
  102:Src/nema_hal_freertos.c ****     int ret;
  103:Src/nema_hal_freertos.c ****     /* Setup GPU2D Callback */
  104:Src/nema_hal_freertos.c **** #if (USE_HAL_GPU2D_REGISTER_CALLBACKS == 1)
  105:Src/nema_hal_freertos.c ****     /* Register Command List Comlete Callback */
  106:Src/nema_hal_freertos.c ****     HAL_GPU2D_RegisterCommandListCpltCallback(&hgpu2d, GPU2D_CommandListCpltCallback);
-ARM GAS  /tmp/cck4dqzt.s 			page 5
-
-
  107:Src/nema_hal_freertos.c **** #endif /* USE_HAL_GPU2D_REGISTER_CALLBACKS = 1 */
  108:Src/nema_hal_freertos.c **** 
  109:Src/nema_hal_freertos.c **** #if (defined(NEMA_MULTI_PROCESS) || defined(NEMA_MULTI_THREAD))
  110:Src/nema_hal_freertos.c ****     /* Create Lock ressource */
  111:Src/nema_hal_freertos.c ****     nema_mutexes_ids[MUTEX_RB] = xSemaphoreCreateMutexStatic(&nema_mutexes_buffers[MUTEX_RB]);
+ 198              		.loc 1 111 34
+ 199 0006 4D49     		ldr	r1, .L17
+ 200 0008 0120     		movs	r0, #1
+ 201 000a FFF7FEFF 		bl	xQueueCreateMutexStatic
+ 202 000e 0346     		mov	r3, r0
+ 203              		.loc 1 111 32 discriminator 1
+ 204 0010 4B4A     		ldr	r2, .L17+4
+ 205 0012 1360     		str	r3, [r2]
  112:Src/nema_hal_freertos.c ****     assert(nema_mutexes_ids[MUTEX_RB]);
+ 206              		.loc 1 112 5
+ 207 0014 4A4B     		ldr	r3, .L17+4
+ARM GAS  /tmp/ccKMUTYx.s 			page 7
+
+
+ 208 0016 1B68     		ldr	r3, [r3]
+ 209 0018 002B     		cmp	r3, #0
+ 210 001a 05D1     		bne	.L8
+ 211              		.loc 1 112 5 is_stmt 0 discriminator 1
+ 212 001c 494B     		ldr	r3, .L17+8
+ 213 001e 4A4A     		ldr	r2, .L17+12
+ 214 0020 7021     		movs	r1, #112
+ 215 0022 4A48     		ldr	r0, .L17+16
+ 216 0024 FFF7FEFF 		bl	__assert_func
+ 217              	.L8:
  113:Src/nema_hal_freertos.c ****     nema_mutexes_ids[MUTEX_MALLOC] = xSemaphoreCreateMutexStatic(&nema_mutexes_buffers[MUTEX_MALLOC
+ 218              		.loc 1 113 38 is_stmt 1
+ 219 0028 4949     		ldr	r1, .L17+20
+ 220 002a 0120     		movs	r0, #1
+ 221 002c FFF7FEFF 		bl	xQueueCreateMutexStatic
+ 222 0030 0346     		mov	r3, r0
+ 223              		.loc 1 113 36 discriminator 1
+ 224 0032 434A     		ldr	r2, .L17+4
+ 225 0034 5360     		str	r3, [r2, #4]
  114:Src/nema_hal_freertos.c ****     assert(nema_mutexes_ids[MUTEX_MALLOC]);
+ 226              		.loc 1 114 5
+ 227 0036 424B     		ldr	r3, .L17+4
+ 228 0038 5B68     		ldr	r3, [r3, #4]
+ 229 003a 002B     		cmp	r3, #0
+ 230 003c 05D1     		bne	.L9
+ 231              		.loc 1 114 5 is_stmt 0 discriminator 1
+ 232 003e 454B     		ldr	r3, .L17+24
+ 233 0040 414A     		ldr	r2, .L17+12
+ 234 0042 7221     		movs	r1, #114
+ 235 0044 4148     		ldr	r0, .L17+16
+ 236 0046 FFF7FEFF 		bl	__assert_func
+ 237              	.L9:
  115:Src/nema_hal_freertos.c ****     nema_mutexes_ids[MUTEX_FLUSH] = xSemaphoreCreateMutexStatic(&nema_mutexes_buffers[MUTEX_FLUSH])
+ 238              		.loc 1 115 37 is_stmt 1
+ 239 004a 4349     		ldr	r1, .L17+28
+ 240 004c 0120     		movs	r0, #1
+ 241 004e FFF7FEFF 		bl	xQueueCreateMutexStatic
+ 242 0052 0346     		mov	r3, r0
+ 243              		.loc 1 115 35 discriminator 1
+ 244 0054 3A4A     		ldr	r2, .L17+4
+ 245 0056 9360     		str	r3, [r2, #8]
  116:Src/nema_hal_freertos.c ****     assert(nema_mutexes_ids[MUTEX_FLUSH]);
+ 246              		.loc 1 116 5
+ 247 0058 394B     		ldr	r3, .L17+4
+ 248 005a 9B68     		ldr	r3, [r3, #8]
+ 249 005c 002B     		cmp	r3, #0
+ 250 005e 05D1     		bne	.L10
+ 251              		.loc 1 116 5 is_stmt 0 discriminator 1
+ 252 0060 3E4B     		ldr	r3, .L17+32
+ 253 0062 394A     		ldr	r2, .L17+12
+ 254 0064 7421     		movs	r1, #116
+ 255 0066 3948     		ldr	r0, .L17+16
+ 256 0068 FFF7FEFF 		bl	__assert_func
+ 257              	.L10:
  117:Src/nema_hal_freertos.c **** #endif /* NEMA_MULTI_PROCESS | NEMA_MULTI_THREAD */
  118:Src/nema_hal_freertos.c **** 
  119:Src/nema_hal_freertos.c **** #if defined(NEMA_WAIT_IRQ_BINARY_SEMAPHORE)
+ARM GAS  /tmp/ccKMUTYx.s 			page 8
+
+
  120:Src/nema_hal_freertos.c ****     /* Create IRQ semaphore */
  121:Src/nema_hal_freertos.c ****     nema_irq_sem = xSemaphoreCreateCountingStatic(1, 0, &nema_irq_sem_buffer);
+ 258              		.loc 1 121 20 is_stmt 1
+ 259 006c 3C4A     		ldr	r2, .L17+36
+ 260 006e 0021     		movs	r1, #0
+ 261 0070 0120     		movs	r0, #1
+ 262 0072 FFF7FEFF 		bl	xQueueCreateCountingSemaphoreStatic
+ 263 0076 0346     		mov	r3, r0
+ 264              		.loc 1 121 18 discriminator 1
+ 265 0078 3A4A     		ldr	r2, .L17+40
+ 266 007a 1360     		str	r3, [r2]
  122:Src/nema_hal_freertos.c ****     assert(nema_irq_sem);
+ 267              		.loc 1 122 5
+ 268 007c 394B     		ldr	r3, .L17+40
+ 269 007e 1B68     		ldr	r3, [r3]
+ 270 0080 002B     		cmp	r3, #0
+ 271 0082 05D1     		bne	.L11
+ 272              		.loc 1 122 5 is_stmt 0 discriminator 1
+ 273 0084 384B     		ldr	r3, .L17+44
+ 274 0086 304A     		ldr	r2, .L17+12
+ 275 0088 7A21     		movs	r1, #122
+ 276 008a 3048     		ldr	r0, .L17+16
+ 277 008c FFF7FEFF 		bl	__assert_func
+ 278              	.L11:
+ 279              	.LBB18:
  123:Src/nema_hal_freertos.c **** #endif /* NEMA_WAIT_IRQ_BINARY_SEMAPHORE */
  124:Src/nema_hal_freertos.c **** 
  125:Src/nema_hal_freertos.c **** #if defined(NEMA_USE_TSI_MALLOC) && defined(NEMA_MULTI_MEM_POOLS)
  126:Src/nema_hal_freertos.c ****     for (int pool_id=0; pool_id < NEMA_MULTI_MEM_POOLS_CNT; pool_id++)
+ 280              		.loc 1 126 14 is_stmt 1
+ 281 0090 0023     		movs	r3, #0
+ 282 0092 7B61     		str	r3, [r7, #20]
+ 283              		.loc 1 126 5
+ 284 0094 25E0     		b	.L12
+ 285              	.L13:
  127:Src/nema_hal_freertos.c ****     {
  128:Src/nema_hal_freertos.c ****         tsi_malloc_init_pool(pool_id, (void*)memPools[pool_id].base_addr, memPools[pool_id].base_ad
+ 286              		.loc 1 128 63
+ 287 0096 3549     		ldr	r1, .L17+48
+ 288 0098 7A69     		ldr	r2, [r7, #20]
+ 289 009a 1346     		mov	r3, r2
+ 290 009c 5B00     		lsls	r3, r3, #1
+ 291 009e 1344     		add	r3, r3, r2
+ 292 00a0 9B00     		lsls	r3, r3, #2
+ 293 00a2 0B44     		add	r3, r3, r1
+ 294 00a4 1B68     		ldr	r3, [r3]
+ 295              		.loc 1 128 9
+ 296 00a6 1C46     		mov	r4, r3
+ 297              		.loc 1 128 92
+ 298 00a8 3049     		ldr	r1, .L17+48
+ 299 00aa 7A69     		ldr	r2, [r7, #20]
+ 300 00ac 1346     		mov	r3, r2
+ 301 00ae 5B00     		lsls	r3, r3, #1
+ 302 00b0 1344     		add	r3, r3, r2
+ 303 00b2 9B00     		lsls	r3, r3, #2
+ 304 00b4 0B44     		add	r3, r3, r1
+ 305 00b6 1968     		ldr	r1, [r3]
+ARM GAS  /tmp/ccKMUTYx.s 			page 9
+
+
+ 306              		.loc 1 128 121
+ 307 00b8 2C48     		ldr	r0, .L17+48
+ 308 00ba 7A69     		ldr	r2, [r7, #20]
+ 309 00bc 1346     		mov	r3, r2
+ 310 00be 5B00     		lsls	r3, r3, #1
+ 311 00c0 1344     		add	r3, r3, r2
+ 312 00c2 9B00     		lsls	r3, r3, #2
+ 313 00c4 0344     		add	r3, r3, r0
+ 314 00c6 0433     		adds	r3, r3, #4
+ 315 00c8 1B68     		ldr	r3, [r3]
+ 316              		.loc 1 128 9
+ 317 00ca 1A46     		mov	r2, r3
+ 318 00cc 0123     		movs	r3, #1
+ 319 00ce 0093     		str	r3, [sp]
+ 320 00d0 1346     		mov	r3, r2
+ 321 00d2 0A46     		mov	r2, r1
+ 322 00d4 2146     		mov	r1, r4
+ 323 00d6 7869     		ldr	r0, [r7, #20]
+ 324 00d8 FFF7FEFF 		bl	tsi_malloc_init_pool
+ 126:Src/nema_hal_freertos.c ****     {
+ 325              		.loc 1 126 68 discriminator 3
+ 326 00dc 7B69     		ldr	r3, [r7, #20]
+ 327 00de 0133     		adds	r3, r3, #1
+ 328 00e0 7B61     		str	r3, [r7, #20]
+ 329              	.L12:
+ 126:Src/nema_hal_freertos.c ****     {
+ 330              		.loc 1 126 33 discriminator 1
+ 331 00e2 7B69     		ldr	r3, [r7, #20]
+ 332 00e4 022B     		cmp	r3, #2
+ 333 00e6 D6DD     		ble	.L13
+ 334              	.LBE18:
  129:Src/nema_hal_freertos.c ****     }
  130:Src/nema_hal_freertos.c **** #endif /* NEMA_USE_TSI_MALLOC & NEMA_MULTI_MEM_POOLS */
  131:Src/nema_hal_freertos.c **** 
  132:Src/nema_hal_freertos.c ****     // Allocate ring_buffer memory
  133:Src/nema_hal_freertos.c ****     ring_buffer_str.bo = nema_buffer_create(RING_SIZE);
+ 335              		.loc 1 133 26
+ 336 00e8 214C     		ldr	r4, .L17+52
+ 337 00ea 3B46     		mov	r3, r7
+ 338 00ec 4FF48061 		mov	r1, #1024
+ 339 00f0 1846     		mov	r0, r3
+ 340 00f2 FFF7FEFF 		bl	nema_buffer_create
+ 341 00f6 3B46     		mov	r3, r7
+ 342 00f8 0FCB     		ldm	r3, {r0, r1, r2, r3}
+ 343 00fa 84E80F00 		stm	r4, {r0, r1, r2, r3}
  134:Src/nema_hal_freertos.c ****     assert(ring_buffer_str.bo.base_virt);
+ 344              		.loc 1 134 5
+ 345 00fe 1C4B     		ldr	r3, .L17+52
+ 346 0100 9B68     		ldr	r3, [r3, #8]
+ 347 0102 002B     		cmp	r3, #0
+ 348 0104 05D1     		bne	.L14
+ 349              		.loc 1 134 5 is_stmt 0 discriminator 1
+ 350 0106 1B4B     		ldr	r3, .L17+56
+ 351 0108 0F4A     		ldr	r2, .L17+12
+ 352 010a 8621     		movs	r1, #134
+ 353 010c 0F48     		ldr	r0, .L17+16
+ 354 010e FFF7FEFF 		bl	__assert_func
+ARM GAS  /tmp/ccKMUTYx.s 			page 10
+
+
+ 355              	.L14:
  135:Src/nema_hal_freertos.c **** 
  136:Src/nema_hal_freertos.c ****     (void)nema_buffer_map(&ring_buffer_str.bo);
+ 356              		.loc 1 136 11 is_stmt 1
+ 357 0112 1748     		ldr	r0, .L17+52
+ 358 0114 FFF7FEFF 		bl	nema_buffer_map
  137:Src/nema_hal_freertos.c **** 
  138:Src/nema_hal_freertos.c ****     // Initialize Ring Buffer
  139:Src/nema_hal_freertos.c ****     ret = nema_rb_init(&ring_buffer_str, 1);
+ 359              		.loc 1 139 11
+ 360 0118 0121     		movs	r1, #1
+ 361 011a 1548     		ldr	r0, .L17+52
+ 362 011c FFF7FEFF 		bl	nema_rb_init
+ 363 0120 3861     		str	r0, [r7, #16]
  140:Src/nema_hal_freertos.c ****     if (ret < 0)
+ 364              		.loc 1 140 8
+ 365 0122 3B69     		ldr	r3, [r7, #16]
+ 366 0124 002B     		cmp	r3, #0
+ 367 0126 01DA     		bge	.L15
  141:Src/nema_hal_freertos.c ****     {
  142:Src/nema_hal_freertos.c ****         return ret;
+ 368              		.loc 1 142 16
+ 369 0128 3B69     		ldr	r3, [r7, #16]
+ 370 012a 03E0     		b	.L16
+ 371              	.L15:
  143:Src/nema_hal_freertos.c ****     }
  144:Src/nema_hal_freertos.c **** 
  145:Src/nema_hal_freertos.c ****     /* Reset last_cl_id counter */
  146:Src/nema_hal_freertos.c ****     last_cl_id = 0;
+ 372              		.loc 1 146 16
+ 373 012c 124B     		ldr	r3, .L17+60
+ 374 012e 0022     		movs	r2, #0
+ 375 0130 1A60     		str	r2, [r3]
  147:Src/nema_hal_freertos.c **** 
  148:Src/nema_hal_freertos.c ****     return 0;
+ 376              		.loc 1 148 12
+ 377 0132 0023     		movs	r3, #0
+ 378              	.L16:
  149:Src/nema_hal_freertos.c **** }
+ 379              		.loc 1 149 1
+ 380 0134 1846     		mov	r0, r3
+ 381 0136 1C37     		adds	r7, r7, #28
+ 382              		.cfi_def_cfa_offset 12
+ 383 0138 BD46     		mov	sp, r7
+ 384              		.cfi_def_cfa_register 13
+ 385              		@ sp needed
+ 386 013a 90BD     		pop	{r4, r7, pc}
+ 387              	.L18:
+ 388              		.align	2
+ 389              	.L17:
+ 390 013c 00000000 		.word	nema_mutexes_buffers
+ 391 0140 00000000 		.word	nema_mutexes_ids
+ 392 0144 28000000 		.word	.LC2
+ 393 0148 00000000 		.word	__func__.3
+ 394 014c 10000000 		.word	.LC1
+ 395 0150 50000000 		.word	nema_mutexes_buffers+80
+ 396 0154 44000000 		.word	.LC3
+ARM GAS  /tmp/ccKMUTYx.s 			page 11
+
+
+ 397 0158 A0000000 		.word	nema_mutexes_buffers+160
+ 398 015c 64000000 		.word	.LC4
+ 399 0160 00000000 		.word	nema_irq_sem_buffer
+ 400 0164 00000000 		.word	nema_irq_sem
+ 401 0168 84000000 		.word	.LC5
+ 402 016c 00000000 		.word	memPools
+ 403 0170 00000000 		.word	ring_buffer_str
+ 404 0174 94000000 		.word	.LC6
+ 405 0178 00000000 		.word	last_cl_id
+ 406              		.cfi_endproc
+ 407              	.LFE844:
+ 409              		.section	.text.nema_wait_irq,"ax",%progbits
+ 410              		.align	1
+ 411              		.global	nema_wait_irq
+ 412              		.syntax unified
+ 413              		.thumb
+ 414              		.thumb_func
+ 416              	nema_wait_irq:
+ 417              	.LFB845:
  150:Src/nema_hal_freertos.c **** 
  151:Src/nema_hal_freertos.c **** int nema_wait_irq(void)
  152:Src/nema_hal_freertos.c **** {
- 118              		.loc 1 152 1 is_stmt 1 view -0
- 119              		.cfi_startproc
- 120              		@ args = 0, pretend = 0, frame = 0
- 121              		@ frame_needed = 0, uses_anonymous_args = 0
+ 418              		.loc 1 152 1
+ 419              		.cfi_startproc
+ 420              		@ args = 0, pretend = 0, frame = 8
+ 421              		@ frame_needed = 1, uses_anonymous_args = 0
+ 422 0000 80B5     		push	{r7, lr}
+ 423              		.cfi_def_cfa_offset 8
+ 424              		.cfi_offset 7, -8
+ 425              		.cfi_offset 14, -4
+ 426 0002 82B0     		sub	sp, sp, #8
+ 427              		.cfi_def_cfa_offset 16
+ 428 0004 00AF     		add	r7, sp, #0
+ 429              		.cfi_def_cfa_register 7
  153:Src/nema_hal_freertos.c **** #if defined(NEMA_WAIT_IRQ_BINARY_SEMAPHORE)
  154:Src/nema_hal_freertos.c ****     int ret;
- 122              		.loc 1 154 5 view .LVU22
  155:Src/nema_hal_freertos.c **** 
  156:Src/nema_hal_freertos.c ****     ret = xSemaphoreTake(nema_irq_sem, portMAX_DELAY);
- 123              		.loc 1 156 5 view .LVU23
- 152:Src/nema_hal_freertos.c **** #if defined(NEMA_WAIT_IRQ_BINARY_SEMAPHORE)
-ARM GAS  /tmp/cck4dqzt.s 			page 6
-
-
- 124              		.loc 1 152 1 is_stmt 0 view .LVU24
- 125 0000 08B5     		push	{r3, lr}
- 126              		.cfi_def_cfa_offset 8
- 127              		.cfi_offset 3, -8
- 128              		.cfi_offset 14, -4
- 129              		.loc 1 156 11 view .LVU25
- 130 0002 044B     		ldr	r3, .L10
- 131 0004 4FF0FF31 		mov	r1, #-1
- 132 0008 1868     		ldr	r0, [r3]
- 133 000a FFF7FEFF 		bl	xQueueSemaphoreTake
- 134              	.LVL6:
+ 430              		.loc 1 156 11
+ 431 0006 0A4B     		ldr	r3, .L23
+ 432 0008 1B68     		ldr	r3, [r3]
+ 433 000a 4FF0FF31 		mov	r1, #-1
+ 434 000e 1846     		mov	r0, r3
+ 435 0010 FFF7FEFF 		bl	xQueueSemaphoreTake
+ 436 0014 7860     		str	r0, [r7, #4]
  157:Src/nema_hal_freertos.c ****     ret = ret == pdTRUE ? 0 : -1;
- 135              		.loc 1 157 5 is_stmt 1 view .LVU26
+ 437              		.loc 1 157 29
+ 438 0016 7B68     		ldr	r3, [r7, #4]
+ 439 0018 012B     		cmp	r3, #1
+ 440 001a 01D1     		bne	.L20
+ 441              		.loc 1 157 29 is_stmt 0 discriminator 1
+ 442 001c 0023     		movs	r3, #0
+ 443 001e 01E0     		b	.L21
+ 444              	.L20:
+ 445              		.loc 1 157 29 discriminator 2
+ 446 0020 4FF0FF33 		mov	r3, #-1
+ 447              	.L21:
+ARM GAS  /tmp/ccKMUTYx.s 			page 12
+
+
+ 448              		.loc 1 157 9 is_stmt 1 discriminator 4
+ 449 0024 7B60     		str	r3, [r7, #4]
  158:Src/nema_hal_freertos.c **** #endif
  159:Src/nema_hal_freertos.c **** 
  160:Src/nema_hal_freertos.c ****     return 0;
- 136              		.loc 1 160 5 view .LVU27
+ 450              		.loc 1 160 12
+ 451 0026 0023     		movs	r3, #0
  161:Src/nema_hal_freertos.c **** }
- 137              		.loc 1 161 1 is_stmt 0 view .LVU28
- 138 000e 0020     		movs	r0, #0
- 139 0010 08BD     		pop	{r3, pc}
- 140              	.L11:
- 141 0012 00BF     		.align	2
- 142              	.L10:
- 143 0014 00000000 		.word	nema_irq_sem
- 144              		.cfi_endproc
- 145              	.LFE845:
- 147              		.section	.text.nema_wait_irq_cl,"ax",%progbits
- 148              		.align	1
- 149              		.global	nema_wait_irq_cl
- 150              		.syntax unified
- 151              		.thumb
- 152              		.thumb_func
- 154              	nema_wait_irq_cl:
- 155              	.LVL7:
- 156              	.LFB846:
+ 452              		.loc 1 161 1
+ 453 0028 1846     		mov	r0, r3
+ 454 002a 0837     		adds	r7, r7, #8
+ 455              		.cfi_def_cfa_offset 8
+ 456 002c BD46     		mov	sp, r7
+ 457              		.cfi_def_cfa_register 13
+ 458              		@ sp needed
+ 459 002e 80BD     		pop	{r7, pc}
+ 460              	.L24:
+ 461              		.align	2
+ 462              	.L23:
+ 463 0030 00000000 		.word	nema_irq_sem
+ 464              		.cfi_endproc
+ 465              	.LFE845:
+ 467              		.section	.text.nema_wait_irq_cl,"ax",%progbits
+ 468              		.align	1
+ 469              		.global	nema_wait_irq_cl
+ 470              		.syntax unified
+ 471              		.thumb
+ 472              		.thumb_func
+ 474              	nema_wait_irq_cl:
+ 475              	.LFB846:
  162:Src/nema_hal_freertos.c **** 
  163:Src/nema_hal_freertos.c **** int nema_wait_irq_cl(int cl_id)
  164:Src/nema_hal_freertos.c **** {
- 157              		.loc 1 164 1 is_stmt 1 view -0
- 158              		.cfi_startproc
- 159              		@ args = 0, pretend = 0, frame = 0
- 160              		@ frame_needed = 0, uses_anonymous_args = 0
+ 476              		.loc 1 164 1
+ 477              		.cfi_startproc
+ 478              		@ args = 0, pretend = 0, frame = 8
+ 479              		@ frame_needed = 1, uses_anonymous_args = 0
+ 480 0000 80B5     		push	{r7, lr}
+ 481              		.cfi_def_cfa_offset 8
+ 482              		.cfi_offset 7, -8
+ 483              		.cfi_offset 14, -4
+ 484 0002 82B0     		sub	sp, sp, #8
+ 485              		.cfi_def_cfa_offset 16
+ 486 0004 00AF     		add	r7, sp, #0
+ 487              		.cfi_def_cfa_register 7
+ 488 0006 7860     		str	r0, [r7, #4]
  165:Src/nema_hal_freertos.c ****     while (last_cl_id < cl_id)
- 161              		.loc 1 165 5 view .LVU30
- 164:Src/nema_hal_freertos.c ****     while (last_cl_id < cl_id)
- 162              		.loc 1 164 1 is_stmt 0 view .LVU31
- 163 0000 38B5     		push	{r3, r4, r5, lr}
- 164              		.cfi_def_cfa_offset 16
- 165              		.cfi_offset 3, -16
- 166              		.cfi_offset 4, -12
- 167              		.cfi_offset 5, -8
- 168              		.cfi_offset 14, -4
- 164:Src/nema_hal_freertos.c ****     while (last_cl_id < cl_id)
- 169              		.loc 1 164 1 view .LVU32
- 170 0002 0446     		mov	r4, r0
- 171              		.loc 1 165 23 view .LVU33
-ARM GAS  /tmp/cck4dqzt.s 			page 7
-
-
- 172 0004 044D     		ldr	r5, .L15
- 173              	.LVL8:
- 174              	.L13:
- 175              		.loc 1 165 23 is_stmt 1 view .LVU34
- 176 0006 2B68     		ldr	r3, [r5]
- 177 0008 A342     		cmp	r3, r4
- 178 000a 01DB     		blt	.L14
+ 489              		.loc 1 165 11
+ 490 0008 01E0     		b	.L26
+ 491              	.L27:
  166:Src/nema_hal_freertos.c ****     {
  167:Src/nema_hal_freertos.c ****         (void)nema_wait_irq();
+ 492              		.loc 1 167 15
+ 493 000a FFF7FEFF 		bl	nema_wait_irq
+ 494              	.L26:
+ 165:Src/nema_hal_freertos.c ****     while (last_cl_id < cl_id)
+ 495              		.loc 1 165 23
+ARM GAS  /tmp/ccKMUTYx.s 			page 13
+
+
+ 496 000e 054B     		ldr	r3, .L29
+ 497 0010 1B68     		ldr	r3, [r3]
+ 498 0012 7A68     		ldr	r2, [r7, #4]
+ 499 0014 9A42     		cmp	r2, r3
+ 500 0016 F8DC     		bgt	.L27
  168:Src/nema_hal_freertos.c ****     }
  169:Src/nema_hal_freertos.c **** 
  170:Src/nema_hal_freertos.c ****     return 0;
- 179              		.loc 1 170 5 view .LVU35
+ 501              		.loc 1 170 12
+ 502 0018 0023     		movs	r3, #0
  171:Src/nema_hal_freertos.c **** }
- 180              		.loc 1 171 1 is_stmt 0 view .LVU36
- 181 000c 0020     		movs	r0, #0
- 182 000e 38BD     		pop	{r3, r4, r5, pc}
- 183              	.LVL9:
- 184              	.L14:
- 167:Src/nema_hal_freertos.c ****     }
- 185              		.loc 1 167 9 is_stmt 1 view .LVU37
- 167:Src/nema_hal_freertos.c ****     }
- 186              		.loc 1 167 15 is_stmt 0 view .LVU38
- 187 0010 FFF7FEFF 		bl	nema_wait_irq
- 188              	.LVL10:
- 189 0014 F7E7     		b	.L13
- 190              	.L16:
- 191 0016 00BF     		.align	2
- 192              	.L15:
- 193 0018 00000000 		.word	last_cl_id
- 194              		.cfi_endproc
- 195              	.LFE846:
- 197              		.section	.text.nema_reg_read,"ax",%progbits
- 198              		.align	1
- 199              		.global	nema_reg_read
- 200              		.syntax unified
- 201              		.thumb
- 202              		.thumb_func
- 204              	nema_reg_read:
- 205              	.LVL11:
- 206              	.LFB848:
+ 503              		.loc 1 171 1
+ 504 001a 1846     		mov	r0, r3
+ 505 001c 0837     		adds	r7, r7, #8
+ 506              		.cfi_def_cfa_offset 8
+ 507 001e BD46     		mov	sp, r7
+ 508              		.cfi_def_cfa_register 13
+ 509              		@ sp needed
+ 510 0020 80BD     		pop	{r7, pc}
+ 511              	.L30:
+ 512 0022 00BF     		.align	2
+ 513              	.L29:
+ 514 0024 00000000 		.word	last_cl_id
+ 515              		.cfi_endproc
+ 516              	.LFE846:
+ 518              		.section	.text.nema_wait_irq_brk,"ax",%progbits
+ 519              		.align	1
+ 520              		.global	nema_wait_irq_brk
+ 521              		.syntax unified
+ 522              		.thumb
+ 523              		.thumb_func
+ 525              	nema_wait_irq_brk:
+ 526              	.LFB847:
  172:Src/nema_hal_freertos.c **** 
  173:Src/nema_hal_freertos.c **** int nema_wait_irq_brk(int brk_id)
  174:Src/nema_hal_freertos.c **** {
+ 527              		.loc 1 174 1
+ 528              		.cfi_startproc
+ 529              		@ args = 0, pretend = 0, frame = 8
+ 530              		@ frame_needed = 1, uses_anonymous_args = 0
+ 531 0000 80B5     		push	{r7, lr}
+ 532              		.cfi_def_cfa_offset 8
+ 533              		.cfi_offset 7, -8
+ 534              		.cfi_offset 14, -4
+ 535 0002 82B0     		sub	sp, sp, #8
+ 536              		.cfi_def_cfa_offset 16
+ 537 0004 00AF     		add	r7, sp, #0
+ 538              		.cfi_def_cfa_register 7
+ 539 0006 7860     		str	r0, [r7, #4]
  175:Src/nema_hal_freertos.c ****     while (nema_reg_read(GPU2D_BREAKPOINT) == 0U)
+ 540              		.loc 1 175 11
+ 541 0008 01E0     		b	.L32
+ 542              	.L33:
  176:Src/nema_hal_freertos.c ****     {
  177:Src/nema_hal_freertos.c ****         (void)nema_wait_irq();
+ 543              		.loc 1 177 15
+ 544 000a FFF7FEFF 		bl	nema_wait_irq
+ARM GAS  /tmp/ccKMUTYx.s 			page 14
+
+
+ 545              	.L32:
+ 175:Src/nema_hal_freertos.c ****     while (nema_reg_read(GPU2D_BREAKPOINT) == 0U)
+ 546              		.loc 1 175 12
+ 547 000e 8020     		movs	r0, #128
+ 548 0010 FFF7FEFF 		bl	nema_reg_read
+ 549 0014 0346     		mov	r3, r0
+ 175:Src/nema_hal_freertos.c ****     while (nema_reg_read(GPU2D_BREAKPOINT) == 0U)
+ 550              		.loc 1 175 44 discriminator 1
+ 551 0016 002B     		cmp	r3, #0
+ 552 0018 F7D0     		beq	.L33
  178:Src/nema_hal_freertos.c ****     }
  179:Src/nema_hal_freertos.c **** 
  180:Src/nema_hal_freertos.c ****     return 0;
+ 553              		.loc 1 180 12
+ 554 001a 0023     		movs	r3, #0
  181:Src/nema_hal_freertos.c **** }
+ 555              		.loc 1 181 1
+ 556 001c 1846     		mov	r0, r3
+ 557 001e 0837     		adds	r7, r7, #8
+ 558              		.cfi_def_cfa_offset 8
+ 559 0020 BD46     		mov	sp, r7
+ 560              		.cfi_def_cfa_register 13
+ 561              		@ sp needed
+ 562 0022 80BD     		pop	{r7, pc}
+ 563              		.cfi_endproc
+ 564              	.LFE847:
+ 566              		.section	.text.nema_reg_read,"ax",%progbits
+ 567              		.align	1
+ 568              		.global	nema_reg_read
+ 569              		.syntax unified
+ 570              		.thumb
+ 571              		.thumb_func
+ 573              	nema_reg_read:
+ 574              	.LFB848:
  182:Src/nema_hal_freertos.c **** 
  183:Src/nema_hal_freertos.c **** uint32_t nema_reg_read(uint32_t reg)
  184:Src/nema_hal_freertos.c **** {
- 207              		.loc 1 184 1 is_stmt 1 view -0
- 208              		.cfi_startproc
- 209              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  /tmp/cck4dqzt.s 			page 8
-
-
- 210              		@ frame_needed = 0, uses_anonymous_args = 0
- 211              		@ link register save eliminated.
+ 575              		.loc 1 184 1
+ 576              		.cfi_startproc
+ 577              		@ args = 0, pretend = 0, frame = 8
+ 578              		@ frame_needed = 1, uses_anonymous_args = 0
+ 579 0000 80B5     		push	{r7, lr}
+ 580              		.cfi_def_cfa_offset 8
+ 581              		.cfi_offset 7, -8
+ 582              		.cfi_offset 14, -4
+ 583 0002 82B0     		sub	sp, sp, #8
+ 584              		.cfi_def_cfa_offset 16
+ 585 0004 00AF     		add	r7, sp, #0
+ 586              		.cfi_def_cfa_register 7
+ 587 0006 7860     		str	r0, [r7, #4]
  185:Src/nema_hal_freertos.c ****     return HAL_GPU2D_ReadRegister(&hgpu2d, reg);
- 212              		.loc 1 185 5 view .LVU40
- 184:Src/nema_hal_freertos.c ****     return HAL_GPU2D_ReadRegister(&hgpu2d, reg);
- 213              		.loc 1 184 1 is_stmt 0 view .LVU41
- 214 0000 0146     		mov	r1, r0
- 215              		.loc 1 185 12 view .LVU42
- 216 0002 0148     		ldr	r0, .L18
- 217              	.LVL12:
- 218              		.loc 1 185 12 view .LVU43
- 219 0004 FFF7FEBF 		b	HAL_GPU2D_ReadRegister
- 220              	.LVL13:
- 221              	.L19:
- 222              		.loc 1 185 12 view .LVU44
- 223              		.align	2
- 224              	.L18:
- 225 0008 00000000 		.word	hgpu2d
- 226              		.cfi_endproc
- 227              	.LFE848:
- 229              		.section	.text.nema_wait_irq_brk,"ax",%progbits
- 230              		.align	1
- 231              		.global	nema_wait_irq_brk
- 232              		.syntax unified
- 233              		.thumb
- 234              		.thumb_func
- 236              	nema_wait_irq_brk:
- 237              	.LVL14:
- 238              	.LFB847:
- 174:Src/nema_hal_freertos.c ****     while (nema_reg_read(GPU2D_BREAKPOINT) == 0U)
- 239              		.loc 1 174 1 is_stmt 1 view -0
- 240              		.cfi_startproc
- 241              		@ args = 0, pretend = 0, frame = 0
- 242              		@ frame_needed = 0, uses_anonymous_args = 0
- 174:Src/nema_hal_freertos.c ****     while (nema_reg_read(GPU2D_BREAKPOINT) == 0U)
- 243              		.loc 1 174 1 is_stmt 0 view .LVU46
- 244 0000 08B5     		push	{r3, lr}
- 245              		.cfi_def_cfa_offset 8
- 246              		.cfi_offset 3, -8
- 247              		.cfi_offset 14, -4
- 175:Src/nema_hal_freertos.c ****     {
- 248              		.loc 1 175 5 is_stmt 1 view .LVU47
- 249              	.LVL15:
- 250              	.L21:
- 175:Src/nema_hal_freertos.c ****     {
- 251              		.loc 1 175 44 view .LVU48
- 175:Src/nema_hal_freertos.c ****     {
- 252              		.loc 1 175 12 is_stmt 0 view .LVU49
- 253 0002 8020     		movs	r0, #128
- 254 0004 FFF7FEFF 		bl	nema_reg_read
- 255              	.LVL16:
- 175:Src/nema_hal_freertos.c ****     {
- 256              		.loc 1 175 44 discriminator 1 view .LVU50
- 257 0008 08B1     		cbz	r0, .L22
- 180:Src/nema_hal_freertos.c **** }
- 258              		.loc 1 180 5 is_stmt 1 view .LVU51
- 181:Src/nema_hal_freertos.c **** 
-ARM GAS  /tmp/cck4dqzt.s 			page 9
-
-
- 259              		.loc 1 181 1 is_stmt 0 view .LVU52
- 260 000a 0020     		movs	r0, #0
- 261 000c 08BD     		pop	{r3, pc}
- 262              	.L22:
- 177:Src/nema_hal_freertos.c ****     }
- 263              		.loc 1 177 9 is_stmt 1 view .LVU53
- 177:Src/nema_hal_freertos.c ****     }
- 264              		.loc 1 177 15 is_stmt 0 view .LVU54
- 265 000e FFF7FEFF 		bl	nema_wait_irq
- 266              	.LVL17:
- 267 0012 F6E7     		b	.L21
- 268              		.cfi_endproc
- 269              	.LFE847:
- 271              		.section	.text.nema_reg_write,"ax",%progbits
- 272              		.align	1
- 273              		.global	nema_reg_write
- 274              		.syntax unified
- 275              		.thumb
- 276              		.thumb_func
- 278              	nema_reg_write:
- 279              	.LVL18:
- 280              	.LFB849:
+ 588              		.loc 1 185 12
+ 589 0008 7968     		ldr	r1, [r7, #4]
+ 590 000a 0448     		ldr	r0, .L37
+ 591 000c FFF7FEFF 		bl	HAL_GPU2D_ReadRegister
+ 592 0010 0346     		mov	r3, r0
  186:Src/nema_hal_freertos.c **** }
+ARM GAS  /tmp/ccKMUTYx.s 			page 15
+
+
+ 593              		.loc 1 186 1
+ 594 0012 1846     		mov	r0, r3
+ 595 0014 0837     		adds	r7, r7, #8
+ 596              		.cfi_def_cfa_offset 8
+ 597 0016 BD46     		mov	sp, r7
+ 598              		.cfi_def_cfa_register 13
+ 599              		@ sp needed
+ 600 0018 80BD     		pop	{r7, pc}
+ 601              	.L38:
+ 602 001a 00BF     		.align	2
+ 603              	.L37:
+ 604 001c 00000000 		.word	hgpu2d
+ 605              		.cfi_endproc
+ 606              	.LFE848:
+ 608              		.section	.text.nema_reg_write,"ax",%progbits
+ 609              		.align	1
+ 610              		.global	nema_reg_write
+ 611              		.syntax unified
+ 612              		.thumb
+ 613              		.thumb_func
+ 615              	nema_reg_write:
+ 616              	.LFB849:
  187:Src/nema_hal_freertos.c **** 
  188:Src/nema_hal_freertos.c **** void nema_reg_write(uint32_t reg, uint32_t value)
  189:Src/nema_hal_freertos.c **** {
- 281              		.loc 1 189 1 is_stmt 1 view -0
- 282              		.cfi_startproc
- 283              		@ args = 0, pretend = 0, frame = 0
- 284              		@ frame_needed = 0, uses_anonymous_args = 0
- 285              		@ link register save eliminated.
+ 617              		.loc 1 189 1
+ 618              		.cfi_startproc
+ 619              		@ args = 0, pretend = 0, frame = 8
+ 620              		@ frame_needed = 1, uses_anonymous_args = 0
+ 621 0000 80B5     		push	{r7, lr}
+ 622              		.cfi_def_cfa_offset 8
+ 623              		.cfi_offset 7, -8
+ 624              		.cfi_offset 14, -4
+ 625 0002 82B0     		sub	sp, sp, #8
+ 626              		.cfi_def_cfa_offset 16
+ 627 0004 00AF     		add	r7, sp, #0
+ 628              		.cfi_def_cfa_register 7
+ 629 0006 7860     		str	r0, [r7, #4]
+ 630 0008 3960     		str	r1, [r7]
  190:Src/nema_hal_freertos.c ****     HAL_GPU2D_WriteRegister(&hgpu2d, reg, value);
- 286              		.loc 1 190 5 view .LVU56
- 189:Src/nema_hal_freertos.c ****     HAL_GPU2D_WriteRegister(&hgpu2d, reg, value);
- 287              		.loc 1 189 1 is_stmt 0 view .LVU57
- 288 0000 0A46     		mov	r2, r1
- 289              		.loc 1 190 5 view .LVU58
- 290 0002 0146     		mov	r1, r0
- 291              	.LVL19:
- 292              		.loc 1 190 5 view .LVU59
- 293 0004 0148     		ldr	r0, .L24
- 294              	.LVL20:
- 295              		.loc 1 190 5 view .LVU60
- 296 0006 FFF7FEBF 		b	HAL_GPU2D_WriteRegister
- 297              	.LVL21:
- 298              	.L25:
- 299              		.loc 1 190 5 view .LVU61
- 300 000a 00BF     		.align	2
- 301              	.L24:
- 302 000c 00000000 		.word	hgpu2d
- 303              		.cfi_endproc
- 304              	.LFE849:
- 306              		.section	.text.nema_buffer_map,"ax",%progbits
- 307              		.align	1
- 308              		.global	nema_buffer_map
- 309              		.syntax unified
- 310              		.thumb
-ARM GAS  /tmp/cck4dqzt.s 			page 10
-
-
- 311              		.thumb_func
- 313              	nema_buffer_map:
- 314              	.LVL22:
- 315              	.LFB852:
+ 631              		.loc 1 190 5
+ 632 000a 3A68     		ldr	r2, [r7]
+ 633 000c 7968     		ldr	r1, [r7, #4]
+ 634 000e 0348     		ldr	r0, .L40
+ 635 0010 FFF7FEFF 		bl	HAL_GPU2D_WriteRegister
  191:Src/nema_hal_freertos.c **** }
+ 636              		.loc 1 191 1
+ 637 0014 00BF     		nop
+ 638 0016 0837     		adds	r7, r7, #8
+ 639              		.cfi_def_cfa_offset 8
+ 640 0018 BD46     		mov	sp, r7
+ 641              		.cfi_def_cfa_register 13
+ 642              		@ sp needed
+ 643 001a 80BD     		pop	{r7, pc}
+ 644              	.L41:
+ 645              		.align	2
+ 646              	.L40:
+ARM GAS  /tmp/ccKMUTYx.s 			page 16
+
+
+ 647 001c 00000000 		.word	hgpu2d
+ 648              		.cfi_endproc
+ 649              	.LFE849:
+ 651              		.section	.rodata
+ 652 00b1 000000   		.align	2
+ 653              	.LC7:
+ 654 00b4 626F2E62 		.ascii	"bo.base_virt\000"
+ 654      6173655F 
+ 654      76697274 
+ 654      00
+ 655              		.section	.text.nema_buffer_create,"ax",%progbits
+ 656              		.align	1
+ 657              		.global	nema_buffer_create
+ 658              		.syntax unified
+ 659              		.thumb
+ 660              		.thumb_func
+ 662              	nema_buffer_create:
+ 663              	.LFB850:
  192:Src/nema_hal_freertos.c **** 
  193:Src/nema_hal_freertos.c **** nema_buffer_t nema_buffer_create(int size)
  194:Src/nema_hal_freertos.c **** {
+ 664              		.loc 1 194 1
+ 665              		.cfi_startproc
+ 666              		@ args = 0, pretend = 0, frame = 24
+ 667              		@ frame_needed = 1, uses_anonymous_args = 0
+ 668 0000 90B5     		push	{r4, r7, lr}
+ 669              		.cfi_def_cfa_offset 12
+ 670              		.cfi_offset 4, -12
+ 671              		.cfi_offset 7, -8
+ 672              		.cfi_offset 14, -4
+ 673 0002 87B0     		sub	sp, sp, #28
+ 674              		.cfi_def_cfa_offset 40
+ 675 0004 00AF     		add	r7, sp, #0
+ 676              		.cfi_def_cfa_register 7
+ 677 0006 7860     		str	r0, [r7, #4]
+ 678 0008 3960     		str	r1, [r7]
  195:Src/nema_hal_freertos.c ****     nema_buffer_t bo;
  196:Src/nema_hal_freertos.c **** 
  197:Src/nema_hal_freertos.c ****     memset(&bo, 0, sizeof(bo));
+ 679              		.loc 1 197 5
+ 680 000a 07F10803 		add	r3, r7, #8
+ 681 000e 1022     		movs	r2, #16
+ 682 0010 0021     		movs	r1, #0
+ 683 0012 1846     		mov	r0, r3
+ 684 0014 FFF7FEFF 		bl	memset
  198:Src/nema_hal_freertos.c **** 
  199:Src/nema_hal_freertos.c ****     nema_mutex_lock(MUTEX_MALLOC);
+ 685              		.loc 1 199 5
+ 686 0018 0120     		movs	r0, #1
+ 687 001a FFF7FEFF 		bl	nema_mutex_lock
  200:Src/nema_hal_freertos.c **** 
  201:Src/nema_hal_freertos.c ****     bo.base_virt = tsi_malloc(size);
+ 688              		.loc 1 201 20
+ 689 001e 3968     		ldr	r1, [r7]
+ 690 0020 0020     		movs	r0, #0
+ 691 0022 FFF7FEFF 		bl	tsi_malloc_pool
+ 692 0026 0346     		mov	r3, r0
+ARM GAS  /tmp/ccKMUTYx.s 			page 17
+
+
+ 693              		.loc 1 201 18 discriminator 1
+ 694 0028 3B61     		str	r3, [r7, #16]
  202:Src/nema_hal_freertos.c ****     assert(bo.base_virt);
+ 695              		.loc 1 202 5
+ 696 002a 3B69     		ldr	r3, [r7, #16]
+ 697 002c 002B     		cmp	r3, #0
+ 698 002e 05D1     		bne	.L43
+ 699              		.loc 1 202 5 is_stmt 0 discriminator 1
+ 700 0030 0B4B     		ldr	r3, .L45
+ 701 0032 0C4A     		ldr	r2, .L45+4
+ 702 0034 CA21     		movs	r1, #202
+ 703 0036 0C48     		ldr	r0, .L45+8
+ 704 0038 FFF7FEFF 		bl	__assert_func
+ 705              	.L43:
  203:Src/nema_hal_freertos.c **** 
  204:Src/nema_hal_freertos.c ****     bo.base_phys = (uint32_t)bo.base_virt;
+ 706              		.loc 1 204 32 is_stmt 1
+ 707 003c 3B69     		ldr	r3, [r7, #16]
+ 708              		.loc 1 204 18
+ 709 003e 7B61     		str	r3, [r7, #20]
  205:Src/nema_hal_freertos.c ****     bo.size      = size;
+ 710              		.loc 1 205 18
+ 711 0040 3B68     		ldr	r3, [r7]
+ 712 0042 BB60     		str	r3, [r7, #8]
  206:Src/nema_hal_freertos.c **** 
  207:Src/nema_hal_freertos.c ****     nema_mutex_unlock(MUTEX_MALLOC);
+ 713              		.loc 1 207 5
+ 714 0044 0120     		movs	r0, #1
+ 715 0046 FFF7FEFF 		bl	nema_mutex_unlock
  208:Src/nema_hal_freertos.c **** 
  209:Src/nema_hal_freertos.c ****     return bo;
+ 716              		.loc 1 209 12
+ 717 004a 7B68     		ldr	r3, [r7, #4]
+ 718 004c 1C46     		mov	r4, r3
+ 719 004e 07F10803 		add	r3, r7, #8
+ 720 0052 0FCB     		ldm	r3, {r0, r1, r2, r3}
+ 721 0054 84E80F00 		stm	r4, {r0, r1, r2, r3}
  210:Src/nema_hal_freertos.c **** }
+ 722              		.loc 1 210 1
+ 723 0058 7868     		ldr	r0, [r7, #4]
+ 724 005a 1C37     		adds	r7, r7, #28
+ 725              		.cfi_def_cfa_offset 12
+ 726 005c BD46     		mov	sp, r7
+ 727              		.cfi_def_cfa_register 13
+ 728              		@ sp needed
+ 729 005e 90BD     		pop	{r4, r7, pc}
+ 730              	.L46:
+ 731              		.align	2
+ 732              	.L45:
+ 733 0060 B4000000 		.word	.LC7
+ 734 0064 00000000 		.word	__func__.2
+ 735 0068 10000000 		.word	.LC1
+ 736              		.cfi_endproc
+ 737              	.LFE850:
+ 739              		.section	.text.nema_buffer_create_pool,"ax",%progbits
+ 740              		.align	1
+ 741              		.global	nema_buffer_create_pool
+ARM GAS  /tmp/ccKMUTYx.s 			page 18
+
+
+ 742              		.syntax unified
+ 743              		.thumb
+ 744              		.thumb_func
+ 746              	nema_buffer_create_pool:
+ 747              	.LFB851:
  211:Src/nema_hal_freertos.c **** 
  212:Src/nema_hal_freertos.c **** nema_buffer_t nema_buffer_create_pool(int pool, int size)
  213:Src/nema_hal_freertos.c **** {
+ 748              		.loc 1 213 1
+ 749              		.cfi_startproc
+ 750              		@ args = 0, pretend = 0, frame = 32
+ 751              		@ frame_needed = 1, uses_anonymous_args = 0
+ 752 0000 90B5     		push	{r4, r7, lr}
+ 753              		.cfi_def_cfa_offset 12
+ 754              		.cfi_offset 4, -12
+ 755              		.cfi_offset 7, -8
+ 756              		.cfi_offset 14, -4
+ 757 0002 89B0     		sub	sp, sp, #36
+ 758              		.cfi_def_cfa_offset 48
+ 759 0004 00AF     		add	r7, sp, #0
+ 760              		.cfi_def_cfa_register 7
+ 761 0006 F860     		str	r0, [r7, #12]
+ 762 0008 B960     		str	r1, [r7, #8]
+ 763 000a 7A60     		str	r2, [r7, #4]
  214:Src/nema_hal_freertos.c ****     nema_buffer_t bo;
  215:Src/nema_hal_freertos.c **** 
  216:Src/nema_hal_freertos.c ****     memset(&bo, 0, sizeof(bo));
+ 764              		.loc 1 216 5
+ 765 000c 07F11003 		add	r3, r7, #16
+ 766 0010 1022     		movs	r2, #16
+ 767 0012 0021     		movs	r1, #0
+ 768 0014 1846     		mov	r0, r3
+ 769 0016 FFF7FEFF 		bl	memset
  217:Src/nema_hal_freertos.c **** 
  218:Src/nema_hal_freertos.c ****     nema_mutex_lock(MUTEX_MALLOC); /* tsi_malloc isn't thread-safe */
+ 770              		.loc 1 218 5
+ 771 001a 0120     		movs	r0, #1
+ 772 001c FFF7FEFF 		bl	nema_mutex_lock
  219:Src/nema_hal_freertos.c **** 
  220:Src/nema_hal_freertos.c ****     bo.base_virt = tsi_malloc_pool(pool, size);
+ 773              		.loc 1 220 20
+ 774 0020 7968     		ldr	r1, [r7, #4]
+ 775 0022 B868     		ldr	r0, [r7, #8]
+ 776 0024 FFF7FEFF 		bl	tsi_malloc_pool
+ 777 0028 0346     		mov	r3, r0
+ 778              		.loc 1 220 18 discriminator 1
+ 779 002a BB61     		str	r3, [r7, #24]
  221:Src/nema_hal_freertos.c ****     assert(bo.base_virt);
+ 780              		.loc 1 221 5
+ 781 002c BB69     		ldr	r3, [r7, #24]
+ 782 002e 002B     		cmp	r3, #0
+ 783 0030 05D1     		bne	.L48
+ 784              		.loc 1 221 5 is_stmt 0 discriminator 1
+ 785 0032 0D4B     		ldr	r3, .L50
+ 786 0034 0D4A     		ldr	r2, .L50+4
+ 787 0036 DD21     		movs	r1, #221
+ 788 0038 0D48     		ldr	r0, .L50+8
+ARM GAS  /tmp/ccKMUTYx.s 			page 19
+
+
+ 789 003a FFF7FEFF 		bl	__assert_func
+ 790              	.L48:
  222:Src/nema_hal_freertos.c **** 
  223:Src/nema_hal_freertos.c ****     bo.base_phys = (uintptr_t)bo.base_virt;
+ 791              		.loc 1 223 33 is_stmt 1
+ 792 003e BB69     		ldr	r3, [r7, #24]
+ 793              		.loc 1 223 18
+ 794 0040 FB61     		str	r3, [r7, #28]
  224:Src/nema_hal_freertos.c ****     bo.size      = size;
+ 795              		.loc 1 224 18
+ 796 0042 7B68     		ldr	r3, [r7, #4]
+ 797 0044 3B61     		str	r3, [r7, #16]
  225:Src/nema_hal_freertos.c ****     bo.fd        = pool; /* use fd during the memory free */
+ 798              		.loc 1 225 18
+ 799 0046 BB68     		ldr	r3, [r7, #8]
+ 800 0048 7B61     		str	r3, [r7, #20]
  226:Src/nema_hal_freertos.c **** 
  227:Src/nema_hal_freertos.c ****     nema_mutex_unlock(MUTEX_MALLOC);
+ 801              		.loc 1 227 5
+ 802 004a 0120     		movs	r0, #1
+ 803 004c FFF7FEFF 		bl	nema_mutex_unlock
  228:Src/nema_hal_freertos.c **** 
  229:Src/nema_hal_freertos.c ****     return bo;
+ 804              		.loc 1 229 12
+ 805 0050 FB68     		ldr	r3, [r7, #12]
+ 806 0052 1C46     		mov	r4, r3
+ 807 0054 07F11003 		add	r3, r7, #16
+ 808 0058 0FCB     		ldm	r3, {r0, r1, r2, r3}
+ 809 005a 84E80F00 		stm	r4, {r0, r1, r2, r3}
  230:Src/nema_hal_freertos.c **** }
+ 810              		.loc 1 230 1
+ 811 005e F868     		ldr	r0, [r7, #12]
+ 812 0060 2437     		adds	r7, r7, #36
+ 813              		.cfi_def_cfa_offset 12
+ 814 0062 BD46     		mov	sp, r7
+ 815              		.cfi_def_cfa_register 13
+ 816              		@ sp needed
+ 817 0064 90BD     		pop	{r4, r7, pc}
+ 818              	.L51:
+ 819 0066 00BF     		.align	2
+ 820              	.L50:
+ 821 0068 B4000000 		.word	.LC7
+ 822 006c 00000000 		.word	__func__.1
+ 823 0070 10000000 		.word	.LC1
+ 824              		.cfi_endproc
+ 825              	.LFE851:
+ 827              		.section	.text.nema_buffer_map,"ax",%progbits
+ 828              		.align	1
+ 829              		.global	nema_buffer_map
+ 830              		.syntax unified
+ 831              		.thumb
+ 832              		.thumb_func
+ 834              	nema_buffer_map:
+ 835              	.LFB852:
  231:Src/nema_hal_freertos.c **** 
  232:Src/nema_hal_freertos.c **** void *nema_buffer_map(nema_buffer_t *bo)
  233:Src/nema_hal_freertos.c **** {
- 316              		.loc 1 233 1 is_stmt 1 view -0
- 317              		.cfi_startproc
- 318              		@ args = 0, pretend = 0, frame = 0
- 319              		@ frame_needed = 0, uses_anonymous_args = 0
- 320              		@ link register save eliminated.
+ARM GAS  /tmp/ccKMUTYx.s 			page 20
+
+
+ 836              		.loc 1 233 1
+ 837              		.cfi_startproc
+ 838              		@ args = 0, pretend = 0, frame = 8
+ 839              		@ frame_needed = 1, uses_anonymous_args = 0
+ 840              		@ link register save eliminated.
+ 841 0000 80B4     		push	{r7}
+ 842              		.cfi_def_cfa_offset 4
+ 843              		.cfi_offset 7, -4
+ 844 0002 83B0     		sub	sp, sp, #12
+ 845              		.cfi_def_cfa_offset 16
+ 846 0004 00AF     		add	r7, sp, #0
+ 847              		.cfi_def_cfa_register 7
+ 848 0006 7860     		str	r0, [r7, #4]
  234:Src/nema_hal_freertos.c ****     return bo->base_virt;
- 321              		.loc 1 234 5 view .LVU63
+ 849              		.loc 1 234 14
+ 850 0008 7B68     		ldr	r3, [r7, #4]
+ 851 000a 9B68     		ldr	r3, [r3, #8]
  235:Src/nema_hal_freertos.c **** }
- 322              		.loc 1 235 1 is_stmt 0 view .LVU64
- 323 0000 8068     		ldr	r0, [r0, #8]
-ARM GAS  /tmp/cck4dqzt.s 			page 11
-
-
- 324              	.LVL23:
- 325              		.loc 1 235 1 view .LVU65
- 326 0002 7047     		bx	lr
- 327              		.cfi_endproc
- 328              	.LFE852:
- 330              		.section	.text.nema_buffer_unmap,"ax",%progbits
- 331              		.align	1
- 332              		.global	nema_buffer_unmap
- 333              		.syntax unified
- 334              		.thumb
- 335              		.thumb_func
- 337              	nema_buffer_unmap:
- 338              	.LVL24:
- 339              	.LFB853:
+ 852              		.loc 1 235 1
+ 853 000c 1846     		mov	r0, r3
+ 854 000e 0C37     		adds	r7, r7, #12
+ 855              		.cfi_def_cfa_offset 4
+ 856 0010 BD46     		mov	sp, r7
+ 857              		.cfi_def_cfa_register 13
+ 858              		@ sp needed
+ 859 0012 5DF8047B 		ldr	r7, [sp], #4
+ 860              		.cfi_restore 7
+ 861              		.cfi_def_cfa_offset 0
+ 862 0016 7047     		bx	lr
+ 863              		.cfi_endproc
+ 864              	.LFE852:
+ 866              		.section	.text.nema_buffer_unmap,"ax",%progbits
+ 867              		.align	1
+ 868              		.global	nema_buffer_unmap
+ 869              		.syntax unified
+ 870              		.thumb
+ 871              		.thumb_func
+ 873              	nema_buffer_unmap:
+ 874              	.LFB853:
  236:Src/nema_hal_freertos.c **** 
  237:Src/nema_hal_freertos.c **** void nema_buffer_unmap(nema_buffer_t *bo)
  238:Src/nema_hal_freertos.c **** {
- 340              		.loc 1 238 1 is_stmt 1 view -0
- 341              		.cfi_startproc
- 342              		@ args = 0, pretend = 0, frame = 0
- 343              		@ frame_needed = 0, uses_anonymous_args = 0
- 344              		@ link register save eliminated.
+ 875              		.loc 1 238 1
+ 876              		.cfi_startproc
+ 877              		@ args = 0, pretend = 0, frame = 8
+ 878              		@ frame_needed = 1, uses_anonymous_args = 0
+ 879              		@ link register save eliminated.
+ 880 0000 80B4     		push	{r7}
+ 881              		.cfi_def_cfa_offset 4
+ 882              		.cfi_offset 7, -4
+ 883 0002 83B0     		sub	sp, sp, #12
+ 884              		.cfi_def_cfa_offset 16
+ 885 0004 00AF     		add	r7, sp, #0
+ 886              		.cfi_def_cfa_register 7
+ 887 0006 7860     		str	r0, [r7, #4]
  239:Src/nema_hal_freertos.c ****     /* Prevent unused argument(s) compilation warning */
  240:Src/nema_hal_freertos.c ****     UNUSED(bo);
- 345              		.loc 1 240 5 view .LVU67
+ARM GAS  /tmp/ccKMUTYx.s 			page 21
+
+
  241:Src/nema_hal_freertos.c **** }
- 346              		.loc 1 241 1 is_stmt 0 view .LVU68
- 347 0000 7047     		bx	lr
- 348              		.cfi_endproc
- 349              	.LFE853:
- 351              		.section	.text.nema_buffer_phys,"ax",%progbits
- 352              		.align	1
- 353              		.global	nema_buffer_phys
- 354              		.syntax unified
- 355              		.thumb
- 356              		.thumb_func
- 358              	nema_buffer_phys:
- 359              	.LVL25:
- 360              	.LFB855:
+ 888              		.loc 1 241 1
+ 889 0008 00BF     		nop
+ 890 000a 0C37     		adds	r7, r7, #12
+ 891              		.cfi_def_cfa_offset 4
+ 892 000c BD46     		mov	sp, r7
+ 893              		.cfi_def_cfa_register 13
+ 894              		@ sp needed
+ 895 000e 5DF8047B 		ldr	r7, [sp], #4
+ 896              		.cfi_restore 7
+ 897              		.cfi_def_cfa_offset 0
+ 898 0012 7047     		bx	lr
+ 899              		.cfi_endproc
+ 900              	.LFE853:
+ 902              		.section	.text.nema_buffer_destroy,"ax",%progbits
+ 903              		.align	1
+ 904              		.global	nema_buffer_destroy
+ 905              		.syntax unified
+ 906              		.thumb
+ 907              		.thumb_func
+ 909              	nema_buffer_destroy:
+ 910              	.LFB854:
  242:Src/nema_hal_freertos.c **** 
  243:Src/nema_hal_freertos.c **** void nema_buffer_destroy(nema_buffer_t *bo)
  244:Src/nema_hal_freertos.c **** {
+ 911              		.loc 1 244 1
+ 912              		.cfi_startproc
+ 913              		@ args = 0, pretend = 0, frame = 8
+ 914              		@ frame_needed = 1, uses_anonymous_args = 0
+ 915 0000 80B5     		push	{r7, lr}
+ 916              		.cfi_def_cfa_offset 8
+ 917              		.cfi_offset 7, -8
+ 918              		.cfi_offset 14, -4
+ 919 0002 82B0     		sub	sp, sp, #8
+ 920              		.cfi_def_cfa_offset 16
+ 921 0004 00AF     		add	r7, sp, #0
+ 922              		.cfi_def_cfa_register 7
+ 923 0006 7860     		str	r0, [r7, #4]
  245:Src/nema_hal_freertos.c ****     nema_mutex_lock(MUTEX_MALLOC);
+ 924              		.loc 1 245 5
+ 925 0008 0120     		movs	r0, #1
+ 926 000a FFF7FEFF 		bl	nema_mutex_lock
  246:Src/nema_hal_freertos.c **** 
  247:Src/nema_hal_freertos.c ****     tsi_free(bo->base_virt);
+ 927              		.loc 1 247 5
+ 928 000e 7B68     		ldr	r3, [r7, #4]
+ 929 0010 9B68     		ldr	r3, [r3, #8]
+ 930 0012 1846     		mov	r0, r3
+ 931 0014 FFF7FEFF 		bl	tsi_free
  248:Src/nema_hal_freertos.c **** 
  249:Src/nema_hal_freertos.c ****     nema_mutex_unlock(MUTEX_MALLOC);
+ 932              		.loc 1 249 5
+ 933 0018 0120     		movs	r0, #1
+ 934 001a FFF7FEFF 		bl	nema_mutex_unlock
  250:Src/nema_hal_freertos.c **** }
+ 935              		.loc 1 250 1
+ 936 001e 00BF     		nop
+ARM GAS  /tmp/ccKMUTYx.s 			page 22
+
+
+ 937 0020 0837     		adds	r7, r7, #8
+ 938              		.cfi_def_cfa_offset 8
+ 939 0022 BD46     		mov	sp, r7
+ 940              		.cfi_def_cfa_register 13
+ 941              		@ sp needed
+ 942 0024 80BD     		pop	{r7, pc}
+ 943              		.cfi_endproc
+ 944              	.LFE854:
+ 946              		.section	.text.nema_buffer_phys,"ax",%progbits
+ 947              		.align	1
+ 948              		.global	nema_buffer_phys
+ 949              		.syntax unified
+ 950              		.thumb
+ 951              		.thumb_func
+ 953              	nema_buffer_phys:
+ 954              	.LFB855:
  251:Src/nema_hal_freertos.c **** 
  252:Src/nema_hal_freertos.c **** uintptr_t nema_buffer_phys(nema_buffer_t *bo)
  253:Src/nema_hal_freertos.c **** {
- 361              		.loc 1 253 1 is_stmt 1 view -0
- 362              		.cfi_startproc
- 363              		@ args = 0, pretend = 0, frame = 0
- 364              		@ frame_needed = 0, uses_anonymous_args = 0
- 365              		@ link register save eliminated.
+ 955              		.loc 1 253 1
+ 956              		.cfi_startproc
+ 957              		@ args = 0, pretend = 0, frame = 8
+ 958              		@ frame_needed = 1, uses_anonymous_args = 0
+ 959              		@ link register save eliminated.
+ 960 0000 80B4     		push	{r7}
+ 961              		.cfi_def_cfa_offset 4
+ 962              		.cfi_offset 7, -4
+ 963 0002 83B0     		sub	sp, sp, #12
+ 964              		.cfi_def_cfa_offset 16
+ 965 0004 00AF     		add	r7, sp, #0
+ 966              		.cfi_def_cfa_register 7
+ 967 0006 7860     		str	r0, [r7, #4]
  254:Src/nema_hal_freertos.c ****     return bo->base_phys;
-ARM GAS  /tmp/cck4dqzt.s 			page 12
-
-
- 366              		.loc 1 254 5 view .LVU70
+ 968              		.loc 1 254 14
+ 969 0008 7B68     		ldr	r3, [r7, #4]
+ 970 000a DB68     		ldr	r3, [r3, #12]
  255:Src/nema_hal_freertos.c **** }
- 367              		.loc 1 255 1 is_stmt 0 view .LVU71
- 368 0000 C068     		ldr	r0, [r0, #12]
- 369              	.LVL26:
- 370              		.loc 1 255 1 view .LVU72
- 371 0002 7047     		bx	lr
- 372              		.cfi_endproc
- 373              	.LFE855:
- 375              		.section	.text.nema_host_free,"ax",%progbits
- 376              		.align	1
- 377              		.global	nema_host_free
- 378              		.syntax unified
- 379              		.thumb
- 380              		.thumb_func
- 382              	nema_host_free:
- 383              	.LVL27:
- 384              	.LFB857:
+ 971              		.loc 1 255 1
+ 972 000c 1846     		mov	r0, r3
+ 973 000e 0C37     		adds	r7, r7, #12
+ 974              		.cfi_def_cfa_offset 4
+ 975 0010 BD46     		mov	sp, r7
+ 976              		.cfi_def_cfa_register 13
+ 977              		@ sp needed
+ 978 0012 5DF8047B 		ldr	r7, [sp], #4
+ 979              		.cfi_restore 7
+ 980              		.cfi_def_cfa_offset 0
+ 981 0016 7047     		bx	lr
+ 982              		.cfi_endproc
+ 983              	.LFE855:
+ 985              		.section	.text.nema_buffer_flush,"ax",%progbits
+ 986              		.align	1
+ 987              		.global	nema_buffer_flush
+ 988              		.syntax unified
+ 989              		.thumb
+ 990              		.thumb_func
+ 992              	nema_buffer_flush:
+ARM GAS  /tmp/ccKMUTYx.s 			page 23
+
+
+ 993              	.LFB856:
  256:Src/nema_hal_freertos.c **** 
  257:Src/nema_hal_freertos.c **** void nema_buffer_flush(nema_buffer_t * bo)
  258:Src/nema_hal_freertos.c **** {
+ 994              		.loc 1 258 1
+ 995              		.cfi_startproc
+ 996              		@ args = 0, pretend = 0, frame = 24
+ 997              		@ frame_needed = 1, uses_anonymous_args = 0
+ 998 0000 80B5     		push	{r7, lr}
+ 999              		.cfi_def_cfa_offset 8
+ 1000              		.cfi_offset 7, -8
+ 1001              		.cfi_offset 14, -4
+ 1002 0002 86B0     		sub	sp, sp, #24
+ 1003              		.cfi_def_cfa_offset 32
+ 1004 0004 00AF     		add	r7, sp, #0
+ 1005              		.cfi_def_cfa_register 7
+ 1006 0006 7860     		str	r0, [r7, #4]
  259:Src/nema_hal_freertos.c **** #if defined(NEMA_CACHED_MEMORY)
  260:Src/nema_hal_freertos.c ****     nema_mutex_lock(MUTEX_FLUSH);
+ 1007              		.loc 1 260 5
+ 1008 0008 0220     		movs	r0, #2
+ 1009 000a FFF7FEFF 		bl	nema_mutex_lock
  261:Src/nema_hal_freertos.c ****     SCB_CleanInvalidateDCache_by_Addr((uint32_t *)bo->base_virt, bo->size);
- 262:Src/nema_hal_freertos.c ****     nema_mutex_unlock(MUTEX_FLUSH);
- 263:Src/nema_hal_freertos.c **** #else /* !NEMA_CACHED_MEMORY */
- 264:Src/nema_hal_freertos.c ****     UNUSED(bo);
- 265:Src/nema_hal_freertos.c **** #endif /* NEMA_CACHED_MEMORY */
- 266:Src/nema_hal_freertos.c **** }
- 267:Src/nema_hal_freertos.c **** 
- 268:Src/nema_hal_freertos.c **** void nema_host_free(void *ptr)
- 269:Src/nema_hal_freertos.c **** {
- 385              		.loc 1 269 1 is_stmt 1 view -0
- 386              		.cfi_startproc
- 387              		@ args = 0, pretend = 0, frame = 0
- 388              		@ frame_needed = 0, uses_anonymous_args = 0
- 389              		@ link register save eliminated.
- 270:Src/nema_hal_freertos.c ****     if (ptr)
- 390              		.loc 1 270 5 view .LVU74
- 391              		.loc 1 270 8 is_stmt 0 view .LVU75
- 392 0000 08B1     		cbz	r0, .L29
- 271:Src/nema_hal_freertos.c ****     {
- 272:Src/nema_hal_freertos.c ****         tsi_free(ptr);
- 393              		.loc 1 272 9 is_stmt 1 view .LVU76
- 394 0002 FFF7FEBF 		b	tsi_free
- 395              	.LVL28:
- 396              	.L29:
- 273:Src/nema_hal_freertos.c ****     }
- 274:Src/nema_hal_freertos.c **** }
- 397              		.loc 1 274 1 is_stmt 0 view .LVU77
- 398 0006 7047     		bx	lr
- 399              		.cfi_endproc
- 400              	.LFE857:
- 402              		.section	.rodata.nema_host_malloc.str1.1,"aMS",%progbits,1
- 403              	.LC2:
- 404 0000 70747200 		.ascii	"ptr\000"
- 405              		.section	.text.nema_host_malloc,"ax",%progbits
-ARM GAS  /tmp/cck4dqzt.s 			page 13
-
-
- 406              		.align	1
- 407              		.global	nema_host_malloc
- 408              		.syntax unified
- 409              		.thumb
- 410              		.thumb_func
- 412              	nema_host_malloc:
- 413              	.LVL29:
- 414              	.LFB858:
- 275:Src/nema_hal_freertos.c **** 
- 276:Src/nema_hal_freertos.c **** void *nema_host_malloc(unsigned size)
- 277:Src/nema_hal_freertos.c **** {
- 415              		.loc 1 277 1 is_stmt 1 view -0
- 416              		.cfi_startproc
- 417              		@ args = 0, pretend = 0, frame = 0
- 418              		@ frame_needed = 0, uses_anonymous_args = 0
- 278:Src/nema_hal_freertos.c ****     void *ptr = NULL;
- 419              		.loc 1 278 5 view .LVU79
- 279:Src/nema_hal_freertos.c **** 
- 280:Src/nema_hal_freertos.c ****     ptr = tsi_malloc(size);
- 420              		.loc 1 280 5 view .LVU80
- 277:Src/nema_hal_freertos.c ****     void *ptr = NULL;
- 421              		.loc 1 277 1 is_stmt 0 view .LVU81
- 422 0000 0146     		mov	r1, r0
- 423 0002 08B5     		push	{r3, lr}
- 424              		.cfi_def_cfa_offset 8
- 425              		.cfi_offset 3, -8
- 426              		.cfi_offset 14, -4
- 427              		.loc 1 280 11 view .LVU82
- 428 0004 0020     		movs	r0, #0
- 429              	.LVL30:
- 430              		.loc 1 280 11 view .LVU83
- 431 0006 FFF7FEFF 		bl	tsi_malloc_pool
- 432              	.LVL31:
- 281:Src/nema_hal_freertos.c ****     assert(ptr);
- 433              		.loc 1 281 5 is_stmt 1 view .LVU84
- 434 000a 30B9     		cbnz	r0, .L31
- 435              		.loc 1 281 5 is_stmt 0 discriminator 1 view .LVU85
- 436 000c 40F21911 		movw	r1, #281
- 437 0010 024B     		ldr	r3, .L33
- 438 0012 034A     		ldr	r2, .L33+4
- 439 0014 0348     		ldr	r0, .L33+8
- 440              	.LVL32:
- 441              		.loc 1 281 5 discriminator 1 view .LVU86
- 442 0016 FFF7FEFF 		bl	__assert_func
- 443              	.LVL33:
- 444              	.L31:
- 282:Src/nema_hal_freertos.c **** 
- 283:Src/nema_hal_freertos.c ****     return ptr;
- 284:Src/nema_hal_freertos.c **** }
- 445              		.loc 1 284 1 view .LVU87
- 446 001a 08BD     		pop	{r3, pc}
- 447              	.L34:
- 448              		.align	2
- 449              	.L33:
- 450 001c 00000000 		.word	.LC2
- 451 0020 00000000 		.word	__func__.0
- 452 0024 0E000000 		.word	.LC1
-ARM GAS  /tmp/cck4dqzt.s 			page 14
-
-
- 453              		.cfi_endproc
- 454              	.LFE858:
- 456              		.section	.text.nema_mutex_lock,"ax",%progbits
- 457              		.align	1
- 458              		.global	nema_mutex_lock
- 459              		.syntax unified
- 460              		.thumb
- 461              		.thumb_func
- 463              	nema_mutex_lock:
- 464              	.LVL34:
- 465              	.LFB859:
- 285:Src/nema_hal_freertos.c **** 
- 286:Src/nema_hal_freertos.c **** int nema_mutex_lock(int mutex_id)
- 287:Src/nema_hal_freertos.c **** {
- 466              		.loc 1 287 1 is_stmt 1 view -0
- 467              		.cfi_startproc
- 468              		@ args = 0, pretend = 0, frame = 0
- 469              		@ frame_needed = 0, uses_anonymous_args = 0
- 288:Src/nema_hal_freertos.c ****     int ret = 0;
- 470              		.loc 1 288 5 view .LVU89
- 289:Src/nema_hal_freertos.c **** 
- 290:Src/nema_hal_freertos.c **** #if (defined(NEMA_MULTI_PROCESS) || defined(NEMA_MULTI_THREAD))
- 291:Src/nema_hal_freertos.c ****     if ((mutex_id >= 0) && (mutex_id <= MUTEX_MAX) && (NULL != nema_mutexes_ids[mutex_id]))
- 471              		.loc 1 291 5 view .LVU90
- 472              		.loc 1 291 8 is_stmt 0 view .LVU91
- 473 0000 0228     		cmp	r0, #2
- 287:Src/nema_hal_freertos.c ****     int ret = 0;
- 474              		.loc 1 287 1 view .LVU92
- 475 0002 08B5     		push	{r3, lr}
- 476              		.cfi_def_cfa_offset 8
- 477              		.cfi_offset 3, -8
- 478              		.cfi_offset 14, -4
- 479              		.loc 1 291 8 view .LVU93
- 480 0004 0DD8     		bhi	.L37
- 481              		.loc 1 291 80 discriminator 1 view .LVU94
- 482 0006 084B     		ldr	r3, .L39
- 483 0008 53F82030 		ldr	r3, [r3, r0, lsl #2]
- 288:Src/nema_hal_freertos.c ****     int ret = 0;
- 484              		.loc 1 288 9 view .LVU95
- 485 000c 1846     		mov	r0, r3
- 486              	.LVL35:
- 487              		.loc 1 291 52 discriminator 1 view .LVU96
- 488 000e 3BB1     		cbz	r3, .L35
- 292:Src/nema_hal_freertos.c ****     {
- 293:Src/nema_hal_freertos.c ****         ret = xSemaphoreTake(nema_mutexes_ids[mutex_id], portMAX_DELAY);
- 489              		.loc 1 293 9 is_stmt 1 view .LVU97
- 490              		.loc 1 293 15 is_stmt 0 view .LVU98
- 491 0010 4FF0FF31 		mov	r1, #-1
- 492 0014 FFF7FEFF 		bl	xQueueSemaphoreTake
- 493              	.LVL36:
- 294:Src/nema_hal_freertos.c ****         ret = ret == pdTRUE ? 0 : -1;
- 494              		.loc 1 294 9 is_stmt 1 view .LVU99
- 495              		.loc 1 294 33 is_stmt 0 view .LVU100
- 496 0018 0138     		subs	r0, r0, #1
- 497              	.LVL37:
- 498              		.loc 1 294 33 view .LVU101
- 499 001a 18BF     		it	ne
-ARM GAS  /tmp/cck4dqzt.s 			page 15
-
-
- 500 001c 0120     		movne	r0, #1
- 501              	.LVL38:
- 502              		.loc 1 294 33 view .LVU102
- 503 001e 4042     		rsbs	r0, r0, #0
- 504              	.LVL39:
- 505              	.L35:
- 295:Src/nema_hal_freertos.c ****     }
- 296:Src/nema_hal_freertos.c **** #else /* !NEMA_MULTI_PROCESS & !NEMA_MULTI_THREAD */
- 297:Src/nema_hal_freertos.c ****     UNUSED(mutex_id);
- 298:Src/nema_hal_freertos.c **** #endif /* NEMA_MULTI_PROCESS | NEMA_MULTI_THREAD */
- 299:Src/nema_hal_freertos.c **** 
- 300:Src/nema_hal_freertos.c ****     return ret;
- 301:Src/nema_hal_freertos.c **** }
- 506              		.loc 1 301 1 view .LVU103
- 507 0020 08BD     		pop	{r3, pc}
- 508              	.LVL40:
- 509              	.L37:
- 288:Src/nema_hal_freertos.c **** 
- 510              		.loc 1 288 9 view .LVU104
- 511 0022 0020     		movs	r0, #0
- 512              	.LVL41:
- 288:Src/nema_hal_freertos.c **** 
- 513              		.loc 1 288 9 view .LVU105
- 514 0024 FCE7     		b	.L35
- 515              	.L40:
- 516 0026 00BF     		.align	2
- 517              	.L39:
- 518 0028 00000000 		.word	nema_mutexes_ids
- 519              		.cfi_endproc
- 520              	.LFE859:
- 522              		.section	.text.nema_mutex_unlock,"ax",%progbits
- 523              		.align	1
- 524              		.global	nema_mutex_unlock
- 525              		.syntax unified
- 526              		.thumb
- 527              		.thumb_func
- 529              	nema_mutex_unlock:
- 530              	.LVL42:
- 531              	.LFB860:
- 302:Src/nema_hal_freertos.c **** 
- 303:Src/nema_hal_freertos.c **** int nema_mutex_unlock(int mutex_id)
- 304:Src/nema_hal_freertos.c **** {
- 532              		.loc 1 304 1 is_stmt 1 view -0
- 533              		.cfi_startproc
- 534              		@ args = 0, pretend = 0, frame = 0
- 535              		@ frame_needed = 0, uses_anonymous_args = 0
- 305:Src/nema_hal_freertos.c ****     int ret = 0;
- 536              		.loc 1 305 5 view .LVU107
- 306:Src/nema_hal_freertos.c **** 
- 307:Src/nema_hal_freertos.c **** #if (defined(NEMA_MULTI_PROCESS) || defined(NEMA_MULTI_THREAD))
- 308:Src/nema_hal_freertos.c ****     if ((mutex_id >= 0) && (mutex_id <= MUTEX_MAX) && (NULL != nema_mutexes_ids[mutex_id]))
- 537              		.loc 1 308 5 view .LVU108
- 538              		.loc 1 308 8 is_stmt 0 view .LVU109
- 539 0000 0228     		cmp	r0, #2
- 304:Src/nema_hal_freertos.c ****     int ret = 0;
- 540              		.loc 1 304 1 view .LVU110
- 541 0002 10B5     		push	{r4, lr}
-ARM GAS  /tmp/cck4dqzt.s 			page 16
-
-
- 542              		.cfi_def_cfa_offset 8
- 543              		.cfi_offset 4, -8
- 544              		.cfi_offset 14, -4
- 545              		.loc 1 308 8 view .LVU111
- 546 0004 0ED8     		bhi	.L43
- 547              		.loc 1 308 80 discriminator 1 view .LVU112
- 548 0006 084B     		ldr	r3, .L45
- 549 0008 53F82040 		ldr	r4, [r3, r0, lsl #2]
- 305:Src/nema_hal_freertos.c ****     int ret = 0;
- 550              		.loc 1 305 9 view .LVU113
- 551 000c 2046     		mov	r0, r4
- 552              	.LVL43:
- 553              		.loc 1 308 52 discriminator 1 view .LVU114
- 554 000e 44B1     		cbz	r4, .L41
- 309:Src/nema_hal_freertos.c ****     {
- 310:Src/nema_hal_freertos.c ****         ret = xSemaphoreGive(nema_mutexes_ids[mutex_id]);
- 555              		.loc 1 310 9 is_stmt 1 view .LVU115
- 556              		.loc 1 310 15 is_stmt 0 view .LVU116
- 557 0010 0023     		movs	r3, #0
- 558 0012 1A46     		mov	r2, r3
- 559 0014 1946     		mov	r1, r3
- 560 0016 FFF7FEFF 		bl	xQueueGenericSend
- 561              	.LVL44:
- 311:Src/nema_hal_freertos.c ****         ret = ret == pdTRUE ? 0 : -1;
- 562              		.loc 1 311 9 is_stmt 1 view .LVU117
- 563              		.loc 1 311 33 is_stmt 0 view .LVU118
- 564 001a 0138     		subs	r0, r0, #1
- 565              	.LVL45:
- 566              		.loc 1 311 33 view .LVU119
- 567 001c 18BF     		it	ne
- 568 001e 0120     		movne	r0, #1
- 569              	.LVL46:
- 570              		.loc 1 311 33 view .LVU120
- 571 0020 4042     		rsbs	r0, r0, #0
- 572              	.LVL47:
- 573              	.L41:
- 312:Src/nema_hal_freertos.c ****     }
- 313:Src/nema_hal_freertos.c **** #else /* !NEMA_MULTI_PROCESS & !NEMA_MULTI_THREAD */
- 314:Src/nema_hal_freertos.c ****     UNUSED(mutex_id);
- 315:Src/nema_hal_freertos.c **** #endif /* NEMA_MULTI_PROCESS | NEMA_MULTI_THREAD */
- 316:Src/nema_hal_freertos.c **** 
- 317:Src/nema_hal_freertos.c ****     return ret;
- 318:Src/nema_hal_freertos.c **** }
- 574              		.loc 1 318 1 view .LVU121
- 575 0022 10BD     		pop	{r4, pc}
- 576              	.LVL48:
- 577              	.L43:
- 305:Src/nema_hal_freertos.c **** 
- 578              		.loc 1 305 9 view .LVU122
- 579 0024 0020     		movs	r0, #0
- 580              	.LVL49:
- 305:Src/nema_hal_freertos.c **** 
- 581              		.loc 1 305 9 view .LVU123
- 582 0026 FCE7     		b	.L41
- 583              	.L46:
- 584              		.align	2
- 585              	.L45:
-ARM GAS  /tmp/cck4dqzt.s 			page 17
-
-
- 586 0028 00000000 		.word	nema_mutexes_ids
- 587              		.cfi_endproc
- 588              	.LFE860:
- 590              		.section	.rodata.nema_buffer_create.str1.1,"aMS",%progbits,1
- 591              	.LC3:
- 592 0000 626F2E62 		.ascii	"bo.base_virt\000"
- 592      6173655F 
- 592      76697274 
- 592      00
- 593              		.section	.text.nema_buffer_create,"ax",%progbits
- 594              		.align	1
- 595              		.global	nema_buffer_create
- 596              		.syntax unified
- 597              		.thumb
- 598              		.thumb_func
- 600              	nema_buffer_create:
- 601              	.LVL50:
- 602              	.LFB850:
- 194:Src/nema_hal_freertos.c ****     nema_buffer_t bo;
- 603              		.loc 1 194 1 is_stmt 1 view -0
- 604              		.cfi_startproc
- 605              		@ args = 0, pretend = 0, frame = 16
- 606              		@ frame_needed = 0, uses_anonymous_args = 0
- 195:Src/nema_hal_freertos.c **** 
- 607              		.loc 1 195 5 view .LVU125
- 197:Src/nema_hal_freertos.c **** 
- 608              		.loc 1 197 5 view .LVU126
- 194:Src/nema_hal_freertos.c ****     nema_buffer_t bo;
- 609              		.loc 1 194 1 is_stmt 0 view .LVU127
- 610 0000 F0B5     		push	{r4, r5, r6, r7, lr}
- 611              		.cfi_def_cfa_offset 20
- 612              		.cfi_offset 4, -20
- 613              		.cfi_offset 5, -16
- 614              		.cfi_offset 6, -12
- 615              		.cfi_offset 7, -8
- 616              		.cfi_offset 14, -4
- 617 0002 0E46     		mov	r6, r1
- 197:Src/nema_hal_freertos.c **** 
- 618              		.loc 1 197 5 view .LVU128
- 619 0004 0027     		movs	r7, #0
- 194:Src/nema_hal_freertos.c ****     nema_buffer_t bo;
- 620              		.loc 1 194 1 view .LVU129
- 621 0006 85B0     		sub	sp, sp, #20
- 622              		.cfi_def_cfa_offset 40
- 194:Src/nema_hal_freertos.c ****     nema_buffer_t bo;
- 623              		.loc 1 194 1 view .LVU130
- 624 0008 0446     		mov	r4, r0
- 199:Src/nema_hal_freertos.c **** 
- 625              		.loc 1 199 5 view .LVU131
- 626 000a 0120     		movs	r0, #1
- 627              	.LVL51:
- 197:Src/nema_hal_freertos.c **** 
- 628              		.loc 1 197 5 view .LVU132
- 629 000c 0197     		str	r7, [sp, #4]
- 199:Src/nema_hal_freertos.c **** 
- 630              		.loc 1 199 5 is_stmt 1 view .LVU133
- 631 000e FFF7FEFF 		bl	nema_mutex_lock
-ARM GAS  /tmp/cck4dqzt.s 			page 18
-
-
- 632              	.LVL52:
- 201:Src/nema_hal_freertos.c ****     assert(bo.base_virt);
- 633              		.loc 1 201 5 view .LVU134
- 201:Src/nema_hal_freertos.c ****     assert(bo.base_virt);
- 634              		.loc 1 201 20 is_stmt 0 view .LVU135
- 635 0012 3146     		mov	r1, r6
- 636 0014 3846     		mov	r0, r7
- 637 0016 FFF7FEFF 		bl	tsi_malloc_pool
- 638              	.LVL53:
- 197:Src/nema_hal_freertos.c **** 
- 639              		.loc 1 197 5 view .LVU136
- 640 001a 6D46     		mov	r5, sp
- 201:Src/nema_hal_freertos.c ****     assert(bo.base_virt);
- 641              		.loc 1 201 18 discriminator 1 view .LVU137
- 642 001c 0290     		str	r0, [sp, #8]
- 202:Src/nema_hal_freertos.c **** 
- 643              		.loc 1 202 5 is_stmt 1 view .LVU138
- 644 001e 28B9     		cbnz	r0, .L48
- 202:Src/nema_hal_freertos.c **** 
- 645              		.loc 1 202 5 is_stmt 0 discriminator 1 view .LVU139
- 646 0020 CA21     		movs	r1, #202
- 647 0022 084B     		ldr	r3, .L49
- 648 0024 084A     		ldr	r2, .L49+4
- 649 0026 0948     		ldr	r0, .L49+8
- 650 0028 FFF7FEFF 		bl	__assert_func
- 651              	.LVL54:
- 652              	.L48:
- 204:Src/nema_hal_freertos.c ****     bo.size      = size;
- 653              		.loc 1 204 5 is_stmt 1 view .LVU140
- 204:Src/nema_hal_freertos.c ****     bo.size      = size;
- 654              		.loc 1 204 18 is_stmt 0 view .LVU141
- 655 002c 0390     		str	r0, [sp, #12]
- 205:Src/nema_hal_freertos.c **** 
- 656              		.loc 1 205 5 is_stmt 1 view .LVU142
- 207:Src/nema_hal_freertos.c **** 
- 657              		.loc 1 207 5 is_stmt 0 view .LVU143
- 658 002e 0120     		movs	r0, #1
- 205:Src/nema_hal_freertos.c **** 
- 659              		.loc 1 205 18 view .LVU144
- 660 0030 0096     		str	r6, [sp]
- 207:Src/nema_hal_freertos.c **** 
- 661              		.loc 1 207 5 is_stmt 1 view .LVU145
- 662 0032 FFF7FEFF 		bl	nema_mutex_unlock
- 663              	.LVL55:
- 209:Src/nema_hal_freertos.c **** }
- 664              		.loc 1 209 5 view .LVU146
- 209:Src/nema_hal_freertos.c **** }
- 665              		.loc 1 209 12 is_stmt 0 view .LVU147
- 666 0036 95E80F00 		ldm	r5, {r0, r1, r2, r3}
- 667 003a 84E80F00 		stm	r4, {r0, r1, r2, r3}
- 210:Src/nema_hal_freertos.c **** 
- 668              		.loc 1 210 1 view .LVU148
- 669 003e 2046     		mov	r0, r4
- 670 0040 05B0     		add	sp, sp, #20
- 671              		.cfi_def_cfa_offset 20
- 672              		@ sp needed
- 673 0042 F0BD     		pop	{r4, r5, r6, r7, pc}
-ARM GAS  /tmp/cck4dqzt.s 			page 19
-
-
- 674              	.LVL56:
- 675              	.L50:
- 210:Src/nema_hal_freertos.c **** 
- 676              		.loc 1 210 1 view .LVU149
- 677              		.align	2
- 678              	.L49:
- 679 0044 00000000 		.word	.LC3
- 680 0048 00000000 		.word	__func__.2
- 681 004c 0E000000 		.word	.LC1
- 682              		.cfi_endproc
- 683              	.LFE850:
- 685              		.section	.rodata.nema_sys_init.str1.1,"aMS",%progbits,1
- 686              	.LC4:
- 687 0000 6E656D61 		.ascii	"nema_mutexes_ids[MUTEX_RB]\000"
- 687      5F6D7574 
- 687      65786573 
- 687      5F696473 
- 687      5B4D5554 
- 688              	.LC5:
- 689 001b 6E656D61 		.ascii	"nema_mutexes_ids[MUTEX_MALLOC]\000"
- 689      5F6D7574 
- 689      65786573 
- 689      5F696473 
- 689      5B4D5554 
- 690              	.LC6:
- 691 003a 6E656D61 		.ascii	"nema_mutexes_ids[MUTEX_FLUSH]\000"
- 691      5F6D7574 
- 691      65786573 
- 691      5F696473 
- 691      5B4D5554 
- 692              	.LC7:
- 693 0058 6E656D61 		.ascii	"nema_irq_sem\000"
- 693      5F697271 
- 693      5F73656D 
- 693      00
- 694              	.LC8:
- 695 0065 72696E67 		.ascii	"ring_buffer_str.bo.base_virt\000"
- 695      5F627566 
- 695      6665725F 
- 695      7374722E 
- 695      626F2E62 
- 696              		.section	.text.nema_sys_init,"ax",%progbits
- 697              		.align	1
- 698              		.global	nema_sys_init
- 699              		.syntax unified
- 700              		.thumb
- 701              		.thumb_func
- 703              	nema_sys_init:
- 704              	.LFB844:
- 101:Src/nema_hal_freertos.c ****     int ret;
- 705              		.loc 1 101 1 is_stmt 1 view -0
- 706              		.cfi_startproc
- 707              		@ args = 0, pretend = 0, frame = 16
- 708              		@ frame_needed = 0, uses_anonymous_args = 0
- 102:Src/nema_hal_freertos.c ****     /* Setup GPU2D Callback */
- 709              		.loc 1 102 5 view .LVU151
- 111:Src/nema_hal_freertos.c ****     assert(nema_mutexes_ids[MUTEX_RB]);
-ARM GAS  /tmp/cck4dqzt.s 			page 20
-
-
- 710              		.loc 1 111 5 view .LVU152
- 101:Src/nema_hal_freertos.c ****     int ret;
- 711              		.loc 1 101 1 is_stmt 0 view .LVU153
- 712 0000 70B5     		push	{r4, r5, r6, lr}
- 713              		.cfi_def_cfa_offset 16
- 714              		.cfi_offset 4, -16
- 715              		.cfi_offset 5, -12
- 716              		.cfi_offset 6, -8
- 717              		.cfi_offset 14, -4
- 111:Src/nema_hal_freertos.c ****     assert(nema_mutexes_ids[MUTEX_RB]);
- 718              		.loc 1 111 34 view .LVU154
- 719 0002 0120     		movs	r0, #1
- 720 0004 2F49     		ldr	r1, .L61
- 101:Src/nema_hal_freertos.c ****     int ret;
- 721              		.loc 1 101 1 view .LVU155
- 722 0006 86B0     		sub	sp, sp, #24
- 723              		.cfi_def_cfa_offset 40
- 111:Src/nema_hal_freertos.c ****     assert(nema_mutexes_ids[MUTEX_RB]);
- 724              		.loc 1 111 34 view .LVU156
- 725 0008 FFF7FEFF 		bl	xQueueCreateMutexStatic
- 726              	.LVL57:
- 111:Src/nema_hal_freertos.c ****     assert(nema_mutexes_ids[MUTEX_RB]);
- 727              		.loc 1 111 32 discriminator 1 view .LVU157
- 728 000c 2E4C     		ldr	r4, .L61+4
- 729 000e 2060     		str	r0, [r4]
- 112:Src/nema_hal_freertos.c ****     nema_mutexes_ids[MUTEX_MALLOC] = xSemaphoreCreateMutexStatic(&nema_mutexes_buffers[MUTEX_MALLOC
- 730              		.loc 1 112 5 is_stmt 1 view .LVU158
- 731 0010 28B9     		cbnz	r0, .L52
- 112:Src/nema_hal_freertos.c ****     nema_mutexes_ids[MUTEX_MALLOC] = xSemaphoreCreateMutexStatic(&nema_mutexes_buffers[MUTEX_MALLOC
- 732              		.loc 1 112 5 is_stmt 0 discriminator 1 view .LVU159
- 733 0012 7021     		movs	r1, #112
- 734 0014 2D4B     		ldr	r3, .L61+8
- 735 0016 2E4A     		ldr	r2, .L61+12
- 736              	.L60:
- 114:Src/nema_hal_freertos.c ****     nema_mutexes_ids[MUTEX_FLUSH] = xSemaphoreCreateMutexStatic(&nema_mutexes_buffers[MUTEX_FLUSH])
- 737              		.loc 1 114 5 discriminator 1 view .LVU160
- 738 0018 2E48     		ldr	r0, .L61+16
- 739 001a FFF7FEFF 		bl	__assert_func
- 740              	.LVL58:
- 741              	.L52:
- 113:Src/nema_hal_freertos.c ****     assert(nema_mutexes_ids[MUTEX_MALLOC]);
- 742              		.loc 1 113 5 is_stmt 1 view .LVU161
- 113:Src/nema_hal_freertos.c ****     assert(nema_mutexes_ids[MUTEX_MALLOC]);
- 743              		.loc 1 113 38 is_stmt 0 view .LVU162
- 744 001e 0120     		movs	r0, #1
- 745 0020 2D49     		ldr	r1, .L61+20
- 746 0022 FFF7FEFF 		bl	xQueueCreateMutexStatic
- 747              	.LVL59:
- 113:Src/nema_hal_freertos.c ****     assert(nema_mutexes_ids[MUTEX_MALLOC]);
- 748              		.loc 1 113 36 discriminator 1 view .LVU163
- 749 0026 6060     		str	r0, [r4, #4]
- 114:Src/nema_hal_freertos.c ****     nema_mutexes_ids[MUTEX_FLUSH] = xSemaphoreCreateMutexStatic(&nema_mutexes_buffers[MUTEX_FLUSH])
- 750              		.loc 1 114 5 is_stmt 1 view .LVU164
- 751 0028 18B9     		cbnz	r0, .L53
- 114:Src/nema_hal_freertos.c ****     nema_mutexes_ids[MUTEX_FLUSH] = xSemaphoreCreateMutexStatic(&nema_mutexes_buffers[MUTEX_FLUSH])
- 752              		.loc 1 114 5 is_stmt 0 discriminator 1 view .LVU165
- 753 002a 7221     		movs	r1, #114
-ARM GAS  /tmp/cck4dqzt.s 			page 21
-
-
- 754 002c 2B4B     		ldr	r3, .L61+24
- 755 002e 284A     		ldr	r2, .L61+12
- 756 0030 F2E7     		b	.L60
- 757              	.L53:
- 115:Src/nema_hal_freertos.c ****     assert(nema_mutexes_ids[MUTEX_FLUSH]);
- 758              		.loc 1 115 5 is_stmt 1 view .LVU166
- 115:Src/nema_hal_freertos.c ****     assert(nema_mutexes_ids[MUTEX_FLUSH]);
- 759              		.loc 1 115 37 is_stmt 0 view .LVU167
- 760 0032 0120     		movs	r0, #1
- 761 0034 2A49     		ldr	r1, .L61+28
- 762 0036 FFF7FEFF 		bl	xQueueCreateMutexStatic
- 763              	.LVL60:
- 115:Src/nema_hal_freertos.c ****     assert(nema_mutexes_ids[MUTEX_FLUSH]);
- 764              		.loc 1 115 35 discriminator 1 view .LVU168
- 765 003a A060     		str	r0, [r4, #8]
- 116:Src/nema_hal_freertos.c **** #endif /* NEMA_MULTI_PROCESS | NEMA_MULTI_THREAD */
- 766              		.loc 1 116 5 is_stmt 1 view .LVU169
- 767 003c 18B9     		cbnz	r0, .L54
- 116:Src/nema_hal_freertos.c **** #endif /* NEMA_MULTI_PROCESS | NEMA_MULTI_THREAD */
- 768              		.loc 1 116 5 is_stmt 0 discriminator 1 view .LVU170
- 769 003e 7421     		movs	r1, #116
- 770 0040 284B     		ldr	r3, .L61+32
- 771 0042 234A     		ldr	r2, .L61+12
- 772 0044 E8E7     		b	.L60
- 773              	.L54:
- 121:Src/nema_hal_freertos.c ****     assert(nema_irq_sem);
- 774              		.loc 1 121 5 is_stmt 1 view .LVU171
- 121:Src/nema_hal_freertos.c ****     assert(nema_irq_sem);
- 775              		.loc 1 121 20 is_stmt 0 view .LVU172
- 776 0046 0021     		movs	r1, #0
- 777 0048 0120     		movs	r0, #1
- 778 004a 274A     		ldr	r2, .L61+36
- 779 004c FFF7FEFF 		bl	xQueueCreateCountingSemaphoreStatic
- 780              	.LVL61:
- 121:Src/nema_hal_freertos.c ****     assert(nema_irq_sem);
- 781              		.loc 1 121 18 discriminator 1 view .LVU173
- 782 0050 264B     		ldr	r3, .L61+40
- 783 0052 1860     		str	r0, [r3]
- 122:Src/nema_hal_freertos.c **** #endif /* NEMA_WAIT_IRQ_BINARY_SEMAPHORE */
- 784              		.loc 1 122 5 is_stmt 1 view .LVU174
- 785 0054 38B3     		cbz	r0, .L55
- 786              	.LVL62:
- 787              	.LBB21:
- 126:Src/nema_hal_freertos.c ****     {
- 788              		.loc 1 126 33 discriminator 1 view .LVU175
- 128:Src/nema_hal_freertos.c ****     }
- 789              		.loc 1 128 9 view .LVU176
- 790 0056 0125     		movs	r5, #1
- 791 0058 254A     		ldr	r2, .L61+44
- 792 005a 4FF40023 		mov	r3, #524288
- 793 005e 1146     		mov	r1, r2
- 794 0060 0020     		movs	r0, #0
- 795 0062 0095     		str	r5, [sp]
- 796 0064 FFF7FEFF 		bl	tsi_malloc_init_pool
- 797              	.LVL63:
- 126:Src/nema_hal_freertos.c ****     {
- 798              		.loc 1 126 68 discriminator 3 view .LVU177
-ARM GAS  /tmp/cck4dqzt.s 			page 22
-
-
- 126:Src/nema_hal_freertos.c ****     {
- 799              		.loc 1 126 33 discriminator 1 view .LVU178
- 128:Src/nema_hal_freertos.c ****     }
- 800              		.loc 1 128 9 view .LVU179
- 801 0068 4FF01042 		mov	r2, #-1879048192
- 802 006c 214B     		ldr	r3, .L61+48
- 803 006e 1146     		mov	r1, r2
- 804 0070 2846     		mov	r0, r5
- 805 0072 0095     		str	r5, [sp]
- 806 0074 FFF7FEFF 		bl	tsi_malloc_init_pool
- 807              	.LVL64:
- 126:Src/nema_hal_freertos.c ****     {
- 808              		.loc 1 126 68 discriminator 3 view .LVU180
- 126:Src/nema_hal_freertos.c ****     {
- 809              		.loc 1 126 33 discriminator 1 view .LVU181
- 128:Src/nema_hal_freertos.c ****     }
- 810              		.loc 1 128 9 view .LVU182
- 811 0078 1F4A     		ldr	r2, .L61+52
- 812 007a 204B     		ldr	r3, .L61+56
- 813 007c 1146     		mov	r1, r2
- 814              	.LBE21:
- 133:Src/nema_hal_freertos.c ****     assert(ring_buffer_str.bo.base_virt);
- 815              		.loc 1 133 26 is_stmt 0 view .LVU183
- 816 007e 02AE     		add	r6, sp, #8
- 817              	.LBB22:
- 128:Src/nema_hal_freertos.c ****     }
- 818              		.loc 1 128 9 view .LVU184
- 819 0080 0220     		movs	r0, #2
- 820              	.LBE22:
- 133:Src/nema_hal_freertos.c ****     assert(ring_buffer_str.bo.base_virt);
- 821              		.loc 1 133 26 view .LVU185
- 822 0082 1F4C     		ldr	r4, .L61+60
- 823              	.LBB23:
- 128:Src/nema_hal_freertos.c ****     }
- 824              		.loc 1 128 9 view .LVU186
- 825 0084 0095     		str	r5, [sp]
- 826 0086 FFF7FEFF 		bl	tsi_malloc_init_pool
- 827              	.LVL65:
- 126:Src/nema_hal_freertos.c ****     {
- 828              		.loc 1 126 68 is_stmt 1 discriminator 3 view .LVU187
- 126:Src/nema_hal_freertos.c ****     {
- 829              		.loc 1 126 33 discriminator 1 view .LVU188
- 830              	.LBE23:
- 133:Src/nema_hal_freertos.c ****     assert(ring_buffer_str.bo.base_virt);
- 831              		.loc 1 133 5 view .LVU189
- 133:Src/nema_hal_freertos.c ****     assert(ring_buffer_str.bo.base_virt);
- 832              		.loc 1 133 26 is_stmt 0 view .LVU190
- 833 008a 4FF48061 		mov	r1, #1024
- 834 008e 3046     		mov	r0, r6
- 835 0090 FFF7FEFF 		bl	nema_buffer_create
- 836              	.LVL66:
- 837 0094 96E80F00 		ldm	r6, {r0, r1, r2, r3}
- 838 0098 84E80F00 		stm	r4, {r0, r1, r2, r3}
- 134:Src/nema_hal_freertos.c **** 
- 839              		.loc 1 134 5 is_stmt 1 view .LVU191
- 840 009c 3AB9     		cbnz	r2, .L59
- 134:Src/nema_hal_freertos.c **** 
-ARM GAS  /tmp/cck4dqzt.s 			page 23
-
-
- 841              		.loc 1 134 5 is_stmt 0 discriminator 1 view .LVU192
- 842 009e 8621     		movs	r1, #134
- 843 00a0 184B     		ldr	r3, .L61+64
- 844 00a2 0B4A     		ldr	r2, .L61+12
- 845 00a4 B8E7     		b	.L60
- 846              	.LVL67:
- 847              	.L55:
- 122:Src/nema_hal_freertos.c **** #endif /* NEMA_WAIT_IRQ_BINARY_SEMAPHORE */
- 848              		.loc 1 122 5 discriminator 1 view .LVU193
- 849 00a6 7A21     		movs	r1, #122
- 850 00a8 174B     		ldr	r3, .L61+68
- 851 00aa 094A     		ldr	r2, .L61+12
- 852 00ac B4E7     		b	.L60
- 853              	.LVL68:
- 854              	.L59:
- 136:Src/nema_hal_freertos.c **** 
- 855              		.loc 1 136 5 is_stmt 1 view .LVU194
- 139:Src/nema_hal_freertos.c ****     if (ret < 0)
- 856              		.loc 1 139 5 view .LVU195
- 139:Src/nema_hal_freertos.c ****     if (ret < 0)
- 857              		.loc 1 139 11 is_stmt 0 view .LVU196
- 858 00ae 2946     		mov	r1, r5
- 859 00b0 2046     		mov	r0, r4
- 860 00b2 FFF7FEFF 		bl	nema_rb_init
- 861              	.LVL69:
- 140:Src/nema_hal_freertos.c ****     {
- 862              		.loc 1 140 5 is_stmt 1 view .LVU197
- 140:Src/nema_hal_freertos.c ****     {
- 863              		.loc 1 140 8 is_stmt 0 view .LVU198
- 864 00b6 0028     		cmp	r0, #0
- 146:Src/nema_hal_freertos.c **** 
- 865              		.loc 1 146 5 is_stmt 1 view .LVU199
- 146:Src/nema_hal_freertos.c **** 
- 866              		.loc 1 146 16 is_stmt 0 view .LVU200
- 867 00b8 A2BF     		ittt	ge
- 868 00ba 0020     		movge	r0, #0
- 869              	.LVL70:
- 146:Src/nema_hal_freertos.c **** 
- 870              		.loc 1 146 16 view .LVU201
- 871 00bc 134B     		ldrge	r3, .L61+72
- 872 00be 1860     		strge	r0, [r3]
- 148:Src/nema_hal_freertos.c **** }
- 873              		.loc 1 148 5 is_stmt 1 view .LVU202
- 149:Src/nema_hal_freertos.c **** 
- 874              		.loc 1 149 1 is_stmt 0 view .LVU203
- 875 00c0 06B0     		add	sp, sp, #24
- 876              		.cfi_def_cfa_offset 16
- 877              		@ sp needed
- 878 00c2 70BD     		pop	{r4, r5, r6, pc}
- 879              	.L62:
- 880              		.align	2
- 881              	.L61:
- 882 00c4 00000000 		.word	nema_mutexes_buffers
- 883 00c8 00000000 		.word	nema_mutexes_ids
- 884 00cc 00000000 		.word	.LC4
- 885 00d0 00000000 		.word	__func__.3
- 886 00d4 0E000000 		.word	.LC1
-ARM GAS  /tmp/cck4dqzt.s 			page 24
-
-
- 887 00d8 50000000 		.word	nema_mutexes_buffers+80
- 888 00dc 1B000000 		.word	.LC5
- 889 00e0 A0000000 		.word	nema_mutexes_buffers+160
- 890 00e4 3A000000 		.word	.LC6
- 891 00e8 00000000 		.word	nema_irq_sem_buffer
- 892 00ec 00000000 		.word	nema_irq_sem
- 893 00f0 00001834 		.word	873988096
- 894 00f4 00E22E00 		.word	3072512
- 895 00f8 00E22E90 		.word	-1875975680
- 896 00fc 00DD0500 		.word	384256
- 897 0100 00000000 		.word	ring_buffer_str
- 898 0104 65000000 		.word	.LC8
- 899 0108 58000000 		.word	.LC7
- 900 010c 00000000 		.word	last_cl_id
- 901              		.cfi_endproc
- 902              	.LFE844:
- 904              		.section	.text.nema_buffer_create_pool,"ax",%progbits
- 905              		.align	1
- 906              		.global	nema_buffer_create_pool
- 907              		.syntax unified
- 908              		.thumb
- 909              		.thumb_func
- 911              	nema_buffer_create_pool:
- 912              	.LVL71:
- 913              	.LFB851:
- 213:Src/nema_hal_freertos.c ****     nema_buffer_t bo;
- 914              		.loc 1 213 1 is_stmt 1 view -0
- 915              		.cfi_startproc
- 916              		@ args = 0, pretend = 0, frame = 0
- 917              		@ frame_needed = 0, uses_anonymous_args = 0
- 214:Src/nema_hal_freertos.c **** 
- 918              		.loc 1 214 5 view .LVU205
- 216:Src/nema_hal_freertos.c **** 
- 919              		.loc 1 216 5 view .LVU206
- 218:Src/nema_hal_freertos.c **** 
- 920              		.loc 1 218 5 view .LVU207
- 213:Src/nema_hal_freertos.c ****     nema_buffer_t bo;
- 921              		.loc 1 213 1 is_stmt 0 view .LVU208
- 922 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
- 923              		.cfi_def_cfa_offset 24
- 924              		.cfi_offset 3, -24
- 925              		.cfi_offset 4, -20
- 926              		.cfi_offset 5, -16
- 927              		.cfi_offset 6, -12
- 928              		.cfi_offset 7, -8
- 929              		.cfi_offset 14, -4
- 213:Src/nema_hal_freertos.c ****     nema_buffer_t bo;
- 930              		.loc 1 213 1 view .LVU209
- 931 0002 0E46     		mov	r6, r1
- 932 0004 1746     		mov	r7, r2
- 933 0006 0446     		mov	r4, r0
- 218:Src/nema_hal_freertos.c **** 
- 934              		.loc 1 218 5 view .LVU210
- 935 0008 0120     		movs	r0, #1
- 936              	.LVL72:
- 218:Src/nema_hal_freertos.c **** 
- 937              		.loc 1 218 5 view .LVU211
-ARM GAS  /tmp/cck4dqzt.s 			page 25
-
-
- 938 000a FFF7FEFF 		bl	nema_mutex_lock
- 939              	.LVL73:
- 220:Src/nema_hal_freertos.c ****     assert(bo.base_virt);
- 940              		.loc 1 220 5 is_stmt 1 view .LVU212
- 220:Src/nema_hal_freertos.c ****     assert(bo.base_virt);
- 941              		.loc 1 220 20 is_stmt 0 view .LVU213
- 942 000e 3946     		mov	r1, r7
- 943 0010 3046     		mov	r0, r6
- 944 0012 FFF7FEFF 		bl	tsi_malloc_pool
- 945              	.LVL74:
- 221:Src/nema_hal_freertos.c **** 
- 946              		.loc 1 221 5 is_stmt 1 view .LVU214
- 947 0016 0546     		mov	r5, r0
- 948 0018 28B9     		cbnz	r0, .L64
- 221:Src/nema_hal_freertos.c **** 
- 949              		.loc 1 221 5 is_stmt 0 discriminator 1 view .LVU215
- 950 001a DD21     		movs	r1, #221
- 951 001c 064B     		ldr	r3, .L65
- 952 001e 074A     		ldr	r2, .L65+4
- 953 0020 0748     		ldr	r0, .L65+8
- 954              	.LVL75:
- 221:Src/nema_hal_freertos.c **** 
- 955              		.loc 1 221 5 discriminator 1 view .LVU216
- 956 0022 FFF7FEFF 		bl	__assert_func
- 957              	.LVL76:
- 958              	.L64:
- 223:Src/nema_hal_freertos.c ****     bo.size      = size;
- 959              		.loc 1 223 5 is_stmt 1 view .LVU217
- 224:Src/nema_hal_freertos.c ****     bo.fd        = pool; /* use fd during the memory free */
- 960              		.loc 1 224 5 view .LVU218
- 225:Src/nema_hal_freertos.c **** 
- 961              		.loc 1 225 5 view .LVU219
- 227:Src/nema_hal_freertos.c **** 
- 962              		.loc 1 227 5 view .LVU220
- 963 0026 0120     		movs	r0, #1
- 964              	.LVL77:
- 227:Src/nema_hal_freertos.c **** 
- 965              		.loc 1 227 5 is_stmt 0 view .LVU221
- 966 0028 FFF7FEFF 		bl	nema_mutex_unlock
- 967              	.LVL78:
- 229:Src/nema_hal_freertos.c **** }
- 968              		.loc 1 229 5 is_stmt 1 view .LVU222
- 230:Src/nema_hal_freertos.c **** 
- 969              		.loc 1 230 1 is_stmt 0 view .LVU223
- 970 002c 2046     		mov	r0, r4
- 229:Src/nema_hal_freertos.c **** }
- 971              		.loc 1 229 12 view .LVU224
- 972 002e C4E90076 		strd	r7, r6, [r4]
- 973 0032 C4E90255 		strd	r5, r5, [r4, #8]
- 974              	.LVL79:
- 230:Src/nema_hal_freertos.c **** 
- 975              		.loc 1 230 1 view .LVU225
- 976 0036 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
- 977              	.LVL80:
- 978              	.L66:
- 230:Src/nema_hal_freertos.c **** 
- 979              		.loc 1 230 1 view .LVU226
-ARM GAS  /tmp/cck4dqzt.s 			page 26
-
-
- 980              		.align	2
- 981              	.L65:
- 982 0038 00000000 		.word	.LC3
- 983 003c 00000000 		.word	__func__.1
- 984 0040 0E000000 		.word	.LC1
- 985              		.cfi_endproc
- 986              	.LFE851:
- 988              		.section	.text.nema_buffer_destroy,"ax",%progbits
- 989              		.align	1
- 990              		.global	nema_buffer_destroy
- 991              		.syntax unified
- 992              		.thumb
- 993              		.thumb_func
- 995              	nema_buffer_destroy:
- 996              	.LVL81:
- 997              	.LFB854:
- 244:Src/nema_hal_freertos.c ****     nema_mutex_lock(MUTEX_MALLOC);
- 998              		.loc 1 244 1 is_stmt 1 view -0
- 999              		.cfi_startproc
- 1000              		@ args = 0, pretend = 0, frame = 0
- 1001              		@ frame_needed = 0, uses_anonymous_args = 0
- 245:Src/nema_hal_freertos.c **** 
- 1002              		.loc 1 245 5 view .LVU228
- 244:Src/nema_hal_freertos.c ****     nema_mutex_lock(MUTEX_MALLOC);
- 1003              		.loc 1 244 1 is_stmt 0 view .LVU229
- 1004 0000 10B5     		push	{r4, lr}
- 1005              		.cfi_def_cfa_offset 8
- 1006              		.cfi_offset 4, -8
- 1007              		.cfi_offset 14, -4
- 244:Src/nema_hal_freertos.c ****     nema_mutex_lock(MUTEX_MALLOC);
- 1008              		.loc 1 244 1 view .LVU230
- 1009 0002 0446     		mov	r4, r0
- 245:Src/nema_hal_freertos.c **** 
- 1010              		.loc 1 245 5 view .LVU231
- 1011 0004 0120     		movs	r0, #1
- 1012              	.LVL82:
- 245:Src/nema_hal_freertos.c **** 
- 1013              		.loc 1 245 5 view .LVU232
- 1014 0006 FFF7FEFF 		bl	nema_mutex_lock
- 1015              	.LVL83:
- 247:Src/nema_hal_freertos.c **** 
- 1016              		.loc 1 247 5 is_stmt 1 view .LVU233
- 1017 000a A068     		ldr	r0, [r4, #8]
- 1018 000c FFF7FEFF 		bl	tsi_free
- 1019              	.LVL84:
- 249:Src/nema_hal_freertos.c **** }
- 1020              		.loc 1 249 5 view .LVU234
- 250:Src/nema_hal_freertos.c **** 
- 1021              		.loc 1 250 1 is_stmt 0 view .LVU235
- 1022 0010 BDE81040 		pop	{r4, lr}
- 1023              		.cfi_restore 14
- 1024              		.cfi_restore 4
- 1025              		.cfi_def_cfa_offset 0
- 1026              	.LVL85:
- 249:Src/nema_hal_freertos.c **** }
- 1027              		.loc 1 249 5 view .LVU236
- 1028 0014 0120     		movs	r0, #1
-ARM GAS  /tmp/cck4dqzt.s 			page 27
-
-
- 1029 0016 FFF7FEBF 		b	nema_mutex_unlock
- 1030              	.LVL86:
- 1031              		.cfi_endproc
- 1032              	.LFE854:
- 1034              		.section	.text.nema_buffer_flush,"ax",%progbits
- 1035              		.align	1
- 1036              		.global	nema_buffer_flush
- 1037              		.syntax unified
- 1038              		.thumb
- 1039              		.thumb_func
- 1041              	nema_buffer_flush:
- 1042              	.LVL87:
- 1043              	.LFB856:
- 258:Src/nema_hal_freertos.c **** #if defined(NEMA_CACHED_MEMORY)
- 1044              		.loc 1 258 1 is_stmt 1 view -0
- 1045              		.cfi_startproc
- 1046              		@ args = 0, pretend = 0, frame = 0
- 1047              		@ frame_needed = 0, uses_anonymous_args = 0
- 260:Src/nema_hal_freertos.c ****     SCB_CleanInvalidateDCache_by_Addr((uint32_t *)bo->base_virt, bo->size);
- 1048              		.loc 1 260 5 view .LVU238
- 258:Src/nema_hal_freertos.c **** #if defined(NEMA_CACHED_MEMORY)
- 1049              		.loc 1 258 1 is_stmt 0 view .LVU239
- 1050 0000 10B5     		push	{r4, lr}
- 1051              		.cfi_def_cfa_offset 8
- 1052              		.cfi_offset 4, -8
- 1053              		.cfi_offset 14, -4
- 258:Src/nema_hal_freertos.c **** #if defined(NEMA_CACHED_MEMORY)
- 1054              		.loc 1 258 1 view .LVU240
- 1055 0002 0446     		mov	r4, r0
- 260:Src/nema_hal_freertos.c ****     SCB_CleanInvalidateDCache_by_Addr((uint32_t *)bo->base_virt, bo->size);
- 1056              		.loc 1 260 5 view .LVU241
- 1057 0004 0220     		movs	r0, #2
- 1058              	.LVL88:
- 260:Src/nema_hal_freertos.c ****     SCB_CleanInvalidateDCache_by_Addr((uint32_t *)bo->base_virt, bo->size);
- 1059              		.loc 1 260 5 view .LVU242
- 1060 0006 FFF7FEFF 		bl	nema_mutex_lock
- 1061              	.LVL89:
- 261:Src/nema_hal_freertos.c ****     nema_mutex_unlock(MUTEX_FLUSH);
- 1062              		.loc 1 261 5 is_stmt 1 view .LVU243
- 261:Src/nema_hal_freertos.c ****     nema_mutex_unlock(MUTEX_FLUSH);
- 1063              		.loc 1 261 68 is_stmt 0 view .LVU244
- 1064 000a 2268     		ldr	r2, [r4]
- 1065              	.LVL90:
- 1066              	.LBB24:
- 1067              	.LBI24:
- 1068              		.file 2 "STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h"
+ 1010              		.loc 1 261 53
+ 1011 000e 7B68     		ldr	r3, [r7, #4]
+ 1012 0010 9A68     		ldr	r2, [r3, #8]
+ 1013              		.loc 1 261 68
+ 1014 0012 7B68     		ldr	r3, [r7, #4]
+ 1015 0014 1B68     		ldr	r3, [r3]
+ 1016 0016 7A61     		str	r2, [r7, #20]
+ 1017 0018 3B61     		str	r3, [r7, #16]
+ 1018              	.LBB19:
+ 1019              	.LBB20:
+ 1020              		.file 2 "STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h"
    1:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** /******************************************************************************
    2:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****  * @file     cachel1_armv7.h
    3:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****  * @brief    CMSIS Level 1 Cache API for Armv7-M and later
@@ -1618,9 +1366,6 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
    9:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****  *
   10:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****  * SPDX-License-Identifier: Apache-2.0
   11:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****  *
-ARM GAS  /tmp/cck4dqzt.s 			page 28
-
-
   12:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****  * Licensed under the Apache License, Version 2.0 (the License); you may
   13:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****  * not use this file except in compliance with the License.
   14:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****  * You may obtain a copy of the License at
@@ -1633,6 +1378,9 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
   21:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****  * See the License for the specific language governing permissions and
   22:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****  * limitations under the License.
   23:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****  */
+ARM GAS  /tmp/ccKMUTYx.s 			page 24
+
+
   24:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** 
   25:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** #if   defined ( __ICCARM__ )
   26:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****   #pragma system_include         /* treat file as system include file for MISRA check */
@@ -1678,9 +1426,6 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
   66:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****     __ISB();
   67:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****     SCB->CCR |=  (uint32_t)SCB_CCR_IC_Msk;  /* enable I-Cache */
   68:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****     __DSB();
-ARM GAS  /tmp/cck4dqzt.s 			page 29
-
-
   69:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****     __ISB();
   70:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****   #endif
   71:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** }
@@ -1693,6 +1438,9 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
   78:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** __STATIC_FORCEINLINE void SCB_DisableICache (void)
   79:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** {
   80:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****   #if defined (__ICACHE_PRESENT) && (__ICACHE_PRESENT == 1U)
+ARM GAS  /tmp/ccKMUTYx.s 			page 25
+
+
   81:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****     __DSB();
   82:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****     __ISB();
   83:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****     SCB->CCR &= ~(uint32_t)SCB_CCR_IC_Msk;  /* disable I-Cache */
@@ -1738,9 +1486,6 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
  123:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** 
  124:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****       do {
  125:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****         SCB->ICIMVAU = op_addr;             /* register accepts only 32byte aligned values, only bi
-ARM GAS  /tmp/cck4dqzt.s 			page 30
-
-
  126:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****         op_addr += __SCB_ICACHE_LINE_SIZE;
  127:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****         op_size -= __SCB_ICACHE_LINE_SIZE;
  128:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****       } while ( op_size > 0 );
@@ -1753,6 +1498,9 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
  135:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** 
  136:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** 
  137:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** /**
+ARM GAS  /tmp/ccKMUTYx.s 			page 26
+
+
  138:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****   \brief   Enable D-Cache
  139:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****   \details Turns on D-Cache
  140:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****   */
@@ -1798,9 +1546,6 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
  180:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****   */
  181:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** __STATIC_FORCEINLINE void SCB_DisableDCache (void)
  182:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** {
-ARM GAS  /tmp/cck4dqzt.s 			page 31
-
-
  183:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****   #if defined (__DCACHE_PRESENT) && (__DCACHE_PRESENT == 1U)
  184:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****     struct {
  185:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****     uint32_t ccsidr;
@@ -1813,6 +1558,9 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
  192:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****     ;
  193:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** 
  194:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****     SCB->CSSELR = 0U;                       /* select Level 1 data cache */
+ARM GAS  /tmp/ccKMUTYx.s 			page 27
+
+
  195:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****     __DSB();
  196:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** 
  197:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****     SCB->CCR &= ~(uint32_t)SCB_CCR_DC_Msk;  /* disable D-Cache */
@@ -1858,9 +1606,6 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
  237:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****     } while(locals.sets-- != 0U);
  238:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** 
  239:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****     __DSB();
-ARM GAS  /tmp/cck4dqzt.s 			page 32
-
-
  240:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****     __ISB();
  241:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****   #endif
  242:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** }
@@ -1873,6 +1618,9 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
  249:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** __STATIC_FORCEINLINE void SCB_InvalidateDCache (void)
  250:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** {
  251:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****   #if defined (__DCACHE_PRESENT) && (__DCACHE_PRESENT == 1U)
+ARM GAS  /tmp/ccKMUTYx.s 			page 28
+
+
  252:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****     uint32_t ccsidr;
  253:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****     uint32_t sets;
  254:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****     uint32_t ways;
@@ -1918,9 +1666,6 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
  294:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****     ccsidr = SCB->CCSIDR;
  295:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** 
  296:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****                                             /* clean D-Cache */
-ARM GAS  /tmp/cck4dqzt.s 			page 33
-
-
  297:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****     sets = (uint32_t)(CCSIDR_SETS(ccsidr));
  298:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****     do {
  299:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****       ways = (uint32_t)(CCSIDR_WAYS(ccsidr));
@@ -1933,6 +1678,9 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
  306:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****       } while (ways-- != 0U);
  307:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****     } while(sets-- != 0U);
  308:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** 
+ARM GAS  /tmp/ccKMUTYx.s 			page 29
+
+
  309:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****     __DSB();
  310:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****     __ISB();
  311:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****   #endif
@@ -1978,9 +1726,6 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
  351:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****   \brief   D-Cache Invalidate by address
  352:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****   \details Invalidates D-Cache for the given address.
  353:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****            D-Cache is invalidated starting from a 32 byte aligned address in 32 byte granularity.
-ARM GAS  /tmp/cck4dqzt.s 			page 34
-
-
  354:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****            D-Cache memory blocks which are part of given address + given size are invalidated.
  355:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****   \param[in]   addr    address
  356:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****   \param[in]   dsize   size of memory block (in number of bytes)
@@ -1993,6 +1738,9 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
  363:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****       uint32_t op_addr = (uint32_t)addr /* & ~(__SCB_DCACHE_LINE_SIZE - 1U) */;
  364:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** 
  365:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****       __DSB();
+ARM GAS  /tmp/ccKMUTYx.s 			page 30
+
+
  366:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** 
  367:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****       do {
  368:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****         SCB->DCIMVAC = op_addr;             /* register accepts only 32byte aligned values, only bi
@@ -2038,9 +1786,6 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
  408:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** 
  409:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** 
  410:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** /**
-ARM GAS  /tmp/cck4dqzt.s 			page 35
-
-
  411:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****   \brief   D-Cache Clean and Invalidate by address
  412:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****   \details Cleans and invalidates D_Cache for the given address
  413:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****            D-Cache is cleaned and invalidated starting from a 32 byte aligned address in 32 byte gr
@@ -2049,33 +1794,34 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
  416:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****   \param[in]   dsize   size of memory block (in number of bytes)
  417:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** */
  418:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** __STATIC_FORCEINLINE void SCB_CleanInvalidateDCache_by_Addr (volatile void *addr, int32_t dsize)
- 1069              		.loc 2 418 27 is_stmt 1 view .LVU245
- 1070              	.LBB25:
  419:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** {
  420:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****   #if defined (__DCACHE_PRESENT) && (__DCACHE_PRESENT == 1U)
  421:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****     if ( dsize > 0 ) {
- 1071              		.loc 2 421 5 view .LVU246
- 1072              		.loc 2 421 8 is_stmt 0 view .LVU247
- 1073 000c 002A     		cmp	r2, #0
- 1074 000e 1CDD     		ble	.L69
- 1075              	.LBB26:
+ 1021              		.loc 2 421 8
+ARM GAS  /tmp/ccKMUTYx.s 			page 31
+
+
+ 1022 001a 3B69     		ldr	r3, [r7, #16]
+ 1023 001c 002B     		cmp	r3, #0
+ 1024 001e 1DDD     		ble	.L62
+ 1025              	.LBB21:
  422:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****        int32_t op_size = dsize + (((uint32_t)addr) & (__SCB_DCACHE_LINE_SIZE - 1U));
- 1076              		.loc 2 422 8 is_stmt 1 view .LVU248
- 1077              		.loc 2 422 36 is_stmt 0 view .LVU249
- 1078 0010 A368     		ldr	r3, [r4, #8]
- 1079              		.loc 2 422 52 view .LVU250
- 1080 0012 03F01F01 		and	r1, r3, #31
- 1081              		.loc 2 422 32 view .LVU251
- 1082 0016 1144     		add	r1, r1, r2
- 1083              	.LVL91:
+ 1026              		.loc 2 422 36
+ 1027 0020 7B69     		ldr	r3, [r7, #20]
+ 1028              		.loc 2 422 52
+ 1029 0022 03F01F02 		and	r2, r3, #31
+ 1030              		.loc 2 422 32
+ 1031 0026 3B69     		ldr	r3, [r7, #16]
+ 1032 0028 1344     		add	r3, r3, r2
+ 1033              		.loc 2 422 16
+ 1034 002a FB60     		str	r3, [r7, #12]
  423:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****       uint32_t op_addr = (uint32_t)addr /* & ~(__SCB_DCACHE_LINE_SIZE - 1U) */;
- 1084              		.loc 2 423 7 is_stmt 1 view .LVU252
- 424:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** 
- 425:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****       __DSB();
- 1085              		.loc 2 425 7 view .LVU253
- 1086              	.LBB27:
- 1087              	.LBI27:
- 1088              		.file 3 "STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h"
+ 1035              		.loc 2 423 16
+ 1036 002c 7B69     		ldr	r3, [r7, #20]
+ 1037 002e BB60     		str	r3, [r7, #8]
+ 1038              	.LBB22:
+ 1039              	.LBB23:
+ 1040              		.file 3 "STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h"
    1:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** /**************************************************************************//**
    2:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****  * @file     cmsis_gcc.h
    3:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****  * @brief    CMSIS compiler GCC header file
@@ -2098,9 +1844,6 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
   20:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   21:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****  * See the License for the specific language governing permissions and
   22:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****  * limitations under the License.
-ARM GAS  /tmp/cck4dqzt.s 			page 36
-
-
   23:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****  */
   24:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
   25:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef __CMSIS_GCC_H
@@ -2115,6 +1858,9 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
   34:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** /* Fallback for __has_builtin */
   35:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef __has_builtin
   36:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __has_builtin(x) (0)
+ARM GAS  /tmp/ccKMUTYx.s 			page 32
+
+
   37:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
   38:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
   39:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** /* CMSIS compiler specific defines */
@@ -2158,9 +1904,6 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
   77:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
   78:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT16_WRITE
   79:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
-ARM GAS  /tmp/cck4dqzt.s 			page 37
-
-
   80:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
   81:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
   82:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT16_WRITE { uint16_t v; };
@@ -2175,6 +1918,9 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
   91:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
   92:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT16_READ(addr)          (((const struct T_UINT16_READ *)(const void *)(add
   93:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ARM GAS  /tmp/ccKMUTYx.s 			page 33
+
+
   94:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32_WRITE
   95:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
   96:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
@@ -2218,9 +1964,6 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
  134:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
  135:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   typedef struct {
  136:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****     uint32_t const* src;
-ARM GAS  /tmp/cck4dqzt.s 			page 38
-
-
  137:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****     uint32_t* dest;
  138:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****     uint32_t  wlen;
  139:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   } __copy_table_t;
@@ -2235,6 +1978,9 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
  148:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   extern const __zero_table_t __zero_table_start__;
  149:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   extern const __zero_table_t __zero_table_end__;
  150:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccKMUTYx.s 			page 34
+
+
  151:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   for (__copy_table_t const* pTable = &__copy_table_start__; pTable < &__copy_table_end__; ++pTable
  152:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
  153:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****       pTable->dest[i] = pTable->src[i];
@@ -2278,9 +2024,6 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
  191:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #define __TZ_STACK_SEAL_SIZE      8U
  192:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
  193:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/cck4dqzt.s 			page 39
-
-
  194:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef __TZ_STACK_SEAL_VALUE
  195:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #define __TZ_STACK_SEAL_VALUE     0xFEF5EDA5FEF5EDA5ULL
  196:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
@@ -2295,6 +2038,9 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
  205:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** /* ##########################  Core Instruction Access  ######################### */
  206:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** /** \defgroup CMSIS_Core_InstructionInterface CMSIS Core Instruction Interface
  207:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   Access to dedicated instructions
+ARM GAS  /tmp/ccKMUTYx.s 			page 35
+
+
  208:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   @{
  209:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** */
  210:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
@@ -2338,9 +2084,6 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
  248:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****  */
  249:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** #define __SEV()                             __ASM volatile ("sev")
  250:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/cck4dqzt.s 			page 40
-
-
  251:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
  252:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** /**
  253:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Instruction Synchronization Barrier
@@ -2355,306 +2098,588 @@ ARM GAS  /tmp/cck4dqzt.s 			page 1
  262:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
  263:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
  264:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ARM GAS  /tmp/ccKMUTYx.s 			page 36
+
+
  265:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Data Synchronization Barrier
  266:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Acts as a special kind of Data Memory Barrier.
  267:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****            It completes when all explicit memory accesses before this instruction complete.
  268:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****  */
  269:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __DSB(void)
- 1089              		.loc 3 269 27 view .LVU254
- 1090              	.LBB28:
  270:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** {
  271:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("dsb 0xF":::"memory");
- 1091              		.loc 3 271 3 view .LVU255
- 1092              		.syntax unified
- 1093              	@ 271 "STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h" 1
- 1094 0018 BFF34F8F 		dsb 0xF
- 1095              	@ 0 "" 2
- 1096              		.thumb
- 1097              		.syntax unified
- 1098              	.LBE28:
- 1099              	.LBE27:
+ 1041              		.loc 3 271 3
+ 1042              		.syntax unified
+ 1043              	@ 271 "STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 1044 0030 BFF34F8F 		dsb 0xF
+ 1045              	@ 0 "" 2
+ 272:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 1046              		.loc 3 272 1
+ 1047              		.thumb
+ 1048              		.syntax unified
+ 1049 0034 00BF     		nop
+ 1050              	.L60:
+ 1051              	.LBE23:
+ 1052              	.LBE22:
+ 424:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** 
+ 425:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****       __DSB();
  426:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** 
  427:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****       do {
  428:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****         SCB->DCCIMVAC = op_addr;            /* register accepts only 32byte aligned values, only bi
+ 1053              		.loc 2 428 12
+ 1054 0036 0D4A     		ldr	r2, .L63
+ 1055              		.loc 2 428 23
+ 1056 0038 BB68     		ldr	r3, [r7, #8]
+ 1057 003a C2F87032 		str	r3, [r2, #624]
  429:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****         op_addr +=          __SCB_DCACHE_LINE_SIZE;
+ 1058              		.loc 2 429 17
+ 1059 003e BB68     		ldr	r3, [r7, #8]
+ 1060 0040 2033     		adds	r3, r3, #32
+ 1061 0042 BB60     		str	r3, [r7, #8]
  430:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****         op_size -=          __SCB_DCACHE_LINE_SIZE;
+ 1062              		.loc 2 430 17
+ 1063 0044 FB68     		ldr	r3, [r7, #12]
+ 1064 0046 203B     		subs	r3, r3, #32
+ 1065 0048 FB60     		str	r3, [r7, #12]
  431:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****       } while ( op_size > 0 );
- 1100              		.loc 2 431 25 is_stmt 0 discriminator 1 view .LVU256
- 1101 001c DA43     		mvns	r2, r3
- 1102              	.LVL92:
- 1103              		.loc 2 431 25 discriminator 1 view .LVU257
- 1104 001e 5C18     		adds	r4, r3, r1
- 1105              	.LVL93:
- 1106              		.loc 2 431 25 discriminator 1 view .LVU258
- 1107 0020 2244     		add	r2, r2, r4
- 1108 0022 2039     		subs	r1, r1, #32
- 1109              	.LVL94:
- 1110              		.loc 2 431 25 discriminator 1 view .LVU259
- 1111 0024 5209     		lsrs	r2, r2, #5
- 1112 0026 2031     		adds	r1, r1, #32
- 1113              	.LVL95:
- 1114              		.loc 2 431 25 discriminator 1 view .LVU260
- 1115 0028 02F1010E 		add	lr, r2, #1
- 1116 002c D8BF     		it	le
- 1117 002e 4FF0010E 		movle	lr, #1
- 1118 0032 4EF001E0 		dls	lr, lr
-ARM GAS  /tmp/cck4dqzt.s 			page 41
+ 1066              		.loc 2 431 25 discriminator 1
+ 1067 004a FB68     		ldr	r3, [r7, #12]
+ 1068 004c 002B     		cmp	r3, #0
+ 1069 004e F2DC     		bgt	.L60
+ 1070              	.LBB24:
+ 1071              	.LBB25:
+ 271:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 1072              		.loc 3 271 3
+ 1073              		.syntax unified
+ 1074              	@ 271 "STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 1075 0050 BFF34F8F 		dsb 0xF
+ 1076              	@ 0 "" 2
+ 1077              		.loc 3 272 1
+ 1078              		.thumb
+ 1079              		.syntax unified
+ 1080 0054 00BF     		nop
+ARM GAS  /tmp/ccKMUTYx.s 			page 37
 
 
- 428:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****         op_addr +=          __SCB_DCACHE_LINE_SIZE;
- 1119              		.loc 2 428 23 view .LVU261
- 1120 0036 0748     		ldr	r0, .L73
- 1121              	.LVL96:
- 1122              	.L70:
- 427:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****         SCB->DCCIMVAC = op_addr;            /* register accepts only 32byte aligned values, only bi
- 1123              		.loc 2 427 7 is_stmt 1 view .LVU262
- 428:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****         op_addr +=          __SCB_DCACHE_LINE_SIZE;
- 1124              		.loc 2 428 9 view .LVU263
- 428:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****         op_addr +=          __SCB_DCACHE_LINE_SIZE;
- 1125              		.loc 2 428 23 is_stmt 0 view .LVU264
- 1126 0038 C0F87032 		str	r3, [r0, #624]
- 429:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****         op_size -=          __SCB_DCACHE_LINE_SIZE;
- 1127              		.loc 2 429 9 is_stmt 1 view .LVU265
- 429:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****         op_size -=          __SCB_DCACHE_LINE_SIZE;
- 1128              		.loc 2 429 17 is_stmt 0 view .LVU266
- 1129 003c 2033     		adds	r3, r3, #32
- 1130              	.LVL97:
- 430:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****       } while ( op_size > 0 );
- 1131              		.loc 2 430 9 is_stmt 1 view .LVU267
- 1132              		.loc 2 431 25 discriminator 1 view .LVU268
- 1133 003e 0FF005C8 		le	lr, .L70
+ 1081              	.LBE25:
+ 1082              	.LBE24:
+ 1083              	.LBB26:
+ 1084              	.LBB27:
+ 260:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 1085              		.loc 3 260 3
+ 1086              		.syntax unified
+ 1087              	@ 260 "STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 1088 0056 BFF36F8F 		isb 0xF
+ 1089              	@ 0 "" 2
+ 261:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 1090              		.loc 3 261 1
+ 1091              		.thumb
+ 1092              		.syntax unified
+ 1093 005a 00BF     		nop
+ 1094              	.L62:
+ 1095              	.LBE27:
+ 1096              	.LBE26:
+ 1097              	.LBE21:
  432:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** 
  433:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****       __DSB();
- 1134              		.loc 2 433 7 view .LVU269
- 1135              	.LBB29:
- 1136              	.LBI29:
- 269:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** {
- 1137              		.loc 3 269 27 view .LVU270
- 1138              	.LBB30:
- 1139              		.loc 3 271 3 view .LVU271
- 1140              		.syntax unified
- 1141              	@ 271 "STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h" 1
- 1142 0042 BFF34F8F 		dsb 0xF
- 1143              	@ 0 "" 2
- 1144              		.thumb
- 1145              		.syntax unified
- 1146              	.LBE30:
- 1147              	.LBE29:
  434:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****       __ISB();
- 1148              		.loc 2 434 7 view .LVU272
- 1149              	.LBB31:
- 1150              	.LBI31:
- 258:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** {
- 1151              		.loc 3 258 27 view .LVU273
- 1152              	.LBB32:
- 260:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** }
- 1153              		.loc 3 260 3 view .LVU274
- 1154              		.syntax unified
- 1155              	@ 260 "STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h" 1
- 1156 0046 BFF36F8F 		isb 0xF
- 1157              	@ 0 "" 2
- 1158              	.LVL98:
- 1159              		.thumb
- 1160              		.syntax unified
- 1161              	.L69:
- 260:STM32Cube_FW_N6/Drivers/CMSIS/Include/cmsis_gcc.h **** }
-ARM GAS  /tmp/cck4dqzt.s 			page 42
+ 435:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****     }
+ 436:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h ****   #endif
+ 437:STM32Cube_FW_N6/Drivers/CMSIS/Include/cachel1_armv7.h **** }
+ 1098              		.loc 2 437 1
+ 1099 005c 00BF     		nop
+ 1100              	.LBE20:
+ 1101              	.LBE19:
+ 262:Src/nema_hal_freertos.c ****     nema_mutex_unlock(MUTEX_FLUSH);
+ 1102              		.loc 1 262 5
+ 1103 005e 0220     		movs	r0, #2
+ 1104 0060 FFF7FEFF 		bl	nema_mutex_unlock
+ 263:Src/nema_hal_freertos.c **** #else /* !NEMA_CACHED_MEMORY */
+ 264:Src/nema_hal_freertos.c ****     UNUSED(bo);
+ 265:Src/nema_hal_freertos.c **** #endif /* NEMA_CACHED_MEMORY */
+ 266:Src/nema_hal_freertos.c **** }
+ 1105              		.loc 1 266 1
+ 1106 0064 00BF     		nop
+ 1107 0066 1837     		adds	r7, r7, #24
+ 1108              		.cfi_def_cfa_offset 8
+ 1109 0068 BD46     		mov	sp, r7
+ 1110              		.cfi_def_cfa_register 13
+ 1111              		@ sp needed
+ 1112 006a 80BD     		pop	{r7, pc}
+ 1113              	.L64:
+ 1114              		.align	2
+ 1115              	.L63:
+ 1116 006c 00ED00E0 		.word	-536810240
+ 1117              		.cfi_endproc
+ 1118              	.LFE856:
+ 1120              		.section	.text.nema_host_free,"ax",%progbits
+ 1121              		.align	1
+ 1122              		.global	nema_host_free
+ 1123              		.syntax unified
+ 1124              		.thumb
+ 1125              		.thumb_func
+ARM GAS  /tmp/ccKMUTYx.s 			page 38
 
 
- 1162              		.loc 3 260 3 is_stmt 0 view .LVU275
- 1163              	.LBE32:
- 1164              	.LBE31:
- 1165              	.LBE26:
- 1166              	.LBE25:
- 1167              	.LBE24:
- 262:Src/nema_hal_freertos.c **** #else /* !NEMA_CACHED_MEMORY */
- 1168              		.loc 1 262 5 is_stmt 1 view .LVU276
- 266:Src/nema_hal_freertos.c **** 
- 1169              		.loc 1 266 1 is_stmt 0 view .LVU277
- 1170 004a BDE81040 		pop	{r4, lr}
- 1171              		.cfi_restore 14
- 1172              		.cfi_restore 4
- 1173              		.cfi_def_cfa_offset 0
- 262:Src/nema_hal_freertos.c **** #else /* !NEMA_CACHED_MEMORY */
- 1174              		.loc 1 262 5 view .LVU278
- 1175 004e 0220     		movs	r0, #2
- 1176 0050 FFF7FEBF 		b	nema_mutex_unlock
- 1177              	.LVL99:
- 1178              	.L74:
- 1179              		.align	2
- 1180              	.L73:
- 1181 0054 00ED00E0 		.word	-536810240
- 1182              		.cfi_endproc
- 1183              	.LFE856:
- 1185              		.section	.rodata.__func__.0,"a"
- 1188              	__func__.0:
- 1189 0000 6E656D61 		.ascii	"nema_host_malloc\000"
- 1189      5F686F73 
- 1189      745F6D61 
- 1189      6C6C6F63 
- 1189      00
- 1190              		.section	.rodata.__func__.1,"a"
- 1193              	__func__.1:
- 1194 0000 6E656D61 		.ascii	"nema_buffer_create_pool\000"
- 1194      5F627566 
- 1194      6665725F 
- 1194      63726561 
- 1194      74655F70 
- 1195              		.section	.rodata.__func__.2,"a"
- 1198              	__func__.2:
- 1199 0000 6E656D61 		.ascii	"nema_buffer_create\000"
- 1199      5F627566 
- 1199      6665725F 
- 1199      63726561 
- 1199      746500
- 1200              		.section	.rodata.__func__.3,"a"
- 1203              	__func__.3:
- 1204 0000 6E656D61 		.ascii	"nema_sys_init\000"
- 1204      5F737973 
- 1204      5F696E69 
- 1204      7400
- 1205              		.section	.rodata.__func__.4,"a"
- 1208              	__func__.4:
- 1209 0000 48414C5F 		.ascii	"HAL_GPU2D_CommandListCpltCallback\000"
- 1209      47505532 
- 1209      445F436F 
-ARM GAS  /tmp/cck4dqzt.s 			page 43
+ 1127              	nema_host_free:
+ 1128              	.LFB857:
+ 267:Src/nema_hal_freertos.c **** 
+ 268:Src/nema_hal_freertos.c **** void nema_host_free(void *ptr)
+ 269:Src/nema_hal_freertos.c **** {
+ 1129              		.loc 1 269 1
+ 1130              		.cfi_startproc
+ 1131              		@ args = 0, pretend = 0, frame = 8
+ 1132              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1133 0000 80B5     		push	{r7, lr}
+ 1134              		.cfi_def_cfa_offset 8
+ 1135              		.cfi_offset 7, -8
+ 1136              		.cfi_offset 14, -4
+ 1137 0002 82B0     		sub	sp, sp, #8
+ 1138              		.cfi_def_cfa_offset 16
+ 1139 0004 00AF     		add	r7, sp, #0
+ 1140              		.cfi_def_cfa_register 7
+ 1141 0006 7860     		str	r0, [r7, #4]
+ 270:Src/nema_hal_freertos.c ****     if (ptr)
+ 1142              		.loc 1 270 8
+ 1143 0008 7B68     		ldr	r3, [r7, #4]
+ 1144 000a 002B     		cmp	r3, #0
+ 1145 000c 02D0     		beq	.L67
+ 271:Src/nema_hal_freertos.c ****     {
+ 272:Src/nema_hal_freertos.c ****         tsi_free(ptr);
+ 1146              		.loc 1 272 9
+ 1147 000e 7868     		ldr	r0, [r7, #4]
+ 1148 0010 FFF7FEFF 		bl	tsi_free
+ 1149              	.L67:
+ 273:Src/nema_hal_freertos.c ****     }
+ 274:Src/nema_hal_freertos.c **** }
+ 1150              		.loc 1 274 1
+ 1151 0014 00BF     		nop
+ 1152 0016 0837     		adds	r7, r7, #8
+ 1153              		.cfi_def_cfa_offset 8
+ 1154 0018 BD46     		mov	sp, r7
+ 1155              		.cfi_def_cfa_register 13
+ 1156              		@ sp needed
+ 1157 001a 80BD     		pop	{r7, pc}
+ 1158              		.cfi_endproc
+ 1159              	.LFE857:
+ 1161              		.section	.rodata
+ 1162 00c1 000000   		.align	2
+ 1163              	.LC8:
+ 1164 00c4 70747200 		.ascii	"ptr\000"
+ 1165              		.section	.text.nema_host_malloc,"ax",%progbits
+ 1166              		.align	1
+ 1167              		.global	nema_host_malloc
+ 1168              		.syntax unified
+ 1169              		.thumb
+ 1170              		.thumb_func
+ 1172              	nema_host_malloc:
+ 1173              	.LFB858:
+ 275:Src/nema_hal_freertos.c **** 
+ 276:Src/nema_hal_freertos.c **** void *nema_host_malloc(unsigned size)
+ 277:Src/nema_hal_freertos.c **** {
+ 1174              		.loc 1 277 1
+ARM GAS  /tmp/ccKMUTYx.s 			page 39
 
 
- 1209      6D6D616E 
- 1209      644C6973 
- 1210              		.section	.bss.nema_irq_sem,"aw",%nobits
- 1211              		.align	2
- 1214              	nema_irq_sem:
- 1215 0000 00000000 		.space	4
- 1216              		.section	.bss.nema_irq_sem_buffer,"aw",%nobits
- 1217              		.align	2
- 1220              	nema_irq_sem_buffer:
- 1221 0000 00000000 		.space	80
- 1221      00000000 
- 1221      00000000 
- 1221      00000000 
- 1221      00000000 
- 1222              		.section	.bss.nema_mutexes_ids,"aw",%nobits
- 1223              		.align	2
- 1226              	nema_mutexes_ids:
- 1227 0000 00000000 		.space	12
- 1227      00000000 
- 1227      00000000 
- 1228              		.section	.bss.nema_mutexes_buffers,"aw",%nobits
- 1229              		.align	2
- 1232              	nema_mutexes_buffers:
- 1233 0000 00000000 		.space	240
- 1233      00000000 
- 1233      00000000 
- 1233      00000000 
- 1233      00000000 
- 1234              		.section	.data.last_cl_id,"aw"
- 1235              		.align	2
- 1238              	last_cl_id:
- 1239 0000 FFFFFFFF 		.word	-1
- 1240              		.section	.bss.ring_buffer_str,"aw",%nobits
- 1241              		.align	2
- 1244              	ring_buffer_str:
- 1245 0000 00000000 		.space	24
- 1245      00000000 
- 1245      00000000 
- 1245      00000000 
- 1245      00000000 
- 1246              		.text
- 1247              	.Letext0:
- 1248              		.file 4 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 1249              		.file 5 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 1250              		.file 6 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 1251              		.file 7 "Lib/NemaGFX/include/nema_hal.h"
- 1252              		.file 8 "STM32Cube_FW_N6/Drivers/CMSIS/Include/core_cm55.h"
- 1253              		.file 9 "STM32Cube_FW_N6/Drivers/STM32N6xx_HAL_Driver/Inc/stm32n6xx_hal_def.h"
- 1254              		.file 10 "STM32Cube_FW_N6/Drivers/STM32N6xx_HAL_Driver/Inc/stm32n6xx_hal_gpu2d.h"
- 1255              		.file 11 "Inc/platform_pool_config.h"
- 1256              		.file 12 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portmacrocommon.h"
- 1257              		.file 13 "Lib/FreeRTOS/Source/include/FreeRTOS.h"
- 1258              		.file 14 "Lib/FreeRTOS/Source/include/queue.h"
- 1259              		.file 15 "Lib/FreeRTOS/Source/include/semphr.h"
- 1260              		.file 16 "Lib/NemaGFX/include/tsi_malloc.h"
- 1261              		.file 17 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-
- 1262              		.file 18 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-
-ARM GAS  /tmp/cck4dqzt.s 			page 44
+ 1175              		.cfi_startproc
+ 1176              		@ args = 0, pretend = 0, frame = 16
+ 1177              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1178 0000 80B5     		push	{r7, lr}
+ 1179              		.cfi_def_cfa_offset 8
+ 1180              		.cfi_offset 7, -8
+ 1181              		.cfi_offset 14, -4
+ 1182 0002 84B0     		sub	sp, sp, #16
+ 1183              		.cfi_def_cfa_offset 24
+ 1184 0004 00AF     		add	r7, sp, #0
+ 1185              		.cfi_def_cfa_register 7
+ 1186 0006 7860     		str	r0, [r7, #4]
+ 278:Src/nema_hal_freertos.c ****     void *ptr = NULL;
+ 1187              		.loc 1 278 11
+ 1188 0008 0023     		movs	r3, #0
+ 1189 000a FB60     		str	r3, [r7, #12]
+ 279:Src/nema_hal_freertos.c **** 
+ 280:Src/nema_hal_freertos.c ****     ptr = tsi_malloc(size);
+ 1190              		.loc 1 280 11
+ 1191 000c 7B68     		ldr	r3, [r7, #4]
+ 1192 000e 1946     		mov	r1, r3
+ 1193 0010 0020     		movs	r0, #0
+ 1194 0012 FFF7FEFF 		bl	tsi_malloc_pool
+ 1195 0016 F860     		str	r0, [r7, #12]
+ 281:Src/nema_hal_freertos.c ****     assert(ptr);
+ 1196              		.loc 1 281 5
+ 1197 0018 FB68     		ldr	r3, [r7, #12]
+ 1198 001a 002B     		cmp	r3, #0
+ 1199 001c 06D1     		bne	.L69
+ 1200              		.loc 1 281 5 is_stmt 0 discriminator 1
+ 1201 001e 064B     		ldr	r3, .L71
+ 1202 0020 064A     		ldr	r2, .L71+4
+ 1203 0022 40F21911 		movw	r1, #281
+ 1204 0026 0648     		ldr	r0, .L71+8
+ 1205 0028 FFF7FEFF 		bl	__assert_func
+ 1206              	.L69:
+ 282:Src/nema_hal_freertos.c **** 
+ 283:Src/nema_hal_freertos.c ****     return ptr;
+ 1207              		.loc 1 283 12 is_stmt 1
+ 1208 002c FB68     		ldr	r3, [r7, #12]
+ 284:Src/nema_hal_freertos.c **** }
+ 1209              		.loc 1 284 1
+ 1210 002e 1846     		mov	r0, r3
+ 1211 0030 1037     		adds	r7, r7, #16
+ 1212              		.cfi_def_cfa_offset 8
+ 1213 0032 BD46     		mov	sp, r7
+ 1214              		.cfi_def_cfa_register 13
+ 1215              		@ sp needed
+ 1216 0034 80BD     		pop	{r7, pc}
+ 1217              	.L72:
+ 1218 0036 00BF     		.align	2
+ 1219              	.L71:
+ 1220 0038 C4000000 		.word	.LC8
+ 1221 003c 00000000 		.word	__func__.0
+ 1222 0040 10000000 		.word	.LC1
+ 1223              		.cfi_endproc
+ 1224              	.LFE858:
+ARM GAS  /tmp/ccKMUTYx.s 			page 40
 
 
-ARM GAS  /tmp/cck4dqzt.s 			page 45
+ 1226              		.section	.text.nema_mutex_lock,"ax",%progbits
+ 1227              		.align	1
+ 1228              		.global	nema_mutex_lock
+ 1229              		.syntax unified
+ 1230              		.thumb
+ 1231              		.thumb_func
+ 1233              	nema_mutex_lock:
+ 1234              	.LFB859:
+ 285:Src/nema_hal_freertos.c **** 
+ 286:Src/nema_hal_freertos.c **** int nema_mutex_lock(int mutex_id)
+ 287:Src/nema_hal_freertos.c **** {
+ 1235              		.loc 1 287 1
+ 1236              		.cfi_startproc
+ 1237              		@ args = 0, pretend = 0, frame = 16
+ 1238              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1239 0000 80B5     		push	{r7, lr}
+ 1240              		.cfi_def_cfa_offset 8
+ 1241              		.cfi_offset 7, -8
+ 1242              		.cfi_offset 14, -4
+ 1243 0002 84B0     		sub	sp, sp, #16
+ 1244              		.cfi_def_cfa_offset 24
+ 1245 0004 00AF     		add	r7, sp, #0
+ 1246              		.cfi_def_cfa_register 7
+ 1247 0006 7860     		str	r0, [r7, #4]
+ 288:Src/nema_hal_freertos.c ****     int ret = 0;
+ 1248              		.loc 1 288 9
+ 1249 0008 0023     		movs	r3, #0
+ 1250 000a FB60     		str	r3, [r7, #12]
+ 289:Src/nema_hal_freertos.c **** 
+ 290:Src/nema_hal_freertos.c **** #if (defined(NEMA_MULTI_PROCESS) || defined(NEMA_MULTI_THREAD))
+ 291:Src/nema_hal_freertos.c ****     if ((mutex_id >= 0) && (mutex_id <= MUTEX_MAX) && (NULL != nema_mutexes_ids[mutex_id]))
+ 1251              		.loc 1 291 8
+ 1252 000c 7B68     		ldr	r3, [r7, #4]
+ 1253 000e 002B     		cmp	r3, #0
+ 1254 0010 1ADB     		blt	.L74
+ 1255              		.loc 1 291 25 discriminator 1
+ 1256 0012 7B68     		ldr	r3, [r7, #4]
+ 1257 0014 022B     		cmp	r3, #2
+ 1258 0016 17DC     		bgt	.L74
+ 1259              		.loc 1 291 80 discriminator 2
+ 1260 0018 0E4A     		ldr	r2, .L78
+ 1261 001a 7B68     		ldr	r3, [r7, #4]
+ 1262 001c 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 1263              		.loc 1 291 52 discriminator 2
+ 1264 0020 002B     		cmp	r3, #0
+ 1265 0022 11D0     		beq	.L74
+ 292:Src/nema_hal_freertos.c ****     {
+ 293:Src/nema_hal_freertos.c ****         ret = xSemaphoreTake(nema_mutexes_ids[mutex_id], portMAX_DELAY);
+ 1266              		.loc 1 293 15
+ 1267 0024 0B4A     		ldr	r2, .L78
+ 1268 0026 7B68     		ldr	r3, [r7, #4]
+ 1269 0028 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 1270 002c 4FF0FF31 		mov	r1, #-1
+ 1271 0030 1846     		mov	r0, r3
+ 1272 0032 FFF7FEFF 		bl	xQueueSemaphoreTake
+ 1273 0036 F860     		str	r0, [r7, #12]
+ 294:Src/nema_hal_freertos.c ****         ret = ret == pdTRUE ? 0 : -1;
+ARM GAS  /tmp/ccKMUTYx.s 			page 41
+
+
+ 1274              		.loc 1 294 33
+ 1275 0038 FB68     		ldr	r3, [r7, #12]
+ 1276 003a 012B     		cmp	r3, #1
+ 1277 003c 01D1     		bne	.L75
+ 1278              		.loc 1 294 33 is_stmt 0 discriminator 1
+ 1279 003e 0023     		movs	r3, #0
+ 1280 0040 01E0     		b	.L76
+ 1281              	.L75:
+ 1282              		.loc 1 294 33 discriminator 2
+ 1283 0042 4FF0FF33 		mov	r3, #-1
+ 1284              	.L76:
+ 1285              		.loc 1 294 13 is_stmt 1 discriminator 4
+ 1286 0046 FB60     		str	r3, [r7, #12]
+ 1287              	.L74:
+ 295:Src/nema_hal_freertos.c ****     }
+ 296:Src/nema_hal_freertos.c **** #else /* !NEMA_MULTI_PROCESS & !NEMA_MULTI_THREAD */
+ 297:Src/nema_hal_freertos.c ****     UNUSED(mutex_id);
+ 298:Src/nema_hal_freertos.c **** #endif /* NEMA_MULTI_PROCESS | NEMA_MULTI_THREAD */
+ 299:Src/nema_hal_freertos.c **** 
+ 300:Src/nema_hal_freertos.c ****     return ret;
+ 1288              		.loc 1 300 12
+ 1289 0048 FB68     		ldr	r3, [r7, #12]
+ 301:Src/nema_hal_freertos.c **** }
+ 1290              		.loc 1 301 1
+ 1291 004a 1846     		mov	r0, r3
+ 1292 004c 1037     		adds	r7, r7, #16
+ 1293              		.cfi_def_cfa_offset 8
+ 1294 004e BD46     		mov	sp, r7
+ 1295              		.cfi_def_cfa_register 13
+ 1296              		@ sp needed
+ 1297 0050 80BD     		pop	{r7, pc}
+ 1298              	.L79:
+ 1299 0052 00BF     		.align	2
+ 1300              	.L78:
+ 1301 0054 00000000 		.word	nema_mutexes_ids
+ 1302              		.cfi_endproc
+ 1303              	.LFE859:
+ 1305              		.section	.text.nema_mutex_unlock,"ax",%progbits
+ 1306              		.align	1
+ 1307              		.global	nema_mutex_unlock
+ 1308              		.syntax unified
+ 1309              		.thumb
+ 1310              		.thumb_func
+ 1312              	nema_mutex_unlock:
+ 1313              	.LFB860:
+ 302:Src/nema_hal_freertos.c **** 
+ 303:Src/nema_hal_freertos.c **** int nema_mutex_unlock(int mutex_id)
+ 304:Src/nema_hal_freertos.c **** {
+ 1314              		.loc 1 304 1
+ 1315              		.cfi_startproc
+ 1316              		@ args = 0, pretend = 0, frame = 16
+ 1317              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1318 0000 80B5     		push	{r7, lr}
+ 1319              		.cfi_def_cfa_offset 8
+ 1320              		.cfi_offset 7, -8
+ 1321              		.cfi_offset 14, -4
+ 1322 0002 84B0     		sub	sp, sp, #16
+ARM GAS  /tmp/ccKMUTYx.s 			page 42
+
+
+ 1323              		.cfi_def_cfa_offset 24
+ 1324 0004 00AF     		add	r7, sp, #0
+ 1325              		.cfi_def_cfa_register 7
+ 1326 0006 7860     		str	r0, [r7, #4]
+ 305:Src/nema_hal_freertos.c ****     int ret = 0;
+ 1327              		.loc 1 305 9
+ 1328 0008 0023     		movs	r3, #0
+ 1329 000a FB60     		str	r3, [r7, #12]
+ 306:Src/nema_hal_freertos.c **** 
+ 307:Src/nema_hal_freertos.c **** #if (defined(NEMA_MULTI_PROCESS) || defined(NEMA_MULTI_THREAD))
+ 308:Src/nema_hal_freertos.c ****     if ((mutex_id >= 0) && (mutex_id <= MUTEX_MAX) && (NULL != nema_mutexes_ids[mutex_id]))
+ 1330              		.loc 1 308 8
+ 1331 000c 7B68     		ldr	r3, [r7, #4]
+ 1332 000e 002B     		cmp	r3, #0
+ 1333 0010 1ADB     		blt	.L81
+ 1334              		.loc 1 308 25 discriminator 1
+ 1335 0012 7B68     		ldr	r3, [r7, #4]
+ 1336 0014 022B     		cmp	r3, #2
+ 1337 0016 17DC     		bgt	.L81
+ 1338              		.loc 1 308 80 discriminator 2
+ 1339 0018 0E4A     		ldr	r2, .L85
+ 1340 001a 7B68     		ldr	r3, [r7, #4]
+ 1341 001c 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 1342              		.loc 1 308 52 discriminator 2
+ 1343 0020 002B     		cmp	r3, #0
+ 1344 0022 11D0     		beq	.L81
+ 309:Src/nema_hal_freertos.c ****     {
+ 310:Src/nema_hal_freertos.c ****         ret = xSemaphoreGive(nema_mutexes_ids[mutex_id]);
+ 1345              		.loc 1 310 15
+ 1346 0024 0B4A     		ldr	r2, .L85
+ 1347 0026 7B68     		ldr	r3, [r7, #4]
+ 1348 0028 52F82300 		ldr	r0, [r2, r3, lsl #2]
+ 1349 002c 0023     		movs	r3, #0
+ 1350 002e 0022     		movs	r2, #0
+ 1351 0030 0021     		movs	r1, #0
+ 1352 0032 FFF7FEFF 		bl	xQueueGenericSend
+ 1353 0036 F860     		str	r0, [r7, #12]
+ 311:Src/nema_hal_freertos.c ****         ret = ret == pdTRUE ? 0 : -1;
+ 1354              		.loc 1 311 33
+ 1355 0038 FB68     		ldr	r3, [r7, #12]
+ 1356 003a 012B     		cmp	r3, #1
+ 1357 003c 01D1     		bne	.L82
+ 1358              		.loc 1 311 33 is_stmt 0 discriminator 1
+ 1359 003e 0023     		movs	r3, #0
+ 1360 0040 01E0     		b	.L83
+ 1361              	.L82:
+ 1362              		.loc 1 311 33 discriminator 2
+ 1363 0042 4FF0FF33 		mov	r3, #-1
+ 1364              	.L83:
+ 1365              		.loc 1 311 13 is_stmt 1 discriminator 4
+ 1366 0046 FB60     		str	r3, [r7, #12]
+ 1367              	.L81:
+ 312:Src/nema_hal_freertos.c ****     }
+ 313:Src/nema_hal_freertos.c **** #else /* !NEMA_MULTI_PROCESS & !NEMA_MULTI_THREAD */
+ 314:Src/nema_hal_freertos.c ****     UNUSED(mutex_id);
+ 315:Src/nema_hal_freertos.c **** #endif /* NEMA_MULTI_PROCESS | NEMA_MULTI_THREAD */
+ 316:Src/nema_hal_freertos.c **** 
+ARM GAS  /tmp/ccKMUTYx.s 			page 43
+
+
+ 317:Src/nema_hal_freertos.c ****     return ret;
+ 1368              		.loc 1 317 12
+ 1369 0048 FB68     		ldr	r3, [r7, #12]
+ 318:Src/nema_hal_freertos.c **** }
+ 1370              		.loc 1 318 1
+ 1371 004a 1846     		mov	r0, r3
+ 1372 004c 1037     		adds	r7, r7, #16
+ 1373              		.cfi_def_cfa_offset 8
+ 1374 004e BD46     		mov	sp, r7
+ 1375              		.cfi_def_cfa_register 13
+ 1376              		@ sp needed
+ 1377 0050 80BD     		pop	{r7, pc}
+ 1378              	.L86:
+ 1379 0052 00BF     		.align	2
+ 1380              	.L85:
+ 1381 0054 00000000 		.word	nema_mutexes_ids
+ 1382              		.cfi_endproc
+ 1383              	.LFE860:
+ 1385              		.section	.rodata.__func__.4,"a"
+ 1386              		.align	2
+ 1389              	__func__.4:
+ 1390 0000 48414C5F 		.ascii	"HAL_GPU2D_CommandListCpltCallback\000"
+ 1390      47505532 
+ 1390      445F436F 
+ 1390      6D6D616E 
+ 1390      644C6973 
+ 1391              		.section	.rodata.__func__.3,"a"
+ 1392              		.align	2
+ 1395              	__func__.3:
+ 1396 0000 6E656D61 		.ascii	"nema_sys_init\000"
+ 1396      5F737973 
+ 1396      5F696E69 
+ 1396      7400
+ 1397              		.section	.rodata.__func__.2,"a"
+ 1398              		.align	2
+ 1401              	__func__.2:
+ 1402 0000 6E656D61 		.ascii	"nema_buffer_create\000"
+ 1402      5F627566 
+ 1402      6665725F 
+ 1402      63726561 
+ 1402      746500
+ 1403              		.section	.rodata.__func__.1,"a"
+ 1404              		.align	2
+ 1407              	__func__.1:
+ 1408 0000 6E656D61 		.ascii	"nema_buffer_create_pool\000"
+ 1408      5F627566 
+ 1408      6665725F 
+ 1408      63726561 
+ 1408      74655F70 
+ 1409              		.section	.rodata.__func__.0,"a"
+ 1410              		.align	2
+ 1413              	__func__.0:
+ 1414 0000 6E656D61 		.ascii	"nema_host_malloc\000"
+ 1414      5F686F73 
+ 1414      745F6D61 
+ 1414      6C6C6F63 
+ 1414      00
+ARM GAS  /tmp/ccKMUTYx.s 			page 44
+
+
+ 1415              		.text
+ 1416              	.Letext0:
+ 1417              		.file 4 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 1418              		.file 5 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 1419              		.file 6 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 1420              		.file 7 "Lib/NemaGFX/include/nema_hal.h"
+ 1421              		.file 8 "STM32Cube_FW_N6/Drivers/CMSIS/Include/core_cm55.h"
+ 1422              		.file 9 "STM32Cube_FW_N6/Drivers/STM32N6xx_HAL_Driver/Inc/stm32n6xx_hal_def.h"
+ 1423              		.file 10 "STM32Cube_FW_N6/Drivers/STM32N6xx_HAL_Driver/Inc/stm32n6xx_hal_gpu2d.h"
+ 1424              		.file 11 "Inc/platform_pool_config.h"
+ 1425              		.file 12 "Lib/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure/portmacrocommon.h"
+ 1426              		.file 13 "Lib/FreeRTOS/Source/include/FreeRTOS.h"
+ 1427              		.file 14 "Lib/FreeRTOS/Source/include/queue.h"
+ 1428              		.file 15 "Lib/FreeRTOS/Source/include/semphr.h"
+ 1429              		.file 16 "Lib/NemaGFX/include/tsi_malloc.h"
+ 1430              		.file 17 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-
+ 1431              		.file 18 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-
+ARM GAS  /tmp/ccKMUTYx.s 			page 45
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 nema_hal_freertos.c
-     /tmp/cck4dqzt.s:31     .text.HAL_GPU2D_CommandListCpltCallback:00000000 $t
-     /tmp/cck4dqzt.s:37     .text.HAL_GPU2D_CommandListCpltCallback:00000000 HAL_GPU2D_CommandListCpltCallback
-     /tmp/cck4dqzt.s:101    .text.HAL_GPU2D_CommandListCpltCallback:0000003c $d
-     /tmp/cck4dqzt.s:1238   .data.last_cl_id:00000000 last_cl_id
-     /tmp/cck4dqzt.s:1214   .bss.nema_irq_sem:00000000 nema_irq_sem
-     /tmp/cck4dqzt.s:1208   .rodata.__func__.4:00000000 __func__.4
-     /tmp/cck4dqzt.s:110    .text.nema_wait_irq:00000000 $t
-     /tmp/cck4dqzt.s:116    .text.nema_wait_irq:00000000 nema_wait_irq
-     /tmp/cck4dqzt.s:143    .text.nema_wait_irq:00000014 $d
-     /tmp/cck4dqzt.s:148    .text.nema_wait_irq_cl:00000000 $t
-     /tmp/cck4dqzt.s:154    .text.nema_wait_irq_cl:00000000 nema_wait_irq_cl
-     /tmp/cck4dqzt.s:193    .text.nema_wait_irq_cl:00000018 $d
-     /tmp/cck4dqzt.s:198    .text.nema_reg_read:00000000 $t
-     /tmp/cck4dqzt.s:204    .text.nema_reg_read:00000000 nema_reg_read
-     /tmp/cck4dqzt.s:225    .text.nema_reg_read:00000008 $d
-     /tmp/cck4dqzt.s:230    .text.nema_wait_irq_brk:00000000 $t
-     /tmp/cck4dqzt.s:236    .text.nema_wait_irq_brk:00000000 nema_wait_irq_brk
-     /tmp/cck4dqzt.s:272    .text.nema_reg_write:00000000 $t
-     /tmp/cck4dqzt.s:278    .text.nema_reg_write:00000000 nema_reg_write
-     /tmp/cck4dqzt.s:302    .text.nema_reg_write:0000000c $d
-     /tmp/cck4dqzt.s:307    .text.nema_buffer_map:00000000 $t
-     /tmp/cck4dqzt.s:313    .text.nema_buffer_map:00000000 nema_buffer_map
-     /tmp/cck4dqzt.s:331    .text.nema_buffer_unmap:00000000 $t
-     /tmp/cck4dqzt.s:337    .text.nema_buffer_unmap:00000000 nema_buffer_unmap
-     /tmp/cck4dqzt.s:352    .text.nema_buffer_phys:00000000 $t
-     /tmp/cck4dqzt.s:358    .text.nema_buffer_phys:00000000 nema_buffer_phys
-     /tmp/cck4dqzt.s:376    .text.nema_host_free:00000000 $t
-     /tmp/cck4dqzt.s:382    .text.nema_host_free:00000000 nema_host_free
-     /tmp/cck4dqzt.s:406    .text.nema_host_malloc:00000000 $t
-     /tmp/cck4dqzt.s:412    .text.nema_host_malloc:00000000 nema_host_malloc
-     /tmp/cck4dqzt.s:450    .text.nema_host_malloc:0000001c $d
-     /tmp/cck4dqzt.s:1188   .rodata.__func__.0:00000000 __func__.0
-     /tmp/cck4dqzt.s:457    .text.nema_mutex_lock:00000000 $t
-     /tmp/cck4dqzt.s:463    .text.nema_mutex_lock:00000000 nema_mutex_lock
-     /tmp/cck4dqzt.s:518    .text.nema_mutex_lock:00000028 $d
-     /tmp/cck4dqzt.s:1226   .bss.nema_mutexes_ids:00000000 nema_mutexes_ids
-     /tmp/cck4dqzt.s:523    .text.nema_mutex_unlock:00000000 $t
-     /tmp/cck4dqzt.s:529    .text.nema_mutex_unlock:00000000 nema_mutex_unlock
-     /tmp/cck4dqzt.s:586    .text.nema_mutex_unlock:00000028 $d
-     /tmp/cck4dqzt.s:594    .text.nema_buffer_create:00000000 $t
-     /tmp/cck4dqzt.s:600    .text.nema_buffer_create:00000000 nema_buffer_create
-     /tmp/cck4dqzt.s:679    .text.nema_buffer_create:00000044 $d
-     /tmp/cck4dqzt.s:1198   .rodata.__func__.2:00000000 __func__.2
-     /tmp/cck4dqzt.s:697    .text.nema_sys_init:00000000 $t
-     /tmp/cck4dqzt.s:703    .text.nema_sys_init:00000000 nema_sys_init
-     /tmp/cck4dqzt.s:882    .text.nema_sys_init:000000c4 $d
-     /tmp/cck4dqzt.s:1232   .bss.nema_mutexes_buffers:00000000 nema_mutexes_buffers
-     /tmp/cck4dqzt.s:1203   .rodata.__func__.3:00000000 __func__.3
-     /tmp/cck4dqzt.s:1220   .bss.nema_irq_sem_buffer:00000000 nema_irq_sem_buffer
-     /tmp/cck4dqzt.s:1244   .bss.ring_buffer_str:00000000 ring_buffer_str
-     /tmp/cck4dqzt.s:905    .text.nema_buffer_create_pool:00000000 $t
-     /tmp/cck4dqzt.s:911    .text.nema_buffer_create_pool:00000000 nema_buffer_create_pool
-     /tmp/cck4dqzt.s:982    .text.nema_buffer_create_pool:00000038 $d
-     /tmp/cck4dqzt.s:1193   .rodata.__func__.1:00000000 __func__.1
-     /tmp/cck4dqzt.s:989    .text.nema_buffer_destroy:00000000 $t
-ARM GAS  /tmp/cck4dqzt.s 			page 46
+     /tmp/ccKMUTYx.s:26     .data.memPools:00000000 $d
+     /tmp/ccKMUTYx.s:29     .data.memPools:00000000 memPools
+     /tmp/ccKMUTYx.s:40     .bss.ring_buffer_str:00000000 $d
+     /tmp/ccKMUTYx.s:43     .bss.ring_buffer_str:00000000 ring_buffer_str
+     /tmp/ccKMUTYx.s:46     .data.last_cl_id:00000000 $d
+     /tmp/ccKMUTYx.s:49     .data.last_cl_id:00000000 last_cl_id
+     /tmp/ccKMUTYx.s:52     .bss.nema_mutexes_buffers:00000000 $d
+     /tmp/ccKMUTYx.s:55     .bss.nema_mutexes_buffers:00000000 nema_mutexes_buffers
+     /tmp/ccKMUTYx.s:58     .bss.nema_mutexes_ids:00000000 $d
+     /tmp/ccKMUTYx.s:61     .bss.nema_mutexes_ids:00000000 nema_mutexes_ids
+     /tmp/ccKMUTYx.s:64     .bss.nema_irq_sem_buffer:00000000 $d
+     /tmp/ccKMUTYx.s:67     .bss.nema_irq_sem_buffer:00000000 nema_irq_sem_buffer
+     /tmp/ccKMUTYx.s:70     .bss.nema_irq_sem:00000000 $d
+     /tmp/ccKMUTYx.s:73     .bss.nema_irq_sem:00000000 nema_irq_sem
+     /tmp/ccKMUTYx.s:76     .rodata:00000000 $d
+     /tmp/ccKMUTYx.s:83     .text.HAL_GPU2D_CommandListCpltCallback:00000000 $t
+     /tmp/ccKMUTYx.s:89     .text.HAL_GPU2D_CommandListCpltCallback:00000000 HAL_GPU2D_CommandListCpltCallback
+     /tmp/ccKMUTYx.s:151    .text.HAL_GPU2D_CommandListCpltCallback:00000050 $d
+     /tmp/ccKMUTYx.s:1389   .rodata.__func__.4:00000000 __func__.4
+     /tmp/ccKMUTYx.s:177    .text.nema_sys_init:00000000 $t
+     /tmp/ccKMUTYx.s:183    .text.nema_sys_init:00000000 nema_sys_init
+     /tmp/ccKMUTYx.s:662    .text.nema_buffer_create:00000000 nema_buffer_create
+     /tmp/ccKMUTYx.s:834    .text.nema_buffer_map:00000000 nema_buffer_map
+     /tmp/ccKMUTYx.s:390    .text.nema_sys_init:0000013c $d
+     /tmp/ccKMUTYx.s:1395   .rodata.__func__.3:00000000 __func__.3
+     /tmp/ccKMUTYx.s:410    .text.nema_wait_irq:00000000 $t
+     /tmp/ccKMUTYx.s:416    .text.nema_wait_irq:00000000 nema_wait_irq
+     /tmp/ccKMUTYx.s:463    .text.nema_wait_irq:00000030 $d
+     /tmp/ccKMUTYx.s:468    .text.nema_wait_irq_cl:00000000 $t
+     /tmp/ccKMUTYx.s:474    .text.nema_wait_irq_cl:00000000 nema_wait_irq_cl
+     /tmp/ccKMUTYx.s:514    .text.nema_wait_irq_cl:00000024 $d
+     /tmp/ccKMUTYx.s:519    .text.nema_wait_irq_brk:00000000 $t
+     /tmp/ccKMUTYx.s:525    .text.nema_wait_irq_brk:00000000 nema_wait_irq_brk
+     /tmp/ccKMUTYx.s:573    .text.nema_reg_read:00000000 nema_reg_read
+     /tmp/ccKMUTYx.s:567    .text.nema_reg_read:00000000 $t
+     /tmp/ccKMUTYx.s:604    .text.nema_reg_read:0000001c $d
+     /tmp/ccKMUTYx.s:609    .text.nema_reg_write:00000000 $t
+     /tmp/ccKMUTYx.s:615    .text.nema_reg_write:00000000 nema_reg_write
+     /tmp/ccKMUTYx.s:647    .text.nema_reg_write:0000001c $d
+     /tmp/ccKMUTYx.s:656    .text.nema_buffer_create:00000000 $t
+     /tmp/ccKMUTYx.s:1233   .text.nema_mutex_lock:00000000 nema_mutex_lock
+     /tmp/ccKMUTYx.s:1312   .text.nema_mutex_unlock:00000000 nema_mutex_unlock
+     /tmp/ccKMUTYx.s:733    .text.nema_buffer_create:00000060 $d
+     /tmp/ccKMUTYx.s:1401   .rodata.__func__.2:00000000 __func__.2
+     /tmp/ccKMUTYx.s:740    .text.nema_buffer_create_pool:00000000 $t
+     /tmp/ccKMUTYx.s:746    .text.nema_buffer_create_pool:00000000 nema_buffer_create_pool
+     /tmp/ccKMUTYx.s:821    .text.nema_buffer_create_pool:00000068 $d
+     /tmp/ccKMUTYx.s:1407   .rodata.__func__.1:00000000 __func__.1
+     /tmp/ccKMUTYx.s:828    .text.nema_buffer_map:00000000 $t
+     /tmp/ccKMUTYx.s:867    .text.nema_buffer_unmap:00000000 $t
+     /tmp/ccKMUTYx.s:873    .text.nema_buffer_unmap:00000000 nema_buffer_unmap
+     /tmp/ccKMUTYx.s:903    .text.nema_buffer_destroy:00000000 $t
+     /tmp/ccKMUTYx.s:909    .text.nema_buffer_destroy:00000000 nema_buffer_destroy
+     /tmp/ccKMUTYx.s:947    .text.nema_buffer_phys:00000000 $t
+     /tmp/ccKMUTYx.s:953    .text.nema_buffer_phys:00000000 nema_buffer_phys
+ARM GAS  /tmp/ccKMUTYx.s 			page 46
 
 
-     /tmp/cck4dqzt.s:995    .text.nema_buffer_destroy:00000000 nema_buffer_destroy
-     /tmp/cck4dqzt.s:1035   .text.nema_buffer_flush:00000000 $t
-     /tmp/cck4dqzt.s:1041   .text.nema_buffer_flush:00000000 nema_buffer_flush
-     /tmp/cck4dqzt.s:1181   .text.nema_buffer_flush:00000054 $d
-     /tmp/cck4dqzt.s:1211   .bss.nema_irq_sem:00000000 $d
-     /tmp/cck4dqzt.s:1217   .bss.nema_irq_sem_buffer:00000000 $d
-     /tmp/cck4dqzt.s:1223   .bss.nema_mutexes_ids:00000000 $d
-     /tmp/cck4dqzt.s:1229   .bss.nema_mutexes_buffers:00000000 $d
-     /tmp/cck4dqzt.s:1235   .data.last_cl_id:00000000 $d
-     /tmp/cck4dqzt.s:1241   .bss.ring_buffer_str:00000000 $d
-                           .group:00000000 wm4.0.c552ae9005b0f2cca11872fae5d4b7f2
+     /tmp/ccKMUTYx.s:986    .text.nema_buffer_flush:00000000 $t
+     /tmp/ccKMUTYx.s:992    .text.nema_buffer_flush:00000000 nema_buffer_flush
+     /tmp/ccKMUTYx.s:1116   .text.nema_buffer_flush:0000006c $d
+     /tmp/ccKMUTYx.s:1121   .text.nema_host_free:00000000 $t
+     /tmp/ccKMUTYx.s:1127   .text.nema_host_free:00000000 nema_host_free
+     /tmp/ccKMUTYx.s:1166   .text.nema_host_malloc:00000000 $t
+     /tmp/ccKMUTYx.s:1172   .text.nema_host_malloc:00000000 nema_host_malloc
+     /tmp/ccKMUTYx.s:1220   .text.nema_host_malloc:00000038 $d
+     /tmp/ccKMUTYx.s:1413   .rodata.__func__.0:00000000 __func__.0
+     /tmp/ccKMUTYx.s:1227   .text.nema_mutex_lock:00000000 $t
+     /tmp/ccKMUTYx.s:1301   .text.nema_mutex_lock:00000054 $d
+     /tmp/ccKMUTYx.s:1306   .text.nema_mutex_unlock:00000000 $t
+     /tmp/ccKMUTYx.s:1381   .text.nema_mutex_unlock:00000054 $d
+     /tmp/ccKMUTYx.s:1386   .rodata.__func__.4:00000000 $d
+     /tmp/ccKMUTYx.s:1392   .rodata.__func__.3:00000000 $d
+     /tmp/ccKMUTYx.s:1398   .rodata.__func__.2:00000000 $d
+     /tmp/ccKMUTYx.s:1404   .rodata.__func__.1:00000000 $d
+     /tmp/ccKMUTYx.s:1410   .rodata.__func__.0:00000000 $d
+                           .group:00000000 wm4.0.2a10773746a5c5ebb5552f50e466f80b
                            .group:00000000 wm4._newlib_version.h.4.411db44ea2338a62eca2f0777f81481b
                            .group:00000000 wm4.features.h.33.e0c9f337c65cb9f22ed5f23d082bc78b
                            .group:00000000 wm4._default_types.h.15.247e5cd201eca3442cbf5404108c4935
@@ -2693,6 +2718,9 @@ DEFINED SYMBOLS
                            .group:00000000 wm4.nema_version.h.35.6aae27202c190348dff84b89d4c12df7
                            .group:00000000 wm4.assert.h.11.db24e541f16414db224bf986d21017e2
                            .group:00000000 wm4.string.h.8.c4b8571ce60dff2817f43fec8b86aecd
+ARM GAS  /tmp/ccKMUTYx.s 			page 47
+
+
                            .group:00000000 wm4.stm32n6xx_hal_conf.h.21.004a06df6e15ac197e03f723792da58a
                            .group:00000000 wm4.arm_cmse.h.103.a0d15a79c4c9a67da8d5831704d7248e
                            .group:00000000 wm4.stm32n6xx.h.34.80585dd08aa426c932f6311fdb7386da
@@ -2701,9 +2729,6 @@ DEFINED SYMBOLS
                            .group:00000000 wm4.core_cm55.h.68.832d5cf835639cc0d28219c3d2867330
                            .group:00000000 wm4.cmsis_gcc.h.26.7a5fd1a99dbedde687044a4433ab3e15
                            .group:00000000 wm4.core_cm55.h.196.52e437a270752da561676e507b35baeb
-ARM GAS  /tmp/cck4dqzt.s 			page 47
-
-
                            .group:00000000 wm4.mpu_armv8.h.32.9d72426c8e2b47753456dcb84802c5b3
                            .group:00000000 wm4.pmu_armv8.h.32.eaa95f88a71b29390b135fd81c071b6b
                            .group:00000000 wm4.core_cm55.h.4411.860dad8650880893dd57b815844f7186
@@ -2753,6 +2778,9 @@ DEFINED SYMBOLS
                            .group:00000000 wm4.stm32n6xx_hal.h.81.5e59143eba07faca3e9aeaa5470826c8
                            .group:00000000 wm4.assert.h.11.d99a111e320bc5106fc4046225782672
                            .group:00000000 wm4.nema_display.h.18.a7ea37edc500f52f8edd143955a5b4f5
+ARM GAS  /tmp/ccKMUTYx.s 			page 48
+
+
                            .group:00000000 wm4.platform_pool_config.h.55.9893eddd2f808b024f6f3dc8bc315b05
                            .group:00000000 wm4.tsi_malloc.h.29.8d287b6f4ac182efa834fa8a5d12b58f
                            .group:00000000 wm4.FreeRTOS.h.59.647b1b0da38e4e98108aae13c8abe9ee
@@ -2761,9 +2789,6 @@ DEFINED SYMBOLS
                            .group:00000000 wm4.projdefs.h.30.55a824156f299c075c33148a9fdadb99
                            .group:00000000 wm4.portmacro.h.30.cbb4b2da41f551c2a9904f0d03a1ce3e
                            .group:00000000 wm4.portmacrocommon.h.30.d5cb67896ab50a95311be7e023da5c4f
-ARM GAS  /tmp/cck4dqzt.s 			page 48
-
-
                            .group:00000000 wm4.portmacro.h.68.4051ecf710d074fb55b16d91dfebeeaa
                            .group:00000000 wm4.portable.h.61.d557c57974d490f056246a26cdcddd6c
                            .group:00000000 wm4.mpu_wrappers.h.30.ccc5f1a6903f941a88c268f5f62af3fe
@@ -2777,14 +2802,15 @@ DEFINED SYMBOLS
 UNDEFINED SYMBOLS
 xQueueGiveFromISR
 __assert_func
-xQueueSemaphoreTake
-HAL_GPU2D_ReadRegister
-hgpu2d
-HAL_GPU2D_WriteRegister
-tsi_free
-tsi_malloc_pool
-xQueueGenericSend
 xQueueCreateMutexStatic
 xQueueCreateCountingSemaphoreStatic
 tsi_malloc_init_pool
 nema_rb_init
+xQueueSemaphoreTake
+HAL_GPU2D_ReadRegister
+hgpu2d
+HAL_GPU2D_WriteRegister
+memset
+tsi_malloc_pool
+tsi_free
+xQueueGenericSend

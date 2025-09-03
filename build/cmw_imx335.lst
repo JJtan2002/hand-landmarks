@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccQ3mQxl.s 			page 1
+ARM GAS  /tmp/ccNbLpFw.s 			page 1
 
 
    1              		.arch armv8.1-m.main
@@ -16,7 +16,7 @@ ARM GAS  /tmp/ccQ3mQxl.s 			page 1
   13              		.eabi_attribute 24, 1
   14              		.eabi_attribute 25, 1
   15              		.eabi_attribute 26, 1
-  16              		.eabi_attribute 30, 4
+  16              		.eabi_attribute 30, 6
   17              		.eabi_attribute 34, 1
   18              		.eabi_attribute 38, 1
   19              		.eabi_attribute 18, 4
@@ -25,14 +25,375 @@ ARM GAS  /tmp/ccQ3mQxl.s 			page 1
   22              	.Ltext0:
   23              		.cfi_sections	.debug_frame
   24              		.file 1 "Lib/Camera_Middleware/sensors/cmw_imx335.c"
-  25              		.section	.text.CMW_IMX335_FrameEventCallback,"ax",%progbits
-  26              		.align	1
-  27              		.syntax unified
-  28              		.thumb
-  29              		.thumb_func
-  31              	CMW_IMX335_FrameEventCallback:
-  32              	.LVL0:
-  33              	.LFB3360:
+  25              		.section	.rodata.ISP_IQParamCacheInit_IMX335,"a"
+  26              		.align	2
+  29              	ISP_IQParamCacheInit_IMX335:
+  30 0000 00       		.byte	0
+  31 0001 000000   		.space	3
+  32 0004 00000000 		.word	0
+  33 0008 00000000 		.word	0
+  34 000c 01       		.byte	1
+  35 000d 00       		.byte	0
+  36 000e 02       		.byte	2
+  37 000f 04       		.byte	4
+  38 0010 04       		.byte	4
+  39 0011 06       		.byte	6
+  40 0012 0000     		.space	2
+  41 0014 00       		.byte	0
+  42 0015 000000   		.space	3
+  43 0018 00000000 		.word	0
+  44 001c 00000000 		.word	0
+  45 0020 00000000 		.word	0
+  46 0024 00000000 		.word	0
+  47 0028 00000000 		.word	0
+  48 002c 00000000 		.word	0
+  49 0030 00000000 		.word	0
+  50 0034 00000000 		.word	0
+  51 0038 00000000 		.word	0
+  52 003c 88020000 		.word	648
+  53 0040 E6010000 		.word	486
+  54 0044 10050000 		.word	1296
+  55 0048 CC030000 		.word	972
+  56 004c 00000000 		.word	0
+  57 0050 00000000 		.word	0
+  58 0054 00       		.byte	0
+  59 0055 000000   		.space	3
+ARM GAS  /tmp/ccNbLpFw.s 			page 2
+
+
+  60 0058 00000000 		.word	0
+  61 005c 00       		.byte	0
+  62 005d 00       		.byte	0
+  63 005e 00000000 		.space	6
+  63      0000
+  64 0064 01       		.byte	1
+  65 0065 0C       		.byte	12
+  66 0066 0C       		.byte	12
+  67 0067 0C       		.byte	12
+  68 0068 01       		.byte	1
+  69 0069 00       		.byte	0
+  70 006a 00000000 		.space	6
+  70      0000
+  71 0070 00       		.byte	0
+  72 0071 000000   		.space	3
+  73 0074 01       		.byte	1
+  74 0075 4100     		.ascii	"A\000"
+  75 0077 00000000 		.space	30
+  75      00000000 
+  75      00000000 
+  75      00000000 
+  75      00000000 
+  76 0095 544C3834 		.ascii	"TL84\000"
+  76      00
+  77 009a 00000000 		.space	27
+  77      00000000 
+  77      00000000 
+  77      00000000 
+  77      00000000 
+  78 00b5 44353000 		.ascii	"D50\000"
+  79 00b9 00000000 		.space	28
+  79      00000000 
+  79      00000000 
+  79      00000000 
+  79      00000000 
+  80 00d5 44363500 		.ascii	"D65\000"
+  81 00d9 00000000 		.space	28
+  81      00000000 
+  81      00000000 
+  81      00000000 
+  81      00000000 
+  82 00f5 46726565 		.ascii	"Free slot\000"
+  82      20736C6F 
+  82      7400
+  83 00ff 00000000 		.space	22
+  83      00000000 
+  83      00000000 
+  83      00000000 
+  83      00000000 
+  84 0115 000000   		.space	3
+  85 0118 280B0000 		.word	2856
+  86 011c A00F0000 		.word	4000
+  87 0120 88130000 		.word	5000
+  88 0124 64190000 		.word	6500
+  89 0128 00000000 		.word	0
+  90 012c 003B5808 		.word	140000000
+  91 0130 40CE8C0A 		.word	177000000
+ARM GAS  /tmp/ccNbLpFw.s 			page 3
+
+
+  92 0134 00EF1C0D 		.word	220000000
+  93 0138 40679A0E 		.word	245000000
+  94 013c 00000000 		.word	0
+  95 0140 00E1F505 		.word	100000000
+  96 0144 00E1F505 		.word	100000000
+  97 0148 00E1F505 		.word	100000000
+  98 014c 00E1F505 		.word	100000000
+  99 0150 00000000 		.word	0
+ 100 0154 C02A6410 		.word	275000000
+ 101 0158 C0D0010E 		.word	235000000
+ 102 015c 0095BA0A 		.word	180000000
+ 103 0160 C01C3D09 		.word	155000000
+ 104 0164 00000000 		.word	0
+ 105 0168 A0180709 		.word	151460000
+ 106 016c 606AE6F9 		.word	-102340000
+ 107 0170 E08C0803 		.word	50892000
+ 108 0174 A8E1DFFA 		.word	-85991000
+ 109 0178 A04C930C 		.word	210980000
+ 110 017c 40C682FE 		.word	-24984000
+ 111 0180 40787D01 		.word	25000000
+ 112 0184 C07471F0 		.word	-261000000
+ 113 0188 403F5314 		.word	341000000
+ 114 018c 242A3F09 		.word	155134500
+ 115 0190 707FDDFB 		.word	-69370000
+ 116 0194 50FBC700 		.word	13106000
+ 117 0198 68EDB1FD 		.word	-38671000
+ 118 019c 48BEFE09 		.word	167689800
+ 119 01a0 802DFAFD 		.word	-33936000
+ 120 01a4 D8A05400 		.word	5546200
+ 121 01a8 B02B05FC 		.word	-66770000
+ 122 01ac 088E8809 		.word	159944200
+ 123 01b0 80CDBB0A 		.word	180080000
+ 124 01b4 C09E22FC 		.word	-64840000
+ 125 01b8 D09B17FF 		.word	-15230000
+ 126 01bc D08CE1FD 		.word	-35550000
+ 127 01c0 00C6200A 		.word	169920000
+ 128 01c4 2067F3FD 		.word	-34380000
+ 129 01c8 10149500 		.word	9770000
+ 130 01cc E0BB4BFA 		.word	-95700000
+ 131 01d0 2038150B 		.word	185940000
+ 132 01d4 80CDBB0A 		.word	180080000
+ 133 01d8 C09E22FC 		.word	-64840000
+ 134 01dc D09B17FF 		.word	-15230000
+ 135 01e0 D08CE1FD 		.word	-35550000
+ 136 01e4 00C6200A 		.word	169920000
+ 137 01e8 2067F3FD 		.word	-34380000
+ 138 01ec 10149500 		.word	9770000
+ 139 01f0 E0BB4BFA 		.word	-95700000
+ 140 01f4 2038150B 		.word	185940000
+ 141 01f8 00000000 		.word	0
+ 142 01fc 00000000 		.word	0
+ 143 0200 00000000 		.word	0
+ 144 0204 00000000 		.word	0
+ 145 0208 00000000 		.word	0
+ 146 020c 00000000 		.word	0
+ 147 0210 00000000 		.word	0
+ 148 0214 00000000 		.word	0
+ARM GAS  /tmp/ccNbLpFw.s 			page 4
+
+
+ 149 0218 00000000 		.word	0
+ 150 021c 00       		.byte	0
+ 151 021d 000000   		.space	3
+ 152 0220 00000000 		.word	0
+ 153 0224 00000000 		.word	0
+ 154 0228 00000000 		.word	0
+ 155 022c 00       		.byte	0
+ 156 022d 000000   		.space	3
+ 157 0230 00000000 		.word	0
+ 158 0234 00000000 		.word	0
+ 159 0238 00000000 		.word	0
+ 160 023c 00000000 		.word	0
+ 161 0240 00000000 		.word	0
+ 162 0244 00000000 		.word	0
+ 163 0248 00000000 		.word	0
+ 164 024c 00000000 		.word	0
+ 165 0250 00000000 		.word	0
+ 166 0254 01       		.byte	1
+ 167 0255 01       		.byte	1
+ 168 0256 0000     		.space	2
+ 169              		.section	.rodata.ISP_IQParamCacheInit_VD66GY,"a"
+ 170              		.align	2
+ 173              	ISP_IQParamCacheInit_VD66GY:
+ 174 0000 00       		.byte	0
+ 175 0001 000000   		.space	3
+ 176 0004 00000000 		.word	0
+ 177 0008 00000000 		.word	0
+ 178 000c 01       		.byte	1
+ 179 000d 00       		.byte	0
+ 180 000e 02       		.byte	2
+ 181 000f 04       		.byte	4
+ 182 0010 04       		.byte	4
+ 183 0011 06       		.byte	6
+ 184 0012 0000     		.space	2
+ 185 0014 00       		.byte	0
+ 186 0015 000000   		.space	3
+ 187 0018 00000000 		.word	0
+ 188 001c 00000000 		.word	0
+ 189 0020 00000000 		.word	0
+ 190 0024 00000000 		.word	0
+ 191 0028 00000000 		.word	0
+ 192 002c 00000000 		.word	0
+ 193 0030 00000000 		.word	0
+ 194 0034 00000000 		.word	0
+ 195 0038 00000000 		.word	0
+ 196 003c 8C000000 		.word	140
+ 197 0040 55010000 		.word	341
+ 198 0044 48030000 		.word	840
+ 199 0048 AA020000 		.word	682
+ 200 004c 00000000 		.word	0
+ 201 0050 00000000 		.word	0
+ 202 0054 00       		.byte	0
+ 203 0055 000000   		.space	3
+ 204 0058 00000000 		.word	0
+ 205 005c 00       		.byte	0
+ 206 005d 00       		.byte	0
+ 207 005e 00000000 		.space	6
+ARM GAS  /tmp/ccNbLpFw.s 			page 5
+
+
+ 207      0000
+ 208 0064 01       		.byte	1
+ 209 0065 10       		.byte	16
+ 210 0066 10       		.byte	16
+ 211 0067 10       		.byte	16
+ 212 0068 00       		.byte	0
+ 213 0069 00       		.byte	0
+ 214 006a 00000000 		.space	6
+ 214      0000
+ 215 0070 00       		.byte	0
+ 216 0071 000000   		.space	3
+ 217 0074 01       		.byte	1
+ 218 0075 4A756467 		.ascii	"JudgeII A\000"
+ 218      65494920 
+ 218      4100
+ 219 007f 00000000 		.space	22
+ 219      00000000 
+ 219      00000000 
+ 219      00000000 
+ 219      00000000 
+ 220 0095 4A756465 		.ascii	"JudegII TL84\000"
+ 220      67494920 
+ 220      544C3834 
+ 220      00
+ 221 00a2 00000000 		.space	19
+ 221      00000000 
+ 221      00000000 
+ 221      00000000 
+ 221      000000
+ 222 00b5 4A756465 		.ascii	"JudegeII DAY\000"
+ 222      67654949 
+ 222      20444159 
+ 222      00
+ 223 00c2 00000000 		.space	19
+ 223      00000000 
+ 223      00000000 
+ 223      00000000 
+ 223      000000
+ 224 00d5 00       		.ascii	"\000"
+ 225 00d6 00000000 		.space	31
+ 225      00000000 
+ 225      00000000 
+ 225      00000000 
+ 225      00000000 
+ 226 00f5 00       		.ascii	"\000"
+ 227 00f6 00000000 		.space	31
+ 227      00000000 
+ 227      00000000 
+ 227      00000000 
+ 227      00000000 
+ 228 0115 000000   		.space	3
+ 229 0118 BE0A0000 		.word	2750
+ 230 011c 36100000 		.word	4150
+ 231 0120 5E1A0000 		.word	6750
+ 232 0124 00000000 		.word	0
+ 233 0128 00000000 		.word	0
+ 234 012c C095A905 		.word	95000000
+ARM GAS  /tmp/ccNbLpFw.s 			page 6
+
+
+ 235 0130 4047F906 		.word	117000000
+ 236 0134 005F4C09 		.word	156000000
+ 237 0138 00000000 		.word	0
+ 238 013c 00000000 		.word	0
+ 239 0140 00E1F505 		.word	100000000
+ 240 0144 00E1F505 		.word	100000000
+ 241 0148 00E1F505 		.word	100000000
+ 242 014c 00000000 		.word	0
+ 243 0150 00000000 		.word	0
+ 244 0154 80972F0E 		.word	238000000
+ 245 0158 40E9430B 		.word	189000000
+ 246 015c 80D1F008 		.word	150000000
+ 247 0160 00000000 		.word	0
+ 248 0164 00000000 		.word	0
+ 249 0168 1FC3FB07 		.word	133939999
+ 250 016c E0C0C4FE 		.word	-20660000
+ 251 0170 80B422FE 		.word	-31280000
+ 252 0174 30D8BDFD 		.word	-37890000
+ 253 0178 80EFEB08 		.word	149680000
+ 254 017c 618670FE 		.word	-26179999
+ 255 0180 C0201F00 		.word	2040000
+ 256 0184 404EAEFA 		.word	-89240000
+ 257 0188 70DB380D 		.word	221830000
+ 258 018c 006BCD08 		.word	147680000
+ 259 0190 7021B7FD 		.word	-38330000
+ 260 0194 800040FE 		.word	-29360000
+ 261 0198 00C498FD 		.word	-40320000
+ 262 019c 90EFB308 		.word	146010000
+ 263 01a0 C0DF20FE 		.word	-31400000
+ 264 01a4 E0C81000 		.word	1100000
+ 265 01a8 408D59FC 		.word	-61240000
+ 266 01ac 70156B0A 		.word	174790000
+ 267 01b0 90EFB308 		.word	146010000
+ 268 01b4 80A2A8FD 		.word	-39280000
+ 269 01b8 207629FF 		.word	-14060000
+ 270 01bc D0D367FE 		.word	-26750000
+ 271 01c0 10D01609 		.word	152490000
+ 272 01c4 403277FD 		.word	-42520000
+ 273 01c8 40B31100 		.word	1160000
+ 274 01cc B082B2FC 		.word	-55410000
+ 275 01d0 70E49308 		.word	143910000
+ 276 01d4 00000000 		.word	0
+ 277 01d8 00000000 		.word	0
+ 278 01dc 00000000 		.word	0
+ 279 01e0 00000000 		.word	0
+ 280 01e4 00000000 		.word	0
+ 281 01e8 00000000 		.word	0
+ 282 01ec 00000000 		.word	0
+ 283 01f0 00000000 		.word	0
+ 284 01f4 00000000 		.word	0
+ 285 01f8 00000000 		.word	0
+ 286 01fc 00000000 		.word	0
+ 287 0200 00000000 		.word	0
+ 288 0204 00000000 		.word	0
+ 289 0208 00000000 		.word	0
+ 290 020c 00000000 		.word	0
+ 291 0210 00000000 		.word	0
+ARM GAS  /tmp/ccNbLpFw.s 			page 7
+
+
+ 292 0214 00000000 		.word	0
+ 293 0218 00000000 		.word	0
+ 294 021c 00       		.byte	0
+ 295 021d 000000   		.space	3
+ 296 0220 00000000 		.word	0
+ 297 0224 00000000 		.word	0
+ 298 0228 00000000 		.word	0
+ 299 022c 00       		.byte	0
+ 300 022d 000000   		.space	3
+ 301 0230 00000000 		.word	0
+ 302 0234 00000000 		.word	0
+ 303 0238 00000000 		.word	0
+ 304 023c 00000000 		.word	0
+ 305 0240 00000000 		.word	0
+ 306 0244 00000000 		.word	0
+ 307 0248 00000000 		.word	0
+ 308 024c 00000000 		.word	0
+ 309 0250 00000000 		.word	0
+ 310 0254 01       		.byte	1
+ 311 0255 01       		.byte	1
+ 312 0256 0000     		.space	2
+ 313              		.section	.data.ISP_IQParamCacheInit,"aw"
+ 314              		.align	2
+ 317              	ISP_IQParamCacheInit:
+ 318 0000 00000000 		.word	ISP_IQParamCacheInit_IMX335
+ 319 0004 00000000 		.word	ISP_IQParamCacheInit_VD66GY
+ 320              		.section	.text.CMW_IMX335_GetResType,"ax",%progbits
+ 321              		.align	1
+ 322              		.syntax unified
+ 323              		.thumb
+ 324              		.thumb_func
+ 326              	CMW_IMX335_GetResType:
+ 327              	.LFB3342:
    1:Lib/Camera_Middleware/sensors/cmw_imx335.c **** /**
    2:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   ******************************************************************************
    3:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   * @file    cmw_imx335.c
@@ -57,10 +418,10 @@ ARM GAS  /tmp/ccQ3mQxl.s 			page 1
   22:Lib/Camera_Middleware/sensors/cmw_imx335.c **** #include <string.h>
   23:Lib/Camera_Middleware/sensors/cmw_imx335.c **** #include "cmw_imx335.h"
   24:Lib/Camera_Middleware/sensors/cmw_imx335.c **** #include "cmw_camera.h"
+ARM GAS  /tmp/ccNbLpFw.s 			page 8
+
+
   25:Lib/Camera_Middleware/sensors/cmw_imx335.c **** #include "imx335_reg.h"
-ARM GAS  /tmp/ccQ3mQxl.s 			page 2
-
-
   26:Lib/Camera_Middleware/sensors/cmw_imx335.c **** #include "imx335.h"
   27:Lib/Camera_Middleware/sensors/cmw_imx335.c **** #ifndef ISP_MW_TUNING_TOOL_SUPPORT
   28:Lib/Camera_Middleware/sensors/cmw_imx335.c **** #include "isp_param_conf.h"
@@ -71,75 +432,400 @@ ARM GAS  /tmp/ccQ3mQxl.s 			page 1
   33:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
   34:Lib/Camera_Middleware/sensors/cmw_imx335.c **** static int CMW_IMX335_GetResType(uint32_t width, uint32_t height, uint32_t*res)
   35:Lib/Camera_Middleware/sensors/cmw_imx335.c **** {
+ 328              		.loc 1 35 1
+ 329              		.cfi_startproc
+ 330              		@ args = 0, pretend = 0, frame = 16
+ 331              		@ frame_needed = 1, uses_anonymous_args = 0
+ 332              		@ link register save eliminated.
+ 333 0000 80B4     		push	{r7}
+ 334              		.cfi_def_cfa_offset 4
+ 335              		.cfi_offset 7, -4
+ 336 0002 85B0     		sub	sp, sp, #20
+ 337              		.cfi_def_cfa_offset 24
+ 338 0004 00AF     		add	r7, sp, #0
+ 339              		.cfi_def_cfa_register 7
+ 340 0006 F860     		str	r0, [r7, #12]
+ 341 0008 B960     		str	r1, [r7, #8]
+ 342 000a 7A60     		str	r2, [r7, #4]
   36:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (width == 2592 && height == 1944)
+ 343              		.loc 1 36 6
+ 344 000c FB68     		ldr	r3, [r7, #12]
+ 345 000e B3F5226F 		cmp	r3, #2592
+ 346 0012 08D1     		bne	.L2
+ 347              		.loc 1 36 21 discriminator 1
+ 348 0014 BB68     		ldr	r3, [r7, #8]
+ 349 0016 B3F5F36F 		cmp	r3, #1944
+ 350 001a 04D1     		bne	.L2
   37:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
   38:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     *res = IMX335_R2592_1944;
+ 351              		.loc 1 38 10
+ 352 001c 7B68     		ldr	r3, [r7, #4]
+ 353 001e 0622     		movs	r2, #6
+ 354 0020 1A60     		str	r2, [r3]
   39:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
   40:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   else
   41:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
   42:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     return CMW_ERROR_WRONG_PARAM;
   43:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
   44:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   return 0;
+ 355              		.loc 1 44 10
+ 356 0022 0023     		movs	r3, #0
+ 357 0024 01E0     		b	.L3
+ 358              	.L2:
+  42:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
+ 359              		.loc 1 42 12
+ 360 0026 6FF00103 		mvn	r3, #1
+ 361              	.L3:
   45:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
+ 362              		.loc 1 45 1
+ARM GAS  /tmp/ccNbLpFw.s 			page 9
+
+
+ 363 002a 1846     		mov	r0, r3
+ 364 002c 1437     		adds	r7, r7, #20
+ 365              		.cfi_def_cfa_offset 4
+ 366 002e BD46     		mov	sp, r7
+ 367              		.cfi_def_cfa_register 13
+ 368              		@ sp needed
+ 369 0030 5DF8047B 		ldr	r7, [sp], #4
+ 370              		.cfi_restore 7
+ 371              		.cfi_def_cfa_offset 0
+ 372 0034 7047     		bx	lr
+ 373              		.cfi_endproc
+ 374              	.LFE3342:
+ 376              		.section	.text.CMW_IMX335_getMirrorFlipConfig,"ax",%progbits
+ 377              		.align	1
+ 378              		.syntax unified
+ 379              		.thumb
+ 380              		.thumb_func
+ 382              	CMW_IMX335_getMirrorFlipConfig:
+ 383              	.LFB3343:
   46:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
   47:Lib/Camera_Middleware/sensors/cmw_imx335.c **** static int32_t CMW_IMX335_getMirrorFlipConfig(uint32_t Config)
   48:Lib/Camera_Middleware/sensors/cmw_imx335.c **** {
+ 384              		.loc 1 48 1
+ 385              		.cfi_startproc
+ 386              		@ args = 0, pretend = 0, frame = 16
+ 387              		@ frame_needed = 1, uses_anonymous_args = 0
+ 388              		@ link register save eliminated.
+ 389 0000 80B4     		push	{r7}
+ 390              		.cfi_def_cfa_offset 4
+ 391              		.cfi_offset 7, -4
+ 392 0002 85B0     		sub	sp, sp, #20
+ 393              		.cfi_def_cfa_offset 24
+ 394 0004 00AF     		add	r7, sp, #0
+ 395              		.cfi_def_cfa_register 7
+ 396 0006 7860     		str	r0, [r7, #4]
   49:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   int32_t ret;
   50:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
   51:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   switch (Config)
+ 397              		.loc 1 51 3
+ 398 0008 7B68     		ldr	r3, [r7, #4]
+ 399 000a 022B     		cmp	r3, #2
+ 400 000c 0FD0     		beq	.L5
+ 401 000e 7B68     		ldr	r3, [r7, #4]
+ 402 0010 022B     		cmp	r3, #2
+ 403 0012 0FD8     		bhi	.L6
+ 404 0014 7B68     		ldr	r3, [r7, #4]
+ 405 0016 002B     		cmp	r3, #0
+ 406 0018 03D0     		beq	.L7
+ 407 001a 7B68     		ldr	r3, [r7, #4]
+ 408 001c 012B     		cmp	r3, #1
+ 409 001e 03D0     		beq	.L8
+ 410 0020 08E0     		b	.L6
+ 411              	.L7:
   52:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
   53:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     case CMW_MIRRORFLIP_NONE:
   54:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       ret = IMX335_MIRROR_FLIP_NONE;
+ 412              		.loc 1 54 11
+ARM GAS  /tmp/ccNbLpFw.s 			page 10
+
+
+ 413 0022 0023     		movs	r3, #0
+ 414 0024 FB60     		str	r3, [r7, #12]
   55:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       break;
+ 415              		.loc 1 55 7
+ 416 0026 08E0     		b	.L9
+ 417              	.L8:
   56:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     case CMW_MIRRORFLIP_FLIP:
   57:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       ret = IMX335_FLIP;
+ 418              		.loc 1 57 11
+ 419 0028 0123     		movs	r3, #1
+ 420 002a FB60     		str	r3, [r7, #12]
   58:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       break;
+ 421              		.loc 1 58 7
+ 422 002c 05E0     		b	.L9
+ 423              	.L5:
   59:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     case CMW_MIRRORFLIP_MIRROR:
   60:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       ret = IMX335_MIRROR;
+ 424              		.loc 1 60 11
+ 425 002e 0223     		movs	r3, #2
+ 426 0030 FB60     		str	r3, [r7, #12]
   61:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       break;
+ 427              		.loc 1 61 7
+ 428 0032 02E0     		b	.L9
+ 429              	.L6:
   62:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     case CMW_MIRRORFLIP_FLIP_MIRROR:
   63:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     default:
   64:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       ret = IMX335_MIRROR_FLIP;
+ 430              		.loc 1 64 11
+ 431 0034 0323     		movs	r3, #3
+ 432 0036 FB60     		str	r3, [r7, #12]
   65:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       break;
+ 433              		.loc 1 65 7
+ 434 0038 00BF     		nop
+ 435              	.L9:
   66:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
   67:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
   68:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   return ret;
+ 436              		.loc 1 68 10
+ 437 003a FB68     		ldr	r3, [r7, #12]
   69:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
+ 438              		.loc 1 69 1
+ 439 003c 1846     		mov	r0, r3
+ 440 003e 1437     		adds	r7, r7, #20
+ 441              		.cfi_def_cfa_offset 4
+ 442 0040 BD46     		mov	sp, r7
+ 443              		.cfi_def_cfa_register 13
+ 444              		@ sp needed
+ 445 0042 5DF8047B 		ldr	r7, [sp], #4
+ 446              		.cfi_restore 7
+ 447              		.cfi_def_cfa_offset 0
+ 448 0046 7047     		bx	lr
+ 449              		.cfi_endproc
+ 450              	.LFE3343:
+ 452              		.section	.text.CMW_IMX335_DeInit,"ax",%progbits
+ 453              		.align	1
+ 454              		.syntax unified
+ 455              		.thumb
+ARM GAS  /tmp/ccNbLpFw.s 			page 11
+
+
+ 456              		.thumb_func
+ 458              	CMW_IMX335_DeInit:
+ 459              	.LFB3344:
   70:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
   71:Lib/Camera_Middleware/sensors/cmw_imx335.c **** static int32_t CMW_IMX335_DeInit(void *io_ctx)
   72:Lib/Camera_Middleware/sensors/cmw_imx335.c **** {
+ 460              		.loc 1 72 1
+ 461              		.cfi_startproc
+ 462              		@ args = 0, pretend = 0, frame = 16
+ 463              		@ frame_needed = 1, uses_anonymous_args = 0
+ 464 0000 80B5     		push	{r7, lr}
+ 465              		.cfi_def_cfa_offset 8
+ 466              		.cfi_offset 7, -8
+ 467              		.cfi_offset 14, -4
+ 468 0002 84B0     		sub	sp, sp, #16
+ 469              		.cfi_def_cfa_offset 24
+ 470 0004 00AF     		add	r7, sp, #0
+ 471              		.cfi_def_cfa_register 7
+ 472 0006 7860     		str	r0, [r7, #4]
   73:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   int ret = CMW_ERROR_NONE;
+ 473              		.loc 1 73 7
+ 474 0008 0023     		movs	r3, #0
+ 475 000a FB60     		str	r3, [r7, #12]
   74:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   ret = ISP_DeInit(&((CMW_IMX335_t *)io_ctx)->hIsp);
+ 476              		.loc 1 74 9
+ 477 000c 7B68     		ldr	r3, [r7, #4]
+ 478 000e 3033     		adds	r3, r3, #48
+ 479 0010 1846     		mov	r0, r3
+ 480 0012 FFF7FEFF 		bl	ISP_DeInit
+ 481 0016 0346     		mov	r3, r0
+ 482              		.loc 1 74 7 discriminator 1
+ 483 0018 FB60     		str	r3, [r7, #12]
   75:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret)
+ 484              		.loc 1 75 6
+ 485 001a FB68     		ldr	r3, [r7, #12]
+ 486 001c 002B     		cmp	r3, #0
+ 487 001e 02D0     		beq	.L12
   76:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
   77:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     return CMW_ERROR_COMPONENT_FAILURE;
+ 488              		.loc 1 77 12
+ 489 0020 6FF00403 		mvn	r3, #4
+ 490 0024 0CE0     		b	.L13
+ 491              	.L12:
   78:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
   79:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
   80:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   ret = IMX335_DeInit(&((CMW_IMX335_t *)io_ctx)->ctx_driver);
+ 492              		.loc 1 80 9
+ 493 0026 7B68     		ldr	r3, [r7, #4]
+ 494 0028 0833     		adds	r3, r3, #8
+ 495 002a 1846     		mov	r0, r3
+ 496 002c FFF7FEFF 		bl	IMX335_DeInit
+ 497 0030 F860     		str	r0, [r7, #12]
   81:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret)
+ 498              		.loc 1 81 6
+ 499 0032 FB68     		ldr	r3, [r7, #12]
+ 500 0034 002B     		cmp	r3, #0
+ 501 0036 02D0     		beq	.L14
+ARM GAS  /tmp/ccNbLpFw.s 			page 12
+
+
   82:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
-ARM GAS  /tmp/ccQ3mQxl.s 			page 3
-
-
   83:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     return CMW_ERROR_COMPONENT_FAILURE;
+ 502              		.loc 1 83 12
+ 503 0038 6FF00403 		mvn	r3, #4
+ 504 003c 00E0     		b	.L13
+ 505              	.L14:
   84:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
   85:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   return ret;
+ 506              		.loc 1 85 10
+ 507 003e FB68     		ldr	r3, [r7, #12]
+ 508              	.L13:
   86:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
+ 509              		.loc 1 86 1
+ 510 0040 1846     		mov	r0, r3
+ 511 0042 1037     		adds	r7, r7, #16
+ 512              		.cfi_def_cfa_offset 8
+ 513 0044 BD46     		mov	sp, r7
+ 514              		.cfi_def_cfa_register 13
+ 515              		@ sp needed
+ 516 0046 80BD     		pop	{r7, pc}
+ 517              		.cfi_endproc
+ 518              	.LFE3344:
+ 520              		.section	.text.CMW_IMX335_ReadID,"ax",%progbits
+ 521              		.align	1
+ 522              		.syntax unified
+ 523              		.thumb
+ 524              		.thumb_func
+ 526              	CMW_IMX335_ReadID:
+ 527              	.LFB3345:
   87:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
   88:Lib/Camera_Middleware/sensors/cmw_imx335.c **** static int32_t CMW_IMX335_ReadID(void *io_ctx, uint32_t *Id)
   89:Lib/Camera_Middleware/sensors/cmw_imx335.c **** {
+ 528              		.loc 1 89 1
+ 529              		.cfi_startproc
+ 530              		@ args = 0, pretend = 0, frame = 8
+ 531              		@ frame_needed = 1, uses_anonymous_args = 0
+ 532 0000 80B5     		push	{r7, lr}
+ 533              		.cfi_def_cfa_offset 8
+ 534              		.cfi_offset 7, -8
+ 535              		.cfi_offset 14, -4
+ 536 0002 82B0     		sub	sp, sp, #8
+ 537              		.cfi_def_cfa_offset 16
+ 538 0004 00AF     		add	r7, sp, #0
+ 539              		.cfi_def_cfa_register 7
+ 540 0006 7860     		str	r0, [r7, #4]
+ 541 0008 3960     		str	r1, [r7]
   90:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   return IMX335_ReadID(&((CMW_IMX335_t *)io_ctx)->ctx_driver, Id);
+ 542              		.loc 1 90 10
+ 543 000a 7B68     		ldr	r3, [r7, #4]
+ 544 000c 0833     		adds	r3, r3, #8
+ 545 000e 3968     		ldr	r1, [r7]
+ 546 0010 1846     		mov	r0, r3
+ 547 0012 FFF7FEFF 		bl	IMX335_ReadID
+ 548 0016 0346     		mov	r3, r0
   91:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
+ 549              		.loc 1 91 1
+ 550 0018 1846     		mov	r0, r3
+ARM GAS  /tmp/ccNbLpFw.s 			page 13
+
+
+ 551 001a 0837     		adds	r7, r7, #8
+ 552              		.cfi_def_cfa_offset 8
+ 553 001c BD46     		mov	sp, r7
+ 554              		.cfi_def_cfa_register 13
+ 555              		@ sp needed
+ 556 001e 80BD     		pop	{r7, pc}
+ 557              		.cfi_endproc
+ 558              	.LFE3345:
+ 560              		.section	.text.CMW_IMX335_SetGain,"ax",%progbits
+ 561              		.align	1
+ 562              		.syntax unified
+ 563              		.thumb
+ 564              		.thumb_func
+ 566              	CMW_IMX335_SetGain:
+ 567              	.LFB3346:
   92:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
   93:Lib/Camera_Middleware/sensors/cmw_imx335.c **** static int32_t CMW_IMX335_SetGain(void *io_ctx, int32_t gain)
   94:Lib/Camera_Middleware/sensors/cmw_imx335.c **** {
+ 568              		.loc 1 94 1
+ 569              		.cfi_startproc
+ 570              		@ args = 0, pretend = 0, frame = 8
+ 571              		@ frame_needed = 1, uses_anonymous_args = 0
+ 572 0000 80B5     		push	{r7, lr}
+ 573              		.cfi_def_cfa_offset 8
+ 574              		.cfi_offset 7, -8
+ 575              		.cfi_offset 14, -4
+ 576 0002 82B0     		sub	sp, sp, #8
+ 577              		.cfi_def_cfa_offset 16
+ 578 0004 00AF     		add	r7, sp, #0
+ 579              		.cfi_def_cfa_register 7
+ 580 0006 7860     		str	r0, [r7, #4]
+ 581 0008 3960     		str	r1, [r7]
   95:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   return IMX335_SetGain(&((CMW_IMX335_t *)io_ctx)->ctx_driver, gain);
+ 582              		.loc 1 95 10
+ 583 000a 7B68     		ldr	r3, [r7, #4]
+ 584 000c 0833     		adds	r3, r3, #8
+ 585 000e 3968     		ldr	r1, [r7]
+ 586 0010 1846     		mov	r0, r3
+ 587 0012 FFF7FEFF 		bl	IMX335_SetGain
+ 588 0016 0346     		mov	r3, r0
   96:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
+ 589              		.loc 1 96 1
+ 590 0018 1846     		mov	r0, r3
+ 591 001a 0837     		adds	r7, r7, #8
+ 592              		.cfi_def_cfa_offset 8
+ 593 001c BD46     		mov	sp, r7
+ 594              		.cfi_def_cfa_register 13
+ 595              		@ sp needed
+ 596 001e 80BD     		pop	{r7, pc}
+ 597              		.cfi_endproc
+ 598              	.LFE3346:
+ 600              		.section	.text.CMW_IMX335_SetExposure,"ax",%progbits
+ 601              		.align	1
+ 602              		.syntax unified
+ 603              		.thumb
+ 604              		.thumb_func
+ 606              	CMW_IMX335_SetExposure:
+ARM GAS  /tmp/ccNbLpFw.s 			page 14
+
+
+ 607              	.LFB3347:
   97:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
   98:Lib/Camera_Middleware/sensors/cmw_imx335.c **** static int32_t CMW_IMX335_SetExposure(void *io_ctx, int32_t exposure)
   99:Lib/Camera_Middleware/sensors/cmw_imx335.c **** {
+ 608              		.loc 1 99 1
+ 609              		.cfi_startproc
+ 610              		@ args = 0, pretend = 0, frame = 8
+ 611              		@ frame_needed = 1, uses_anonymous_args = 0
+ 612 0000 80B5     		push	{r7, lr}
+ 613              		.cfi_def_cfa_offset 8
+ 614              		.cfi_offset 7, -8
+ 615              		.cfi_offset 14, -4
+ 616 0002 82B0     		sub	sp, sp, #8
+ 617              		.cfi_def_cfa_offset 16
+ 618 0004 00AF     		add	r7, sp, #0
+ 619              		.cfi_def_cfa_register 7
+ 620 0006 7860     		str	r0, [r7, #4]
+ 621 0008 3960     		str	r1, [r7]
  100:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   return IMX335_SetExposure(&((CMW_IMX335_t *)io_ctx)->ctx_driver, exposure);
+ 622              		.loc 1 100 10
+ 623 000a 7B68     		ldr	r3, [r7, #4]
+ 624 000c 0833     		adds	r3, r3, #8
+ 625 000e 3968     		ldr	r1, [r7]
+ 626 0010 1846     		mov	r0, r3
+ 627 0012 FFF7FEFF 		bl	IMX335_SetExposure
+ 628 0016 0346     		mov	r3, r0
  101:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
+ 629              		.loc 1 101 1
+ 630 0018 1846     		mov	r0, r3
+ 631 001a 0837     		adds	r7, r7, #8
+ 632              		.cfi_def_cfa_offset 8
+ 633 001c BD46     		mov	sp, r7
+ 634              		.cfi_def_cfa_register 13
+ 635              		@ sp needed
+ 636 001e 80BD     		pop	{r7, pc}
+ 637              		.cfi_endproc
+ 638              	.LFE3347:
+ 640              		.section	.text.CMW_IMX335_SetWBRefMode,"ax",%progbits
+ 641              		.align	1
+ 642              		.global	CMW_IMX335_SetWBRefMode
+ 643              		.syntax unified
+ 644              		.thumb
+ 645              		.thumb_func
+ 647              	CMW_IMX335_SetWBRefMode:
+ 648              	.LFB3348:
  102:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  103:Lib/Camera_Middleware/sensors/cmw_imx335.c **** /**
  104:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   * @brief  Set the sensor white balance mode
@@ -150,16 +836,80 @@ ARM GAS  /tmp/ccQ3mQxl.s 			page 1
  109:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   */
  110:Lib/Camera_Middleware/sensors/cmw_imx335.c **** int32_t CMW_IMX335_SetWBRefMode(void *io_ctx, uint8_t Automatic, uint32_t RefColorTemp)
  111:Lib/Camera_Middleware/sensors/cmw_imx335.c **** {
+ 649              		.loc 1 111 1
+ 650              		.cfi_startproc
+ARM GAS  /tmp/ccNbLpFw.s 			page 15
+
+
+ 651              		@ args = 0, pretend = 0, frame = 24
+ 652              		@ frame_needed = 1, uses_anonymous_args = 0
+ 653 0000 80B5     		push	{r7, lr}
+ 654              		.cfi_def_cfa_offset 8
+ 655              		.cfi_offset 7, -8
+ 656              		.cfi_offset 14, -4
+ 657 0002 86B0     		sub	sp, sp, #24
+ 658              		.cfi_def_cfa_offset 32
+ 659 0004 00AF     		add	r7, sp, #0
+ 660              		.cfi_def_cfa_register 7
+ 661 0006 F860     		str	r0, [r7, #12]
+ 662 0008 0B46     		mov	r3, r1
+ 663 000a 7A60     		str	r2, [r7, #4]
+ 664 000c FB72     		strb	r3, [r7, #11]
  112:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   int ret = CMW_ERROR_NONE;
+ 665              		.loc 1 112 7
+ 666 000e 0023     		movs	r3, #0
+ 667 0010 7B61     		str	r3, [r7, #20]
  113:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  114:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   ret = ISP_SetWBRefMode(&((CMW_IMX335_t *)io_ctx)->hIsp, Automatic, RefColorTemp);
+ 668              		.loc 1 114 9
+ 669 0012 FB68     		ldr	r3, [r7, #12]
+ 670 0014 3033     		adds	r3, r3, #48
+ 671 0016 F97A     		ldrb	r1, [r7, #11]	@ zero_extendqisi2
+ 672 0018 7A68     		ldr	r2, [r7, #4]
+ 673 001a 1846     		mov	r0, r3
+ 674 001c FFF7FEFF 		bl	ISP_SetWBRefMode
+ 675 0020 0346     		mov	r3, r0
+ 676              		.loc 1 114 7 discriminator 1
+ 677 0022 7B61     		str	r3, [r7, #20]
  115:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret)
+ 678              		.loc 1 115 6
+ 679 0024 7B69     		ldr	r3, [r7, #20]
+ 680 0026 002B     		cmp	r3, #0
+ 681 0028 02D0     		beq	.L22
  116:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
  117:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     return CMW_ERROR_PERIPH_FAILURE;
+ 682              		.loc 1 117 12
+ 683 002a 6FF00303 		mvn	r3, #3
+ 684 002e 00E0     		b	.L23
+ 685              	.L22:
  118:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
  119:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  120:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   return CMW_ERROR_NONE;
+ 686              		.loc 1 120 10
+ 687 0030 0023     		movs	r3, #0
+ 688              	.L23:
  121:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
+ 689              		.loc 1 121 1
+ 690 0032 1846     		mov	r0, r3
+ 691 0034 1837     		adds	r7, r7, #24
+ 692              		.cfi_def_cfa_offset 8
+ 693 0036 BD46     		mov	sp, r7
+ 694              		.cfi_def_cfa_register 13
+ 695              		@ sp needed
+ 696 0038 80BD     		pop	{r7, pc}
+ 697              		.cfi_endproc
+ARM GAS  /tmp/ccNbLpFw.s 			page 16
+
+
+ 698              	.LFE3348:
+ 700              		.section	.text.CMW_IMX335_ListWBRefModes,"ax",%progbits
+ 701              		.align	1
+ 702              		.global	CMW_IMX335_ListWBRefModes
+ 703              		.syntax unified
+ 704              		.thumb
+ 705              		.thumb_func
+ 707              	CMW_IMX335_ListWBRefModes:
+ 708              	.LFB3349:
  122:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  123:Lib/Camera_Middleware/sensors/cmw_imx335.c **** /**
  124:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   * @brief  List the sensor white balance modes
@@ -169,52 +919,335 @@ ARM GAS  /tmp/ccQ3mQxl.s 			page 1
  128:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   */
  129:Lib/Camera_Middleware/sensors/cmw_imx335.c **** int32_t CMW_IMX335_ListWBRefModes(void *io_ctx, uint32_t RefColorTemp[])
  130:Lib/Camera_Middleware/sensors/cmw_imx335.c **** {
+ 709              		.loc 1 130 1
+ 710              		.cfi_startproc
+ 711              		@ args = 0, pretend = 0, frame = 16
+ 712              		@ frame_needed = 1, uses_anonymous_args = 0
+ 713 0000 80B5     		push	{r7, lr}
+ 714              		.cfi_def_cfa_offset 8
+ 715              		.cfi_offset 7, -8
+ 716              		.cfi_offset 14, -4
+ 717 0002 84B0     		sub	sp, sp, #16
+ 718              		.cfi_def_cfa_offset 24
+ 719 0004 00AF     		add	r7, sp, #0
+ 720              		.cfi_def_cfa_register 7
+ 721 0006 7860     		str	r0, [r7, #4]
+ 722 0008 3960     		str	r1, [r7]
  131:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   int ret = CMW_ERROR_NONE;
+ 723              		.loc 1 131 7
+ 724 000a 0023     		movs	r3, #0
+ 725 000c FB60     		str	r3, [r7, #12]
  132:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  133:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   ret = ISP_ListWBRefModes(&((CMW_IMX335_t *)io_ctx)->hIsp, RefColorTemp);
+ 726              		.loc 1 133 9
+ 727 000e 7B68     		ldr	r3, [r7, #4]
+ 728 0010 3033     		adds	r3, r3, #48
+ 729 0012 3968     		ldr	r1, [r7]
+ 730 0014 1846     		mov	r0, r3
+ 731 0016 FFF7FEFF 		bl	ISP_ListWBRefModes
+ 732 001a 0346     		mov	r3, r0
+ 733              		.loc 1 133 7 discriminator 1
+ 734 001c FB60     		str	r3, [r7, #12]
  134:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret)
+ 735              		.loc 1 134 6
+ 736 001e FB68     		ldr	r3, [r7, #12]
+ 737 0020 002B     		cmp	r3, #0
+ 738 0022 02D0     		beq	.L25
  135:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
  136:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     return CMW_ERROR_PERIPH_FAILURE;
+ 739              		.loc 1 136 12
+ 740 0024 6FF00303 		mvn	r3, #3
+ 741 0028 00E0     		b	.L26
+ARM GAS  /tmp/ccNbLpFw.s 			page 17
+
+
+ 742              	.L25:
  137:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
  138:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  139:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   return CMW_ERROR_NONE;
-ARM GAS  /tmp/ccQ3mQxl.s 			page 4
-
-
+ 743              		.loc 1 139 10
+ 744 002a 0023     		movs	r3, #0
+ 745              	.L26:
  140:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
+ 746              		.loc 1 140 1
+ 747 002c 1846     		mov	r0, r3
+ 748 002e 1037     		adds	r7, r7, #16
+ 749              		.cfi_def_cfa_offset 8
+ 750 0030 BD46     		mov	sp, r7
+ 751              		.cfi_def_cfa_register 13
+ 752              		@ sp needed
+ 753 0032 80BD     		pop	{r7, pc}
+ 754              		.cfi_endproc
+ 755              	.LFE3349:
+ 757              		.section	.text.CMW_IMX335_SetFrequency,"ax",%progbits
+ 758              		.align	1
+ 759              		.syntax unified
+ 760              		.thumb
+ 761              		.thumb_func
+ 763              	CMW_IMX335_SetFrequency:
+ 764              	.LFB3350:
  141:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  142:Lib/Camera_Middleware/sensors/cmw_imx335.c **** static int32_t CMW_IMX335_SetFrequency(void *io_ctx, int32_t frequency)
  143:Lib/Camera_Middleware/sensors/cmw_imx335.c **** {
+ 765              		.loc 1 143 1
+ 766              		.cfi_startproc
+ 767              		@ args = 0, pretend = 0, frame = 8
+ 768              		@ frame_needed = 1, uses_anonymous_args = 0
+ 769 0000 80B5     		push	{r7, lr}
+ 770              		.cfi_def_cfa_offset 8
+ 771              		.cfi_offset 7, -8
+ 772              		.cfi_offset 14, -4
+ 773 0002 82B0     		sub	sp, sp, #8
+ 774              		.cfi_def_cfa_offset 16
+ 775 0004 00AF     		add	r7, sp, #0
+ 776              		.cfi_def_cfa_register 7
+ 777 0006 7860     		str	r0, [r7, #4]
+ 778 0008 3960     		str	r1, [r7]
  144:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   return IMX335_SetFrequency(&((CMW_IMX335_t *)io_ctx)->ctx_driver, frequency);
+ 779              		.loc 1 144 10
+ 780 000a 7B68     		ldr	r3, [r7, #4]
+ 781 000c 0833     		adds	r3, r3, #8
+ 782 000e 3968     		ldr	r1, [r7]
+ 783 0010 1846     		mov	r0, r3
+ 784 0012 FFF7FEFF 		bl	IMX335_SetFrequency
+ 785 0016 0346     		mov	r3, r0
  145:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
+ 786              		.loc 1 145 1
+ 787 0018 1846     		mov	r0, r3
+ 788 001a 0837     		adds	r7, r7, #8
+ 789              		.cfi_def_cfa_offset 8
+ 790 001c BD46     		mov	sp, r7
+ 791              		.cfi_def_cfa_register 13
+ARM GAS  /tmp/ccNbLpFw.s 			page 18
+
+
+ 792              		@ sp needed
+ 793 001e 80BD     		pop	{r7, pc}
+ 794              		.cfi_endproc
+ 795              	.LFE3350:
+ 797              		.section	.rodata
+ 798              		.align	2
+ 799              	.LC0:
+ 800 0000 0A000000 		.word	10
+ 801 0004 0F000000 		.word	15
+ 802 0008 14000000 		.word	20
+ 803 000c 19000000 		.word	25
+ 804 0010 1E000000 		.word	30
+ 805              		.section	.text.CMW_IMX335_SetFramerate,"ax",%progbits
+ 806              		.align	1
+ 807              		.syntax unified
+ 808              		.thumb
+ 809              		.thumb_func
+ 811              	CMW_IMX335_SetFramerate:
+ 812              	.LFB3351:
  146:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  147:Lib/Camera_Middleware/sensors/cmw_imx335.c **** static int32_t CMW_IMX335_SetFramerate(void *io_ctx, int32_t framerate)
  148:Lib/Camera_Middleware/sensors/cmw_imx335.c **** {
+ 813              		.loc 1 148 1
+ 814              		.cfi_startproc
+ 815              		@ args = 0, pretend = 0, frame = 32
+ 816              		@ frame_needed = 1, uses_anonymous_args = 0
+ 817 0000 B0B5     		push	{r4, r5, r7, lr}
+ 818              		.cfi_def_cfa_offset 16
+ 819              		.cfi_offset 4, -16
+ 820              		.cfi_offset 5, -12
+ 821              		.cfi_offset 7, -8
+ 822              		.cfi_offset 14, -4
+ 823 0002 88B0     		sub	sp, sp, #32
+ 824              		.cfi_def_cfa_offset 48
+ 825 0004 00AF     		add	r7, sp, #0
+ 826              		.cfi_def_cfa_register 7
+ 827 0006 7860     		str	r0, [r7, #4]
+ 828 0008 3960     		str	r1, [r7]
  149:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   const int32_t available_imx335_fps[] = {10, 15, 20, 25, 30};
+ 829              		.loc 1 149 17
+ 830 000a 144B     		ldr	r3, .L35
+ 831 000c 07F10804 		add	r4, r7, #8
+ 832 0010 1D46     		mov	r5, r3
+ 833 0012 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 834 0014 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 835 0016 2B68     		ldr	r3, [r5]
+ 836 0018 2360     		str	r3, [r4]
+ 837              	.LBB2:
  150:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  151:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   for (int i = 0; i < ARRAY_SIZE(available_imx335_fps); i++)
+ 838              		.loc 1 151 12
+ 839 001a 0023     		movs	r3, #0
+ 840 001c FB61     		str	r3, [r7, #28]
+ 841              		.loc 1 151 3
+ 842 001e 13E0     		b	.L30
+ 843              	.L33:
  152:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     if (framerate == available_imx335_fps[i])
+ARM GAS  /tmp/ccNbLpFw.s 			page 19
+
+
+ 844              		.loc 1 152 42
+ 845 0020 FB69     		ldr	r3, [r7, #28]
+ 846 0022 9B00     		lsls	r3, r3, #2
+ 847 0024 2033     		adds	r3, r3, #32
+ 848 0026 3B44     		add	r3, r3, r7
+ 849 0028 53F8183C 		ldr	r3, [r3, #-24]
+ 850              		.loc 1 152 8
+ 851 002c 3A68     		ldr	r2, [r7]
+ 852 002e 9A42     		cmp	r2, r3
+ 853 0030 07D1     		bne	.L31
  153:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       return IMX335_SetFramerate(&((CMW_IMX335_t *)io_ctx)->ctx_driver, framerate);
+ 854              		.loc 1 153 14
+ 855 0032 7B68     		ldr	r3, [r7, #4]
+ 856 0034 0833     		adds	r3, r3, #8
+ 857 0036 3968     		ldr	r1, [r7]
+ 858 0038 1846     		mov	r0, r3
+ 859 003a FFF7FEFF 		bl	IMX335_SetFramerate
+ 860 003e 0346     		mov	r3, r0
+ 861 0040 07E0     		b	.L34
+ 862              	.L31:
+ 151:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     if (framerate == available_imx335_fps[i])
+ 863              		.loc 1 151 58 discriminator 2
+ 864 0042 FB69     		ldr	r3, [r7, #28]
+ 865 0044 0133     		adds	r3, r3, #1
+ 866 0046 FB61     		str	r3, [r7, #28]
+ 867              	.L30:
+ 151:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     if (framerate == available_imx335_fps[i])
+ 868              		.loc 1 151 21 discriminator 1
+ 869 0048 FB69     		ldr	r3, [r7, #28]
+ 870 004a 042B     		cmp	r3, #4
+ 871 004c E8D9     		bls	.L33
+ 872              	.LBE2:
  154:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  155:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   return CMW_ERROR_WRONG_PARAM;
+ 873              		.loc 1 155 10
+ 874 004e 6FF00103 		mvn	r3, #1
+ 875              	.L34:
  156:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
+ 876              		.loc 1 156 1
+ 877 0052 1846     		mov	r0, r3
+ 878 0054 2037     		adds	r7, r7, #32
+ 879              		.cfi_def_cfa_offset 16
+ 880 0056 BD46     		mov	sp, r7
+ 881              		.cfi_def_cfa_register 13
+ 882              		@ sp needed
+ 883 0058 B0BD     		pop	{r4, r5, r7, pc}
+ 884              	.L36:
+ 885 005a 00BF     		.align	2
+ 886              	.L35:
+ 887 005c 00000000 		.word	.LC0
+ 888              		.cfi_endproc
+ 889              	.LFE3351:
+ 891              		.section	.text.CMW_IMX335_SetMirrorFlip,"ax",%progbits
+ 892              		.align	1
+ 893              		.syntax unified
+ 894              		.thumb
+ 895              		.thumb_func
+ARM GAS  /tmp/ccNbLpFw.s 			page 20
+
+
+ 897              	CMW_IMX335_SetMirrorFlip:
+ 898              	.LFB3352:
  157:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  158:Lib/Camera_Middleware/sensors/cmw_imx335.c **** static int32_t CMW_IMX335_SetMirrorFlip(void *io_ctx, uint32_t config)
  159:Lib/Camera_Middleware/sensors/cmw_imx335.c **** {
+ 899              		.loc 1 159 1
+ 900              		.cfi_startproc
+ 901              		@ args = 0, pretend = 0, frame = 16
+ 902              		@ frame_needed = 1, uses_anonymous_args = 0
+ 903 0000 80B5     		push	{r7, lr}
+ 904              		.cfi_def_cfa_offset 8
+ 905              		.cfi_offset 7, -8
+ 906              		.cfi_offset 14, -4
+ 907 0002 84B0     		sub	sp, sp, #16
+ 908              		.cfi_def_cfa_offset 24
+ 909 0004 00AF     		add	r7, sp, #0
+ 910              		.cfi_def_cfa_register 7
+ 911 0006 7860     		str	r0, [r7, #4]
+ 912 0008 3960     		str	r1, [r7]
  160:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   int32_t mirrorFlip = CMW_IMX335_getMirrorFlipConfig(config);
+ 913              		.loc 1 160 24
+ 914 000a 3868     		ldr	r0, [r7]
+ 915 000c FFF7FEFF 		bl	CMW_IMX335_getMirrorFlipConfig
+ 916 0010 F860     		str	r0, [r7, #12]
  161:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   return IMX335_MirrorFlipConfig(&((CMW_IMX335_t *)io_ctx)->ctx_driver, mirrorFlip);
+ 917              		.loc 1 161 10
+ 918 0012 7B68     		ldr	r3, [r7, #4]
+ 919 0014 0833     		adds	r3, r3, #8
+ 920 0016 FA68     		ldr	r2, [r7, #12]
+ 921 0018 1146     		mov	r1, r2
+ 922 001a 1846     		mov	r0, r3
+ 923 001c FFF7FEFF 		bl	IMX335_MirrorFlipConfig
+ 924 0020 0346     		mov	r3, r0
  162:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
+ 925              		.loc 1 162 1
+ 926 0022 1846     		mov	r0, r3
+ 927 0024 1037     		adds	r7, r7, #16
+ 928              		.cfi_def_cfa_offset 8
+ 929 0026 BD46     		mov	sp, r7
+ 930              		.cfi_def_cfa_register 13
+ 931              		@ sp needed
+ 932 0028 80BD     		pop	{r7, pc}
+ 933              		.cfi_endproc
+ 934              	.LFE3352:
+ 936              		.section	.rodata
+ 937              		.align	2
+ 938              	.LC1:
+ 939 0014 494D5833 		.ascii	"IMX335\000"
+ 939      333500
+ 940              		.section	.text.CMW_IMX335_GetSensorInfo,"ax",%progbits
+ 941              		.align	1
+ 942              		.syntax unified
+ 943              		.thumb
+ 944              		.thumb_func
+ 946              	CMW_IMX335_GetSensorInfo:
+ 947              	.LFB3353:
  163:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
+ARM GAS  /tmp/ccNbLpFw.s 			page 21
+
+
  164:Lib/Camera_Middleware/sensors/cmw_imx335.c **** static int32_t CMW_IMX335_GetSensorInfo(void *io_ctx, ISP_SensorInfoTypeDef *info)
  165:Lib/Camera_Middleware/sensors/cmw_imx335.c **** {
+ 948              		.loc 1 165 1
+ 949              		.cfi_startproc
+ 950              		@ args = 0, pretend = 0, frame = 8
+ 951              		@ frame_needed = 1, uses_anonymous_args = 0
+ 952              		@ link register save eliminated.
+ 953 0000 80B4     		push	{r7}
+ 954              		.cfi_def_cfa_offset 4
+ 955              		.cfi_offset 7, -4
+ 956 0002 83B0     		sub	sp, sp, #12
+ 957              		.cfi_def_cfa_offset 16
+ 958 0004 00AF     		add	r7, sp, #0
+ 959              		.cfi_def_cfa_register 7
+ 960 0006 7860     		str	r0, [r7, #4]
+ 961 0008 3960     		str	r1, [r7]
  166:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if ((io_ctx ==  NULL) || (info == NULL))
+ 962              		.loc 1 166 6
+ 963 000a 7B68     		ldr	r3, [r7, #4]
+ 964 000c 002B     		cmp	r3, #0
+ 965 000e 02D0     		beq	.L40
+ 966              		.loc 1 166 25 discriminator 1
+ 967 0010 3B68     		ldr	r3, [r7]
+ 968 0012 002B     		cmp	r3, #0
+ 969 0014 02D1     		bne	.L41
+ 970              	.L40:
  167:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
  168:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     return CMW_ERROR_WRONG_PARAM;
+ 971              		.loc 1 168 12
+ 972 0016 6FF00103 		mvn	r3, #1
+ 973 001a 25E0     		b	.L42
+ 974              	.L41:
  169:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
  170:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  171:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (sizeof(info->name) >= strlen(IMX335_NAME) + 1)
  172:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
  173:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     strcpy(info->name, IMX335_NAME);
+ 975              		.loc 1 173 16
+ 976 001c 3B68     		ldr	r3, [r7]
+ 977              		.loc 1 173 5
+ 978 001e 154A     		ldr	r2, .L43
+ 979 0020 1068     		ldr	r0, [r2]
+ 980 0022 1860     		str	r0, [r3]	@ unaligned
+ 981 0024 9188     		ldrh	r1, [r2, #4]	@ unaligned
+ 982 0026 9279     		ldrb	r2, [r2, #6]
+ 983 0028 9980     		strh	r1, [r3, #4]	@ unaligned
+ 984 002a 9A71     		strb	r2, [r3, #6]
  174:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
  175:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   else
  176:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
@@ -222,53 +1255,262 @@ ARM GAS  /tmp/ccQ3mQxl.s 			page 1
  178:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
  179:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  180:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   info->bayer_pattern = IMX335_BAYER_PATTERN;
+ 985              		.loc 1 180 23
+ 986 002c 3B68     		ldr	r3, [r7]
+ 987 002e 0022     		movs	r2, #0
+ARM GAS  /tmp/ccNbLpFw.s 			page 22
+
+
+ 988 0030 83F82020 		strb	r2, [r3, #32]
  181:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   info->color_depth = IMX335_COLOR_DEPTH;
+ 989              		.loc 1 181 21
+ 990 0034 3B68     		ldr	r3, [r7]
+ 991 0036 0A22     		movs	r2, #10
+ 992 0038 83F82120 		strb	r2, [r3, #33]
  182:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   info->width = IMX335_WIDTH;
+ 993              		.loc 1 182 15
+ 994 003c 3B68     		ldr	r3, [r7]
+ 995 003e 4FF42262 		mov	r2, #2592
+ 996 0042 5A62     		str	r2, [r3, #36]
  183:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   info->height = IMX335_HEIGHT;
+ 997              		.loc 1 183 16
+ 998 0044 3B68     		ldr	r3, [r7]
+ 999 0046 4FF4F362 		mov	r2, #1944
+ 1000 004a 9A62     		str	r2, [r3, #40]
  184:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   info->gain_min = IMX335_GAIN_MIN;
+ 1001              		.loc 1 184 18
+ 1002 004c 3B68     		ldr	r3, [r7]
+ 1003 004e 0022     		movs	r2, #0
+ 1004 0050 DA62     		str	r2, [r3, #44]
  185:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   info->gain_max = IMX335_GAIN_MAX;
+ 1005              		.loc 1 185 18
+ 1006 0052 3B68     		ldr	r3, [r7]
+ 1007 0054 084A     		ldr	r2, .L43+4
+ 1008 0056 1A63     		str	r2, [r3, #48]
  186:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   info->exposure_min = IMX335_EXPOSURE_MIN;
+ 1009              		.loc 1 186 22
+ 1010 0058 3B68     		ldr	r3, [r7]
+ 1011 005a 0022     		movs	r2, #0
+ 1012 005c 5A63     		str	r2, [r3, #52]
  187:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   info->exposure_max = IMX335_EXPOSURE_MAX;
+ 1013              		.loc 1 187 22
+ 1014 005e 3B68     		ldr	r3, [r7]
+ 1015 0060 48F2F212 		movw	r2, #33266
+ 1016 0064 9A63     		str	r2, [r3, #56]
  188:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  189:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   return CMW_ERROR_NONE;
+ 1017              		.loc 1 189 10
+ 1018 0066 0023     		movs	r3, #0
+ 1019              	.L42:
  190:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
+ 1020              		.loc 1 190 1
+ 1021 0068 1846     		mov	r0, r3
+ 1022 006a 0C37     		adds	r7, r7, #12
+ 1023              		.cfi_def_cfa_offset 4
+ 1024 006c BD46     		mov	sp, r7
+ 1025              		.cfi_def_cfa_register 13
+ 1026              		@ sp needed
+ 1027 006e 5DF8047B 		ldr	r7, [sp], #4
+ 1028              		.cfi_restore 7
+ 1029              		.cfi_def_cfa_offset 0
+ 1030 0072 7047     		bx	lr
+ 1031              	.L44:
+ 1032              		.align	2
+ 1033              	.L43:
+ 1034 0074 14000000 		.word	.LC1
+ARM GAS  /tmp/ccNbLpFw.s 			page 23
+
+
+ 1035 0078 40190100 		.word	72000
+ 1036              		.cfi_endproc
+ 1037              	.LFE3353:
+ 1039              		.section	.text.CMW_IMX335_SetTestPattern,"ax",%progbits
+ 1040              		.align	1
+ 1041              		.syntax unified
+ 1042              		.thumb
+ 1043              		.thumb_func
+ 1045              	CMW_IMX335_SetTestPattern:
+ 1046              	.LFB3354:
  191:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  192:Lib/Camera_Middleware/sensors/cmw_imx335.c **** static int32_t CMW_IMX335_SetTestPattern(void *io_ctx, int32_t mode)
  193:Lib/Camera_Middleware/sensors/cmw_imx335.c **** {
+ 1047              		.loc 1 193 1
+ 1048              		.cfi_startproc
+ 1049              		@ args = 0, pretend = 0, frame = 8
+ 1050              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1051 0000 80B5     		push	{r7, lr}
+ 1052              		.cfi_def_cfa_offset 8
+ 1053              		.cfi_offset 7, -8
+ 1054              		.cfi_offset 14, -4
+ 1055 0002 82B0     		sub	sp, sp, #8
+ 1056              		.cfi_def_cfa_offset 16
+ 1057 0004 00AF     		add	r7, sp, #0
+ 1058              		.cfi_def_cfa_register 7
+ 1059 0006 7860     		str	r0, [r7, #4]
+ 1060 0008 3960     		str	r1, [r7]
  194:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   return IMX335_SetTestPattern(&((CMW_IMX335_t *)io_ctx)->ctx_driver, mode);
+ 1061              		.loc 1 194 10
+ 1062 000a 7B68     		ldr	r3, [r7, #4]
+ 1063 000c 0833     		adds	r3, r3, #8
+ 1064 000e 3968     		ldr	r1, [r7]
+ 1065 0010 1846     		mov	r0, r3
+ 1066 0012 FFF7FEFF 		bl	IMX335_SetTestPattern
+ 1067 0016 0346     		mov	r3, r0
  195:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
+ 1068              		.loc 1 195 1
+ 1069 0018 1846     		mov	r0, r3
+ 1070 001a 0837     		adds	r7, r7, #8
+ 1071              		.cfi_def_cfa_offset 8
+ 1072 001c BD46     		mov	sp, r7
+ 1073              		.cfi_def_cfa_register 13
+ 1074              		@ sp needed
+ 1075 001e 80BD     		pop	{r7, pc}
+ 1076              		.cfi_endproc
+ 1077              	.LFE3354:
+ 1079              		.section	.text.CMW_IMX335_Init,"ax",%progbits
+ 1080              		.align	1
+ 1081              		.syntax unified
+ 1082              		.thumb
+ 1083              		.thumb_func
+ 1085              	CMW_IMX335_Init:
+ 1086              	.LFB3355:
  196:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
-ARM GAS  /tmp/ccQ3mQxl.s 			page 5
-
-
  197:Lib/Camera_Middleware/sensors/cmw_imx335.c **** static int32_t CMW_IMX335_Init(void *io_ctx, CMW_Sensor_Init_t *initSensor)
  198:Lib/Camera_Middleware/sensors/cmw_imx335.c **** {
+ 1087              		.loc 1 198 1
+ARM GAS  /tmp/ccNbLpFw.s 			page 24
+
+
+ 1088              		.cfi_startproc
+ 1089              		@ args = 0, pretend = 0, frame = 16
+ 1090              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1091 0000 80B5     		push	{r7, lr}
+ 1092              		.cfi_def_cfa_offset 8
+ 1093              		.cfi_offset 7, -8
+ 1094              		.cfi_offset 14, -4
+ 1095 0002 84B0     		sub	sp, sp, #16
+ 1096              		.cfi_def_cfa_offset 24
+ 1097 0004 00AF     		add	r7, sp, #0
+ 1098              		.cfi_def_cfa_register 7
+ 1099 0006 7860     		str	r0, [r7, #4]
+ 1100 0008 3960     		str	r1, [r7]
  199:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   int ret = CMW_ERROR_NONE;
+ 1101              		.loc 1 199 7
+ 1102 000a 0023     		movs	r3, #0
+ 1103 000c FB60     		str	r3, [r7, #12]
  200:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   uint32_t resolution;
  201:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  202:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   ret = CMW_IMX335_GetResType(initSensor->width, initSensor->height, &resolution);
+ 1104              		.loc 1 202 9
+ 1105 000e 3B68     		ldr	r3, [r7]
+ 1106 0010 1868     		ldr	r0, [r3]
+ 1107 0012 3B68     		ldr	r3, [r7]
+ 1108 0014 5B68     		ldr	r3, [r3, #4]
+ 1109 0016 07F10802 		add	r2, r7, #8
+ 1110 001a 1946     		mov	r1, r3
+ 1111 001c FFF7FEFF 		bl	CMW_IMX335_GetResType
+ 1112 0020 F860     		str	r0, [r7, #12]
  203:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret)
+ 1113              		.loc 1 203 6
+ 1114 0022 FB68     		ldr	r3, [r7, #12]
+ 1115 0024 002B     		cmp	r3, #0
+ 1116 0026 02D0     		beq	.L48
  204:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
  205:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     return CMW_ERROR_WRONG_PARAM;
+ 1117              		.loc 1 205 12
+ 1118 0028 6FF00103 		mvn	r3, #1
+ 1119 002c 1DE0     		b	.L52
+ 1120              	.L48:
  206:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
  207:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  208:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   ret = CMW_IMX335_SetMirrorFlip(io_ctx, initSensor->mirrorFlip);
+ 1121              		.loc 1 208 9
+ 1122 002e 3B68     		ldr	r3, [r7]
+ 1123 0030 1B69     		ldr	r3, [r3, #16]
+ 1124 0032 1946     		mov	r1, r3
+ 1125 0034 7868     		ldr	r0, [r7, #4]
+ 1126 0036 FFF7FEFF 		bl	CMW_IMX335_SetMirrorFlip
+ 1127 003a F860     		str	r0, [r7, #12]
  209:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret)
+ 1128              		.loc 1 209 6
+ 1129 003c FB68     		ldr	r3, [r7, #12]
+ 1130 003e 002B     		cmp	r3, #0
+ 1131 0040 02D0     		beq	.L50
  210:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
  211:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     return CMW_ERROR_WRONG_PARAM;
+ARM GAS  /tmp/ccNbLpFw.s 			page 25
+
+
+ 1132              		.loc 1 211 12
+ 1133 0042 6FF00103 		mvn	r3, #1
+ 1134 0046 10E0     		b	.L52
+ 1135              	.L50:
  212:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
  213:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  214:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   ret = IMX335_Init(&((CMW_IMX335_t *)io_ctx)->ctx_driver, resolution, initSensor->pixel_format);
+ 1136              		.loc 1 214 9
+ 1137 0048 7B68     		ldr	r3, [r7, #4]
+ 1138 004a 03F10800 		add	r0, r3, #8
+ 1139 004e B968     		ldr	r1, [r7, #8]
+ 1140 0050 3B68     		ldr	r3, [r7]
+ 1141 0052 DB68     		ldr	r3, [r3, #12]
+ 1142 0054 1A46     		mov	r2, r3
+ 1143 0056 FFF7FEFF 		bl	IMX335_Init
+ 1144 005a F860     		str	r0, [r7, #12]
  215:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret != IMX335_OK)
+ 1145              		.loc 1 215 6
+ 1146 005c FB68     		ldr	r3, [r7, #12]
+ 1147 005e 002B     		cmp	r3, #0
+ 1148 0060 02D0     		beq	.L51
  216:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
  217:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     return CMW_ERROR_COMPONENT_FAILURE;
+ 1149              		.loc 1 217 12
+ 1150 0062 6FF00403 		mvn	r3, #4
+ 1151 0066 00E0     		b	.L52
+ 1152              	.L51:
  218:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
  219:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  220:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   return CMW_ERROR_NONE;
+ 1153              		.loc 1 220 10
+ 1154 0068 0023     		movs	r3, #0
+ 1155              	.L52:
  221:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
+ 1156              		.loc 1 221 1
+ 1157 006a 1846     		mov	r0, r3
+ 1158 006c 1037     		adds	r7, r7, #16
+ 1159              		.cfi_def_cfa_offset 8
+ 1160 006e BD46     		mov	sp, r7
+ 1161              		.cfi_def_cfa_register 13
+ 1162              		@ sp needed
+ 1163 0070 80BD     		pop	{r7, pc}
+ 1164              		.cfi_endproc
+ 1165              	.LFE3355:
+ 1167              		.section	.text.CMW_IMX335_Start,"ax",%progbits
+ 1168              		.align	1
+ 1169              		.syntax unified
+ 1170              		.thumb
+ 1171              		.thumb_func
+ 1173              	CMW_IMX335_Start:
+ 1174              	.LFB3356:
  222:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  223:Lib/Camera_Middleware/sensors/cmw_imx335.c **** static int32_t CMW_IMX335_Start(void *io_ctx)
  224:Lib/Camera_Middleware/sensors/cmw_imx335.c **** {
+ 1175              		.loc 1 224 1
+ 1176              		.cfi_startproc
+ 1177              		@ args = 0, pretend = 0, frame = 16
+ARM GAS  /tmp/ccNbLpFw.s 			page 26
+
+
+ 1178              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1179 0000 80B5     		push	{r7, lr}
+ 1180              		.cfi_def_cfa_offset 8
+ 1181              		.cfi_offset 7, -8
+ 1182              		.cfi_offset 14, -4
+ 1183 0002 86B0     		sub	sp, sp, #24
+ 1184              		.cfi_def_cfa_offset 32
+ 1185 0004 02AF     		add	r7, sp, #8
+ 1186              		.cfi_def_cfa 7, 24
+ 1187 0006 7860     		str	r0, [r7, #4]
  225:Lib/Camera_Middleware/sensors/cmw_imx335.c **** #ifndef ISP_MW_TUNING_TOOL_SUPPORT
  226:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   int ret;
  227:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   /* Statistic area is provided with null value so that it force the ISP Library to get the statist
@@ -276,53 +1518,295 @@ ARM GAS  /tmp/ccQ3mQxl.s 			page 1
  229:Lib/Camera_Middleware/sensors/cmw_imx335.c ****    */
  230:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   (void) ISP_IQParamCacheInit; /* unused */
  231:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   ret = ISP_Init(&((CMW_IMX335_t *)io_ctx)->hIsp, ((CMW_IMX335_t *)io_ctx)->hdcmipp, 0, &((CMW_IMX3
+ 1188              		.loc 1 231 9
+ 1189 0008 7B68     		ldr	r3, [r7, #4]
+ 1190 000a 03F13000 		add	r0, r3, #48
+ 1191              		.loc 1 231 75
+ 1192 000e 7B68     		ldr	r3, [r7, #4]
+ 1193 0010 D3F8DC10 		ldr	r1, [r3, #220]
+ 1194              		.loc 1 231 9
+ 1195 0014 7B68     		ldr	r3, [r7, #4]
+ 1196 0016 B833     		adds	r3, r3, #184
+ 1197 0018 114A     		ldr	r2, .L57
+ 1198 001a 0092     		str	r2, [sp]
+ 1199 001c 0022     		movs	r2, #0
+ 1200 001e FFF7FEFF 		bl	ISP_Init
+ 1201 0022 0346     		mov	r3, r0
+ 1202              		.loc 1 231 7 discriminator 1
+ 1203 0024 FB60     		str	r3, [r7, #12]
  232:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret != ISP_OK)
+ 1204              		.loc 1 232 6
+ 1205 0026 FB68     		ldr	r3, [r7, #12]
+ 1206 0028 002B     		cmp	r3, #0
+ 1207 002a 02D0     		beq	.L54
  233:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
  234:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     return CMW_ERROR_COMPONENT_FAILURE;
+ 1208              		.loc 1 234 12
+ 1209 002c 6FF00403 		mvn	r3, #4
+ 1210 0030 12E0     		b	.L55
+ 1211              	.L54:
  235:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
  236:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  237:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   ret = ISP_Start(&((CMW_IMX335_t *)io_ctx)->hIsp);
+ 1212              		.loc 1 237 9
+ 1213 0032 7B68     		ldr	r3, [r7, #4]
+ 1214 0034 3033     		adds	r3, r3, #48
+ 1215 0036 1846     		mov	r0, r3
+ 1216 0038 FFF7FEFF 		bl	ISP_Start
+ 1217 003c 0346     		mov	r3, r0
+ 1218              		.loc 1 237 7 discriminator 1
+ 1219 003e FB60     		str	r3, [r7, #12]
  238:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret != ISP_OK)
+ 1220              		.loc 1 238 6
+ARM GAS  /tmp/ccNbLpFw.s 			page 27
+
+
+ 1221 0040 FB68     		ldr	r3, [r7, #12]
+ 1222 0042 002B     		cmp	r3, #0
+ 1223 0044 02D0     		beq	.L56
  239:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
  240:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       return CMW_ERROR_PERIPH_FAILURE;
+ 1224              		.loc 1 240 14
+ 1225 0046 6FF00303 		mvn	r3, #3
+ 1226 004a 05E0     		b	.L55
+ 1227              	.L56:
  241:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
  242:Lib/Camera_Middleware/sensors/cmw_imx335.c **** #endif
  243:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   return IMX335_Start(&((CMW_IMX335_t *)io_ctx)->ctx_driver);
+ 1228              		.loc 1 243 10
+ 1229 004c 7B68     		ldr	r3, [r7, #4]
+ 1230 004e 0833     		adds	r3, r3, #8
+ 1231 0050 1846     		mov	r0, r3
+ 1232 0052 FFF7FEFF 		bl	IMX335_Start
+ 1233 0056 0346     		mov	r3, r0
+ 1234              	.L55:
  244:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
+ 1235              		.loc 1 244 1
+ 1236 0058 1846     		mov	r0, r3
+ 1237 005a 1037     		adds	r7, r7, #16
+ 1238              		.cfi_def_cfa_offset 8
+ 1239 005c BD46     		mov	sp, r7
+ 1240              		.cfi_def_cfa_register 13
+ 1241              		@ sp needed
+ 1242 005e 80BD     		pop	{r7, pc}
+ 1243              	.L58:
+ 1244              		.align	2
+ 1245              	.L57:
+ 1246 0060 00000000 		.word	ISP_IQParamCacheInit_IMX335
+ 1247              		.cfi_endproc
+ 1248              	.LFE3356:
+ 1250              		.section	.text.CMW_IMX335_Run,"ax",%progbits
+ 1251              		.align	1
+ 1252              		.syntax unified
+ 1253              		.thumb
+ 1254              		.thumb_func
+ 1256              	CMW_IMX335_Run:
+ 1257              	.LFB3357:
  245:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  246:Lib/Camera_Middleware/sensors/cmw_imx335.c **** static int32_t CMW_IMX335_Run(void *io_ctx)
  247:Lib/Camera_Middleware/sensors/cmw_imx335.c **** {
+ 1258              		.loc 1 247 1
+ 1259              		.cfi_startproc
+ 1260              		@ args = 0, pretend = 0, frame = 16
+ 1261              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1262 0000 80B5     		push	{r7, lr}
+ 1263              		.cfi_def_cfa_offset 8
+ 1264              		.cfi_offset 7, -8
+ 1265              		.cfi_offset 14, -4
+ 1266 0002 84B0     		sub	sp, sp, #16
+ 1267              		.cfi_def_cfa_offset 24
+ 1268 0004 00AF     		add	r7, sp, #0
+ 1269              		.cfi_def_cfa_register 7
+ 1270 0006 7860     		str	r0, [r7, #4]
+ARM GAS  /tmp/ccNbLpFw.s 			page 28
+
+
  248:Lib/Camera_Middleware/sensors/cmw_imx335.c **** #ifndef ISP_MW_TUNING_TOOL_SUPPORT
  249:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   int ret;
  250:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   ret = ISP_BackgroundProcess(&((CMW_IMX335_t *)io_ctx)->hIsp);
+ 1271              		.loc 1 250 9
+ 1272 0008 7B68     		ldr	r3, [r7, #4]
+ 1273 000a 3033     		adds	r3, r3, #48
+ 1274 000c 1846     		mov	r0, r3
+ 1275 000e FFF7FEFF 		bl	ISP_BackgroundProcess
+ 1276 0012 0346     		mov	r3, r0
+ 1277              		.loc 1 250 7 discriminator 1
+ 1278 0014 FB60     		str	r3, [r7, #12]
  251:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret != ISP_OK)
+ 1279              		.loc 1 251 6
+ 1280 0016 FB68     		ldr	r3, [r7, #12]
+ 1281 0018 002B     		cmp	r3, #0
+ 1282 001a 02D0     		beq	.L60
  252:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
  253:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       return CMW_ERROR_PERIPH_FAILURE;
-ARM GAS  /tmp/ccQ3mQxl.s 			page 6
-
-
+ 1283              		.loc 1 253 14
+ 1284 001c 6FF00303 		mvn	r3, #3
+ 1285 0020 00E0     		b	.L61
+ 1286              	.L60:
  254:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
  255:Lib/Camera_Middleware/sensors/cmw_imx335.c **** #endif
  256:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   return CMW_ERROR_NONE;
+ 1287              		.loc 1 256 10
+ 1288 0022 0023     		movs	r3, #0
+ 1289              	.L61:
  257:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
+ 1290              		.loc 1 257 1
+ 1291 0024 1846     		mov	r0, r3
+ 1292 0026 1037     		adds	r7, r7, #16
+ 1293              		.cfi_def_cfa_offset 8
+ 1294 0028 BD46     		mov	sp, r7
+ 1295              		.cfi_def_cfa_register 13
+ 1296              		@ sp needed
+ 1297 002a 80BD     		pop	{r7, pc}
+ 1298              		.cfi_endproc
+ 1299              	.LFE3357:
+ 1301              		.section	.text.CMW_IMX335_PowerOn,"ax",%progbits
+ 1302              		.align	1
+ 1303              		.syntax unified
+ 1304              		.thumb
+ 1305              		.thumb_func
+ 1307              	CMW_IMX335_PowerOn:
+ 1308              	.LFB3358:
  258:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  259:Lib/Camera_Middleware/sensors/cmw_imx335.c **** static void CMW_IMX335_PowerOn(CMW_IMX335_t *io_ctx)
  260:Lib/Camera_Middleware/sensors/cmw_imx335.c **** {
+ 1309              		.loc 1 260 1
+ 1310              		.cfi_startproc
+ 1311              		@ args = 0, pretend = 0, frame = 8
+ 1312              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1313 0000 80B5     		push	{r7, lr}
+ 1314              		.cfi_def_cfa_offset 8
+ 1315              		.cfi_offset 7, -8
+ 1316              		.cfi_offset 14, -4
+ARM GAS  /tmp/ccNbLpFw.s 			page 29
+
+
+ 1317 0002 82B0     		sub	sp, sp, #8
+ 1318              		.cfi_def_cfa_offset 16
+ 1319 0004 00AF     		add	r7, sp, #0
+ 1320              		.cfi_def_cfa_register 7
+ 1321 0006 7860     		str	r0, [r7, #4]
  261:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->ShutdownPin(0);  /* Disable MB1723 2V8 signal  */
+ 1322              		.loc 1 261 9
+ 1323 0008 7B68     		ldr	r3, [r7, #4]
+ 1324 000a D3F8FC30 		ldr	r3, [r3, #252]
+ 1325              		.loc 1 261 3
+ 1326 000e 0020     		movs	r0, #0
+ 1327 0010 9847     		blx	r3
+ 1328              	.LVL0:
  262:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->Delay(100);
+ 1329              		.loc 1 262 9
+ 1330 0012 7B68     		ldr	r3, [r7, #4]
+ 1331 0014 D3F8F830 		ldr	r3, [r3, #248]
+ 1332              		.loc 1 262 3
+ 1333 0018 6420     		movs	r0, #100
+ 1334 001a 9847     		blx	r3
+ 1335              	.LVL1:
  263:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->EnablePin(0);  /* RESET low (reset active low) */
+ 1336              		.loc 1 263 9
+ 1337 001c 7B68     		ldr	r3, [r7, #4]
+ 1338 001e D3F80031 		ldr	r3, [r3, #256]
+ 1339              		.loc 1 263 3
+ 1340 0022 0020     		movs	r0, #0
+ 1341 0024 9847     		blx	r3
+ 1342              	.LVL2:
  264:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->Delay(100);
+ 1343              		.loc 1 264 9
+ 1344 0026 7B68     		ldr	r3, [r7, #4]
+ 1345 0028 D3F8F830 		ldr	r3, [r3, #248]
+ 1346              		.loc 1 264 3
+ 1347 002c 6420     		movs	r0, #100
+ 1348 002e 9847     		blx	r3
+ 1349              	.LVL3:
  265:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->ShutdownPin(1);  /* Disable MB1723 2V8 signal  */
+ 1350              		.loc 1 265 9
+ 1351 0030 7B68     		ldr	r3, [r7, #4]
+ 1352 0032 D3F8FC30 		ldr	r3, [r3, #252]
+ 1353              		.loc 1 265 3
+ 1354 0036 0120     		movs	r0, #1
+ 1355 0038 9847     		blx	r3
+ 1356              	.LVL4:
  266:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->Delay(100);
+ 1357              		.loc 1 266 9
+ 1358 003a 7B68     		ldr	r3, [r7, #4]
+ 1359 003c D3F8F830 		ldr	r3, [r3, #248]
+ 1360              		.loc 1 266 3
+ 1361 0040 6420     		movs	r0, #100
+ 1362 0042 9847     		blx	r3
+ 1363              	.LVL5:
  267:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->EnablePin(1);  /* RESET low (reset active low) */
+ 1364              		.loc 1 267 9
+ 1365 0044 7B68     		ldr	r3, [r7, #4]
+ 1366 0046 D3F80031 		ldr	r3, [r3, #256]
+ARM GAS  /tmp/ccNbLpFw.s 			page 30
+
+
+ 1367              		.loc 1 267 3
+ 1368 004a 0120     		movs	r0, #1
+ 1369 004c 9847     		blx	r3
+ 1370              	.LVL6:
  268:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->Delay(100);
+ 1371              		.loc 1 268 9
+ 1372 004e 7B68     		ldr	r3, [r7, #4]
+ 1373 0050 D3F8F830 		ldr	r3, [r3, #248]
+ 1374              		.loc 1 268 3
+ 1375 0054 6420     		movs	r0, #100
+ 1376 0056 9847     		blx	r3
+ 1377              	.LVL7:
  269:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
+ 1378              		.loc 1 269 1
+ 1379 0058 00BF     		nop
+ 1380 005a 0837     		adds	r7, r7, #8
+ 1381              		.cfi_def_cfa_offset 8
+ 1382 005c BD46     		mov	sp, r7
+ 1383              		.cfi_def_cfa_register 13
+ 1384              		@ sp needed
+ 1385 005e 80BD     		pop	{r7, pc}
+ 1386              		.cfi_endproc
+ 1387              	.LFE3358:
+ 1389              		.section	.text.CMW_IMX335_VsyncEventCallback,"ax",%progbits
+ 1390              		.align	1
+ 1391              		.syntax unified
+ 1392              		.thumb
+ 1393              		.thumb_func
+ 1395              	CMW_IMX335_VsyncEventCallback:
+ 1396              	.LFB3359:
  270:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  271:Lib/Camera_Middleware/sensors/cmw_imx335.c **** static void CMW_IMX335_VsyncEventCallback(void *io_ctx, uint32_t pipe)
  272:Lib/Camera_Middleware/sensors/cmw_imx335.c **** {
+ 1397              		.loc 1 272 1
+ 1398              		.cfi_startproc
+ 1399              		@ args = 0, pretend = 0, frame = 8
+ 1400              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1401 0000 80B5     		push	{r7, lr}
+ 1402              		.cfi_def_cfa_offset 8
+ 1403              		.cfi_offset 7, -8
+ 1404              		.cfi_offset 14, -4
+ 1405 0002 82B0     		sub	sp, sp, #8
+ 1406              		.cfi_def_cfa_offset 16
+ 1407 0004 00AF     		add	r7, sp, #0
+ 1408              		.cfi_def_cfa_register 7
+ 1409 0006 7860     		str	r0, [r7, #4]
+ 1410 0008 3960     		str	r1, [r7]
  273:Lib/Camera_Middleware/sensors/cmw_imx335.c **** #ifndef ISP_MW_TUNING_TOOL_SUPPORT
  274:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   /* Update the ISP frame counter and call its statistics handler */
  275:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   switch (pipe)
+ 1411              		.loc 1 275 3
+ 1412 000a 3B68     		ldr	r3, [r7]
+ 1413 000c 022B     		cmp	r3, #2
+ 1414 000e 1AD0     		beq	.L64
+ 1415 0010 3B68     		ldr	r3, [r7]
+ 1416 0012 022B     		cmp	r3, #2
+ 1417 0014 1DD8     		bhi	.L68
+ARM GAS  /tmp/ccNbLpFw.s 			page 31
+
+
+ 1418 0016 3B68     		ldr	r3, [r7]
+ 1419 0018 002B     		cmp	r3, #0
+ 1420 001a 03D0     		beq	.L66
+ 1421 001c 3B68     		ldr	r3, [r7]
+ 1422 001e 012B     		cmp	r3, #1
+ 1423 0020 06D0     		beq	.L67
  276:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
  277:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     case DCMIPP_PIPE0 :
  278:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       ISP_IncDumpFrameId(&((CMW_IMX335_t *)io_ctx)->hIsp);
@@ -337,1687 +1821,448 @@ ARM GAS  /tmp/ccQ3mQxl.s 			page 1
  287:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
  288:Lib/Camera_Middleware/sensors/cmw_imx335.c **** #endif
  289:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
+ 1424              		.loc 1 289 1
+ 1425 0022 16E0     		b	.L68
+ 1426              	.L66:
+ 278:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       break;
+ 1427              		.loc 1 278 7
+ 1428 0024 7B68     		ldr	r3, [r7, #4]
+ 1429 0026 3033     		adds	r3, r3, #48
+ 1430 0028 1846     		mov	r0, r3
+ 1431 002a FFF7FEFF 		bl	ISP_IncDumpFrameId
+ 279:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     case DCMIPP_PIPE1 :
+ 1432              		.loc 1 279 7
+ 1433 002e 10E0     		b	.L65
+ 1434              	.L67:
+ 281:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       ISP_GatherStatistics(&((CMW_IMX335_t *)io_ctx)->hIsp);
+ 1435              		.loc 1 281 7
+ 1436 0030 7B68     		ldr	r3, [r7, #4]
+ 1437 0032 3033     		adds	r3, r3, #48
+ 1438 0034 1846     		mov	r0, r3
+ 1439 0036 FFF7FEFF 		bl	ISP_IncMainFrameId
+ 282:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       break;
+ 1440              		.loc 1 282 7
+ 1441 003a 7B68     		ldr	r3, [r7, #4]
+ 1442 003c 3033     		adds	r3, r3, #48
+ 1443 003e 1846     		mov	r0, r3
+ 1444 0040 FFF7FEFF 		bl	ISP_GatherStatistics
+ 283:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     case DCMIPP_PIPE2 :
+ 1445              		.loc 1 283 7
+ 1446 0044 05E0     		b	.L65
+ 1447              	.L64:
+ 285:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       break;
+ 1448              		.loc 1 285 7
+ 1449 0046 7B68     		ldr	r3, [r7, #4]
+ 1450 0048 3033     		adds	r3, r3, #48
+ 1451 004a 1846     		mov	r0, r3
+ 1452 004c FFF7FEFF 		bl	ISP_IncAncillaryFrameId
+ 286:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
+ 1453              		.loc 1 286 7
+ARM GAS  /tmp/ccNbLpFw.s 			page 32
+
+
+ 1454 0050 00BF     		nop
+ 1455              	.L65:
+ 1456              	.L68:
+ 1457              		.loc 1 289 1
+ 1458 0052 00BF     		nop
+ 1459 0054 0837     		adds	r7, r7, #8
+ 1460              		.cfi_def_cfa_offset 8
+ 1461 0056 BD46     		mov	sp, r7
+ 1462              		.cfi_def_cfa_register 13
+ 1463              		@ sp needed
+ 1464 0058 80BD     		pop	{r7, pc}
+ 1465              		.cfi_endproc
+ 1466              	.LFE3359:
+ 1468              		.section	.text.CMW_IMX335_FrameEventCallback,"ax",%progbits
+ 1469              		.align	1
+ 1470              		.syntax unified
+ 1471              		.thumb
+ 1472              		.thumb_func
+ 1474              	CMW_IMX335_FrameEventCallback:
+ 1475              	.LFB3360:
  290:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  291:Lib/Camera_Middleware/sensors/cmw_imx335.c **** static void CMW_IMX335_FrameEventCallback(void *io_ctx, uint32_t pipe)
  292:Lib/Camera_Middleware/sensors/cmw_imx335.c **** {
-  34              		.loc 1 292 1 view -0
-  35              		.cfi_startproc
-  36              		@ args = 0, pretend = 0, frame = 0
-  37              		@ frame_needed = 0, uses_anonymous_args = 0
-  38              		@ link register save eliminated.
+ 1476              		.loc 1 292 1
+ 1477              		.cfi_startproc
+ 1478              		@ args = 0, pretend = 0, frame = 8
+ 1479              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1480              		@ link register save eliminated.
+ 1481 0000 80B4     		push	{r7}
+ 1482              		.cfi_def_cfa_offset 4
+ 1483              		.cfi_offset 7, -4
+ 1484 0002 83B0     		sub	sp, sp, #12
+ 1485              		.cfi_def_cfa_offset 16
+ 1486 0004 00AF     		add	r7, sp, #0
+ 1487              		.cfi_def_cfa_register 7
+ 1488 0006 7860     		str	r0, [r7, #4]
+ 1489 0008 3960     		str	r1, [r7]
  293:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
-  39              		.loc 1 293 1 view .LVU1
-  40 0000 7047     		bx	lr
-  41              		.cfi_endproc
-  42              	.LFE3360:
-  44              		.section	.text.CMW_IMX335_SetWBRefMode,"ax",%progbits
-  45              		.align	1
-  46              		.global	CMW_IMX335_SetWBRefMode
-  47              		.syntax unified
-  48              		.thumb
-  49              		.thumb_func
-  51              	CMW_IMX335_SetWBRefMode:
-  52              	.LVL1:
-ARM GAS  /tmp/ccQ3mQxl.s 			page 7
+ 1490              		.loc 1 293 1
+ 1491 000a 00BF     		nop
+ 1492 000c 0C37     		adds	r7, r7, #12
+ 1493              		.cfi_def_cfa_offset 4
+ 1494 000e BD46     		mov	sp, r7
+ 1495              		.cfi_def_cfa_register 13
+ 1496              		@ sp needed
+ 1497 0010 5DF8047B 		ldr	r7, [sp], #4
+ 1498              		.cfi_restore 7
+ 1499              		.cfi_def_cfa_offset 0
+ 1500 0014 7047     		bx	lr
+ 1501              		.cfi_endproc
+ 1502              	.LFE3360:
+ 1504              		.section	.text.CMW_IMX335_Probe,"ax",%progbits
+ 1505              		.align	1
+ 1506              		.global	CMW_IMX335_Probe
+ 1507              		.syntax unified
+ 1508              		.thumb
+ 1509              		.thumb_func
+ARM GAS  /tmp/ccNbLpFw.s 			page 33
 
 
-  53              	.LFB3348:
- 111:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   int ret = CMW_ERROR_NONE;
-  54              		.loc 1 111 1 view -0
-  55              		.cfi_startproc
-  56              		@ args = 0, pretend = 0, frame = 0
-  57              		@ frame_needed = 0, uses_anonymous_args = 0
- 112:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
-  58              		.loc 1 112 3 view .LVU3
- 114:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret)
-  59              		.loc 1 114 3 view .LVU4
- 111:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   int ret = CMW_ERROR_NONE;
-  60              		.loc 1 111 1 is_stmt 0 view .LVU5
-  61 0000 08B5     		push	{r3, lr}
-  62              		.cfi_def_cfa_offset 8
-  63              		.cfi_offset 3, -8
-  64              		.cfi_offset 14, -4
- 114:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret)
-  65              		.loc 1 114 9 view .LVU6
-  66 0002 3030     		adds	r0, r0, #48
-  67              	.LVL2:
- 114:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret)
-  68              		.loc 1 114 9 view .LVU7
-  69 0004 FFF7FEFF 		bl	ISP_SetWBRefMode
-  70              	.LVL3:
- 115:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
-  71              		.loc 1 115 3 is_stmt 1 view .LVU8
- 120:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
-  72              		.loc 1 120 10 is_stmt 0 view .LVU9
-  73 0008 0028     		cmp	r0, #0
- 121:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
-  74              		.loc 1 121 1 view .LVU10
-  75 000a 14BF     		ite	ne
-  76 000c 6FF00300 		mvnne	r0, #3
-  77              	.LVL4:
- 121:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
-  78              		.loc 1 121 1 view .LVU11
-  79 0010 0020     		moveq	r0, #0
-  80 0012 08BD     		pop	{r3, pc}
-  81              		.cfi_endproc
-  82              	.LFE3348:
-  84              		.section	.text.CMW_IMX335_ListWBRefModes,"ax",%progbits
-  85              		.align	1
-  86              		.global	CMW_IMX335_ListWBRefModes
-  87              		.syntax unified
-  88              		.thumb
-  89              		.thumb_func
-  91              	CMW_IMX335_ListWBRefModes:
-  92              	.LVL5:
-  93              	.LFB3349:
- 130:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   int ret = CMW_ERROR_NONE;
-  94              		.loc 1 130 1 is_stmt 1 view -0
-  95              		.cfi_startproc
-  96              		@ args = 0, pretend = 0, frame = 0
-  97              		@ frame_needed = 0, uses_anonymous_args = 0
- 131:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
-  98              		.loc 1 131 3 view .LVU13
- 133:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret)
-ARM GAS  /tmp/ccQ3mQxl.s 			page 8
-
-
-  99              		.loc 1 133 3 view .LVU14
- 130:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   int ret = CMW_ERROR_NONE;
- 100              		.loc 1 130 1 is_stmt 0 view .LVU15
- 101 0000 08B5     		push	{r3, lr}
- 102              		.cfi_def_cfa_offset 8
- 103              		.cfi_offset 3, -8
- 104              		.cfi_offset 14, -4
- 133:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret)
- 105              		.loc 1 133 9 view .LVU16
- 106 0002 3030     		adds	r0, r0, #48
- 107              	.LVL6:
- 133:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret)
- 108              		.loc 1 133 9 view .LVU17
- 109 0004 FFF7FEFF 		bl	ISP_ListWBRefModes
- 110              	.LVL7:
- 134:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
- 111              		.loc 1 134 3 is_stmt 1 view .LVU18
- 139:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 112              		.loc 1 139 10 is_stmt 0 view .LVU19
- 113 0008 0028     		cmp	r0, #0
- 140:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 114              		.loc 1 140 1 view .LVU20
- 115 000a 14BF     		ite	ne
- 116 000c 6FF00300 		mvnne	r0, #3
- 117              	.LVL8:
- 140:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 118              		.loc 1 140 1 view .LVU21
- 119 0010 0020     		moveq	r0, #0
- 120 0012 08BD     		pop	{r3, pc}
- 121              		.cfi_endproc
- 122              	.LFE3349:
- 124              		.section	.text.CMW_IMX335_ReadID,"ax",%progbits
- 125              		.align	1
- 126              		.syntax unified
- 127              		.thumb
- 128              		.thumb_func
- 130              	CMW_IMX335_ReadID:
- 131              	.LVL9:
- 132              	.LFB3345:
-  89:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   return IMX335_ReadID(&((CMW_IMX335_t *)io_ctx)->ctx_driver, Id);
- 133              		.loc 1 89 1 is_stmt 1 view -0
- 134              		.cfi_startproc
- 135              		@ args = 0, pretend = 0, frame = 0
- 136              		@ frame_needed = 0, uses_anonymous_args = 0
- 137              		@ link register save eliminated.
-  90:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 138              		.loc 1 90 3 view .LVU23
-  90:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 139              		.loc 1 90 10 is_stmt 0 view .LVU24
- 140 0000 0830     		adds	r0, r0, #8
- 141              	.LVL10:
-  90:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 142              		.loc 1 90 10 view .LVU25
- 143 0002 FFF7FEBF 		b	IMX335_ReadID
- 144              	.LVL11:
-  90:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 145              		.loc 1 90 10 view .LVU26
-ARM GAS  /tmp/ccQ3mQxl.s 			page 9
-
-
- 146              		.cfi_endproc
- 147              	.LFE3345:
- 149              		.section	.text.CMW_IMX335_SetTestPattern,"ax",%progbits
- 150              		.align	1
- 151              		.syntax unified
- 152              		.thumb
- 153              		.thumb_func
- 155              	CMW_IMX335_SetTestPattern:
- 156              	.LVL12:
- 157              	.LFB3354:
- 193:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   return IMX335_SetTestPattern(&((CMW_IMX335_t *)io_ctx)->ctx_driver, mode);
- 158              		.loc 1 193 1 is_stmt 1 view -0
- 159              		.cfi_startproc
- 160              		@ args = 0, pretend = 0, frame = 0
- 161              		@ frame_needed = 0, uses_anonymous_args = 0
- 162              		@ link register save eliminated.
- 194:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 163              		.loc 1 194 3 view .LVU28
- 194:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 164              		.loc 1 194 10 is_stmt 0 view .LVU29
- 165 0000 0830     		adds	r0, r0, #8
- 166              	.LVL13:
- 194:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 167              		.loc 1 194 10 view .LVU30
- 168 0002 FFF7FEBF 		b	IMX335_SetTestPattern
- 169              	.LVL14:
- 194:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 170              		.loc 1 194 10 view .LVU31
- 171              		.cfi_endproc
- 172              	.LFE3354:
- 174              		.section	.rodata.CMW_IMX335_GetSensorInfo.str1.1,"aMS",%progbits,1
- 175              	.LC1:
- 176 0000 494D5833 		.ascii	"IMX335\000"
- 176      333500
- 177              		.section	.text.CMW_IMX335_GetSensorInfo,"ax",%progbits
- 178              		.align	1
- 179              		.syntax unified
- 180              		.thumb
- 181              		.thumb_func
- 183              	CMW_IMX335_GetSensorInfo:
- 184              	.LVL15:
- 185              	.LFB3353:
- 165:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if ((io_ctx ==  NULL) || (info == NULL))
- 186              		.loc 1 165 1 is_stmt 1 view -0
- 187              		.cfi_startproc
- 188              		@ args = 0, pretend = 0, frame = 0
- 189              		@ frame_needed = 0, uses_anonymous_args = 0
- 166:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
- 190              		.loc 1 166 3 view .LVU33
- 165:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if ((io_ctx ==  NULL) || (info == NULL))
- 191              		.loc 1 165 1 is_stmt 0 view .LVU34
- 192 0000 08B5     		push	{r3, lr}
- 193              		.cfi_def_cfa_offset 8
- 194              		.cfi_offset 3, -8
- 195              		.cfi_offset 14, -4
- 165:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if ((io_ctx ==  NULL) || (info == NULL))
- 196              		.loc 1 165 1 view .LVU35
-ARM GAS  /tmp/ccQ3mQxl.s 			page 10
-
-
- 197 0002 0B46     		mov	r3, r1
- 166:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
- 198              		.loc 1 166 6 view .LVU36
- 199 0004 B8B1     		cbz	r0, .L13
- 166:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
- 200              		.loc 1 166 25 discriminator 1 view .LVU37
- 201 0006 B1B1     		cbz	r1, .L13
- 171:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
- 202              		.loc 1 171 3 is_stmt 1 view .LVU38
- 173:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
- 203              		.loc 1 173 5 view .LVU39
- 204 0008 1846     		mov	r0, r3
- 205              	.LVL16:
- 173:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
- 206              		.loc 1 173 5 is_stmt 0 view .LVU40
- 207 000a 0C49     		ldr	r1, .L14
- 208              	.LVL17:
- 173:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
- 209              		.loc 1 173 5 view .LVU41
- 210 000c FFF7FEFF 		bl	strcpy
- 211              	.LVL18:
- 180:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   info->color_depth = IMX335_COLOR_DEPTH;
- 212              		.loc 1 180 23 view .LVU42
- 213 0010 4FF42062 		mov	r2, #2560
- 183:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   info->gain_min = IMX335_GAIN_MIN;
- 214              		.loc 1 183 16 view .LVU43
- 215 0014 4FF42261 		mov	r1, #2592
- 180:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   info->color_depth = IMX335_COLOR_DEPTH;
- 216              		.loc 1 180 23 view .LVU44
- 217 0018 0284     		strh	r2, [r0, #32]	@ movhi
- 183:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   info->gain_min = IMX335_GAIN_MIN;
- 218              		.loc 1 183 16 view .LVU45
- 219 001a 4FF4F362 		mov	r2, #1944
- 173:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
- 220              		.loc 1 173 5 view .LVU46
- 221 001e 0346     		mov	r3, r0
- 180:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   info->color_depth = IMX335_COLOR_DEPTH;
- 222              		.loc 1 180 3 is_stmt 1 view .LVU47
- 181:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   info->width = IMX335_WIDTH;
- 223              		.loc 1 181 3 view .LVU48
- 182:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   info->height = IMX335_HEIGHT;
- 224              		.loc 1 182 3 view .LVU49
- 183:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   info->gain_min = IMX335_GAIN_MIN;
- 225              		.loc 1 183 16 is_stmt 0 view .LVU50
- 226 0020 C0E90912 		strd	r1, r2, [r0, #36]
- 184:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   info->gain_max = IMX335_GAIN_MAX;
- 227              		.loc 1 184 3 is_stmt 1 view .LVU51
- 185:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   info->exposure_min = IMX335_EXPOSURE_MIN;
- 228              		.loc 1 185 18 is_stmt 0 view .LVU52
- 229 0024 0020     		movs	r0, #0
- 230 0026 064A     		ldr	r2, .L14+4
- 186:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   info->exposure_max = IMX335_EXPOSURE_MAX;
- 231              		.loc 1 186 22 view .LVU53
- 232 0028 5863     		str	r0, [r3, #52]
- 185:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   info->exposure_min = IMX335_EXPOSURE_MIN;
- 233              		.loc 1 185 18 view .LVU54
- 234 002a C3E90B02 		strd	r0, r2, [r3, #44]
-ARM GAS  /tmp/ccQ3mQxl.s 			page 11
-
-
- 186:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   info->exposure_max = IMX335_EXPOSURE_MAX;
- 235              		.loc 1 186 3 is_stmt 1 view .LVU55
- 187:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 236              		.loc 1 187 3 view .LVU56
- 187:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 237              		.loc 1 187 22 is_stmt 0 view .LVU57
- 238 002e 48F2F212 		movw	r2, #33266
- 239 0032 9A63     		str	r2, [r3, #56]
- 189:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 240              		.loc 1 189 3 is_stmt 1 view .LVU58
- 241              	.L10:
- 190:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 242              		.loc 1 190 1 is_stmt 0 view .LVU59
- 243 0034 08BD     		pop	{r3, pc}
- 244              	.LVL19:
- 245              	.L13:
- 168:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
- 246              		.loc 1 168 12 view .LVU60
- 247 0036 6FF00100 		mvn	r0, #1
- 248              	.LVL20:
- 168:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
- 249              		.loc 1 168 12 view .LVU61
- 250 003a FBE7     		b	.L10
- 251              	.L15:
- 252              		.align	2
- 253              	.L14:
- 254 003c 00000000 		.word	.LC1
- 255 0040 40190100 		.word	72000
- 256              		.cfi_endproc
- 257              	.LFE3353:
- 259              		.section	.text.CMW_IMX335_SetMirrorFlip,"ax",%progbits
- 260              		.align	1
- 261              		.syntax unified
- 262              		.thumb
- 263              		.thumb_func
- 265              	CMW_IMX335_SetMirrorFlip:
- 266              	.LVL21:
- 267              	.LFB3352:
- 159:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   int32_t mirrorFlip = CMW_IMX335_getMirrorFlipConfig(config);
- 268              		.loc 1 159 1 is_stmt 1 view -0
- 269              		.cfi_startproc
- 270              		@ args = 0, pretend = 0, frame = 0
- 271              		@ frame_needed = 0, uses_anonymous_args = 0
- 272              		@ link register save eliminated.
- 160:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   return IMX335_MirrorFlipConfig(&((CMW_IMX335_t *)io_ctx)->ctx_driver, mirrorFlip);
- 273              		.loc 1 160 3 view .LVU63
- 161:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 274              		.loc 1 161 3 view .LVU64
- 161:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 275              		.loc 1 161 10 is_stmt 0 view .LVU65
- 276 0000 0329     		cmp	r1, #3
- 277 0002 28BF     		it	cs
- 278 0004 0321     		movcs	r1, #3
- 279              	.LVL22:
- 161:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 280              		.loc 1 161 10 view .LVU66
- 281 0006 0830     		adds	r0, r0, #8
-ARM GAS  /tmp/ccQ3mQxl.s 			page 12
-
-
- 282              	.LVL23:
- 161:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 283              		.loc 1 161 10 view .LVU67
- 284 0008 FFF7FEBF 		b	IMX335_MirrorFlipConfig
- 285              	.LVL24:
- 161:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 286              		.loc 1 161 10 view .LVU68
- 287              		.cfi_endproc
- 288              	.LFE3352:
- 290              		.section	.text.CMW_IMX335_SetFramerate,"ax",%progbits
- 291              		.align	1
- 292              		.syntax unified
- 293              		.thumb
- 294              		.thumb_func
- 296              	CMW_IMX335_SetFramerate:
- 297              	.LVL25:
- 298              	.LFB3351:
- 148:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   const int32_t available_imx335_fps[] = {10, 15, 20, 25, 30};
- 299              		.loc 1 148 1 is_stmt 1 view -0
- 300              		.cfi_startproc
- 301              		@ args = 0, pretend = 0, frame = 24
- 302              		@ frame_needed = 0, uses_anonymous_args = 0
- 303              		@ link register save eliminated.
- 149:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 304              		.loc 1 149 3 view .LVU70
- 148:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   const int32_t available_imx335_fps[] = {10, 15, 20, 25, 30};
- 305              		.loc 1 148 1 is_stmt 0 view .LVU71
- 306 0000 F0B4     		push	{r4, r5, r6, r7}
- 307              		.cfi_def_cfa_offset 16
- 308              		.cfi_offset 4, -16
- 309              		.cfi_offset 5, -12
- 310              		.cfi_offset 6, -8
- 311              		.cfi_offset 7, -4
- 149:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 312              		.loc 1 149 17 view .LVU72
- 313 0002 0E4D     		ldr	r5, .L21
- 148:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   const int32_t available_imx335_fps[] = {10, 15, 20, 25, 30};
- 314              		.loc 1 148 1 view .LVU73
- 315 0004 86B0     		sub	sp, sp, #24
- 316              		.cfi_def_cfa_offset 40
- 149:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 317              		.loc 1 149 17 view .LVU74
- 318 0006 01AC     		add	r4, sp, #4
- 148:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   const int32_t available_imx335_fps[] = {10, 15, 20, 25, 30};
- 319              		.loc 1 148 1 view .LVU75
- 320 0008 0746     		mov	r7, r0
- 321 000a 0E46     		mov	r6, r1
- 149:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 322              		.loc 1 149 17 view .LVU76
- 323 000c 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
- 324              	.LVL26:
- 149:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 325              		.loc 1 149 17 view .LVU77
- 326 000e 0FC4     		stmia	r4!, {r0, r1, r2, r3}
- 327 0010 2B68     		ldr	r3, [r5]
- 328 0012 01AA     		add	r2, sp, #4
- 329 0014 2360     		str	r3, [r4]
-ARM GAS  /tmp/ccQ3mQxl.s 			page 13
-
-
- 151:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     if (framerate == available_imx335_fps[i])
- 330              		.loc 1 151 3 is_stmt 1 view .LVU78
- 331              	.LBB6:
- 151:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     if (framerate == available_imx335_fps[i])
- 332              		.loc 1 151 8 view .LVU79
- 333              	.LVL27:
- 151:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     if (framerate == available_imx335_fps[i])
- 334              		.loc 1 151 21 discriminator 1 view .LVU80
- 151:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     if (framerate == available_imx335_fps[i])
- 335              		.loc 1 151 12 is_stmt 0 view .LVU81
- 336 0016 0523     		movs	r3, #5
- 337              	.LVL28:
- 338              	.L19:
- 152:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       return IMX335_SetFramerate(&((CMW_IMX335_t *)io_ctx)->ctx_driver, framerate);
- 339              		.loc 1 152 5 is_stmt 1 view .LVU82
- 152:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       return IMX335_SetFramerate(&((CMW_IMX335_t *)io_ctx)->ctx_driver, framerate);
- 340              		.loc 1 152 42 is_stmt 0 view .LVU83
- 341 0018 52F8041B 		ldr	r1, [r2], #4
- 152:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       return IMX335_SetFramerate(&((CMW_IMX335_t *)io_ctx)->ctx_driver, framerate);
- 342              		.loc 1 152 8 view .LVU84
- 343 001c B142     		cmp	r1, r6
- 344 001e 06D1     		bne	.L18
- 153:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 345              		.loc 1 153 7 is_stmt 1 view .LVU85
- 153:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 346              		.loc 1 153 14 is_stmt 0 view .LVU86
- 347 0020 3146     		mov	r1, r6
- 348 0022 07F10800 		add	r0, r7, #8
- 349              	.LBE6:
- 156:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 350              		.loc 1 156 1 view .LVU87
- 351 0026 06B0     		add	sp, sp, #24
- 352              		.cfi_remember_state
- 353              		.cfi_def_cfa_offset 16
- 354              		@ sp needed
- 355 0028 F0BC     		pop	{r4, r5, r6, r7}
- 356              		.cfi_restore 7
- 357              		.cfi_restore 6
- 358              		.cfi_restore 5
- 359              		.cfi_restore 4
- 360              		.cfi_def_cfa_offset 0
- 361              	.LVL29:
- 362              	.LBB7:
- 153:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 363              		.loc 1 153 14 view .LVU88
- 364 002a FFF7FEBF 		b	IMX335_SetFramerate
- 365              	.LVL30:
- 366              	.L18:
- 367              		.cfi_restore_state
- 151:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     if (framerate == available_imx335_fps[i])
- 368              		.loc 1 151 58 is_stmt 1 discriminator 2 view .LVU89
- 151:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     if (framerate == available_imx335_fps[i])
- 369              		.loc 1 151 21 discriminator 1 view .LVU90
- 370 002e 013B     		subs	r3, r3, #1
- 371 0030 F2D1     		bne	.L19
- 372              	.LBE7:
- 156:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
-ARM GAS  /tmp/ccQ3mQxl.s 			page 14
-
-
- 373              		.loc 1 156 1 is_stmt 0 view .LVU91
- 374 0032 6FF00100 		mvn	r0, #1
- 375 0036 06B0     		add	sp, sp, #24
- 376              		.cfi_def_cfa_offset 16
- 377              		@ sp needed
- 378 0038 F0BC     		pop	{r4, r5, r6, r7}
- 379              		.cfi_restore 7
- 380              		.cfi_restore 6
- 381              		.cfi_restore 5
- 382              		.cfi_restore 4
- 383              		.cfi_def_cfa_offset 0
- 384              	.LVL31:
- 156:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 385              		.loc 1 156 1 view .LVU92
- 386 003a 7047     		bx	lr
- 387              	.L22:
- 388              		.align	2
- 389              	.L21:
- 390 003c 00000000 		.word	.LANCHOR0
- 391              		.cfi_endproc
- 392              	.LFE3351:
- 394              		.section	.text.CMW_IMX335_SetFrequency,"ax",%progbits
- 395              		.align	1
- 396              		.syntax unified
- 397              		.thumb
- 398              		.thumb_func
- 400              	CMW_IMX335_SetFrequency:
- 401              	.LVL32:
- 402              	.LFB3350:
- 143:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   return IMX335_SetFrequency(&((CMW_IMX335_t *)io_ctx)->ctx_driver, frequency);
- 403              		.loc 1 143 1 is_stmt 1 view -0
- 404              		.cfi_startproc
- 405              		@ args = 0, pretend = 0, frame = 0
- 406              		@ frame_needed = 0, uses_anonymous_args = 0
- 407              		@ link register save eliminated.
- 144:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 408              		.loc 1 144 3 view .LVU94
- 144:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 409              		.loc 1 144 10 is_stmt 0 view .LVU95
- 410 0000 0830     		adds	r0, r0, #8
- 411              	.LVL33:
- 144:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 412              		.loc 1 144 10 view .LVU96
- 413 0002 FFF7FEBF 		b	IMX335_SetFrequency
- 414              	.LVL34:
- 144:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 415              		.loc 1 144 10 view .LVU97
- 416              		.cfi_endproc
- 417              	.LFE3350:
- 419              		.section	.text.CMW_IMX335_SetExposure,"ax",%progbits
- 420              		.align	1
- 421              		.syntax unified
- 422              		.thumb
- 423              		.thumb_func
- 425              	CMW_IMX335_SetExposure:
- 426              	.LVL35:
- 427              	.LFB3347:
-ARM GAS  /tmp/ccQ3mQxl.s 			page 15
-
-
-  99:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   return IMX335_SetExposure(&((CMW_IMX335_t *)io_ctx)->ctx_driver, exposure);
- 428              		.loc 1 99 1 is_stmt 1 view -0
- 429              		.cfi_startproc
- 430              		@ args = 0, pretend = 0, frame = 0
- 431              		@ frame_needed = 0, uses_anonymous_args = 0
- 432              		@ link register save eliminated.
- 100:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 433              		.loc 1 100 3 view .LVU99
- 100:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 434              		.loc 1 100 10 is_stmt 0 view .LVU100
- 435 0000 0830     		adds	r0, r0, #8
- 436              	.LVL36:
- 100:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 437              		.loc 1 100 10 view .LVU101
- 438 0002 FFF7FEBF 		b	IMX335_SetExposure
- 439              	.LVL37:
- 100:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 440              		.loc 1 100 10 view .LVU102
- 441              		.cfi_endproc
- 442              	.LFE3347:
- 444              		.section	.text.CMW_IMX335_SetGain,"ax",%progbits
- 445              		.align	1
- 446              		.syntax unified
- 447              		.thumb
- 448              		.thumb_func
- 450              	CMW_IMX335_SetGain:
- 451              	.LVL38:
- 452              	.LFB3346:
-  94:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   return IMX335_SetGain(&((CMW_IMX335_t *)io_ctx)->ctx_driver, gain);
- 453              		.loc 1 94 1 is_stmt 1 view -0
- 454              		.cfi_startproc
- 455              		@ args = 0, pretend = 0, frame = 0
- 456              		@ frame_needed = 0, uses_anonymous_args = 0
- 457              		@ link register save eliminated.
-  95:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 458              		.loc 1 95 3 view .LVU104
-  95:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 459              		.loc 1 95 10 is_stmt 0 view .LVU105
- 460 0000 0830     		adds	r0, r0, #8
- 461              	.LVL39:
-  95:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 462              		.loc 1 95 10 view .LVU106
- 463 0002 FFF7FEBF 		b	IMX335_SetGain
- 464              	.LVL40:
-  95:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 465              		.loc 1 95 10 view .LVU107
- 466              		.cfi_endproc
- 467              	.LFE3346:
- 469              		.section	.text.CMW_IMX335_Run,"ax",%progbits
- 470              		.align	1
- 471              		.syntax unified
- 472              		.thumb
- 473              		.thumb_func
- 475              	CMW_IMX335_Run:
- 476              	.LVL41:
- 477              	.LFB3357:
- 247:Lib/Camera_Middleware/sensors/cmw_imx335.c **** #ifndef ISP_MW_TUNING_TOOL_SUPPORT
-ARM GAS  /tmp/ccQ3mQxl.s 			page 16
-
-
- 478              		.loc 1 247 1 is_stmt 1 view -0
- 479              		.cfi_startproc
- 480              		@ args = 0, pretend = 0, frame = 0
- 481              		@ frame_needed = 0, uses_anonymous_args = 0
- 249:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   ret = ISP_BackgroundProcess(&((CMW_IMX335_t *)io_ctx)->hIsp);
- 482              		.loc 1 249 3 view .LVU109
- 250:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret != ISP_OK)
- 483              		.loc 1 250 3 view .LVU110
- 247:Lib/Camera_Middleware/sensors/cmw_imx335.c **** #ifndef ISP_MW_TUNING_TOOL_SUPPORT
- 484              		.loc 1 247 1 is_stmt 0 view .LVU111
- 485 0000 08B5     		push	{r3, lr}
- 486              		.cfi_def_cfa_offset 8
- 487              		.cfi_offset 3, -8
- 488              		.cfi_offset 14, -4
- 250:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret != ISP_OK)
- 489              		.loc 1 250 9 view .LVU112
- 490 0002 3030     		adds	r0, r0, #48
- 491              	.LVL42:
- 250:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret != ISP_OK)
- 492              		.loc 1 250 9 view .LVU113
- 493 0004 FFF7FEFF 		bl	ISP_BackgroundProcess
- 494              	.LVL43:
- 251:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
- 495              		.loc 1 251 3 is_stmt 1 view .LVU114
- 256:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 496              		.loc 1 256 10 is_stmt 0 view .LVU115
- 497 0008 0028     		cmp	r0, #0
- 257:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 498              		.loc 1 257 1 view .LVU116
- 499 000a 14BF     		ite	ne
- 500 000c 6FF00300 		mvnne	r0, #3
- 501              	.LVL44:
- 257:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 502              		.loc 1 257 1 view .LVU117
- 503 0010 0020     		moveq	r0, #0
- 504 0012 08BD     		pop	{r3, pc}
- 505              		.cfi_endproc
- 506              	.LFE3357:
- 508              		.section	.text.CMW_IMX335_DeInit,"ax",%progbits
- 509              		.align	1
- 510              		.syntax unified
- 511              		.thumb
- 512              		.thumb_func
- 514              	CMW_IMX335_DeInit:
- 515              	.LVL45:
- 516              	.LFB3344:
-  72:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   int ret = CMW_ERROR_NONE;
- 517              		.loc 1 72 1 is_stmt 1 view -0
- 518              		.cfi_startproc
- 519              		@ args = 0, pretend = 0, frame = 0
- 520              		@ frame_needed = 0, uses_anonymous_args = 0
-  73:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   ret = ISP_DeInit(&((CMW_IMX335_t *)io_ctx)->hIsp);
- 521              		.loc 1 73 3 view .LVU119
-  74:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret)
- 522              		.loc 1 74 3 view .LVU120
-  72:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   int ret = CMW_ERROR_NONE;
- 523              		.loc 1 72 1 is_stmt 0 view .LVU121
-ARM GAS  /tmp/ccQ3mQxl.s 			page 17
-
-
- 524 0000 10B5     		push	{r4, lr}
- 525              		.cfi_def_cfa_offset 8
- 526              		.cfi_offset 4, -8
- 527              		.cfi_offset 14, -4
-  72:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   int ret = CMW_ERROR_NONE;
- 528              		.loc 1 72 1 view .LVU122
- 529 0002 0446     		mov	r4, r0
-  74:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret)
- 530              		.loc 1 74 9 view .LVU123
- 531 0004 3030     		adds	r0, r0, #48
- 532              	.LVL46:
-  74:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret)
- 533              		.loc 1 74 9 view .LVU124
- 534 0006 FFF7FEFF 		bl	ISP_DeInit
- 535              	.LVL47:
-  75:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
- 536              		.loc 1 75 3 is_stmt 1 view .LVU125
-  75:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
- 537              		.loc 1 75 6 is_stmt 0 view .LVU126
- 538 000a 10B1     		cbz	r0, .L30
- 539              	.LVL48:
- 540              	.L32:
-  77:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
- 541              		.loc 1 77 12 view .LVU127
- 542 000c 6FF00400 		mvn	r0, #4
- 543              	.L29:
-  86:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 544              		.loc 1 86 1 view .LVU128
- 545 0010 10BD     		pop	{r4, pc}
- 546              	.LVL49:
- 547              	.L30:
-  80:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret)
- 548              		.loc 1 80 3 is_stmt 1 view .LVU129
-  80:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret)
- 549              		.loc 1 80 9 is_stmt 0 view .LVU130
- 550 0012 04F10800 		add	r0, r4, #8
- 551              	.LVL50:
-  80:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret)
- 552              		.loc 1 80 9 view .LVU131
- 553 0016 FFF7FEFF 		bl	IMX335_DeInit
- 554              	.LVL51:
-  81:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
- 555              		.loc 1 81 3 is_stmt 1 view .LVU132
-  81:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
- 556              		.loc 1 81 6 is_stmt 0 view .LVU133
- 557 001a 0028     		cmp	r0, #0
- 558 001c F8D0     		beq	.L29
- 559 001e F5E7     		b	.L32
- 560              		.cfi_endproc
- 561              	.LFE3344:
- 563              		.section	.text.CMW_IMX335_Start,"ax",%progbits
- 564              		.align	1
- 565              		.syntax unified
- 566              		.thumb
- 567              		.thumb_func
- 569              	CMW_IMX335_Start:
- 570              	.LVL52:
-ARM GAS  /tmp/ccQ3mQxl.s 			page 18
-
-
- 571              	.LFB3356:
- 224:Lib/Camera_Middleware/sensors/cmw_imx335.c **** #ifndef ISP_MW_TUNING_TOOL_SUPPORT
- 572              		.loc 1 224 1 is_stmt 1 view -0
- 573              		.cfi_startproc
- 574              		@ args = 0, pretend = 0, frame = 0
- 575              		@ frame_needed = 0, uses_anonymous_args = 0
- 226:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   /* Statistic area is provided with null value so that it force the ISP Library to get the statist
- 576              		.loc 1 226 3 view .LVU135
- 230:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   ret = ISP_Init(&((CMW_IMX335_t *)io_ctx)->hIsp, ((CMW_IMX335_t *)io_ctx)->hdcmipp, 0, &((CMW_IMX3
- 577              		.loc 1 230 3 view .LVU136
- 231:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret != ISP_OK)
- 578              		.loc 1 231 3 view .LVU137
- 224:Lib/Camera_Middleware/sensors/cmw_imx335.c **** #ifndef ISP_MW_TUNING_TOOL_SUPPORT
- 579              		.loc 1 224 1 is_stmt 0 view .LVU138
- 580 0000 37B5     		push	{r0, r1, r2, r4, r5, lr}
- 581              		.cfi_def_cfa_offset 24
- 582              		.cfi_offset 4, -12
- 583              		.cfi_offset 5, -8
- 584              		.cfi_offset 14, -4
- 231:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret != ISP_OK)
- 585              		.loc 1 231 9 view .LVU139
- 586 0002 104B     		ldr	r3, .L37
- 587 0004 00F13005 		add	r5, r0, #48
- 588 0008 0093     		str	r3, [sp]
- 224:Lib/Camera_Middleware/sensors/cmw_imx335.c **** #ifndef ISP_MW_TUNING_TOOL_SUPPORT
- 589              		.loc 1 224 1 view .LVU140
- 590 000a 0446     		mov	r4, r0
- 231:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret != ISP_OK)
- 591              		.loc 1 231 9 view .LVU141
- 592 000c D0F8DC10 		ldr	r1, [r0, #220]
- 593 0010 00F1B803 		add	r3, r0, #184
- 594 0014 0022     		movs	r2, #0
- 595 0016 2846     		mov	r0, r5
- 596              	.LVL53:
- 231:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret != ISP_OK)
- 597              		.loc 1 231 9 view .LVU142
- 598 0018 FFF7FEFF 		bl	ISP_Init
- 599              	.LVL54:
- 232:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
- 600              		.loc 1 232 3 is_stmt 1 view .LVU143
- 232:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
- 601              		.loc 1 232 6 is_stmt 0 view .LVU144
- 602 001c 50B9     		cbnz	r0, .L35
- 237:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret != ISP_OK)
- 603              		.loc 1 237 3 is_stmt 1 view .LVU145
- 237:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret != ISP_OK)
- 604              		.loc 1 237 9 is_stmt 0 view .LVU146
- 605 001e 2846     		mov	r0, r5
- 606              	.LVL55:
- 237:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret != ISP_OK)
- 607              		.loc 1 237 9 view .LVU147
- 608 0020 FFF7FEFF 		bl	ISP_Start
- 609              	.LVL56:
- 238:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
- 610              		.loc 1 238 3 is_stmt 1 view .LVU148
- 238:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
- 611              		.loc 1 238 6 is_stmt 0 view .LVU149
-ARM GAS  /tmp/ccQ3mQxl.s 			page 19
-
-
- 612 0024 50B9     		cbnz	r0, .L36
- 243:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 613              		.loc 1 243 3 is_stmt 1 view .LVU150
- 243:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 614              		.loc 1 243 10 is_stmt 0 view .LVU151
- 615 0026 04F10800 		add	r0, r4, #8
- 616              	.LVL57:
- 244:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 617              		.loc 1 244 1 view .LVU152
- 618 002a 03B0     		add	sp, sp, #12
- 619              		.cfi_remember_state
- 620              		.cfi_def_cfa_offset 12
- 621              		@ sp needed
- 622 002c BDE83040 		pop	{r4, r5, lr}
- 623              		.cfi_restore 14
- 624              		.cfi_restore 5
- 625              		.cfi_restore 4
- 626              		.cfi_def_cfa_offset 0
- 627              	.LVL58:
- 243:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 628              		.loc 1 243 10 view .LVU153
- 629 0030 FFF7FEBF 		b	IMX335_Start
- 630              	.LVL59:
- 631              	.L35:
- 632              		.cfi_restore_state
- 234:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
- 633              		.loc 1 234 12 view .LVU154
- 634 0034 6FF00400 		mvn	r0, #4
- 635              	.LVL60:
- 636              	.L33:
- 244:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 637              		.loc 1 244 1 view .LVU155
- 638 0038 03B0     		add	sp, sp, #12
- 639              		.cfi_remember_state
- 640              		.cfi_def_cfa_offset 12
- 641              		@ sp needed
- 642 003a 30BD     		pop	{r4, r5, pc}
- 643              	.LVL61:
- 644              	.L36:
- 645              		.cfi_restore_state
- 240:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
- 646              		.loc 1 240 14 view .LVU156
- 647 003c 6FF00300 		mvn	r0, #3
- 648              	.LVL62:
- 240:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
- 649              		.loc 1 240 14 view .LVU157
- 650 0040 FAE7     		b	.L33
- 651              	.L38:
- 652 0042 00BF     		.align	2
- 653              	.L37:
- 654 0044 00000000 		.word	ISP_IQParamCacheInit_IMX335
- 655              		.cfi_endproc
- 656              	.LFE3356:
- 658              		.section	.text.CMW_IMX335_Init,"ax",%progbits
- 659              		.align	1
- 660              		.syntax unified
- 661              		.thumb
-ARM GAS  /tmp/ccQ3mQxl.s 			page 20
-
-
- 662              		.thumb_func
- 664              	CMW_IMX335_Init:
- 665              	.LVL63:
- 666              	.LFB3355:
- 198:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   int ret = CMW_ERROR_NONE;
- 667              		.loc 1 198 1 is_stmt 1 view -0
- 668              		.cfi_startproc
- 669              		@ args = 0, pretend = 0, frame = 0
- 670              		@ frame_needed = 0, uses_anonymous_args = 0
- 199:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   uint32_t resolution;
- 671              		.loc 1 199 3 view .LVU159
- 200:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 672              		.loc 1 200 3 view .LVU160
- 202:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret)
- 673              		.loc 1 202 3 view .LVU161
- 198:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   int ret = CMW_ERROR_NONE;
- 674              		.loc 1 198 1 is_stmt 0 view .LVU162
- 675 0000 38B5     		push	{r3, r4, r5, lr}
- 676              		.cfi_def_cfa_offset 16
- 677              		.cfi_offset 3, -16
- 678              		.cfi_offset 4, -12
- 679              		.cfi_offset 5, -8
- 680              		.cfi_offset 14, -4
- 681              	.LBB8:
- 682              	.LBB9:
-  36:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
- 683              		.loc 1 36 6 view .LVU163
- 684 0002 D1E90023 		ldrd	r2, r3, [r1]
- 685 0006 B2F5226F 		cmp	r2, #2592
- 686              	.LBE9:
- 687              	.LBE8:
- 198:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   int ret = CMW_ERROR_NONE;
- 688              		.loc 1 198 1 view .LVU164
- 689 000a 0546     		mov	r5, r0
- 690 000c 0C46     		mov	r4, r1
- 691              	.LBB12:
- 692              	.LBB10:
-  36:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
- 693              		.loc 1 36 6 view .LVU165
- 694 000e 02D0     		beq	.L40
- 695              	.LVL64:
- 696              	.L42:
-  36:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
- 697              		.loc 1 36 6 view .LVU166
- 698              	.LBE10:
- 699              	.LBE12:
- 205:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
- 700              		.loc 1 205 12 view .LVU167
- 701 0010 6FF00100 		mvn	r0, #1
- 702              	.L39:
- 221:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 703              		.loc 1 221 1 view .LVU168
- 704 0014 38BD     		pop	{r3, r4, r5, pc}
- 705              	.LVL65:
- 706              	.L40:
- 707              	.LBB13:
- 708              	.LBB11:
-ARM GAS  /tmp/ccQ3mQxl.s 			page 21
-
-
-  36:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
- 709              		.loc 1 36 21 discriminator 1 view .LVU169
- 710 0016 B3F5F36F 		cmp	r3, #1944
- 711 001a F9D1     		bne	.L42
-  38:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
- 712              		.loc 1 38 5 is_stmt 1 view .LVU170
- 713              	.LVL66:
-  44:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 714              		.loc 1 44 3 view .LVU171
-  44:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 715              		.loc 1 44 3 is_stmt 0 view .LVU172
- 716              	.LBE11:
- 717              	.LBE13:
- 203:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
- 718              		.loc 1 203 3 is_stmt 1 view .LVU173
- 208:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret)
- 719              		.loc 1 208 3 view .LVU174
- 208:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret)
- 720              		.loc 1 208 9 is_stmt 0 view .LVU175
- 721 001c 0969     		ldr	r1, [r1, #16]
- 722              	.LVL67:
- 208:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret)
- 723              		.loc 1 208 9 view .LVU176
- 724 001e FFF7FEFF 		bl	CMW_IMX335_SetMirrorFlip
- 725              	.LVL68:
- 209:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
- 726              		.loc 1 209 3 is_stmt 1 view .LVU177
- 209:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
- 727              		.loc 1 209 6 is_stmt 0 view .LVU178
- 728 0022 0028     		cmp	r0, #0
- 729 0024 F4D1     		bne	.L42
- 214:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret != IMX335_OK)
- 730              		.loc 1 214 3 is_stmt 1 view .LVU179
- 214:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret != IMX335_OK)
- 731              		.loc 1 214 9 is_stmt 0 view .LVU180
- 732 0026 0621     		movs	r1, #6
- 733 0028 E268     		ldr	r2, [r4, #12]
- 734 002a 05F10800 		add	r0, r5, #8
- 735              	.LVL69:
- 214:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret != IMX335_OK)
- 736              		.loc 1 214 9 view .LVU181
- 737 002e FFF7FEFF 		bl	IMX335_Init
- 738              	.LVL70:
- 215:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
- 739              		.loc 1 215 3 is_stmt 1 view .LVU182
- 217:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
- 740              		.loc 1 217 12 is_stmt 0 view .LVU183
- 741 0032 0028     		cmp	r0, #0
- 217:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
- 742              		.loc 1 217 12 view .LVU184
- 743 0034 18BF     		it	ne
- 744 0036 6FF00400 		mvnne	r0, #4
- 745              	.LVL71:
- 217:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
- 746              		.loc 1 217 12 view .LVU185
- 747 003a EBE7     		b	.L39
- 748              		.cfi_endproc
-ARM GAS  /tmp/ccQ3mQxl.s 			page 22
-
-
- 749              	.LFE3355:
- 751              		.section	.text.CMW_IMX335_VsyncEventCallback,"ax",%progbits
- 752              		.align	1
- 753              		.syntax unified
- 754              		.thumb
- 755              		.thumb_func
- 757              	CMW_IMX335_VsyncEventCallback:
- 758              	.LVL72:
- 759              	.LFB3359:
- 272:Lib/Camera_Middleware/sensors/cmw_imx335.c **** #ifndef ISP_MW_TUNING_TOOL_SUPPORT
- 760              		.loc 1 272 1 is_stmt 1 view -0
- 761              		.cfi_startproc
- 762              		@ args = 0, pretend = 0, frame = 0
- 763              		@ frame_needed = 0, uses_anonymous_args = 0
- 275:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
- 764              		.loc 1 275 3 view .LVU187
- 765 0000 0129     		cmp	r1, #1
- 272:Lib/Camera_Middleware/sensors/cmw_imx335.c **** #ifndef ISP_MW_TUNING_TOOL_SUPPORT
- 766              		.loc 1 272 1 is_stmt 0 view .LVU188
- 767 0002 10B5     		push	{r4, lr}
- 768              		.cfi_def_cfa_offset 8
- 769              		.cfi_offset 4, -8
- 770              		.cfi_offset 14, -4
- 275:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
- 771              		.loc 1 275 3 view .LVU189
- 772 0004 07D0     		beq	.L45
- 773 0006 0229     		cmp	r1, #2
- 774 0008 0FD0     		beq	.L46
- 775 000a 99B9     		cbnz	r1, .L44
- 278:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       break;
- 776              		.loc 1 278 7 is_stmt 1 view .LVU190
- 289:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 777              		.loc 1 289 1 is_stmt 0 view .LVU191
- 778 000c BDE81040 		pop	{r4, lr}
- 779              		.cfi_remember_state
- 780              		.cfi_restore 14
- 781              		.cfi_restore 4
- 782              		.cfi_def_cfa_offset 0
- 278:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       break;
- 783              		.loc 1 278 7 view .LVU192
- 784 0010 3030     		adds	r0, r0, #48
- 785              	.LVL73:
- 278:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       break;
- 786              		.loc 1 278 7 view .LVU193
- 787 0012 FFF7FEBF 		b	ISP_IncDumpFrameId
- 788              	.LVL74:
- 789              	.L45:
- 790              		.cfi_restore_state
- 791              	.LBB16:
- 792              	.LBI16:
- 271:Lib/Camera_Middleware/sensors/cmw_imx335.c **** {
- 793              		.loc 1 271 13 is_stmt 1 view .LVU194
- 794              	.LBB17:
- 281:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       ISP_GatherStatistics(&((CMW_IMX335_t *)io_ctx)->hIsp);
- 795              		.loc 1 281 7 view .LVU195
- 796 0016 00F13004 		add	r4, r0, #48
- 797 001a 2046     		mov	r0, r4
-ARM GAS  /tmp/ccQ3mQxl.s 			page 23
-
-
- 798              	.LVL75:
- 281:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       ISP_GatherStatistics(&((CMW_IMX335_t *)io_ctx)->hIsp);
- 799              		.loc 1 281 7 is_stmt 0 view .LVU196
- 800 001c FFF7FEFF 		bl	ISP_IncMainFrameId
- 801              	.LVL76:
- 282:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       break;
- 802              		.loc 1 282 7 is_stmt 1 view .LVU197
- 803 0020 2046     		mov	r0, r4
- 804              	.LBE17:
- 805              	.LBE16:
- 289:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 806              		.loc 1 289 1 is_stmt 0 view .LVU198
- 807 0022 BDE81040 		pop	{r4, lr}
- 808              		.cfi_remember_state
- 809              		.cfi_restore 14
- 810              		.cfi_restore 4
- 811              		.cfi_def_cfa_offset 0
- 812              	.LVL77:
- 813              	.LBB19:
- 814              	.LBB18:
- 282:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       break;
- 815              		.loc 1 282 7 view .LVU199
- 816 0026 FFF7FEBF 		b	ISP_GatherStatistics
- 817              	.LVL78:
- 818              	.L46:
- 819              		.cfi_restore_state
- 282:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       break;
- 820              		.loc 1 282 7 view .LVU200
- 821              	.LBE18:
- 822              	.LBE19:
- 285:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       break;
- 823              		.loc 1 285 7 is_stmt 1 view .LVU201
- 824 002a 3030     		adds	r0, r0, #48
- 825              	.LVL79:
- 289:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 826              		.loc 1 289 1 is_stmt 0 view .LVU202
- 827 002c BDE81040 		pop	{r4, lr}
- 828              		.cfi_remember_state
- 829              		.cfi_restore 14
- 830              		.cfi_restore 4
- 831              		.cfi_def_cfa_offset 0
- 285:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       break;
- 832              		.loc 1 285 7 view .LVU203
- 833 0030 FFF7FEBF 		b	ISP_IncAncillaryFrameId
- 834              	.LVL80:
- 835              	.L44:
- 836              		.cfi_restore_state
- 289:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 837              		.loc 1 289 1 view .LVU204
- 838 0034 10BD     		pop	{r4, pc}
- 839              		.cfi_endproc
- 840              	.LFE3359:
- 842              		.section	.text.CMW_IMX335_Probe,"ax",%progbits
- 843              		.align	1
- 844              		.global	CMW_IMX335_Probe
- 845              		.syntax unified
- 846              		.thumb
-ARM GAS  /tmp/ccQ3mQxl.s 			page 24
-
-
- 847              		.thumb_func
- 849              	CMW_IMX335_Probe:
- 850              	.LVL81:
- 851              	.LFB3361:
+ 1511              	CMW_IMX335_Probe:
+ 1512              	.LFB3361:
  294:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  295:Lib/Camera_Middleware/sensors/cmw_imx335.c **** int CMW_IMX335_Probe(CMW_IMX335_t *io_ctx, CMW_Sensor_if_t *imx335_if)
  296:Lib/Camera_Middleware/sensors/cmw_imx335.c **** {
- 852              		.loc 1 296 1 is_stmt 1 view -0
- 853              		.cfi_startproc
- 854              		@ args = 0, pretend = 0, frame = 8
- 855              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1513              		.loc 1 296 1
+ 1514              		.cfi_startproc
+ 1515              		@ args = 0, pretend = 0, frame = 16
+ 1516              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1517 0000 80B5     		push	{r7, lr}
+ 1518              		.cfi_def_cfa_offset 8
+ 1519              		.cfi_offset 7, -8
+ 1520              		.cfi_offset 14, -4
+ 1521 0002 84B0     		sub	sp, sp, #16
+ 1522              		.cfi_def_cfa_offset 24
+ 1523 0004 00AF     		add	r7, sp, #0
+ 1524              		.cfi_def_cfa_register 7
+ 1525 0006 7860     		str	r0, [r7, #4]
+ 1526 0008 3960     		str	r1, [r7]
  297:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   int ret = CMW_ERROR_NONE;
- 856              		.loc 1 297 3 view .LVU206
+ 1527              		.loc 1 297 7
+ 1528 000a 0023     		movs	r3, #0
+ 1529 000c FB60     		str	r3, [r7, #12]
  298:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   uint32_t id;
- 857              		.loc 1 298 3 view .LVU207
  299:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->ctx_driver.IO.Address = io_ctx->Address;
- 858              		.loc 1 299 3 view .LVU208
- 296:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   int ret = CMW_ERROR_NONE;
- 859              		.loc 1 296 1 is_stmt 0 view .LVU209
- 860 0000 73B5     		push	{r0, r1, r4, r5, r6, lr}
- 861              		.cfi_def_cfa_offset 24
- 862              		.cfi_offset 4, -16
- 863              		.cfi_offset 5, -12
- 864              		.cfi_offset 6, -8
- 865              		.cfi_offset 14, -4
- 296:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   int ret = CMW_ERROR_NONE;
- 866              		.loc 1 296 1 view .LVU210
- 867 0002 0446     		mov	r4, r0
- 868              		.loc 1 299 33 view .LVU211
- 869 0004 0388     		ldrh	r3, [r0]
- 296:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   int ret = CMW_ERROR_NONE;
- 870              		.loc 1 296 1 view .LVU212
- 871 0006 0D46     		mov	r5, r1
- 872              		.loc 1 299 33 view .LVU213
- 873 0008 0382     		strh	r3, [r0, #16]	@ movhi
+ 1530              		.loc 1 299 41
+ 1531 000e 7B68     		ldr	r3, [r7, #4]
+ 1532 0010 1A88     		ldrh	r2, [r3]
+ 1533              		.loc 1 299 33
+ 1534 0012 7B68     		ldr	r3, [r7, #4]
+ 1535 0014 1A82     		strh	r2, [r3, #16]	@ movhi
  300:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->ctx_driver.IO.Init = io_ctx->Init;
- 874              		.loc 1 300 3 is_stmt 1 view .LVU214
- 875              		.loc 1 300 30 is_stmt 0 view .LVU215
- 876 000a D0F8E430 		ldr	r3, [r0, #228]
+ 1536              		.loc 1 300 38
+ 1537 0016 7B68     		ldr	r3, [r7, #4]
+ 1538 0018 D3F8E420 		ldr	r2, [r3, #228]
+ 1539              		.loc 1 300 30
+ 1540 001c 7B68     		ldr	r3, [r7, #4]
+ 1541 001e 9A60     		str	r2, [r3, #8]
  301:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->ctx_driver.IO.DeInit = io_ctx->DeInit;
+ 1542              		.loc 1 301 40
+ 1543 0020 7B68     		ldr	r3, [r7, #4]
+ 1544 0022 D3F8E820 		ldr	r2, [r3, #232]
+ 1545              		.loc 1 301 32
+ 1546 0026 7B68     		ldr	r3, [r7, #4]
+ 1547 0028 DA60     		str	r2, [r3, #12]
  302:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->ctx_driver.IO.GetTick = io_ctx->GetTick;
+ 1548              		.loc 1 302 41
+ 1549 002a 7B68     		ldr	r3, [r7, #4]
+ 1550 002c D3F8F420 		ldr	r2, [r3, #244]
+ 1551              		.loc 1 302 33
+ 1552 0030 7B68     		ldr	r3, [r7, #4]
+ 1553 0032 DA61     		str	r2, [r3, #28]
  303:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->ctx_driver.IO.ReadReg = io_ctx->ReadReg;
+ 1554              		.loc 1 303 41
+ 1555 0034 7B68     		ldr	r3, [r7, #4]
+ 1556 0036 D3F8F020 		ldr	r2, [r3, #240]
+ 1557              		.loc 1 303 33
+ARM GAS  /tmp/ccNbLpFw.s 			page 34
+
+
+ 1558 003a 7B68     		ldr	r3, [r7, #4]
+ 1559 003c 9A61     		str	r2, [r3, #24]
  304:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->ctx_driver.IO.WriteReg = io_ctx->WriteReg;
+ 1560              		.loc 1 304 42
+ 1561 003e 7B68     		ldr	r3, [r7, #4]
+ 1562 0040 D3F8EC20 		ldr	r2, [r3, #236]
+ 1563              		.loc 1 304 34
+ 1564 0044 7B68     		ldr	r3, [r7, #4]
+ 1565 0046 5A61     		str	r2, [r3, #20]
  305:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  306:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   CMW_IMX335_PowerOn(io_ctx);
+ 1566              		.loc 1 306 3
+ 1567 0048 7868     		ldr	r0, [r7, #4]
+ 1568 004a FFF7FEFF 		bl	CMW_IMX335_PowerOn
  307:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  308:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   ret = IMX335_RegisterBusIO(&io_ctx->ctx_driver, &io_ctx->ctx_driver.IO);
- 877              		.loc 1 308 9 view .LVU216
- 878 000e 0834     		adds	r4, r4, #8
- 300:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->ctx_driver.IO.Init = io_ctx->Init;
- 879              		.loc 1 300 30 view .LVU217
- 880 0010 8360     		str	r3, [r0, #8]
- 301:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->ctx_driver.IO.DeInit = io_ctx->DeInit;
- 881              		.loc 1 301 3 is_stmt 1 view .LVU218
- 301:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->ctx_driver.IO.DeInit = io_ctx->DeInit;
- 882              		.loc 1 301 32 is_stmt 0 view .LVU219
- 883 0012 D0F8E830 		ldr	r3, [r0, #232]
-ARM GAS  /tmp/ccQ3mQxl.s 			page 25
-
-
- 884 0016 C360     		str	r3, [r0, #12]
- 302:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->ctx_driver.IO.ReadReg = io_ctx->ReadReg;
- 885              		.loc 1 302 3 is_stmt 1 view .LVU220
- 302:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->ctx_driver.IO.ReadReg = io_ctx->ReadReg;
- 886              		.loc 1 302 33 is_stmt 0 view .LVU221
- 887 0018 D0F8F430 		ldr	r3, [r0, #244]
- 888 001c C361     		str	r3, [r0, #28]
- 303:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->ctx_driver.IO.WriteReg = io_ctx->WriteReg;
- 889              		.loc 1 303 3 is_stmt 1 view .LVU222
- 303:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->ctx_driver.IO.WriteReg = io_ctx->WriteReg;
- 890              		.loc 1 303 33 is_stmt 0 view .LVU223
- 891 001e D0F8F030 		ldr	r3, [r0, #240]
- 892 0022 8361     		str	r3, [r0, #24]
- 304:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 893              		.loc 1 304 3 is_stmt 1 view .LVU224
- 304:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 894              		.loc 1 304 34 is_stmt 0 view .LVU225
- 895 0024 D0F8EC30 		ldr	r3, [r0, #236]
- 896 0028 4361     		str	r3, [r0, #20]
- 306:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
- 897              		.loc 1 306 3 is_stmt 1 view .LVU226
- 898              	.LVL82:
- 899              	.LBB22:
- 900              	.LBI22:
- 259:Lib/Camera_Middleware/sensors/cmw_imx335.c **** {
- 901              		.loc 1 259 13 view .LVU227
- 902              	.LBB23:
- 261:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->Delay(100);
- 903              		.loc 1 261 3 view .LVU228
- 904 002a D0F8FC30 		ldr	r3, [r0, #252]
- 905 002e 0020     		movs	r0, #0
- 906              	.LVL83:
- 261:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->Delay(100);
- 907              		.loc 1 261 3 is_stmt 0 view .LVU229
- 908 0030 9847     		blx	r3
- 909              	.LVL84:
- 262:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->EnablePin(0);  /* RESET low (reset active low) */
- 910              		.loc 1 262 3 is_stmt 1 view .LVU230
- 911 0032 D4F8F030 		ldr	r3, [r4, #240]
- 912 0036 6420     		movs	r0, #100
- 913 0038 9847     		blx	r3
- 914              	.LVL85:
- 263:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->Delay(100);
- 915              		.loc 1 263 3 view .LVU231
- 916 003a D4F8F830 		ldr	r3, [r4, #248]
- 917 003e 0020     		movs	r0, #0
- 918 0040 9847     		blx	r3
- 919              	.LVL86:
- 264:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->ShutdownPin(1);  /* Disable MB1723 2V8 signal  */
- 920              		.loc 1 264 3 view .LVU232
- 921 0042 D4F8F030 		ldr	r3, [r4, #240]
- 922 0046 6420     		movs	r0, #100
- 923 0048 9847     		blx	r3
- 924              	.LVL87:
- 265:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->Delay(100);
- 925              		.loc 1 265 3 view .LVU233
- 926 004a D4F8F430 		ldr	r3, [r4, #244]
-ARM GAS  /tmp/ccQ3mQxl.s 			page 26
-
-
- 927 004e 0120     		movs	r0, #1
- 928 0050 9847     		blx	r3
- 929              	.LVL88:
- 266:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->EnablePin(1);  /* RESET low (reset active low) */
- 930              		.loc 1 266 3 view .LVU234
- 931 0052 D4F8F030 		ldr	r3, [r4, #240]
- 932 0056 6420     		movs	r0, #100
- 933 0058 9847     		blx	r3
- 934              	.LVL89:
- 267:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   io_ctx->Delay(100);
- 935              		.loc 1 267 3 view .LVU235
- 936 005a D4F8F830 		ldr	r3, [r4, #248]
- 937 005e 0120     		movs	r0, #1
- 938 0060 9847     		blx	r3
- 939              	.LVL90:
- 268:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 940              		.loc 1 268 3 view .LVU236
- 941 0062 D4F8F030 		ldr	r3, [r4, #240]
- 942 0066 6420     		movs	r0, #100
- 943 0068 9847     		blx	r3
- 944              	.LVL91:
- 268:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 945              		.loc 1 268 3 is_stmt 0 view .LVU237
- 946              	.LBE23:
- 947              	.LBE22:
- 948              		.loc 1 308 3 is_stmt 1 view .LVU238
- 949              		.loc 1 308 9 is_stmt 0 view .LVU239
- 950 006a 2146     		mov	r1, r4
- 951 006c 2046     		mov	r0, r4
- 952 006e FFF7FEFF 		bl	IMX335_RegisterBusIO
- 953              	.LVL92:
+ 1569              		.loc 1 308 9
+ 1570 004e 7B68     		ldr	r3, [r7, #4]
+ 1571 0050 03F10802 		add	r2, r3, #8
+ 1572 0054 7B68     		ldr	r3, [r7, #4]
+ 1573 0056 0833     		adds	r3, r3, #8
+ 1574 0058 1946     		mov	r1, r3
+ 1575 005a 1046     		mov	r0, r2
+ 1576 005c FFF7FEFF 		bl	IMX335_RegisterBusIO
+ 1577 0060 F860     		str	r0, [r7, #12]
  309:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret != IMX335_OK)
- 954              		.loc 1 309 3 is_stmt 1 view .LVU240
- 955              		.loc 1 309 6 is_stmt 0 view .LVU241
- 956 0072 0646     		mov	r6, r0
- 957 0074 20B1     		cbz	r0, .L49
- 958              	.LVL93:
- 959              	.L51:
+ 1578              		.loc 1 309 6
+ 1579 0062 FB68     		ldr	r3, [r7, #12]
+ 1580 0064 002B     		cmp	r3, #0
+ 1581 0066 02D0     		beq	.L71
  310:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
  311:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     return CMW_ERROR_COMPONENT_FAILURE;
- 960              		.loc 1 311 12 view .LVU242
- 961 0076 6FF00404 		mvn	r4, #4
- 962              	.LVL94:
- 963              	.L48:
+ 1582              		.loc 1 311 12
+ 1583 0068 6FF00403 		mvn	r3, #4
+ 1584 006c 4AE0     		b	.L75
+ 1585              	.L71:
  312:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
  313:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  314:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   ret = IMX335_ReadID(&io_ctx->ctx_driver, &id);
+ 1586              		.loc 1 314 9
+ 1587 006e 7B68     		ldr	r3, [r7, #4]
+ 1588 0070 0833     		adds	r3, r3, #8
+ 1589 0072 07F10802 		add	r2, r7, #8
+ 1590 0076 1146     		mov	r1, r2
+ 1591 0078 1846     		mov	r0, r3
+ 1592 007a FFF7FEFF 		bl	IMX335_ReadID
+ 1593 007e F860     		str	r0, [r7, #12]
  315:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret != IMX335_OK)
+ 1594              		.loc 1 315 6
+ 1595 0080 FB68     		ldr	r3, [r7, #12]
+ 1596 0082 002B     		cmp	r3, #0
+ 1597 0084 02D0     		beq	.L73
  316:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
  317:Lib/Camera_Middleware/sensors/cmw_imx335.c ****     return CMW_ERROR_COMPONENT_FAILURE;
+ 1598              		.loc 1 317 12
+ 1599 0086 6FF00403 		mvn	r3, #4
+ 1600 008a 3BE0     		b	.L75
+ARM GAS  /tmp/ccNbLpFw.s 			page 35
+
+
+ 1601              	.L73:
  318:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
  319:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (id != IMX335_CHIP_ID)
+ 1602              		.loc 1 319 10
+ 1603 008c BB68     		ldr	r3, [r7, #8]
+ 1604              		.loc 1 319 6
+ 1605 008e 002B     		cmp	r3, #0
+ 1606 0090 02D0     		beq	.L74
  320:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
  321:Lib/Camera_Middleware/sensors/cmw_imx335.c ****       ret = CMW_ERROR_UNKNOWN_COMPONENT;
+ 1607              		.loc 1 321 11
+ 1608 0092 6FF00603 		mvn	r3, #6
+ 1609 0096 FB60     		str	r3, [r7, #12]
+ 1610              	.L74:
  322:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
  323:Lib/Camera_Middleware/sensors/cmw_imx335.c **** 
  324:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   memset(imx335_if, 0, sizeof(*imx335_if));
-ARM GAS  /tmp/ccQ3mQxl.s 			page 27
-
-
+ 1611              		.loc 1 324 3
+ 1612 0098 6822     		movs	r2, #104
+ 1613 009a 0021     		movs	r1, #0
+ 1614 009c 3868     		ldr	r0, [r7]
+ 1615 009e FFF7FEFF 		bl	memset
  325:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->Init = CMW_IMX335_Init;
+ 1616              		.loc 1 325 19
+ 1617 00a2 3B68     		ldr	r3, [r7]
+ 1618 00a4 194A     		ldr	r2, .L76
+ 1619 00a6 1A60     		str	r2, [r3]
  326:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->Start = CMW_IMX335_Start;
+ 1620              		.loc 1 326 20
+ 1621 00a8 3B68     		ldr	r3, [r7]
+ 1622 00aa 194A     		ldr	r2, .L76+4
+ 1623 00ac 9A60     		str	r2, [r3, #8]
  327:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->DeInit = CMW_IMX335_DeInit;
+ 1624              		.loc 1 327 21
+ 1625 00ae 3B68     		ldr	r3, [r7]
+ 1626 00b0 184A     		ldr	r2, .L76+8
+ 1627 00b2 5A60     		str	r2, [r3, #4]
  328:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->Run = CMW_IMX335_Run;
+ 1628              		.loc 1 328 18
+ 1629 00b4 3B68     		ldr	r3, [r7]
+ 1630 00b6 184A     		ldr	r2, .L76+12
+ 1631 00b8 DA60     		str	r2, [r3, #12]
  329:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->VsyncEventCallback = CMW_IMX335_VsyncEventCallback;
+ 1632              		.loc 1 329 33
+ 1633 00ba 3B68     		ldr	r3, [r7]
+ 1634 00bc 174A     		ldr	r2, .L76+16
+ 1635 00be 1A61     		str	r2, [r3, #16]
  330:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->FrameEventCallback = CMW_IMX335_FrameEventCallback;
+ 1636              		.loc 1 330 33
+ 1637 00c0 3B68     		ldr	r3, [r7]
+ 1638 00c2 174A     		ldr	r2, .L76+20
+ 1639 00c4 5A61     		str	r2, [r3, #20]
  331:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->ReadID = CMW_IMX335_ReadID;
+ 1640              		.loc 1 331 21
+ 1641 00c6 3B68     		ldr	r3, [r7]
+ 1642 00c8 164A     		ldr	r2, .L76+24
+ 1643 00ca DA61     		str	r2, [r3, #28]
+ARM GAS  /tmp/ccNbLpFw.s 			page 36
+
+
  332:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->SetGain = CMW_IMX335_SetGain;
+ 1644              		.loc 1 332 22
+ 1645 00cc 3B68     		ldr	r3, [r7]
+ 1646 00ce 164A     		ldr	r2, .L76+28
+ 1647 00d0 9A64     		str	r2, [r3, #72]
  333:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->SetExposure = CMW_IMX335_SetExposure;
+ 1648              		.loc 1 333 26
+ 1649 00d2 3B68     		ldr	r3, [r7]
+ 1650 00d4 154A     		ldr	r2, .L76+32
+ 1651 00d6 DA64     		str	r2, [r3, #76]
  334:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->SetWBRefMode = CMW_IMX335_SetWBRefMode;
+ 1652              		.loc 1 334 27
+ 1653 00d8 3B68     		ldr	r3, [r7]
+ 1654 00da 154A     		ldr	r2, .L76+36
+ 1655 00dc 5A65     		str	r2, [r3, #84]
  335:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->ListWBRefModes = CMW_IMX335_ListWBRefModes;
+ 1656              		.loc 1 335 29
+ 1657 00de 3B68     		ldr	r3, [r7]
+ 1658 00e0 144A     		ldr	r2, .L76+40
+ 1659 00e2 9A65     		str	r2, [r3, #88]
  336:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->SetFrequency = CMW_IMX335_SetFrequency;
+ 1660              		.loc 1 336 27
+ 1661 00e4 3B68     		ldr	r3, [r7]
+ 1662 00e6 144A     		ldr	r2, .L76+44
+ 1663 00e8 1A64     		str	r2, [r3, #64]
  337:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->SetFramerate = CMW_IMX335_SetFramerate;
+ 1664              		.loc 1 337 27
+ 1665 00ea 3B68     		ldr	r3, [r7]
+ 1666 00ec 134A     		ldr	r2, .L76+48
+ 1667 00ee 5A64     		str	r2, [r3, #68]
  338:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->SetMirrorFlip = CMW_IMX335_SetMirrorFlip;
+ 1668              		.loc 1 338 28
+ 1669 00f0 3B68     		ldr	r3, [r7]
+ 1670 00f2 134A     		ldr	r2, .L76+52
+ 1671 00f4 DA62     		str	r2, [r3, #44]
  339:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->GetSensorInfo = CMW_IMX335_GetSensorInfo;
+ 1672              		.loc 1 339 28
+ 1673 00f6 3B68     		ldr	r3, [r7]
+ 1674 00f8 124A     		ldr	r2, .L76+56
+ 1675 00fa 1A66     		str	r2, [r3, #96]
  340:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->SetTestPattern = CMW_IMX335_SetTestPattern;
+ 1676              		.loc 1 340 29
+ 1677 00fc 3B68     		ldr	r3, [r7]
+ 1678 00fe 124A     		ldr	r2, .L76+60
+ 1679 0100 5A66     		str	r2, [r3, #100]
  341:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   return ret;
+ 1680              		.loc 1 341 10
+ 1681 0102 FB68     		ldr	r3, [r7, #12]
+ 1682              	.L75:
  342:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 964              		.loc 1 342 1 view .LVU243
- 965 007a 2046     		mov	r0, r4
- 966 007c 02B0     		add	sp, sp, #8
- 967              		.cfi_remember_state
- 968              		.cfi_def_cfa_offset 16
- 969              		@ sp needed
- 970 007e 70BD     		pop	{r4, r5, r6, pc}
- 971              	.LVL95:
- 972              	.L49:
- 973              		.cfi_restore_state
- 314:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret != IMX335_OK)
- 974              		.loc 1 314 3 is_stmt 1 view .LVU244
- 314:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret != IMX335_OK)
- 975              		.loc 1 314 9 is_stmt 0 view .LVU245
- 976 0080 2046     		mov	r0, r4
- 977              	.LVL96:
- 314:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   if (ret != IMX335_OK)
- 978              		.loc 1 314 9 view .LVU246
- 979 0082 01A9     		add	r1, sp, #4
- 980 0084 FFF7FEFF 		bl	IMX335_ReadID
- 981              	.LVL97:
- 315:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
- 982              		.loc 1 315 3 is_stmt 1 view .LVU247
- 315:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
- 983              		.loc 1 315 6 is_stmt 0 view .LVU248
- 984 0088 0446     		mov	r4, r0
- 985 008a 0028     		cmp	r0, #0
- 986 008c F3D1     		bne	.L51
- 319:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
- 987              		.loc 1 319 3 is_stmt 1 view .LVU249
- 319:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   {
- 988              		.loc 1 319 6 is_stmt 0 view .LVU250
- 989 008e 019B     		ldr	r3, [sp, #4]
- 324:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->Init = CMW_IMX335_Init;
- 990              		.loc 1 324 3 view .LVU251
- 991 0090 5022     		movs	r2, #80
- 321:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
- 992              		.loc 1 321 11 view .LVU252
- 993 0092 002B     		cmp	r3, #0
-ARM GAS  /tmp/ccQ3mQxl.s 			page 28
+ 1683              		.loc 1 342 1
+ 1684 0104 1846     		mov	r0, r3
+ 1685 0106 1037     		adds	r7, r7, #16
+ 1686              		.cfi_def_cfa_offset 8
+ 1687 0108 BD46     		mov	sp, r7
+ 1688              		.cfi_def_cfa_register 13
+ 1689              		@ sp needed
+ARM GAS  /tmp/ccNbLpFw.s 			page 37
 
 
- 994 0094 08BF     		it	eq
- 995 0096 0446     		moveq	r4, r0
- 324:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->Init = CMW_IMX335_Init;
- 996              		.loc 1 324 3 view .LVU253
- 997 0098 3146     		mov	r1, r6
- 998 009a 05F11800 		add	r0, r5, #24
- 999              	.LVL98:
- 321:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   }
- 1000              		.loc 1 321 11 view .LVU254
- 1001 009e 18BF     		it	ne
- 1002 00a0 6FF00604 		mvnne	r4, #6
- 1003              	.LVL99:
- 324:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->Init = CMW_IMX335_Init;
- 1004              		.loc 1 324 3 is_stmt 1 view .LVU255
- 1005 00a4 FFF7FEFF 		bl	memset
- 1006              	.LVL100:
- 325:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->Start = CMW_IMX335_Start;
- 1007              		.loc 1 325 3 view .LVU256
- 325:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->Start = CMW_IMX335_Start;
- 1008              		.loc 1 325 19 is_stmt 0 view .LVU257
- 1009 00a8 104B     		ldr	r3, .L54
- 1010 00aa 2B60     		str	r3, [r5]
- 326:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->DeInit = CMW_IMX335_DeInit;
- 1011              		.loc 1 326 3 is_stmt 1 view .LVU258
- 326:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->DeInit = CMW_IMX335_DeInit;
- 1012              		.loc 1 326 20 is_stmt 0 view .LVU259
- 1013 00ac 104B     		ldr	r3, .L54+4
- 1014 00ae AB60     		str	r3, [r5, #8]
- 327:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->Run = CMW_IMX335_Run;
- 1015              		.loc 1 327 3 is_stmt 1 view .LVU260
- 327:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->Run = CMW_IMX335_Run;
- 1016              		.loc 1 327 21 is_stmt 0 view .LVU261
- 1017 00b0 104B     		ldr	r3, .L54+8
- 1018 00b2 6B60     		str	r3, [r5, #4]
- 328:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->VsyncEventCallback = CMW_IMX335_VsyncEventCallback;
- 1019              		.loc 1 328 3 is_stmt 1 view .LVU262
- 328:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->VsyncEventCallback = CMW_IMX335_VsyncEventCallback;
- 1020              		.loc 1 328 18 is_stmt 0 view .LVU263
- 1021 00b4 104B     		ldr	r3, .L54+12
- 1022 00b6 EB60     		str	r3, [r5, #12]
- 329:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->FrameEventCallback = CMW_IMX335_FrameEventCallback;
- 1023              		.loc 1 329 3 is_stmt 1 view .LVU264
- 329:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->FrameEventCallback = CMW_IMX335_FrameEventCallback;
- 1024              		.loc 1 329 33 is_stmt 0 view .LVU265
- 1025 00b8 104B     		ldr	r3, .L54+16
- 1026 00ba 2B61     		str	r3, [r5, #16]
- 330:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->ReadID = CMW_IMX335_ReadID;
- 1027              		.loc 1 330 3 is_stmt 1 view .LVU266
- 330:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->ReadID = CMW_IMX335_ReadID;
- 1028              		.loc 1 330 33 is_stmt 0 view .LVU267
- 1029 00bc 104B     		ldr	r3, .L54+20
- 1030 00be 6B61     		str	r3, [r5, #20]
- 331:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->SetGain = CMW_IMX335_SetGain;
- 1031              		.loc 1 331 3 is_stmt 1 view .LVU268
- 331:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->SetGain = CMW_IMX335_SetGain;
- 1032              		.loc 1 331 21 is_stmt 0 view .LVU269
- 1033 00c0 104B     		ldr	r3, .L54+24
-ARM GAS  /tmp/ccQ3mQxl.s 			page 29
-
-
- 1034 00c2 EB61     		str	r3, [r5, #28]
- 332:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->SetExposure = CMW_IMX335_SetExposure;
- 1035              		.loc 1 332 3 is_stmt 1 view .LVU270
- 332:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->SetExposure = CMW_IMX335_SetExposure;
- 1036              		.loc 1 332 22 is_stmt 0 view .LVU271
- 1037 00c4 104B     		ldr	r3, .L54+28
- 1038 00c6 AB64     		str	r3, [r5, #72]
- 333:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->SetWBRefMode = CMW_IMX335_SetWBRefMode;
- 1039              		.loc 1 333 3 is_stmt 1 view .LVU272
- 333:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->SetWBRefMode = CMW_IMX335_SetWBRefMode;
- 1040              		.loc 1 333 26 is_stmt 0 view .LVU273
- 1041 00c8 104B     		ldr	r3, .L54+32
- 1042 00ca EB64     		str	r3, [r5, #76]
- 334:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->ListWBRefModes = CMW_IMX335_ListWBRefModes;
- 1043              		.loc 1 334 3 is_stmt 1 view .LVU274
- 334:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->ListWBRefModes = CMW_IMX335_ListWBRefModes;
- 1044              		.loc 1 334 27 is_stmt 0 view .LVU275
- 1045 00cc 104B     		ldr	r3, .L54+36
- 1046 00ce 6B65     		str	r3, [r5, #84]
- 335:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->SetFrequency = CMW_IMX335_SetFrequency;
- 1047              		.loc 1 335 3 is_stmt 1 view .LVU276
- 335:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->SetFrequency = CMW_IMX335_SetFrequency;
- 1048              		.loc 1 335 29 is_stmt 0 view .LVU277
- 1049 00d0 104B     		ldr	r3, .L54+40
- 1050 00d2 AB65     		str	r3, [r5, #88]
- 336:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->SetFramerate = CMW_IMX335_SetFramerate;
- 1051              		.loc 1 336 3 is_stmt 1 view .LVU278
- 336:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->SetFramerate = CMW_IMX335_SetFramerate;
- 1052              		.loc 1 336 27 is_stmt 0 view .LVU279
- 1053 00d4 104B     		ldr	r3, .L54+44
- 1054 00d6 2B64     		str	r3, [r5, #64]
- 337:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->SetMirrorFlip = CMW_IMX335_SetMirrorFlip;
- 1055              		.loc 1 337 3 is_stmt 1 view .LVU280
- 337:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->SetMirrorFlip = CMW_IMX335_SetMirrorFlip;
- 1056              		.loc 1 337 27 is_stmt 0 view .LVU281
- 1057 00d8 104B     		ldr	r3, .L54+48
- 1058 00da 6B64     		str	r3, [r5, #68]
- 338:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->GetSensorInfo = CMW_IMX335_GetSensorInfo;
- 1059              		.loc 1 338 3 is_stmt 1 view .LVU282
- 338:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->GetSensorInfo = CMW_IMX335_GetSensorInfo;
- 1060              		.loc 1 338 28 is_stmt 0 view .LVU283
- 1061 00dc 104B     		ldr	r3, .L54+52
- 1062 00de EB62     		str	r3, [r5, #44]
- 339:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->SetTestPattern = CMW_IMX335_SetTestPattern;
- 1063              		.loc 1 339 3 is_stmt 1 view .LVU284
- 339:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   imx335_if->SetTestPattern = CMW_IMX335_SetTestPattern;
- 1064              		.loc 1 339 28 is_stmt 0 view .LVU285
- 1065 00e0 104B     		ldr	r3, .L54+56
- 1066 00e2 2B66     		str	r3, [r5, #96]
- 340:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   return ret;
- 1067              		.loc 1 340 3 is_stmt 1 view .LVU286
- 340:Lib/Camera_Middleware/sensors/cmw_imx335.c ****   return ret;
- 1068              		.loc 1 340 29 is_stmt 0 view .LVU287
- 1069 00e4 104B     		ldr	r3, .L54+60
- 1070 00e6 6B66     		str	r3, [r5, #100]
- 341:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 1071              		.loc 1 341 3 is_stmt 1 view .LVU288
-ARM GAS  /tmp/ccQ3mQxl.s 			page 30
-
-
- 341:Lib/Camera_Middleware/sensors/cmw_imx335.c **** }
- 1072              		.loc 1 341 10 is_stmt 0 view .LVU289
- 1073 00e8 C7E7     		b	.L48
- 1074              	.L55:
- 1075 00ea 00BF     		.align	2
- 1076              	.L54:
- 1077 00ec 00000000 		.word	CMW_IMX335_Init
- 1078 00f0 00000000 		.word	CMW_IMX335_Start
- 1079 00f4 00000000 		.word	CMW_IMX335_DeInit
- 1080 00f8 00000000 		.word	CMW_IMX335_Run
- 1081 00fc 00000000 		.word	CMW_IMX335_VsyncEventCallback
- 1082 0100 00000000 		.word	CMW_IMX335_FrameEventCallback
- 1083 0104 00000000 		.word	CMW_IMX335_ReadID
- 1084 0108 00000000 		.word	CMW_IMX335_SetGain
- 1085 010c 00000000 		.word	CMW_IMX335_SetExposure
- 1086 0110 00000000 		.word	CMW_IMX335_SetWBRefMode
- 1087 0114 00000000 		.word	CMW_IMX335_ListWBRefModes
- 1088 0118 00000000 		.word	CMW_IMX335_SetFrequency
- 1089 011c 00000000 		.word	CMW_IMX335_SetFramerate
- 1090 0120 00000000 		.word	CMW_IMX335_SetMirrorFlip
- 1091 0124 00000000 		.word	CMW_IMX335_GetSensorInfo
- 1092 0128 00000000 		.word	CMW_IMX335_SetTestPattern
- 1093              		.cfi_endproc
- 1094              	.LFE3361:
- 1096              		.section	.rodata.ISP_IQParamCacheInit_IMX335,"a"
- 1097              		.align	2
- 1100              	ISP_IQParamCacheInit_IMX335:
- 1101 0000 00       		.byte	0
- 1102 0001 000000   		.space	3
- 1103 0004 00000000 		.word	0
- 1104 0008 00000000 		.word	0
- 1105 000c 01       		.byte	1
- 1106 000d 00       		.byte	0
- 1107 000e 02       		.byte	2
- 1108 000f 04       		.byte	4
- 1109 0010 04       		.byte	4
- 1110 0011 06       		.byte	6
- 1111 0012 0000     		.space	2
- 1112 0014 00       		.byte	0
- 1113 0015 000000   		.space	3
- 1114 0018 00000000 		.word	0
- 1115 001c 00000000 		.word	0
- 1116 0020 00000000 		.word	0
- 1117 0024 00000000 		.word	0
- 1118 0028 00000000 		.word	0
- 1119 002c 00000000 		.word	0
- 1120 0030 00000000 		.word	0
- 1121 0034 00000000 		.word	0
- 1122 0038 00000000 		.word	0
- 1123 003c 88020000 		.word	648
- 1124 0040 E6010000 		.word	486
- 1125 0044 10050000 		.word	1296
- 1126 0048 CC030000 		.word	972
- 1127 004c 00000000 		.word	0
- 1128 0050 00000000 		.word	0
- 1129 0054 00       		.byte	0
- 1130 0055 000000   		.space	3
-ARM GAS  /tmp/ccQ3mQxl.s 			page 31
-
-
- 1131 0058 00000000 		.word	0
- 1132 005c 00       		.byte	0
- 1133 005d 00       		.byte	0
- 1134 005e 00000000 		.space	6
- 1134      0000
- 1135 0064 01       		.byte	1
- 1136 0065 0C       		.byte	12
- 1137 0066 0C       		.byte	12
- 1138 0067 0C       		.byte	12
- 1139 0068 01       		.byte	1
- 1140 0069 00       		.byte	0
- 1141 006a 00000000 		.space	6
- 1141      0000
- 1142 0070 00       		.byte	0
- 1143 0071 000000   		.space	3
- 1144 0074 01       		.byte	1
- 1145 0075 4100     		.ascii	"A\000"
- 1146 0077 00000000 		.space	30
- 1146      00000000 
- 1146      00000000 
- 1146      00000000 
- 1146      00000000 
- 1147 0095 544C3834 		.ascii	"TL84\000"
- 1147      00
- 1148 009a 00000000 		.space	27
- 1148      00000000 
- 1148      00000000 
- 1148      00000000 
- 1148      00000000 
- 1149 00b5 44353000 		.ascii	"D50\000"
- 1150 00b9 00000000 		.space	28
- 1150      00000000 
- 1150      00000000 
- 1150      00000000 
- 1150      00000000 
- 1151 00d5 44363500 		.ascii	"D65\000"
- 1152 00d9 00000000 		.space	28
- 1152      00000000 
- 1152      00000000 
- 1152      00000000 
- 1152      00000000 
- 1153 00f5 46726565 		.ascii	"Free slot\000"
- 1153      20736C6F 
- 1153      7400
- 1154 00ff 00000000 		.space	22
- 1154      00000000 
- 1154      00000000 
- 1154      00000000 
- 1154      00000000 
- 1155 0115 000000   		.space	3
- 1156 0118 280B0000 		.word	2856
- 1157 011c A00F0000 		.word	4000
- 1158 0120 88130000 		.word	5000
- 1159 0124 64190000 		.word	6500
- 1160 0128 00000000 		.word	0
- 1161 012c 003B5808 		.word	140000000
- 1162 0130 40CE8C0A 		.word	177000000
-ARM GAS  /tmp/ccQ3mQxl.s 			page 32
-
-
- 1163 0134 00EF1C0D 		.word	220000000
- 1164 0138 40679A0E 		.word	245000000
- 1165 013c 00000000 		.word	0
- 1166 0140 00E1F505 		.word	100000000
- 1167 0144 00E1F505 		.word	100000000
- 1168 0148 00E1F505 		.word	100000000
- 1169 014c 00E1F505 		.word	100000000
- 1170 0150 00000000 		.word	0
- 1171 0154 C02A6410 		.word	275000000
- 1172 0158 C0D0010E 		.word	235000000
- 1173 015c 0095BA0A 		.word	180000000
- 1174 0160 C01C3D09 		.word	155000000
- 1175 0164 00000000 		.word	0
- 1176 0168 A0180709 		.word	151460000
- 1177 016c 606AE6F9 		.word	-102340000
- 1178 0170 E08C0803 		.word	50892000
- 1179 0174 A8E1DFFA 		.word	-85991000
- 1180 0178 A04C930C 		.word	210980000
- 1181 017c 40C682FE 		.word	-24984000
- 1182 0180 40787D01 		.word	25000000
- 1183 0184 C07471F0 		.word	-261000000
- 1184 0188 403F5314 		.word	341000000
- 1185 018c 242A3F09 		.word	155134500
- 1186 0190 707FDDFB 		.word	-69370000
- 1187 0194 50FBC700 		.word	13106000
- 1188 0198 68EDB1FD 		.word	-38671000
- 1189 019c 48BEFE09 		.word	167689800
- 1190 01a0 802DFAFD 		.word	-33936000
- 1191 01a4 D8A05400 		.word	5546200
- 1192 01a8 B02B05FC 		.word	-66770000
- 1193 01ac 088E8809 		.word	159944200
- 1194 01b0 80CDBB0A 		.word	180080000
- 1195 01b4 C09E22FC 		.word	-64840000
- 1196 01b8 D09B17FF 		.word	-15230000
- 1197 01bc D08CE1FD 		.word	-35550000
- 1198 01c0 00C6200A 		.word	169920000
- 1199 01c4 2067F3FD 		.word	-34380000
- 1200 01c8 10149500 		.word	9770000
- 1201 01cc E0BB4BFA 		.word	-95700000
- 1202 01d0 2038150B 		.word	185940000
- 1203 01d4 80CDBB0A 		.word	180080000
- 1204 01d8 C09E22FC 		.word	-64840000
- 1205 01dc D09B17FF 		.word	-15230000
- 1206 01e0 D08CE1FD 		.word	-35550000
- 1207 01e4 00C6200A 		.word	169920000
- 1208 01e8 2067F3FD 		.word	-34380000
- 1209 01ec 10149500 		.word	9770000
- 1210 01f0 E0BB4BFA 		.word	-95700000
- 1211 01f4 2038150B 		.word	185940000
- 1212 01f8 00000000 		.word	0
- 1213 01fc 00000000 		.word	0
- 1214 0200 00000000 		.word	0
- 1215 0204 00000000 		.word	0
- 1216 0208 00000000 		.word	0
- 1217 020c 00000000 		.word	0
- 1218 0210 00000000 		.word	0
- 1219 0214 00000000 		.word	0
-ARM GAS  /tmp/ccQ3mQxl.s 			page 33
-
-
- 1220 0218 00000000 		.word	0
- 1221 021c 00       		.byte	0
- 1222 021d 000000   		.space	3
- 1223 0220 00000000 		.word	0
- 1224 0224 00000000 		.word	0
- 1225 0228 00000000 		.word	0
- 1226 022c 00       		.byte	0
- 1227 022d 000000   		.space	3
- 1228 0230 00000000 		.word	0
- 1229 0234 00000000 		.word	0
- 1230 0238 00000000 		.word	0
- 1231 023c 00000000 		.word	0
- 1232 0240 00000000 		.word	0
- 1233 0244 00000000 		.word	0
- 1234 0248 00000000 		.word	0
- 1235 024c 00000000 		.word	0
- 1236 0250 00000000 		.word	0
- 1237 0254 01       		.byte	1
- 1238 0255 01       		.byte	1
- 1239 0256 0000     		.space	2
- 1240              		.section	.rodata
- 1241              		.align	2
- 1242              		.set	.LANCHOR0,. + 0
- 1243              	.LC0:
- 1244 0000 0A000000 		.word	10
- 1245 0004 0F000000 		.word	15
- 1246 0008 14000000 		.word	20
- 1247 000c 19000000 		.word	25
- 1248 0010 1E000000 		.word	30
- 1249              		.text
- 1250              	.Letext0:
- 1251              		.file 2 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 1252              		.file 3 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 1253              		.file 4 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 1254              		.file 5 "STM32Cube_FW_N6/Drivers/CMSIS/Device/ST/STM32N6xx/Include/stm32n657xx.h"
- 1255              		.file 6 "STM32Cube_FW_N6/Drivers/STM32N6xx_HAL_Driver/Inc/stm32n6xx_hal_dcmipp.h"
- 1256              		.file 7 "Lib/Camera_Middleware/ISP_Library/isp/Inc/isp_core.h"
- 1257              		.file 8 "Lib/Camera_Middleware/sensors/cmw_sensors_if.h"
- 1258              		.file 9 "Lib/Camera_Middleware/sensors/imx335/imx335_reg.h"
- 1259              		.file 10 "Lib/Camera_Middleware/sensors/imx335/imx335.h"
- 1260              		.file 11 "Lib/Camera_Middleware/sensors/cmw_imx335.h"
- 1261              		.file 12 "Inc/imx335_isp_param_conf.h"
- 1262              		.file 13 "Inc/vd66gy_isp_param_conf.h"
- 1263              		.file 14 "Lib/Camera_Middleware/ISP_Library/isp/Inc/isp_api.h"
- 1264              		.file 15 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-
- 1265              		.file 16 "Inc/isp_param_conf.h"
- 1266              		.file 17 "<built-in>"
-ARM GAS  /tmp/ccQ3mQxl.s 			page 34
+ 1690 010a 80BD     		pop	{r7, pc}
+ 1691              	.L77:
+ 1692              		.align	2
+ 1693              	.L76:
+ 1694 010c 00000000 		.word	CMW_IMX335_Init
+ 1695 0110 00000000 		.word	CMW_IMX335_Start
+ 1696 0114 00000000 		.word	CMW_IMX335_DeInit
+ 1697 0118 00000000 		.word	CMW_IMX335_Run
+ 1698 011c 00000000 		.word	CMW_IMX335_VsyncEventCallback
+ 1699 0120 00000000 		.word	CMW_IMX335_FrameEventCallback
+ 1700 0124 00000000 		.word	CMW_IMX335_ReadID
+ 1701 0128 00000000 		.word	CMW_IMX335_SetGain
+ 1702 012c 00000000 		.word	CMW_IMX335_SetExposure
+ 1703 0130 00000000 		.word	CMW_IMX335_SetWBRefMode
+ 1704 0134 00000000 		.word	CMW_IMX335_ListWBRefModes
+ 1705 0138 00000000 		.word	CMW_IMX335_SetFrequency
+ 1706 013c 00000000 		.word	CMW_IMX335_SetFramerate
+ 1707 0140 00000000 		.word	CMW_IMX335_SetMirrorFlip
+ 1708 0144 00000000 		.word	CMW_IMX335_GetSensorInfo
+ 1709 0148 00000000 		.word	CMW_IMX335_SetTestPattern
+ 1710              		.cfi_endproc
+ 1711              	.LFE3361:
+ 1713              		.text
+ 1714              	.Letext0:
+ 1715              		.file 2 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 1716              		.file 3 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 1717              		.file 4 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 1718              		.file 5 "STM32Cube_FW_N6/Drivers/CMSIS/Device/ST/STM32N6xx/Include/stm32n657xx.h"
+ 1719              		.file 6 "STM32Cube_FW_N6/Drivers/STM32N6xx_HAL_Driver/Inc/stm32n6xx_hal_dcmipp.h"
+ 1720              		.file 7 "Lib/Camera_Middleware/ISP_Library/isp/Inc/isp_core.h"
+ 1721              		.file 8 "Lib/Camera_Middleware/sensors/cmw_sensors_if.h"
+ 1722              		.file 9 "Lib/Camera_Middleware/sensors/imx335/imx335_reg.h"
+ 1723              		.file 10 "Lib/Camera_Middleware/sensors/imx335/imx335.h"
+ 1724              		.file 11 "Lib/Camera_Middleware/sensors/cmw_imx335.h"
+ 1725              		.file 12 "Inc/imx335_isp_param_conf.h"
+ 1726              		.file 13 "Inc/vd66gy_isp_param_conf.h"
+ 1727              		.file 14 "Inc/isp_param_conf.h"
+ 1728              		.file 15 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-
+ 1729              		.file 16 "Lib/Camera_Middleware/ISP_Library/isp/Inc/isp_api.h"
+ARM GAS  /tmp/ccNbLpFw.s 			page 38
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 cmw_imx335.c
-     /tmp/ccQ3mQxl.s:26     .text.CMW_IMX335_FrameEventCallback:00000000 $t
-     /tmp/ccQ3mQxl.s:31     .text.CMW_IMX335_FrameEventCallback:00000000 CMW_IMX335_FrameEventCallback
-     /tmp/ccQ3mQxl.s:45     .text.CMW_IMX335_SetWBRefMode:00000000 $t
-     /tmp/ccQ3mQxl.s:51     .text.CMW_IMX335_SetWBRefMode:00000000 CMW_IMX335_SetWBRefMode
-     /tmp/ccQ3mQxl.s:85     .text.CMW_IMX335_ListWBRefModes:00000000 $t
-     /tmp/ccQ3mQxl.s:91     .text.CMW_IMX335_ListWBRefModes:00000000 CMW_IMX335_ListWBRefModes
-     /tmp/ccQ3mQxl.s:125    .text.CMW_IMX335_ReadID:00000000 $t
-     /tmp/ccQ3mQxl.s:130    .text.CMW_IMX335_ReadID:00000000 CMW_IMX335_ReadID
-     /tmp/ccQ3mQxl.s:150    .text.CMW_IMX335_SetTestPattern:00000000 $t
-     /tmp/ccQ3mQxl.s:155    .text.CMW_IMX335_SetTestPattern:00000000 CMW_IMX335_SetTestPattern
-     /tmp/ccQ3mQxl.s:178    .text.CMW_IMX335_GetSensorInfo:00000000 $t
-     /tmp/ccQ3mQxl.s:183    .text.CMW_IMX335_GetSensorInfo:00000000 CMW_IMX335_GetSensorInfo
-     /tmp/ccQ3mQxl.s:254    .text.CMW_IMX335_GetSensorInfo:0000003c $d
-     /tmp/ccQ3mQxl.s:260    .text.CMW_IMX335_SetMirrorFlip:00000000 $t
-     /tmp/ccQ3mQxl.s:265    .text.CMW_IMX335_SetMirrorFlip:00000000 CMW_IMX335_SetMirrorFlip
-     /tmp/ccQ3mQxl.s:291    .text.CMW_IMX335_SetFramerate:00000000 $t
-     /tmp/ccQ3mQxl.s:296    .text.CMW_IMX335_SetFramerate:00000000 CMW_IMX335_SetFramerate
-     /tmp/ccQ3mQxl.s:390    .text.CMW_IMX335_SetFramerate:0000003c $d
-     /tmp/ccQ3mQxl.s:395    .text.CMW_IMX335_SetFrequency:00000000 $t
-     /tmp/ccQ3mQxl.s:400    .text.CMW_IMX335_SetFrequency:00000000 CMW_IMX335_SetFrequency
-     /tmp/ccQ3mQxl.s:420    .text.CMW_IMX335_SetExposure:00000000 $t
-     /tmp/ccQ3mQxl.s:425    .text.CMW_IMX335_SetExposure:00000000 CMW_IMX335_SetExposure
-     /tmp/ccQ3mQxl.s:445    .text.CMW_IMX335_SetGain:00000000 $t
-     /tmp/ccQ3mQxl.s:450    .text.CMW_IMX335_SetGain:00000000 CMW_IMX335_SetGain
-     /tmp/ccQ3mQxl.s:470    .text.CMW_IMX335_Run:00000000 $t
-     /tmp/ccQ3mQxl.s:475    .text.CMW_IMX335_Run:00000000 CMW_IMX335_Run
-     /tmp/ccQ3mQxl.s:509    .text.CMW_IMX335_DeInit:00000000 $t
-     /tmp/ccQ3mQxl.s:514    .text.CMW_IMX335_DeInit:00000000 CMW_IMX335_DeInit
-     /tmp/ccQ3mQxl.s:564    .text.CMW_IMX335_Start:00000000 $t
-     /tmp/ccQ3mQxl.s:569    .text.CMW_IMX335_Start:00000000 CMW_IMX335_Start
-     /tmp/ccQ3mQxl.s:654    .text.CMW_IMX335_Start:00000044 $d
-     /tmp/ccQ3mQxl.s:1100   .rodata.ISP_IQParamCacheInit_IMX335:00000000 ISP_IQParamCacheInit_IMX335
-     /tmp/ccQ3mQxl.s:659    .text.CMW_IMX335_Init:00000000 $t
-     /tmp/ccQ3mQxl.s:664    .text.CMW_IMX335_Init:00000000 CMW_IMX335_Init
-     /tmp/ccQ3mQxl.s:752    .text.CMW_IMX335_VsyncEventCallback:00000000 $t
-     /tmp/ccQ3mQxl.s:757    .text.CMW_IMX335_VsyncEventCallback:00000000 CMW_IMX335_VsyncEventCallback
-     /tmp/ccQ3mQxl.s:843    .text.CMW_IMX335_Probe:00000000 $t
-     /tmp/ccQ3mQxl.s:849    .text.CMW_IMX335_Probe:00000000 CMW_IMX335_Probe
-     /tmp/ccQ3mQxl.s:1077   .text.CMW_IMX335_Probe:000000ec $d
-     /tmp/ccQ3mQxl.s:1097   .rodata.ISP_IQParamCacheInit_IMX335:00000000 $d
-     /tmp/ccQ3mQxl.s:1241   .rodata:00000000 $d
-                           .group:00000000 wm4.0.c552ae9005b0f2cca11872fae5d4b7f2
+     /tmp/ccNbLpFw.s:26     .rodata.ISP_IQParamCacheInit_IMX335:00000000 $d
+     /tmp/ccNbLpFw.s:29     .rodata.ISP_IQParamCacheInit_IMX335:00000000 ISP_IQParamCacheInit_IMX335
+     /tmp/ccNbLpFw.s:170    .rodata.ISP_IQParamCacheInit_VD66GY:00000000 $d
+     /tmp/ccNbLpFw.s:173    .rodata.ISP_IQParamCacheInit_VD66GY:00000000 ISP_IQParamCacheInit_VD66GY
+     /tmp/ccNbLpFw.s:314    .data.ISP_IQParamCacheInit:00000000 $d
+     /tmp/ccNbLpFw.s:317    .data.ISP_IQParamCacheInit:00000000 ISP_IQParamCacheInit
+     /tmp/ccNbLpFw.s:321    .text.CMW_IMX335_GetResType:00000000 $t
+     /tmp/ccNbLpFw.s:326    .text.CMW_IMX335_GetResType:00000000 CMW_IMX335_GetResType
+     /tmp/ccNbLpFw.s:377    .text.CMW_IMX335_getMirrorFlipConfig:00000000 $t
+     /tmp/ccNbLpFw.s:382    .text.CMW_IMX335_getMirrorFlipConfig:00000000 CMW_IMX335_getMirrorFlipConfig
+     /tmp/ccNbLpFw.s:453    .text.CMW_IMX335_DeInit:00000000 $t
+     /tmp/ccNbLpFw.s:458    .text.CMW_IMX335_DeInit:00000000 CMW_IMX335_DeInit
+     /tmp/ccNbLpFw.s:521    .text.CMW_IMX335_ReadID:00000000 $t
+     /tmp/ccNbLpFw.s:526    .text.CMW_IMX335_ReadID:00000000 CMW_IMX335_ReadID
+     /tmp/ccNbLpFw.s:561    .text.CMW_IMX335_SetGain:00000000 $t
+     /tmp/ccNbLpFw.s:566    .text.CMW_IMX335_SetGain:00000000 CMW_IMX335_SetGain
+     /tmp/ccNbLpFw.s:601    .text.CMW_IMX335_SetExposure:00000000 $t
+     /tmp/ccNbLpFw.s:606    .text.CMW_IMX335_SetExposure:00000000 CMW_IMX335_SetExposure
+     /tmp/ccNbLpFw.s:641    .text.CMW_IMX335_SetWBRefMode:00000000 $t
+     /tmp/ccNbLpFw.s:647    .text.CMW_IMX335_SetWBRefMode:00000000 CMW_IMX335_SetWBRefMode
+     /tmp/ccNbLpFw.s:701    .text.CMW_IMX335_ListWBRefModes:00000000 $t
+     /tmp/ccNbLpFw.s:707    .text.CMW_IMX335_ListWBRefModes:00000000 CMW_IMX335_ListWBRefModes
+     /tmp/ccNbLpFw.s:758    .text.CMW_IMX335_SetFrequency:00000000 $t
+     /tmp/ccNbLpFw.s:763    .text.CMW_IMX335_SetFrequency:00000000 CMW_IMX335_SetFrequency
+     /tmp/ccNbLpFw.s:798    .rodata:00000000 $d
+     /tmp/ccNbLpFw.s:806    .text.CMW_IMX335_SetFramerate:00000000 $t
+     /tmp/ccNbLpFw.s:811    .text.CMW_IMX335_SetFramerate:00000000 CMW_IMX335_SetFramerate
+     /tmp/ccNbLpFw.s:887    .text.CMW_IMX335_SetFramerate:0000005c $d
+     /tmp/ccNbLpFw.s:892    .text.CMW_IMX335_SetMirrorFlip:00000000 $t
+     /tmp/ccNbLpFw.s:897    .text.CMW_IMX335_SetMirrorFlip:00000000 CMW_IMX335_SetMirrorFlip
+     /tmp/ccNbLpFw.s:941    .text.CMW_IMX335_GetSensorInfo:00000000 $t
+     /tmp/ccNbLpFw.s:946    .text.CMW_IMX335_GetSensorInfo:00000000 CMW_IMX335_GetSensorInfo
+     /tmp/ccNbLpFw.s:1034   .text.CMW_IMX335_GetSensorInfo:00000074 $d
+     /tmp/ccNbLpFw.s:1040   .text.CMW_IMX335_SetTestPattern:00000000 $t
+     /tmp/ccNbLpFw.s:1045   .text.CMW_IMX335_SetTestPattern:00000000 CMW_IMX335_SetTestPattern
+     /tmp/ccNbLpFw.s:1080   .text.CMW_IMX335_Init:00000000 $t
+     /tmp/ccNbLpFw.s:1085   .text.CMW_IMX335_Init:00000000 CMW_IMX335_Init
+     /tmp/ccNbLpFw.s:1168   .text.CMW_IMX335_Start:00000000 $t
+     /tmp/ccNbLpFw.s:1173   .text.CMW_IMX335_Start:00000000 CMW_IMX335_Start
+     /tmp/ccNbLpFw.s:1246   .text.CMW_IMX335_Start:00000060 $d
+     /tmp/ccNbLpFw.s:1251   .text.CMW_IMX335_Run:00000000 $t
+     /tmp/ccNbLpFw.s:1256   .text.CMW_IMX335_Run:00000000 CMW_IMX335_Run
+     /tmp/ccNbLpFw.s:1302   .text.CMW_IMX335_PowerOn:00000000 $t
+     /tmp/ccNbLpFw.s:1307   .text.CMW_IMX335_PowerOn:00000000 CMW_IMX335_PowerOn
+     /tmp/ccNbLpFw.s:1390   .text.CMW_IMX335_VsyncEventCallback:00000000 $t
+     /tmp/ccNbLpFw.s:1395   .text.CMW_IMX335_VsyncEventCallback:00000000 CMW_IMX335_VsyncEventCallback
+     /tmp/ccNbLpFw.s:1469   .text.CMW_IMX335_FrameEventCallback:00000000 $t
+     /tmp/ccNbLpFw.s:1474   .text.CMW_IMX335_FrameEventCallback:00000000 CMW_IMX335_FrameEventCallback
+     /tmp/ccNbLpFw.s:1505   .text.CMW_IMX335_Probe:00000000 $t
+     /tmp/ccNbLpFw.s:1511   .text.CMW_IMX335_Probe:00000000 CMW_IMX335_Probe
+     /tmp/ccNbLpFw.s:1694   .text.CMW_IMX335_Probe:0000010c $d
+                           .group:00000000 wm4.0.2a10773746a5c5ebb5552f50e466f80b
                            .group:00000000 wm4._newlib_version.h.4.411db44ea2338a62eca2f0777f81481b
                            .group:00000000 wm4.newlib.h.27.4b972ceed5d01f491020c20f1e546cab
                            .group:00000000 wm4.ieeefp.h.77.bd5feb87d9990dd328793ced294f6a87
+ARM GAS  /tmp/ccNbLpFw.s 			page 39
+
+
                            .group:00000000 wm4.features.h.22.9dfb1293666eb4caf24cccb81c86a551
                            .group:00000000 wm4.config.h.224.10ee1ad185d877c6e334e6581faab44d
                            .group:00000000 wm4._ansi.h.31.de524f58584151836e90d8620a16f8e8
@@ -2028,9 +2273,6 @@ DEFINED SYMBOLS
                            .group:00000000 wm4._default_types.h.6.959254cf5f09734ea7516c89e8bb21bd
                            .group:00000000 wm4.cdefs.h.49.70fc7af612f78ddcace70fdd90b5623b
                            .group:00000000 wm4._types.h.20.dd0d04dca3800a0d2a6129b87f3adbb2
-ARM GAS  /tmp/ccQ3mQxl.s 			page 35
-
-
                            .group:00000000 wm4.stddef.h.158.6f8e08a347b1cff664332fa350bfceb3
                            .group:00000000 wm4._types.h.127.3bdfe3ff8ea2d0985b03d9cbe93480e3
                            .group:00000000 wm4.reent.h.18.25503cdc8b7e55dd0d6ea7b3e5af7a03
@@ -2078,6 +2320,9 @@ DEFINED SYMBOLS
                            .group:00000000 wm4.stm32n6xx_hal_dma_ex.h.21.66e597beb090a165329d6ccf665e41bc
                            .group:00000000 wm4.stm32n6xx_hal_dma.h.1020.87e2180c009560b617c1f8208140c950
                            .group:00000000 wm4.stm32n6xx_hal_cortex.h.21.f493623cc58f9454ab4eae41e395c5cc
+ARM GAS  /tmp/ccNbLpFw.s 			page 40
+
+
                            .group:00000000 wm4.stm32n6xx_hal_bsec.h.21.61b309e67dd810e28897a01b1b21a97f
                            .group:00000000 wm4.stm32n6xx_hal_dcmipp.h.21.f538bfd785c6469670251ac9bc7af55d
                            .group:00000000 wm4.stm32n6xx_hal_dma2d.h.21.75c8d46cdbb72970123b3f34ae2043d7
@@ -2088,9 +2333,6 @@ DEFINED SYMBOLS
                            .group:00000000 wm4.stm32n6xx_hal_i2c.h.741.1084702632703acc669e4282b3043372
                            .group:00000000 wm4.stm32n6xx_hal_icache.h.21.194b4ec6e76f32b14f65c85616854850
                            .group:00000000 wm4.stm32n6xx_hal_ltdc.h.21.ae1eb09930e7e550e48e418ac5849e4d
-ARM GAS  /tmp/ccQ3mQxl.s 			page 36
-
-
                            .group:00000000 wm4.stm32n6xx_hal_ltdc.h.1002.b13ede7fc94ed5ad1c6768a157d2149a
                            .group:00000000 wm4.stm32n6xx_ll_usb.h.21.d518a5d97876c2ff49040c20a2c4a120
                            .group:00000000 wm4.stm32n6xx_hal_pcd.h.155.27040aac6844effe2af8c180caf1dd2e
@@ -2130,30 +2372,29 @@ DEFINED SYMBOLS
                            .group:00000000 wm4.controller_functions.h.28.7bed7d7a726df2f65b8a3d89cff01247
                            .group:00000000 wm4.filtering_functions.h.46.6cf1424fb1f86d5f9958d208b83340a1
                            .group:00000000 wm4.postprocess_conf.h.22.3cea487938a8716b861207393e069778
-                           .group:00000000 wm4.app_config.h.23.726746aecdeac4550fc4bca4b08fd195
+                           .group:00000000 wm4.app_config.h.23.c1bf0853dd36ee4f0f9eca08a0684042
                            .group:00000000 wm4.vd66gy_isp_param_conf.h.22.604506d661a39388c7c546f6b95d86d1
 
 UNDEFINED SYMBOLS
-ISP_SetWBRefMode
-ISP_ListWBRefModes
-IMX335_ReadID
-IMX335_SetTestPattern
-strcpy
-IMX335_MirrorFlipConfig
-IMX335_SetFramerate
-IMX335_SetFrequency
-IMX335_SetExposure
-IMX335_SetGain
-ISP_BackgroundProcess
 ISP_DeInit
 IMX335_DeInit
+IMX335_ReadID
+IMX335_SetGain
+ARM GAS  /tmp/ccNbLpFw.s 			page 41
+
+
+IMX335_SetExposure
+ISP_SetWBRefMode
+ISP_ListWBRefModes
+IMX335_SetFrequency
+IMX335_SetFramerate
+IMX335_MirrorFlipConfig
+IMX335_SetTestPattern
+IMX335_Init
 ISP_Init
-ARM GAS  /tmp/ccQ3mQxl.s 			page 37
-
-
 ISP_Start
 IMX335_Start
-IMX335_Init
+ISP_BackgroundProcess
 ISP_IncDumpFrameId
 ISP_IncMainFrameId
 ISP_GatherStatistics

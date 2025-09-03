@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccft5TA7.s 			page 1
+ARM GAS  /tmp/ccupW8Gk.s 			page 1
 
 
    1              		.arch armv8.1-m.main
@@ -16,7 +16,7 @@ ARM GAS  /tmp/ccft5TA7.s 			page 1
   13              		.eabi_attribute 24, 1
   14              		.eabi_attribute 25, 1
   15              		.eabi_attribute 26, 1
-  16              		.eabi_attribute 30, 4
+  16              		.eabi_attribute 30, 6
   17              		.eabi_attribute 34, 1
   18              		.eabi_attribute 38, 1
   19              		.eabi_attribute 18, 4
@@ -25,102 +25,48 @@ ARM GAS  /tmp/ccft5TA7.s 			page 1
   22              	.Ltext0:
   23              		.cfi_sections	.debug_frame
   24              		.file 1 "Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c"
-  25              		.section	.rodata.app_postprocess_init.str1.1,"aMS",%progbits,1
-  26              	.LC0:
-  27 0000 286E6E5F 		.ascii	"(nn_instance != NULL) && (nn_instance->network != N"
-  27      696E7374 
-  27      616E6365 
-  27      20213D20 
-  27      4E554C4C 
-  28 0033 554C4C29 		.ascii	"ULL) && (nn_instance->network->output_buffers_info "
-  28      20262620 
-  28      286E6E5F 
+  25              		.section	.rodata
+  26              		.align	2
+  27              	.LC0:
+  28 0000 286E6E5F 		.ascii	"(nn_instance != NULL) && (nn_instance->network != N"
   28      696E7374 
   28      616E6365 
-  29 0066 213D204E 		.ascii	"!= NULL)\000"
-  29      554C4C29 
-  29      00
-  30              	.LC1:
-  31 006f 4C69622F 		.ascii	"Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h\000"
-  31      41495F52 
-  31      756E7469 
-  31      6D652F4E 
-  31      70752F6C 
-  32              		.section	.text.app_postprocess_init,"ax",%progbits
-  33              		.align	1
-  34              		.global	app_postprocess_init
-  35              		.syntax unified
-  36              		.thumb
-  37              		.thumb_func
-  39              	app_postprocess_init:
-  40              	.LVL0:
-  41              	.LFB7343:
-   1:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  /**
-   2:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  ******************************************************************************
-   3:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  * @file    app_postprocess_od_yolov8_ui.c
-ARM GAS  /tmp/ccft5TA7.s 			page 2
-
-
-   4:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  * @author  GPM Application Team
-   5:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  *
-   6:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  ******************************************************************************
-   7:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  * @attention
-   8:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  *
-   9:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  * Copyright (c) 2023 STMicroelectronics.
-  10:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  * All rights reserved.
-  11:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  *
-  12:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  * This software is licensed under terms that can be found in the LICENSE file
-  13:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  * in the root directory of this software component.
-  14:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  * If no LICENSE file comes with this software, it is provided AS-IS.
-  15:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  *
-  16:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  ******************************************************************************
-  17:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  */
-  18:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** 
-  19:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** 
-  20:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** #include "app_postprocess.h"
-  21:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** #include "app_config.h"
-  22:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** #include <assert.h>
-  23:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** 
-  24:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** #if POSTPROCESS_TYPE == POSTPROCESS_OD_YOLO_V8_UI
-  25:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** static int8_t scratch_buffer[AI_OD_YOLOV8_PP_TOTAL_BOXES * 6];
-  26:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** static od_pp_outBuffer_t out_detections[AI_OD_YOLOV8_PP_TOTAL_BOXES];
-  27:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** 
-  28:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** int32_t app_postprocess_init(void *params_postprocess, NN_Instance_TypeDef *NN_Instance)
-  29:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** {
-  42              		.loc 1 29 1 view -0
-  43              		.cfi_startproc
-  44              		@ args = 0, pretend = 0, frame = 0
-  45              		@ frame_needed = 0, uses_anonymous_args = 0
-  30:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   int32_t error = AI_OD_POSTPROCESS_ERROR_NO;
-  46              		.loc 1 30 3 view .LVU1
-  31:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   od_yolov8_pp_static_param_t *params = (od_yolov8_pp_static_param_t *) params_postprocess;
-  47              		.loc 1 31 3 view .LVU2
-  29:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   int32_t error = AI_OD_POSTPROCESS_ERROR_NO;
-  48              		.loc 1 29 1 is_stmt 0 view .LVU3
-  49 0000 10B5     		push	{r4, lr}
-  50              		.cfi_def_cfa_offset 8
-  51              		.cfi_offset 4, -8
-  52              		.cfi_offset 14, -4
-  29:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   int32_t error = AI_OD_POSTPROCESS_ERROR_NO;
-  53              		.loc 1 29 1 view .LVU4
-  54 0002 0446     		mov	r4, r0
-  55              	.LVL1:
-  32:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   const LL_Buffer_InfoTypeDef *buffers_info = LL_ATON_Output_Buffers_Info(NN_Instance);
-  56              		.loc 1 32 3 is_stmt 1 view .LVU5
-  57              	.LBB4:
-  58              	.LBI4:
-  59              		.file 2 "Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h"
+  28      20213D20 
+  28      4E554C4C 
+  29 0033 554C4C29 		.ascii	"ULL) && (nn_instance->network->output_buffers_info "
+  29      20262620 
+  29      286E6E5F 
+  29      696E7374 
+  29      616E6365 
+  30 0066 213D204E 		.ascii	"!= NULL)\000"
+  30      554C4C29 
+  30      00
+  31 006f 00       		.align	2
+  32              	.LC1:
+  33 0070 4C69622F 		.ascii	"Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h\000"
+  33      41495F52 
+  33      756E7469 
+  33      6D652F4E 
+  33      70752F6C 
+  34              		.section	.text.LL_ATON_Output_Buffers_Info,"ax",%progbits
+  35              		.align	1
+  36              		.syntax unified
+  37              		.thumb
+  38              		.thumb_func
+  40              	LL_ATON_Output_Buffers_Info:
+  41              	.LFB4836:
+  42              		.file 2 "Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h"
    1:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** /**
    2:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  ******************************************************************************
+ARM GAS  /tmp/ccupW8Gk.s 			page 2
+
+
    3:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  * @file    ll_aton_rt_user_api.h
    4:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  * @author  SRA Artificial Intelligence & Embedded Architectures
    5:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  * @brief   Header file of ATON LL runtime.
    6:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  * @note    User API to Aton Runtime.
    7:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  ******************************************************************************
    8:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  * @attention
-ARM GAS  /tmp/ccft5TA7.s 			page 3
-
-
    9:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  *
   10:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  * Copyright (c) 2025 STMicroelectronics.
   11:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  * All rights reserved.
@@ -172,15 +118,15 @@ ARM GAS  /tmp/ccft5TA7.s 			page 1
   57:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
   58:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
   59:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /**
+ARM GAS  /tmp/ccupW8Gk.s 			page 3
+
+
   60:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @}
   61:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
   62:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
   63:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /** @defgroup User API Macros for NN Interface & Instance definition
   64:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @{
   65:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
-ARM GAS  /tmp/ccft5TA7.s 			page 4
-
-
   66:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
   67:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** /**
   68:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****  * @brief Declare and fill a constant named NN interface object
@@ -232,15 +178,15 @@ ARM GAS  /tmp/ccft5TA7.s 			page 1
  114:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @brief Initialize the ATON runtime
  115:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @note  If not explicitly stated otherwise, this function must be called before any other `LL_*
  116:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *        library function
+ARM GAS  /tmp/ccupW8Gk.s 			page 4
+
+
  117:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
  118:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   void LL_ATON_RT_RuntimeInit(void);
  119:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
  120:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /**
  121:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @brief Register callback for ATON runtime related events (e.g. initialization/deinitialization
  122:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * `LL_ATON_RT_Callbacktype_t`)
-ARM GAS  /tmp/ccft5TA7.s 			page 5
-
-
  123:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @param rt_callback Function pointer to callback function (set to `NULL` to disable epoch traci
  124:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *
  125:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @note  This function must only be called when no network is currently executing
@@ -292,15 +238,15 @@ ARM GAS  /tmp/ccft5TA7.s 			page 1
  171:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @retval LL_ATON_RT_WFE     Epoch block is still running, NN execution not finished, you may ca
  172:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *                            `LL_ATON_OSAL_WFE()`.
  173:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *                            NOTE, that in this case no other network instance may be run/contin
+ARM GAS  /tmp/ccupW8Gk.s 			page 5
+
+
  174:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *                            same thread!
  175:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *                            It is entirely the user's responsibility to comply with this restri
  176:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @retval LL_ATON_RT_DONE    NN execution finished
  177:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
  178:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   LL_ATON_RT_RetValues_t LL_ATON_RT_RunEpochBlock(NN_Instance_TypeDef *nn_instance);
  179:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
-ARM GAS  /tmp/ccft5TA7.s 			page 6
-
-
  180:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /**
  181:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @brief  Sets user allocated inputs (one at a time)
  182:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @param  nn_instance pointer to the network instance
@@ -352,15 +298,15 @@ ARM GAS  /tmp/ccft5TA7.s 			page 1
  228:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /**
  229:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @brief  Returns an array of structures describing output buffers
  230:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @param  nn_instance pointer to the network instance
+ARM GAS  /tmp/ccupW8Gk.s 			page 6
+
+
  231:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *         (MUST be an already initialized instance)
  232:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @retval Returns a pointer to the array of LL_Buffer_InfoTypeDef, name is NULL for the last one
  233:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    */
  234:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   static inline const LL_Buffer_InfoTypeDef *LL_ATON_Input_Buffers_Info(const NN_Instance_TypeDef *
  235:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
  236:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   /**
-ARM GAS  /tmp/ccft5TA7.s 			page 7
-
-
  237:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @brief  Returns an array of structures describing epoch output transient buffers
  238:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    * @param  nn_instance pointer to the network instance
  239:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****    *         (MUST be an already initialized instance)
@@ -412,318 +358,407 @@ ARM GAS  /tmp/ccft5TA7.s 			page 1
  285:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****     assert((nn_instance != NULL) && (nn_instance->network != NULL) && (nn_instance->network->output
  286:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****     return nn_instance->network->output_getter(num);
  287:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   }
+ARM GAS  /tmp/ccupW8Gk.s 			page 7
+
+
  288:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h **** 
  289:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   static inline const LL_Buffer_InfoTypeDef *LL_ATON_Output_Buffers_Info(const NN_Instance_TypeDef 
-  60              		.loc 2 289 46 view .LVU6
-  61              	.LBB5:
  290:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   {
+  43              		.loc 2 290 3
+  44              		.cfi_startproc
+  45              		@ args = 0, pretend = 0, frame = 8
+  46              		@ frame_needed = 1, uses_anonymous_args = 0
+  47 0000 80B5     		push	{r7, lr}
+  48              		.cfi_def_cfa_offset 8
+  49              		.cfi_offset 7, -8
+  50              		.cfi_offset 14, -4
+  51 0002 82B0     		sub	sp, sp, #8
+  52              		.cfi_def_cfa_offset 16
+  53 0004 00AF     		add	r7, sp, #0
+  54              		.cfi_def_cfa_register 7
+  55 0006 7860     		str	r0, [r7, #4]
  291:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****     assert((nn_instance != NULL) && (nn_instance->network != NULL) &&
-ARM GAS  /tmp/ccft5TA7.s 			page 8
-
-
-  62              		.loc 2 291 5 view .LVU7
-  63 0004 19B1     		cbz	r1, .L2
-  64              		.loc 2 291 5 is_stmt 0 discriminator 2 view .LVU8
-  65 0006 0B68     		ldr	r3, [r1]
-  66 0008 0BB1     		cbz	r3, .L2
-  67              		.loc 2 291 5 discriminator 4 view .LVU9
-  68 000a 1B6A     		ldr	r3, [r3, #32]
-  69 000c 33B9     		cbnz	r3, .L3
-  70              	.L2:
-  71              		.loc 2 291 5 discriminator 5 view .LVU10
-  72 000e 40F22311 		movw	r1, #291
-  73              	.LVL2:
-  74              		.loc 2 291 5 discriminator 5 view .LVU11
-  75 0012 0F4B     		ldr	r3, .L10
-  76 0014 0F4A     		ldr	r2, .L10+4
-  77 0016 1048     		ldr	r0, .L10+8
-  78              	.LVL3:
-  79              		.loc 2 291 5 discriminator 5 view .LVU12
-  80 0018 FFF7FEFF 		bl	__assert_func
-  81              	.LVL4:
-  82              	.L3:
+  56              		.loc 2 291 5
+  57 0008 7B68     		ldr	r3, [r7, #4]
+  58 000a 002B     		cmp	r3, #0
+  59 000c 08D0     		beq	.L2
+  60              		.loc 2 291 5 is_stmt 0 discriminator 2
+  61 000e 7B68     		ldr	r3, [r7, #4]
+  62 0010 1B68     		ldr	r3, [r3]
+  63 0012 002B     		cmp	r3, #0
+  64 0014 04D0     		beq	.L2
+  65              		.loc 2 291 5 discriminator 4
+  66 0016 7B68     		ldr	r3, [r7, #4]
+  67 0018 1B68     		ldr	r3, [r3]
+  68 001a 1B6A     		ldr	r3, [r3, #32]
+  69 001c 002B     		cmp	r3, #0
+  70 001e 06D1     		bne	.L3
+  71              	.L2:
+  72              		.loc 2 291 5 discriminator 5
+  73 0020 074B     		ldr	r3, .L5
+  74 0022 084A     		ldr	r2, .L5+4
+  75 0024 40F22311 		movw	r1, #291
+  76 0028 0748     		ldr	r0, .L5+8
+  77 002a FFF7FEFF 		bl	__assert_func
+  78              	.L3:
  292:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****            (nn_instance->network->output_buffers_info != NULL));
  293:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****     return nn_instance->network->output_buffers_info();
-  83              		.loc 2 293 5 is_stmt 1 view .LVU13
-  84              		.loc 2 293 12 is_stmt 0 view .LVU14
-  85 001c 9847     		blx	r3
-  86              	.LVL5:
-  87              		.loc 2 293 12 view .LVU15
-  88              	.LBE5:
-  89              	.LBE4:
+  79              		.loc 2 293 23 is_stmt 1
+  80 002e 7B68     		ldr	r3, [r7, #4]
+  81 0030 1B68     		ldr	r3, [r3]
+  82              		.loc 2 293 32
+  83 0032 1B6A     		ldr	r3, [r3, #32]
+  84              		.loc 2 293 12
+  85 0034 9847     		blx	r3
+  86              	.LVL0:
+  87 0036 0346     		mov	r3, r0
+ 294:Lib/AI_Runtime/Npu/ll_aton/ll_aton_rt_user_api.h ****   }
+  88              		.loc 2 294 3
+  89 0038 1846     		mov	r0, r3
+  90 003a 0837     		adds	r7, r7, #8
+  91              		.cfi_def_cfa_offset 8
+  92 003c BD46     		mov	sp, r7
+ARM GAS  /tmp/ccupW8Gk.s 			page 8
+
+
+  93              		.cfi_def_cfa_register 13
+  94              		@ sp needed
+  95 003e 80BD     		pop	{r7, pc}
+  96              	.L6:
+  97              		.align	2
+  98              	.L5:
+  99 0040 00000000 		.word	.LC0
+ 100 0044 00000000 		.word	__func__.1
+ 101 0048 70000000 		.word	.LC1
+ 102              		.cfi_endproc
+ 103              	.LFE4836:
+ 105              		.section	.bss.scratch_buffer,"aw",%nobits
+ 106              		.align	2
+ 109              	scratch_buffer:
+ 110 0000 00000000 		.space	12600
+ 110      00000000 
+ 110      00000000 
+ 110      00000000 
+ 110      00000000 
+ 111              		.section	.bss.out_detections,"aw",%nobits
+ 112              		.align	2
+ 115              	out_detections:
+ 116 0000 00000000 		.space	50400
+ 116      00000000 
+ 116      00000000 
+ 116      00000000 
+ 116      00000000 
+ 117              		.section	.text.app_postprocess_init,"ax",%progbits
+ 118              		.align	1
+ 119              		.global	app_postprocess_init
+ 120              		.syntax unified
+ 121              		.thumb
+ 122              		.thumb_func
+ 124              	app_postprocess_init:
+ 125              	.LFB7343:
+   1:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  /**
+   2:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  ******************************************************************************
+   3:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  * @file    app_postprocess_od_yolov8_ui.c
+   4:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  * @author  GPM Application Team
+   5:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  *
+   6:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  ******************************************************************************
+   7:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  * @attention
+   8:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  *
+   9:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  * Copyright (c) 2023 STMicroelectronics.
+  10:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  * All rights reserved.
+  11:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  *
+  12:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  * This software is licensed under terms that can be found in the LICENSE file
+  13:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  * in the root directory of this software component.
+  14:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  * If no LICENSE file comes with this software, it is provided AS-IS.
+  15:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  *
+  16:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  ******************************************************************************
+  17:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****  */
+  18:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** 
+  19:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** 
+  20:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** #include "app_postprocess.h"
+  21:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** #include "app_config.h"
+  22:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** #include <assert.h>
+ARM GAS  /tmp/ccupW8Gk.s 			page 9
+
+
+  23:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** 
+  24:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** #if POSTPROCESS_TYPE == POSTPROCESS_OD_YOLO_V8_UI
+  25:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** static int8_t scratch_buffer[AI_OD_YOLOV8_PP_TOTAL_BOXES * 6];
+  26:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** static od_pp_outBuffer_t out_detections[AI_OD_YOLOV8_PP_TOTAL_BOXES];
+  27:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** 
+  28:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** int32_t app_postprocess_init(void *params_postprocess, NN_Instance_TypeDef *NN_Instance)
+  29:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** {
+ 126              		.loc 1 29 1
+ 127              		.cfi_startproc
+ 128              		@ args = 0, pretend = 0, frame = 24
+ 129              		@ frame_needed = 1, uses_anonymous_args = 0
+ 130 0000 80B5     		push	{r7, lr}
+ 131              		.cfi_def_cfa_offset 8
+ 132              		.cfi_offset 7, -8
+ 133              		.cfi_offset 14, -4
+ 134 0002 86B0     		sub	sp, sp, #24
+ 135              		.cfi_def_cfa_offset 32
+ 136 0004 00AF     		add	r7, sp, #0
+ 137              		.cfi_def_cfa_register 7
+ 138 0006 7860     		str	r0, [r7, #4]
+ 139 0008 3960     		str	r1, [r7]
+  30:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   int32_t error = AI_OD_POSTPROCESS_ERROR_NO;
+ 140              		.loc 1 30 11
+ 141 000a 0023     		movs	r3, #0
+ 142 000c 7B61     		str	r3, [r7, #20]
+  31:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   od_yolov8_pp_static_param_t *params = (od_yolov8_pp_static_param_t *) params_postprocess;
+ 143              		.loc 1 31 32
+ 144 000e 7B68     		ldr	r3, [r7, #4]
+ 145 0010 3B61     		str	r3, [r7, #16]
+  32:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   const LL_Buffer_InfoTypeDef *buffers_info = LL_ATON_Output_Buffers_Info(NN_Instance);
+ 146              		.loc 1 32 47
+ 147 0012 3868     		ldr	r0, [r7]
+ 148 0014 FFF7FEFF 		bl	LL_ATON_Output_Buffers_Info
+ 149 0018 F860     		str	r0, [r7, #12]
   33:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->raw_output_scale = *(buffers_info[0].scale);
-  90              		.loc 1 33 3 is_stmt 1 view .LVU16
-  91              		.loc 1 33 30 is_stmt 0 view .LVU17
-  92 001e 036B     		ldr	r3, [r0, #48]
+ 150              		.loc 1 33 47
+ 151 001a FB68     		ldr	r3, [r7, #12]
+ 152 001c 1B6B     		ldr	r3, [r3, #48]
+ 153              		.loc 1 33 30
+ 154 001e 1A68     		ldr	r2, [r3]	@ float
+ 155              		.loc 1 33 28
+ 156 0020 3B69     		ldr	r3, [r7, #16]
+ 157 0022 5A61     		str	r2, [r3, #20]	@ float
   34:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->raw_output_zero_point = *(buffers_info[0].offset);
+ 158              		.loc 1 34 52
+ 159 0024 FB68     		ldr	r3, [r7, #12]
+ 160 0026 5B6B     		ldr	r3, [r3, #52]
+ 161              		.loc 1 34 35
+ 162 0028 B3F90030 		ldrsh	r3, [r3]
+ 163              		.loc 1 34 33
+ 164 002c 5AB2     		sxtb	r2, r3
+ 165 002e 3B69     		ldr	r3, [r7, #16]
+ 166 0030 1A76     		strb	r2, [r3, #24]
   35:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->nb_classes = AI_OD_YOLOV8_PP_NB_CLASSES;
+ 167              		.loc 1 35 22
+ 168 0032 3B69     		ldr	r3, [r7, #16]
+ 169 0034 0322     		movs	r2, #3
+ARM GAS  /tmp/ccupW8Gk.s 			page 10
+
+
+ 170 0036 1A60     		str	r2, [r3]
   36:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->nb_total_boxes = AI_OD_YOLOV8_PP_TOTAL_BOXES;
-  93              		.loc 1 36 26 view .LVU18
-  94 0020 0322     		movs	r2, #3
-  33:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->raw_output_scale = *(buffers_info[0].scale);
-  95              		.loc 1 33 30 view .LVU19
-  96 0022 1B68     		ldr	r3, [r3]	@ float
-  33:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->raw_output_scale = *(buffers_info[0].scale);
-  97              		.loc 1 33 28 view .LVU20
-  98 0024 6361     		str	r3, [r4, #20]	@ float
-  34:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->raw_output_zero_point = *(buffers_info[0].offset);
-  99              		.loc 1 34 3 is_stmt 1 view .LVU21
-  34:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->raw_output_zero_point = *(buffers_info[0].offset);
- 100              		.loc 1 34 35 is_stmt 0 view .LVU22
- 101 0026 436B     		ldr	r3, [r0, #52]
+ 171              		.loc 1 36 26
+ 172 0038 3B69     		ldr	r3, [r7, #16]
+ 173 003a 40F63402 		movw	r2, #2100
+ 174 003e 5A60     		str	r2, [r3, #4]
   37:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->max_boxes_limit = AI_OD_YOLOV8_PP_MAX_BOXES_LIMIT;
+ 175              		.loc 1 37 27
+ 176 0040 3B69     		ldr	r3, [r7, #16]
+ 177 0042 0A22     		movs	r2, #10
+ 178 0044 9A60     		str	r2, [r3, #8]
   38:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->conf_threshold = AI_OD_YOLOV8_PP_CONF_THRESHOLD;
+ 179              		.loc 1 38 26
+ 180 0046 3B69     		ldr	r3, [r7, #16]
+ 181 0048 084A     		ldr	r2, .L9
+ 182 004a DA60     		str	r2, [r3, #12]	@ float
   39:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->iou_threshold = AI_OD_YOLOV8_PP_IOU_THRESHOLD;
+ 183              		.loc 1 39 25
+ 184 004c 3B69     		ldr	r3, [r7, #16]
+ 185 004e 084A     		ldr	r2, .L9+4
+ 186 0050 1A61     		str	r2, [r3, #16]	@ float
   40:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->pScratchBuff = scratch_buffer;
+ 187              		.loc 1 40 24
+ 188 0052 3B69     		ldr	r3, [r7, #16]
+ 189 0054 074A     		ldr	r2, .L9+8
+ 190 0056 1A62     		str	r2, [r3, #32]
   41:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   error = od_yolov8_pp_reset(params);
- 102              		.loc 1 41 11 view .LVU23
- 103 0028 2046     		mov	r0, r4
-ARM GAS  /tmp/ccft5TA7.s 			page 9
-
-
- 104              	.LVL6:
-  34:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->raw_output_zero_point = *(buffers_info[0].offset);
- 105              		.loc 1 34 33 view .LVU24
- 106 002a 1B88     		ldrh	r3, [r3]
- 107 002c 2376     		strb	r3, [r4, #24]
-  35:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->nb_total_boxes = AI_OD_YOLOV8_PP_TOTAL_BOXES;
- 108              		.loc 1 35 3 is_stmt 1 view .LVU25
-  36:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->max_boxes_limit = AI_OD_YOLOV8_PP_MAX_BOXES_LIMIT;
- 109              		.loc 1 36 26 is_stmt 0 view .LVU26
- 110 002e 40F63403 		movw	r3, #2100
- 111 0032 C4E90023 		strd	r2, r3, [r4]
-  37:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->max_boxes_limit = AI_OD_YOLOV8_PP_MAX_BOXES_LIMIT;
- 112              		.loc 1 37 3 is_stmt 1 view .LVU27
-  37:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->max_boxes_limit = AI_OD_YOLOV8_PP_MAX_BOXES_LIMIT;
- 113              		.loc 1 37 27 is_stmt 0 view .LVU28
- 114 0036 0A23     		movs	r3, #10
- 115 0038 A360     		str	r3, [r4, #8]
-  38:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->iou_threshold = AI_OD_YOLOV8_PP_IOU_THRESHOLD;
- 116              		.loc 1 38 3 is_stmt 1 view .LVU29
-  38:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->iou_threshold = AI_OD_YOLOV8_PP_IOU_THRESHOLD;
- 117              		.loc 1 38 26 is_stmt 0 view .LVU30
- 118 003a 084B     		ldr	r3, .L10+12
- 119 003c E360     		str	r3, [r4, #12]	@ float
-  39:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->pScratchBuff = scratch_buffer;
- 120              		.loc 1 39 3 is_stmt 1 view .LVU31
-  39:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   params->pScratchBuff = scratch_buffer;
- 121              		.loc 1 39 25 is_stmt 0 view .LVU32
- 122 003e 084B     		ldr	r3, .L10+16
- 123 0040 2361     		str	r3, [r4, #16]	@ float
-  40:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   error = od_yolov8_pp_reset(params);
- 124              		.loc 1 40 3 is_stmt 1 view .LVU33
-  40:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   error = od_yolov8_pp_reset(params);
- 125              		.loc 1 40 24 is_stmt 0 view .LVU34
- 126 0042 084B     		ldr	r3, .L10+20
- 127 0044 2362     		str	r3, [r4, #32]
- 128              		.loc 1 41 3 is_stmt 1 view .LVU35
+ 191              		.loc 1 41 11
+ 192 0058 3869     		ldr	r0, [r7, #16]
+ 193 005a FFF7FEFF 		bl	od_yolov8_pp_reset
+ 194 005e 7861     		str	r0, [r7, #20]
   42:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** 
   43:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   return error;
+ 195              		.loc 1 43 10
+ 196 0060 7B69     		ldr	r3, [r7, #20]
   44:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** }
- 129              		.loc 1 44 1 is_stmt 0 view .LVU36
- 130 0046 BDE81040 		pop	{r4, lr}
- 131              		.cfi_restore 14
- 132              		.cfi_restore 4
- 133              		.cfi_def_cfa_offset 0
- 134              	.LVL7:
-  41:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** 
- 135              		.loc 1 41 11 view .LVU37
- 136 004a FFF7FEBF 		b	od_yolov8_pp_reset
- 137              	.LVL8:
- 138              	.L11:
-  41:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** 
- 139              		.loc 1 41 11 view .LVU38
- 140 004e 00BF     		.align	2
- 141              	.L10:
- 142 0050 00000000 		.word	.LC0
- 143 0054 00000000 		.word	__func__.1
- 144 0058 6F000000 		.word	.LC1
-ARM GAS  /tmp/ccft5TA7.s 			page 10
+ 197              		.loc 1 44 1
+ 198 0062 1846     		mov	r0, r3
+ 199 0064 1837     		adds	r7, r7, #24
+ 200              		.cfi_def_cfa_offset 8
+ 201 0066 BD46     		mov	sp, r7
+ 202              		.cfi_def_cfa_register 13
+ 203              		@ sp needed
+ 204 0068 80BD     		pop	{r7, pc}
+ 205              	.L10:
+ 206 006a 00BF     		.align	2
+ 207              	.L9:
+ 208 006c 9A99993E 		.word	1050253722
+ 209 0070 CDCCCC3D 		.word	1036831949
+ 210 0074 00000000 		.word	scratch_buffer
+ 211              		.cfi_endproc
+ 212              	.LFE7343:
+ 214              		.section	.rodata
+ 215 00a1 000000   		.align	2
+ 216              	.LC2:
+ 217 00a4 6E625F69 		.ascii	"nb_input == 1\000"
+ 217      6E707574 
+ARM GAS  /tmp/ccupW8Gk.s 			page 11
 
 
- 145 005c 9A99993E 		.word	1050253722
- 146 0060 CDCCCC3D 		.word	1036831949
- 147 0064 00000000 		.word	scratch_buffer
- 148              		.cfi_endproc
- 149              	.LFE7343:
- 151              		.section	.rodata.app_postprocess_run.str1.1,"aMS",%progbits,1
- 152              	.LC2:
- 153 0000 6E625F69 		.ascii	"nb_input == 1\000"
- 153      6E707574 
- 153      203D3D20 
- 153      3100
- 154              	.LC3:
- 155 000e 4C69622F 		.ascii	"Lib/ai-postprocessing-wrapper/app_postprocess_od_yo"
- 155      61692D70 
- 155      6F737470 
- 155      726F6365 
- 155      7373696E 
- 156 0041 6C6F7638 		.ascii	"lov8_ui.c\000"
- 156      5F75692E 
- 156      6300
- 157              		.section	.text.app_postprocess_run,"ax",%progbits
- 158              		.align	1
- 159              		.global	app_postprocess_run
- 160              		.syntax unified
- 161              		.thumb
- 162              		.thumb_func
- 164              	app_postprocess_run:
- 165              	.LVL9:
- 166              	.LFB7344:
+ 217      203D3D20 
+ 217      3100
+ 218 00b2 0000     		.align	2
+ 219              	.LC3:
+ 220 00b4 4C69622F 		.ascii	"Lib/ai-postprocessing-wrapper/app_postprocess_od_yo"
+ 220      61692D70 
+ 220      6F737470 
+ 220      726F6365 
+ 220      7373696E 
+ 221 00e7 6C6F7638 		.ascii	"lov8_ui.c\000"
+ 221      5F75692E 
+ 221      6300
+ 222              		.section	.text.app_postprocess_run,"ax",%progbits
+ 223              		.align	1
+ 224              		.global	app_postprocess_run
+ 225              		.syntax unified
+ 226              		.thumb
+ 227              		.thumb_func
+ 229              	app_postprocess_run:
+ 230              	.LFB7344:
   45:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** 
   46:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** int32_t app_postprocess_run(void *pInput[], int nb_input, void *pOutput, void *pInput_param)
   47:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** {
- 167              		.loc 1 47 1 is_stmt 1 view -0
- 168              		.cfi_startproc
- 169              		@ args = 0, pretend = 0, frame = 8
- 170              		@ frame_needed = 0, uses_anonymous_args = 0
+ 231              		.loc 1 47 1
+ 232              		.cfi_startproc
+ 233              		@ args = 0, pretend = 0, frame = 32
+ 234              		@ frame_needed = 1, uses_anonymous_args = 0
+ 235 0000 80B5     		push	{r7, lr}
+ 236              		.cfi_def_cfa_offset 8
+ 237              		.cfi_offset 7, -8
+ 238              		.cfi_offset 14, -4
+ 239 0002 88B0     		sub	sp, sp, #32
+ 240              		.cfi_def_cfa_offset 40
+ 241 0004 00AF     		add	r7, sp, #0
+ 242              		.cfi_def_cfa_register 7
+ 243 0006 F860     		str	r0, [r7, #12]
+ 244 0008 B960     		str	r1, [r7, #8]
+ 245 000a 7A60     		str	r2, [r7, #4]
+ 246 000c 3B60     		str	r3, [r7]
   48:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   assert(nb_input == 1);
- 171              		.loc 1 48 3 view .LVU40
-  47:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   assert(nb_input == 1);
- 172              		.loc 1 47 1 is_stmt 0 view .LVU41
- 173 0000 13B5     		push	{r0, r1, r4, lr}
- 174              		.cfi_def_cfa_offset 16
- 175              		.cfi_offset 4, -8
- 176              		.cfi_offset 14, -4
-  47:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   assert(nb_input == 1);
- 177              		.loc 1 47 1 view .LVU42
- 178 0002 0C46     		mov	r4, r1
- 179              		.loc 1 48 3 view .LVU43
- 180 0004 012C     		cmp	r4, #1
-  47:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   assert(nb_input == 1);
- 181              		.loc 1 47 1 view .LVU44
- 182 0006 1146     		mov	r1, r2
- 183              	.LVL10:
-  47:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   assert(nb_input == 1);
- 184              		.loc 1 47 1 view .LVU45
- 185 0008 1A46     		mov	r2, r3
- 186              	.LVL11:
-ARM GAS  /tmp/ccft5TA7.s 			page 11
-
-
- 187              		.loc 1 48 3 view .LVU46
- 188 000a 05D0     		beq	.L13
- 189              		.loc 1 48 3 discriminator 1 view .LVU47
- 190 000c 3021     		movs	r1, #48
- 191              	.LVL12:
- 192              		.loc 1 48 3 discriminator 1 view .LVU48
- 193 000e 074B     		ldr	r3, .L14
- 194              	.LVL13:
- 195              		.loc 1 48 3 discriminator 1 view .LVU49
- 196 0010 074A     		ldr	r2, .L14+4
- 197              	.LVL14:
- 198              		.loc 1 48 3 discriminator 1 view .LVU50
- 199 0012 0848     		ldr	r0, .L14+8
- 200              	.LVL15:
- 201              		.loc 1 48 3 discriminator 1 view .LVU51
- 202 0014 FFF7FEFF 		bl	__assert_func
- 203              	.LVL16:
- 204              	.L13:
+ 247              		.loc 1 48 3
+ 248 000e BB68     		ldr	r3, [r7, #8]
+ 249 0010 012B     		cmp	r3, #1
+ 250 0012 05D0     		beq	.L12
+ 251              		.loc 1 48 3 is_stmt 0 discriminator 1
+ 252 0014 0E4B     		ldr	r3, .L14
+ 253 0016 0F4A     		ldr	r2, .L14+4
+ 254 0018 3021     		movs	r1, #48
+ 255 001a 0F48     		ldr	r0, .L14+8
+ 256 001c FFF7FEFF 		bl	__assert_func
+ 257              	.L12:
   49:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   int32_t error = AI_OD_POSTPROCESS_ERROR_NO;
- 205              		.loc 1 49 3 is_stmt 1 view .LVU52
+ 258              		.loc 1 49 11 is_stmt 1
+ 259 0020 0023     		movs	r3, #0
+ 260 0022 FB61     		str	r3, [r7, #28]
   50:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   od_pp_out_t *pObjDetOutput = (od_pp_out_t *) pOutput;
- 206              		.loc 1 50 3 view .LVU53
+ 261              		.loc 1 50 16
+ARM GAS  /tmp/ccupW8Gk.s 			page 12
+
+
+ 262 0024 7B68     		ldr	r3, [r7, #4]
+ 263 0026 BB61     		str	r3, [r7, #24]
   51:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   pObjDetOutput->pOutBuff = out_detections;
- 207              		.loc 1 51 3 view .LVU54
- 208              		.loc 1 51 27 is_stmt 0 view .LVU55
- 209 0018 074B     		ldr	r3, .L14+12
- 210 001a 0B60     		str	r3, [r1]
+ 264              		.loc 1 51 27
+ 265 0028 BB69     		ldr	r3, [r7, #24]
+ 266 002a 0C4A     		ldr	r2, .L14+12
+ 267 002c 1A60     		str	r2, [r3]
   52:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   od_yolov8_pp_in_centroid_t pp_input = {
- 211              		.loc 1 52 3 is_stmt 1 view .LVU56
- 212              		.loc 1 52 30 is_stmt 0 view .LVU57
- 213 001c 0368     		ldr	r3, [r0]
   53:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****       .pRaw_detections = (int8_t *) pInput[0]
+ 268              		.loc 1 53 43
+ 269 002e FB68     		ldr	r3, [r7, #12]
+ 270 0030 1B68     		ldr	r3, [r3]
+  52:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   od_yolov8_pp_in_centroid_t pp_input = {
+ 271              		.loc 1 52 30
+ 272 0032 7B61     		str	r3, [r7, #20]
   54:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   };
   55:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   error = od_yolov8_pp_process_int8(&pp_input, pObjDetOutput,
- 214              		.loc 1 55 11 view .LVU58
- 215 001e 01A8     		add	r0, sp, #4
- 216              	.LVL17:
-  52:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   od_yolov8_pp_in_centroid_t pp_input = {
- 217              		.loc 1 52 30 view .LVU59
- 218 0020 0193     		str	r3, [sp, #4]
- 219              		.loc 1 55 3 is_stmt 1 view .LVU60
- 220              		.loc 1 55 11 is_stmt 0 view .LVU61
- 221 0022 FFF7FEFF 		bl	od_yolov8_pp_process_int8
- 222              	.LVL18:
+ 273              		.loc 1 55 11
+ 274 0034 07F11403 		add	r3, r7, #20
+ 275 0038 3A68     		ldr	r2, [r7]
+ 276 003a B969     		ldr	r1, [r7, #24]
+ 277 003c 1846     		mov	r0, r3
+ 278 003e FFF7FEFF 		bl	od_yolov8_pp_process_int8
+ 279 0042 F861     		str	r0, [r7, #28]
   56:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****                                     (od_yolov8_pp_static_param_t *) pInput_param);
   57:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c ****   return error;
- 223              		.loc 1 57 3 is_stmt 1 view .LVU62
+ 280              		.loc 1 57 10
+ 281 0044 FB69     		ldr	r3, [r7, #28]
   58:Lib/ai-postprocessing-wrapper/app_postprocess_od_yolov8_ui.c **** }
- 224              		.loc 1 58 1 is_stmt 0 view .LVU63
- 225 0026 02B0     		add	sp, sp, #8
- 226              		.cfi_def_cfa_offset 8
- 227              		@ sp needed
- 228 0028 10BD     		pop	{r4, pc}
- 229              	.LVL19:
- 230              	.L15:
- 231              		.loc 1 58 1 view .LVU64
- 232 002a 00BF     		.align	2
-ARM GAS  /tmp/ccft5TA7.s 			page 12
+ 282              		.loc 1 58 1
+ 283 0046 1846     		mov	r0, r3
+ 284 0048 2037     		adds	r7, r7, #32
+ 285              		.cfi_def_cfa_offset 8
+ 286 004a BD46     		mov	sp, r7
+ 287              		.cfi_def_cfa_register 13
+ 288              		@ sp needed
+ 289 004c 80BD     		pop	{r7, pc}
+ 290              	.L15:
+ 291 004e 00BF     		.align	2
+ 292              	.L14:
+ 293 0050 A4000000 		.word	.LC2
+ 294 0054 00000000 		.word	__func__.0
+ 295 0058 B4000000 		.word	.LC3
+ 296 005c 00000000 		.word	out_detections
+ 297              		.cfi_endproc
+ 298              	.LFE7344:
+ 300              		.section	.rodata.__func__.1,"a"
+ 301              		.align	2
+ 304              	__func__.1:
+ 305 0000 4C4C5F41 		.ascii	"LL_ATON_Output_Buffers_Info\000"
+ 305      544F4E5F 
+ 305      4F757470 
+ 305      75745F42 
+ 305      75666665 
+ 306              		.section	.rodata.__func__.0,"a"
+ 307              		.align	2
+ 310              	__func__.0:
+ARM GAS  /tmp/ccupW8Gk.s 			page 13
 
 
- 233              	.L14:
- 234 002c 00000000 		.word	.LC2
- 235 0030 00000000 		.word	__func__.0
- 236 0034 0E000000 		.word	.LC3
- 237 0038 00000000 		.word	out_detections
- 238              		.cfi_endproc
- 239              	.LFE7344:
- 241              		.section	.rodata.__func__.0,"a"
- 244              	__func__.0:
- 245 0000 6170705F 		.ascii	"app_postprocess_run\000"
- 245      706F7374 
- 245      70726F63 
- 245      6573735F 
- 245      72756E00 
- 246              		.section	.rodata.__func__.1,"a"
- 249              	__func__.1:
- 250 0000 4C4C5F41 		.ascii	"LL_ATON_Output_Buffers_Info\000"
- 250      544F4E5F 
- 250      4F757470 
- 250      75745F42 
- 250      75666665 
- 251              		.section	.bss.out_detections,"aw",%nobits
- 252              		.align	2
- 255              	out_detections:
- 256 0000 00000000 		.space	50400
- 256      00000000 
- 256      00000000 
- 256      00000000 
- 256      00000000 
- 257              		.section	.bss.scratch_buffer,"aw",%nobits
- 260              	scratch_buffer:
- 261 0000 00000000 		.space	12600
- 261      00000000 
- 261      00000000 
- 261      00000000 
- 261      00000000 
- 262              		.text
- 263              	.Letext0:
- 264              		.file 3 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 265              		.file 4 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 266              		.file 5 "Lib/AI_Runtime/Npu/ll_aton/ll_aton_NN_interface.h"
- 267              		.file 6 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
- 268              		.file 7 "Lib/lib_vision_models_pp/lib_vision_models_pp/Inc/od_pp_output_if.h"
- 269              		.file 8 "Lib/lib_vision_models_pp/lib_vision_models_pp/Inc/od_yolov8_pp_if.h"
- 270              		.file 9 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
-ARM GAS  /tmp/ccft5TA7.s 			page 13
+ 311 0000 6170705F 		.ascii	"app_postprocess_run\000"
+ 311      706F7374 
+ 311      70726F63 
+ 311      6573735F 
+ 311      72756E00 
+ 312              		.text
+ 313              	.Letext0:
+ 314              		.file 3 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 315              		.file 4 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 316              		.file 5 "Lib/AI_Runtime/Npu/ll_aton/ll_aton_NN_interface.h"
+ 317              		.file 6 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ 318              		.file 7 "Lib/lib_vision_models_pp/lib_vision_models_pp/Inc/od_pp_output_if.h"
+ 319              		.file 8 "Lib/lib_vision_models_pp/lib_vision_models_pp/Inc/od_yolov8_pp_if.h"
+ 320              		.file 9 "/home/tanjiajun2002/renesas/rzv/e2studio_v2025-01_fsp_v3.1.0/toolchains/gcc_arm/arm-gnu-t
+ARM GAS  /tmp/ccupW8Gk.s 			page 14
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 app_postprocess_od_yolov8_ui.c
-     /tmp/ccft5TA7.s:33     .text.app_postprocess_init:00000000 $t
-     /tmp/ccft5TA7.s:39     .text.app_postprocess_init:00000000 app_postprocess_init
-     /tmp/ccft5TA7.s:142    .text.app_postprocess_init:00000050 $d
-     /tmp/ccft5TA7.s:249    .rodata.__func__.1:00000000 __func__.1
-     /tmp/ccft5TA7.s:260    .bss.scratch_buffer:00000000 scratch_buffer
-     /tmp/ccft5TA7.s:158    .text.app_postprocess_run:00000000 $t
-     /tmp/ccft5TA7.s:164    .text.app_postprocess_run:00000000 app_postprocess_run
-     /tmp/ccft5TA7.s:234    .text.app_postprocess_run:0000002c $d
-     /tmp/ccft5TA7.s:244    .rodata.__func__.0:00000000 __func__.0
-     /tmp/ccft5TA7.s:255    .bss.out_detections:00000000 out_detections
-     /tmp/ccft5TA7.s:252    .bss.out_detections:00000000 $d
-     /tmp/ccft5TA7.s:261    .bss.scratch_buffer:00000000 $d
-                           .group:00000000 wm4.0.c552ae9005b0f2cca11872fae5d4b7f2
+     /tmp/ccupW8Gk.s:26     .rodata:00000000 $d
+     /tmp/ccupW8Gk.s:35     .text.LL_ATON_Output_Buffers_Info:00000000 $t
+     /tmp/ccupW8Gk.s:40     .text.LL_ATON_Output_Buffers_Info:00000000 LL_ATON_Output_Buffers_Info
+     /tmp/ccupW8Gk.s:99     .text.LL_ATON_Output_Buffers_Info:00000040 $d
+     /tmp/ccupW8Gk.s:304    .rodata.__func__.1:00000000 __func__.1
+     /tmp/ccupW8Gk.s:106    .bss.scratch_buffer:00000000 $d
+     /tmp/ccupW8Gk.s:109    .bss.scratch_buffer:00000000 scratch_buffer
+     /tmp/ccupW8Gk.s:112    .bss.out_detections:00000000 $d
+     /tmp/ccupW8Gk.s:115    .bss.out_detections:00000000 out_detections
+     /tmp/ccupW8Gk.s:118    .text.app_postprocess_init:00000000 $t
+     /tmp/ccupW8Gk.s:124    .text.app_postprocess_init:00000000 app_postprocess_init
+     /tmp/ccupW8Gk.s:208    .text.app_postprocess_init:0000006c $d
+     /tmp/ccupW8Gk.s:223    .text.app_postprocess_run:00000000 $t
+     /tmp/ccupW8Gk.s:229    .text.app_postprocess_run:00000000 app_postprocess_run
+     /tmp/ccupW8Gk.s:293    .text.app_postprocess_run:00000050 $d
+     /tmp/ccupW8Gk.s:310    .rodata.__func__.0:00000000 __func__.0
+     /tmp/ccupW8Gk.s:301    .rodata.__func__.1:00000000 $d
+     /tmp/ccupW8Gk.s:307    .rodata.__func__.0:00000000 $d
+                           .group:00000000 wm4.0.2a10773746a5c5ebb5552f50e466f80b
                            .group:00000000 wm4._newlib_version.h.4.411db44ea2338a62eca2f0777f81481b
                            .group:00000000 wm4.newlib.h.27.4b972ceed5d01f491020c20f1e546cab
                            .group:00000000 wm4.ieeefp.h.77.bd5feb87d9990dd328793ced294f6a87
@@ -760,15 +795,15 @@ DEFINED SYMBOLS
                            .group:00000000 wm4.FreeRTOSConfig.h.59.2629c72cff9e6dbe880a2dc225eae516
                            .group:00000000 wm4.FreeRTOS.h.80.7742fabaf5accf3762dc12f7f259a8a0
                            .group:00000000 wm4.projdefs.h.30.55a824156f299c075c33148a9fdadb99
+ARM GAS  /tmp/ccupW8Gk.s 			page 15
+
+
                            .group:00000000 wm4.portmacro.h.30.cbb4b2da41f551c2a9904f0d03a1ce3e
                            .group:00000000 wm4.portmacrocommon.h.30.d5cb67896ab50a95311be7e023da5c4f
                            .group:00000000 wm4.portmacro.h.68.4051ecf710d074fb55b16d91dfebeeaa
                            .group:00000000 wm4.portable.h.61.d557c57974d490f056246a26cdcddd6c
                            .group:00000000 wm4.mpu_wrappers.h.30.ccc5f1a6903f941a88c268f5f62af3fe
                            .group:00000000 wm4.portable.h.189.522b8bd52a171d3fd1432ef06d0caa63
-ARM GAS  /tmp/ccft5TA7.s 			page 14
-
-
                            .group:00000000 wm4.FreeRTOS.h.102.fb871f3e464d99c5a57b3115545a02ad
                            .group:00000000 wm4.list.h.59.bce6419520cd4f5f98779a1530bf2118
                            .group:00000000 wm4.task.h.56.84290139c73b47f5b9aac361361a2a31
@@ -820,15 +855,15 @@ DEFINED SYMBOLS
                            .group:00000000 wm4.stm32n6xx_hal_pwr.h.21.cdb73e4869c3fed3fc84f901ec0e5f0a
                            .group:00000000 wm4.stm32n6xx_hal_pwr_ex.h.21.1a673224a58b0c1e5fad8eeda6514208
                            .group:00000000 wm4.stm32n6xx_hal_ramcfg.h.21.a62dfbb4d2c14e9a8c634a215e37bd3d
+ARM GAS  /tmp/ccupW8Gk.s 			page 16
+
+
                            .group:00000000 wm4.stm32n6xx_hal_spi.h.21.9f810303326e2d91749800e9911f8e4d
                            .group:00000000 wm4.stm32n6xx_hal_spi.h.906.93ec0695066db4253cdbcb7d84358a0b
                            .group:00000000 wm4.stm32n6xx_hal_tim.h.21.839dd2b2a70382fb2c44f8f293a84d5f
                            .group:00000000 wm4.stm32n6xx_hal_tim_ex.h.21.e372d5ac63c13441211ea4ecbd353150
                            .group:00000000 wm4.stm32n6xx_hal_uart.h.21.230f549bfa0d5ebfd77bfb311b2aca15
                            .group:00000000 wm4.stm32n6xx_hal_uart_ex.h.21.a0d5511e1d0703b7b5278c8f5472b96d
-ARM GAS  /tmp/ccft5TA7.s 			page 15
-
-
                            .group:00000000 wm4.stm32n6xx_hal_xspi.h.21.e17898be2073b6b6b19faf30b4e304e9
                            .group:00000000 wm4.stm32n6xx_hal_cacheaxi.h.21.7c3375b7903ec42376e4883320997f74
                            .group:00000000 wm4.stm32n6xx_hal_gpu2d.h.21.48d0249122abad294a630c39cc4ebaed
@@ -862,7 +897,7 @@ DEFINED SYMBOLS
                            .group:00000000 wm4.sseg_pp_output_if.h.11.caf00fb1ae24f8dc9c80bee7827b96f2
                            .group:00000000 wm4.app_postprocess.h.49.6186ff44b2c06089fe0297042919e83a
                            .group:00000000 wm4.postprocess_conf.h.12.d5ca9edd42f1b31a4a50fca37e62de19
-                           .group:00000000 wm4.app_config.h.23.726746aecdeac4550fc4bca4b08fd195
+                           .group:00000000 wm4.app_config.h.23.c1bf0853dd36ee4f0f9eca08a0684042
 
 UNDEFINED SYMBOLS
 __assert_func
